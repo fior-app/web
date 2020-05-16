@@ -1,0 +1,14 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "--tag=gcr.io/$PROJECT_ID/fior-app-dev:$TAG_NAME", "."]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "run",
+        "gcr.io/$PROJECT_ID/fior-app-dev:$TAG_NAME",
+        "react-scripts",
+        "test",
+      ]
+  - name: "gcr.io/cloud-builders/gsutil"
+    args: ["cp", "-r", "k8s/*", "gs://$PROJECT_ID-kubernetes-manifests"]
+images: ["gcr.io/$PROJECT_ID/fior-app-dev:$TAG_NAME"]
