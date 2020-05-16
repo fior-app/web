@@ -1,10 +1,34 @@
-body {
+* {
   margin: 0;
+}
+
+body {
+  height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.heading {
+.center {
   display: flex;
   justify-content: center;
+}
+
+.end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page-wrap {
+  min-height: 100%;
+  margin-top: 4rem;
+  margin-bottom: -80px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer,
+.page-wrap:after {
+  margin-top: 1rem;
+  height: 80px;
 }
