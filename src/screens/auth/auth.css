@@ -12,12 +12,15 @@
 .menu-item {
   margin: 1rem;
   font-size: 14px;
+  font-weight: 800;
+  color: grey;
+  cursor: pointer;
 }
 
 .selected {
   color: black;
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .menu {
