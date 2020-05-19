@@ -29,3 +29,11 @@ body {
 .container {
   height: 100%;
 }
+
+.v-align {
+  align-items: center;
+}
+
+.j-around {
+  justify-content: space-around;
+}
