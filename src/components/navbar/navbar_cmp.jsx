@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./navbar.css";
 
 class Navbar extends Component {
@@ -7,15 +7,15 @@ class Navbar extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className='row'>
-          <h1 className='logo'>Fior</h1>
-          <div className='spacer'></div>
-          <Link to='/'>
-            <div className='nav-item'>Home</div>
-          </Link>
-          <Link to='/login'>
-            <div className='nav-item'>Login</div>
-          </Link>
+        <div className="row">
+          <h1 className="logo">Fior</h1>
+          <div className="spacer"></div>
+          <NavLink to="/">
+            <div className="nav-item">Home</div>
+          </NavLink>
+          <NavLink to="/login">
+            <div className="nav-item">Login</div>
+          </NavLink>
         </div>
       </React.Fragment>
     );

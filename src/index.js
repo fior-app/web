@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Fior from "./fior";
+import FiorApp from "./fior-app";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Fior />
+    <FiorApp />
   </React.StrictMode>,
   document.getElementById("root")
 );
