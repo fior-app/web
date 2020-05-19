@@ -13,22 +13,19 @@ body {
   justify-content: center;
 }
 
-.end {
+.spacer {
+  width: 100%;
+}
+
+.row {
   display: flex;
+  flex-direction: row;
+}
+
+.end {
   justify-content: flex-end;
 }
 
-.page-wrap {
-  min-height: 100%;
-  margin-top: 4rem;
-  margin-bottom: -80px;
-}
-.page-wrap:after {
-  content: "";
-  display: block;
-}
-.site-footer,
-.page-wrap:after {
-  margin-top: 1rem;
-  height: 80px;
+.container {
+  height: 100%;
 }

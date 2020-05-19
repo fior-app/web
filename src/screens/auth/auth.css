@@ -1,0 +1,12 @@
+.placeholder {
+  width: 100%;
+  background-color: red;
+}
+
+.items-right {
+  margin: 6rem;
+}
+
+.menu-item {
+  margin: 1rem;
+}
