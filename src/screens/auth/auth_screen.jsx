@@ -1,50 +1,52 @@
 import React, { Component } from "react";
-import Login from "../../components/auth/login/login_cmp";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from "react-router-dom";
+import { Image, Button } from "semantic-ui-react";
+
 import "./auth.css";
 import Register from "../../components/auth/register/register_cmp";
-import { Image } from "semantic-ui-react";
+import Login from "../../components/auth/login/login_cmp";
 
 class AuthScreen extends Component {
-  state = {};
+  state = {
+    loginComponent: true,
+  };
+
+  changeComponent = (e) => {
+    if (e.target.id === "login") {
+      this.setState({
+        loginComponent: true,
+      });
+    }
+    if (e.target.id === "register") {
+      this.setState({
+        loginComponent: false,
+      });
+    }
+  };
+
   render() {
+    const { loginComponent } = this.state;
     return (
       <React.Fragment>
-        <div className='container'>
-          <div className='row j-around'>
-            <div className='placeholder'>
-              <Image src='../../assets/img/auth.svg' size='massive' />
+        <div className="container">
+          <div className="row j-around">
+            <div className="placeholder">
+              <Image src="../../assets/img/auth.svg" size="massive" />
             </div>
-            {/* <div className='spacer'></div> */}
-            <Router>
-              <div className='items-right'>
-                <div className='row menu'>
-                  <div className='menu-item'>
-                    <NavLink to='/login' exact activeClassName='selected'>
-                      Login
-                    </NavLink>
-                  </div>
-                  <div className='menu-item'>
-                    <NavLink
-                      to='/login/welcome'
-                      exact
-                      activeClassName='selected'
-                    >
-                      Register
-                    </NavLink>
-                  </div>
+            <div className="items-right">
+              <div className="row menu">
+                <div className="menu-item">
+                  <Button id="login" onClick={this.changeComponent}>
+                    Login
+                  </Button>
                 </div>
-                <Switch>
-                  <Route path='/login' exact component={Login} />
-                  <Route path='/login/welcome' exact component={Register} />
-                </Switch>
+                <div className="menu-item">
+                  <Button id="register" onClick={this.changeComponent}>
+                    Register
+                  </Button>
+                </div>
               </div>
-            </Router>
+              {loginComponent ? <Login /> : <Register />}
+            </div>
           </div>
         </div>
       </React.Fragment>
