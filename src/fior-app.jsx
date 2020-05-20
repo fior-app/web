@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import LandingScreen from "./screens/landing/landing_screen";
 import Navbar from "./components/navbar/navbar_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
+import { userMe } from "./store/actions/authActions";
 
 class FiorApp extends Component {
+  componentDidMount = () => {
+    this.props.userMe();
+  };
+
   render() {
     return (
       <BrowserRouter>
@@ -20,5 +26,8 @@ class FiorApp extends Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => ({
+  userMe: () => dispatch(userMe()),
+});
 
-export default FiorApp;
+export default connect(null, mapDispatchToProps)(FiorApp);
