@@ -12,6 +12,22 @@ export const signInEmail = (credentials) => {
         dispatch({
           type: "LOGIN_SUCCESS",
         });
+        axios
+          .get("/users/me")
+          .then((res) => {
+            console.log(res);
+            dispatch({
+              type: "CURRENT_USER",
+              payload: res.data,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            dispatch({
+              type: "CURRENT_USER_ERROR",
+              error,
+            });
+          });
       })
       .catch((error) => {
         dispatch({
@@ -25,9 +41,8 @@ export const signInEmail = (credentials) => {
 export const userMe = () => {
   return (dispatch) => {
     axios
-      .get("/users/me/")
+      .get("/users/me")
       .then((res) => {
-        console.log(res);
         dispatch({
           type: "CURRENT_USER",
           payload: res.data,
