@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { Image, Button } from "semantic-ui-react";
+import { connect } from "react-redux";
 import "./navbar.css";
 
 class Navbar extends Component {
   state = {};
   render() {
+    const { user } = this.props;
+
     return (
       <React.Fragment>
         <div className='row navbar v-align'>
@@ -14,22 +16,26 @@ class Navbar extends Component {
               <Image src='../../assets/logo/logo.png' />
             </div>
           </NavLink>
-          <div className='spacer'></div>
-          <NavLink to='#'>
-            <div className='nav-item'>Pricing Plan</div>
-          </NavLink>
-          <NavLink to='#'>
-            <div className='nav-item'>About Us</div>
-          </NavLink>
-          <NavLink to='/login'>
-            <Button color='green' className='nav-item btn-login'>
-              Login
-            </Button>
-          </NavLink>
+          {user ? (
+            <NavLink to="/logout">
+              <div className="nav-item">
+                Logout<span> ({user.name.split(" ")[0]})</span>
+              </div>
+            </NavLink>
+          ) : (
+            <NavLink to="/login">
+              <div className="nav-item">Login</div>
+            </NavLink>
+          )}
         </div>
       </React.Fragment>
     );
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  user: state.auth.currentUser,
+});
+
+const mapDispatchToProps = {};
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

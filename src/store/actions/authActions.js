@@ -1,4 +1,5 @@
 import axios from "axios";
+import AxiosConfig from "../../config/axios-config";
 
 export const signInEmail = (credentials) => {
   return (dispatch) => {
@@ -9,20 +10,20 @@ export const signInEmail = (credentials) => {
       })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        AxiosConfig.config();
         dispatch({
           type: "LOGIN_SUCCESS",
         });
+
         axios
           .get("/users/me")
           .then((res) => {
-            console.log(res);
             dispatch({
               type: "CURRENT_USER",
               payload: res.data,
             });
           })
           .catch((error) => {
-            console.log(error);
             dispatch({
               type: "CURRENT_USER_ERROR",
               error,
