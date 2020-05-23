@@ -14,21 +14,7 @@ export const signInEmail = (credentials) => {
         dispatch({
           type: "LOGIN_SUCCESS",
         });
-
-        axios
-          .get("/users/me")
-          .then((res) => {
-            dispatch({
-              type: "CURRENT_USER",
-              payload: res.data,
-            });
-          })
-          .catch((error) => {
-            dispatch({
-              type: "CURRENT_USER_ERROR",
-              error,
-            });
-          });
+        userMeFetch(dispatch);
       })
       .catch((error) => {
         dispatch({
@@ -41,20 +27,24 @@ export const signInEmail = (credentials) => {
 
 export const userMe = () => {
   return (dispatch) => {
-    axios
-      .get("/users/me")
-      .then((res) => {
-        dispatch({
-          type: "CURRENT_USER",
-          payload: res.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch({
-          type: "CURRENT_USER_ERROR",
-          error,
-        });
-      });
+    userMeFetch(dispatch);
   };
+};
+
+const userMeFetch = (dispatch) => {
+  axios
+    .get("/users/me")
+    .then((res) => {
+      dispatch({
+        type: "CURRENT_USER",
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({
+        type: "CURRENT_USER_ERROR",
+        error,
+      });
+    });
 };

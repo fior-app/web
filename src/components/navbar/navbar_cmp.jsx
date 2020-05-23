@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import { Image } from "semantic-ui-react";
 
 import "./navbar.css";
 
@@ -11,17 +12,15 @@ class Navbar extends Component {
 
     return (
       <React.Fragment>
-        <div className='row navbar v-align'>
-          <NavLink to='/'>
-            <div className='logo'>
-              <Image src='../../assets/logo/logo.png' />
+        <div className="row navbar v-align">
+          <NavLink to="/">
+            <div className="logo">
+              <Image src="../../assets/logo/logo.png" />
             </div>
           </NavLink>
           {user ? (
             <NavLink to="/logout">
-              <div className="nav-item">
-                Logout<span> ({user.name.split(" ")[0]})</span>
-              </div>
+              <div className="nav-item">Logout</div>
             </NavLink>
           ) : (
             <NavLink to="/login">
