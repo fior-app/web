@@ -12,19 +12,20 @@ class Navbar extends Component {
 
     return (
       <React.Fragment>
-        <div className="row navbar v-align">
-          <NavLink to="/">
-            <div className="logo">
-              <Image src="../../assets/logo/logo.png" />
+        <div className='row navbar v-align'>
+          <NavLink to='/'>
+            <div className='logo'>
+              <Image src='../../assets/logo/logo.png' />
             </div>
           </NavLink>
+          <div className='spacer'></div>
           {user ? (
-            <NavLink to="/logout">
-              <div className="nav-item">Logout</div>
+            <NavLink to='/logout'>
+              <div className='nav-item'>Logout</div>
             </NavLink>
           ) : (
-            <NavLink to="/login">
-              <div className="nav-item">Login</div>
+            <NavLink to='/login'>
+              <div className='nav-item'>Login</div>
             </NavLink>
           )}
         </div>
