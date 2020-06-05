@@ -17,15 +17,7 @@ const BlogScreen = ({
 
   
 
-  useEffect(() => {
-    dispatchGetPosts();
-  }, [dispatchGetPosts]);
-
-  const handlePaginationChange = (e, { activePage }) => setBlogState((state) => ({
-    ...state,
-    activePage,
-  }));
-
+  
   const getPageStart = () => blogState.limit * (blogState.activePage - 1);
   const getPageEnd = () => getPageStart() + blogState.limit;
   
