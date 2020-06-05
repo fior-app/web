@@ -18,6 +18,25 @@ class Login extends Component {
       };
     }
 
+    handleChange = (e) => {
+        this.setState({
+          [e.target.id]: e.target.value,
+        });
+      };
+    
+      handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.signInEmail(this.state);
+      };
+    
+      handleGSignFailure = (response) => {
+        console.log('Google login failed', response);
+      };
+    
+      handleGSignSuccess = (response) => {
+        this.props.signInGoogle(response.tokenId);
+      };
+
 
 
 
