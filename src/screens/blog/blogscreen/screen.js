@@ -60,7 +60,12 @@ const BlogScreen = ({
   );
 };
 
-
+const mapStateToProps = (state) => ({
+  loading: state.blog.posts.loading,
+  error: state.blog.posts.error,
+  posts: state.blog.posts.posts,
+  skills: state.skills.skills.items,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchGetPosts: () => dispatch(getPosts()),
