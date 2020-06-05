@@ -43,11 +43,6 @@ const BlogScreen = ({
             />
           </Grid.Row>
         </Grid.Column>
-        <Grid.Column width={4}>
-          <Button as={NavLink} to="/blog/edit" primary>Create Post</Button>
-          <Categories categories={skills} />
-          <RecentPosts posts={recentPosts} />
-        </Grid.Column>
       </Grid>
     </Container>
   );
