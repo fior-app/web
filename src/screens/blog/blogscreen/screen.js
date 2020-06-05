@@ -26,8 +26,9 @@ const BlogScreen = ({
     activePage,
   }));
 
+  const getPageStart = () => blogState.limit * (blogState.activePage - 1);
+  const getPageEnd = () => getPageStart() + blogState.limit;
   
-
   return (
     <Container>
       <Grid columns="equal">
