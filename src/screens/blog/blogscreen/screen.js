@@ -34,14 +34,6 @@ const BlogScreen = ({
       <Grid columns="equal">
         <Grid.Column>
           <Grid.Row>
-            {posts.slice(getPageStart(), getPageEnd())
-              .map((post) => (
-                <Link to={`/blog/${post.id}`} key={post.id}>
-                  <Post post={post} />
-                </Link>
-              ))}
-          </Grid.Row>
-          <Grid.Row>
             <Pagination
               activePage={blogState.activePage}
               firstItem={null}
