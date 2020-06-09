@@ -14,7 +14,7 @@ const BlogScreen = ({
 
       };
   }
-/
+
   const [blogState, setBlogState]= useState(initialState);
   
 
@@ -24,6 +24,7 @@ const BlogScreen = ({
   
   return (
     <Container>
+
       <Grid columns="equal">
         <Grid.Column>
           <Grid.Row>
@@ -51,5 +52,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchGetPosts: () => dispatch(getPosts()),
 });
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogScreen);
