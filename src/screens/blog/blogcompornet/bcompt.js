@@ -25,3 +25,11 @@ const BlogDetail = (
       const handleDelete = () => {
         dispatchDeletePost(postId);
       };
+
+      return (
+        <Container>
+          <Grid columns="equal">
+            <Grid.Row>
+              <Link to="/blog">← Back to Blog Posts</Link>
+            </Grid.Row>
+    
