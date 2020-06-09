@@ -18,4 +18,10 @@ const BlogDetail = (
     },
   ) => {
     const { postId } = useParams();
+    useEffect(() => {
+        dispatchGetPost(postId);
+      }, [postId, dispatchGetPost]);
     
+      const handleDelete = () => {
+        dispatchDeletePost(postId);
+      };
