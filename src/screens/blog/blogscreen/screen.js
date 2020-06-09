@@ -8,10 +8,12 @@ const BlogScreen = ({
   skills,
   dispatchGetPosts,
 }) => {
-  const initialState = {
-    activePage: 1,
-    limit: 5,
-  };
+      const initialState={
+          activePage: 1,
+          limit: 5,
+
+      };
+  }
 
   const [blogState, setBlogState] = useState(initialState);
 
