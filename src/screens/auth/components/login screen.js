@@ -122,38 +122,6 @@ class Login extends Component {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const mapStateToProps = (state) => ({
         authState: state.auth.authState,
       });
