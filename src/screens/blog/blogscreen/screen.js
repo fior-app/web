@@ -14,9 +14,8 @@ const BlogScreen = ({
 
       };
   }
-
-  const [blogState, setBlogState] = useState(initialState);
-
+/
+  const [blogState, setBlogState]= useState(initialState);
   
 
   
