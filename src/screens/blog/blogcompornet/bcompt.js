@@ -32,4 +32,17 @@ const BlogDetail = (
             <Grid.Row>
               <Link to="/blog">← Back to Blog Posts</Link>
             </Grid.Row>
-    
+            {!loading && post
+          ? (<>
+            <Grid.Column>
+              <Header as="h2">{post.title}</Header>
+              <Image src="../../assets/vectors/blogviewicon.svg" alt=""/>
+              <p>{post.text}</p>
+              <div className="comments_section">
+                <Header as="h4">Comments</Header>
+                <button type="button">Add Comment</button>
+              </div>
+            </Grid.Column>
+            <Grid.Column width={4}>
+              {post.createdBy.id === user.id && (
+                <>
