@@ -13,6 +13,35 @@ export class QuestionForum extends Component {
             <img className="blogicon6"  src='../../assets/vectors/blogicon6.svg' />
             <img className="blogicon7"  src='../../assets/vectors/blogicon7.svg' />
         </div>
+        <div className='forum_content'>
+            <div className='forum_item row'>
+                <div className='forum_card'>
+                    <div className='forum_title'>
+                        {/* <p className='post_title'>Question Title</p> */}
+                        <p className='contentt'>Here is the content</p>
+                        <p className='forum_by'>by John Doe</p>
+                    </div>
+                </div>
+            </div>
+            <div className='forum_item row'>
+                <div className='forum_card2'>
+                    <div className='forum_title'>   
+                        {/* <p className='post_title'>Question Title</p> */}
+                        <p className='contentt'>Here is the content</p>
+                        <p className='forum_by'>by John Doe</p>
+                    </div>
+                </div>
+            </div>
+            <div className='forum_item row'>
+                <div className='forum_card3'>
+                    <div className='forum_title'>
+                        {/* <p className='post_title'>Question Title</p> */}
+                        <p className='contentt'>Here is the content</p>
+                        <p className='forum_by'>by John Doe</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     }
 }
