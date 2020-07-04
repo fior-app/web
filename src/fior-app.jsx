@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import LandingScreen from "./screens/landing/landing_screen";
 import Navbar from "./components/navbar/navbar_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
+import GroupsScreen from "./screens/groups/GroupsScreen";
+
 import { userMe } from "./store/actions/authActions";
 
 class FiorApp extends Component {
@@ -20,6 +22,7 @@ class FiorApp extends Component {
           <Switch>
             <Route exact path="/" component={LandingScreen} />
             <Route path="/login" component={AuthScreen} />
+            <Route exact path="/groups" component={GroupsScreen} />
           </Switch>
         </div>
       </BrowserRouter>
