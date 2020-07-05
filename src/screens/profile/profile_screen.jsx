@@ -8,7 +8,6 @@ import {
   Card,
   Label,
 } from "semantic-ui-react";
-import "./profile.css";
 
 class ProfileScreen extends Component {
   state = {
