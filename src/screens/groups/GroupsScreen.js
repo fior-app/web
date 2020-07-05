@@ -25,7 +25,9 @@ export class GroupsScreen extends Component {
           {groups.map((member) => {
             return (
               <Link to={`/groups/${member.group.id}`} key={member.id}>
-                <li>{member.group.name}</li>
+                <li>
+                  {member.group.name} - ({member.group.members})
+                </li>
               </Link>
             );
           })}

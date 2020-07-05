@@ -6,7 +6,7 @@ import LandingScreen from "./screens/landing/landing_screen";
 import Navbar from "./components/navbar/navbar_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
 import GroupsScreen from "./screens/groups/GroupsScreen";
-import GroupScreen from "./screens/groups/GroupScreen";
+import GroupScreen from "./screens/group/GroupScreen";
 
 import { userMe } from "./store/actions/authActions";
 

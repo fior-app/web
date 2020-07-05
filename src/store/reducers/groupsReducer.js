@@ -15,6 +15,11 @@ const initState = {
     loading: false,
     group: null,
   },
+  groupMembers: {
+    members: [],
+    loading: false,
+    error: null,
+  },
 };
 
 const createGroupStart = (state) => {
@@ -73,6 +78,29 @@ const getGroup = (state, payload) => {
   return { ...state, group: { ...state.group, group: payload } };
 };
 
+const getGroupMembersStart = (state) => {
+  return { ...state, groupMembers: { ...state.groupMembers, loading: true } };
+};
+
+const getGroupMembersEnd = (state) => {
+  return { ...state, groupMembers: { ...state.groupMembers, loading: false } };
+};
+
+const getGroupMembersFailed = (state, payload) => {
+  return { ...state, groupMembers: { ...state.groupMembers, error: payload } };
+};
+
+const getGroupMembersSuccess = (state) => {
+  return { ...state, groupMembers: { ...state.groupMembers, error: null } };
+};
+
+const getGroupMembers = (state, payload) => {
+  return {
+    ...state,
+    groupMembers: { ...state.groupMembers, members: payload },
+  };
+};
+
 const groupsReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.GET_MY_GROUPS_START:
@@ -104,6 +132,21 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.GET_GROUP:
       return getGroup(state, action.payload);
+
+    case actions.GET_GROUP_MEMBERS_START:
+      return getGroupMembersStart(state);
+
+    case actions.GET_GROUP_MEMBERS_END:
+      return getGroupMembersEnd(state);
+
+    case actions.GET_GROUP_MEMBERS_SUCCESS:
+      return getGroupMembersSuccess(state);
+
+    case actions.GET_GROUP_MEMBERS_FAILED:
+      return getGroupMembersFailed(state, action.payload);
+
+    case actions.GET_GROUP_MEMBERS:
+      return getGroupMembers(state, action.payload);
 
     case actions.CREATE_GROUP_START:
       return createGroupStart(state);

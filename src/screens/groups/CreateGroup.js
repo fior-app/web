@@ -7,6 +7,7 @@ export class CreateGroup extends Component {
   state = {
     name: "",
     description: "",
+    icon: "",
   };
 
   handleOnChangeInput = (e) => {
@@ -44,6 +45,14 @@ export class CreateGroup extends Component {
           type="text"
           id="description"
           value={this.state.description}
+          onChange={this.handleOnChangeInput}
+        />
+        <br />
+        {/* since any storage bucket not installed in system. lets continue with a link */}
+        <input
+          type="text"
+          id="icon"
+          value={this.state.icon}
           onChange={this.handleOnChangeInput}
         />
         <br />

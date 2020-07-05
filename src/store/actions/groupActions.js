@@ -35,6 +35,23 @@ export const getGroup = (groupId) => {
   };
 };
 
+export const getGroupMembers = (groupId) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_GROUP_MEMBERS_START });
+    axios
+      .get("/groups/" + groupId + "/members")
+      .then((res) => {
+        dispatch({ type: actions.GET_GROUP_MEMBERS, payload: res.data });
+        dispatch({ type: actions.GET_GROUP_MEMBERS_SUCCESS });
+        dispatch({ type: actions.GET_GROUP_MEMBERS_END });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_GROUP_MEMBERS_FAILED, payload: error });
+        dispatch({ type: actions.GET_GROUP_MEMBERS_END });
+      });
+  };
+};
+
 export const createGroup = (group) => {
   return (dispatch) => {
     dispatch({ type: actions.CREATE_GROUP_START });
