@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Card, Form, Button, Icon, Divider } from "semantic-ui-react";
 import { connect } from "react-redux";
 
-import "./login.css";
 import { signInEmail } from "../../../store/actions/authActions";
 
 class Login extends Component {
@@ -24,43 +23,43 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="center">
+      <div className='center'>
         <Card>
           <Card.Content>
             <Card.Description>
-              <Button color="google plus" fluid>
-                <Icon name="google" />
+              <Button color='google plus' fluid>
+                <Icon name='google' />
                 Sign in with Google
               </Button>
-              <div className="v-spacer"></div>
-              <Button color="linkedin" fluid>
-                <Icon name="linkedin" />
+              <div className='v-spacer'></div>
+              <Button color='linkedin' fluid>
+                <Icon name='linkedin' />
                 Sign in with LinkedIn
               </Button>
-              <div className="v-spacer"></div>
+              <div className='v-spacer'></div>
               <Divider horizontal>OR</Divider>
               {/* <Card.Meta>Enter your email and password to login</Card.Meta> */}
               <Form onSubmit={this.handleSubmit}>
                 <Form.Field>
                   <input
-                    type="email"
+                    type='email'
                     required
-                    placeholder="Email"
-                    id="email"
+                    placeholder='Email'
+                    id='email'
                     onChange={this.handleChange}
                   />
                 </Form.Field>
                 <Form.Field>
                   <input
-                    type="password"
+                    type='password'
                     required
-                    placeholder="Password"
-                    id="password"
+                    placeholder='Password'
+                    id='password'
                     onChange={this.handleChange}
                   />
                 </Form.Field>
-                <div className="end">
-                  <Button type="submit" fluid>
+                <div className='end'>
+                  <Button type='submit' fluid>
                     Login
                   </Button>
                 </div>

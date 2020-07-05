@@ -4,11 +4,12 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 
-import "./index.css";
 import FiorApp from "./fior-app";
 import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./store/reducers/rootReducer";
 import AxiosConfig from "./config/axios-config";
+
+import "./styles.css";
 
 AxiosConfig.config();
 

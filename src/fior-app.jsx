@@ -7,8 +7,10 @@ import Navbar from "./components/navbar/navbar_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
 import GroupsScreen from "./screens/groups/GroupsScreen";
 import GroupScreen from "./screens/group/GroupScreen";
+import ProfileScreen from "./screens/profile/profile_screen";
 
 import { userMe } from "./store/actions/authActions";
+import Footer from "./components/footer/footer";
 
 class FiorApp extends Component {
   componentDidMount = () => {
@@ -18,14 +20,16 @@ class FiorApp extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className='App'>
           <Navbar />
           <Switch>
             <Route exact path="/" component={LandingScreen} />
             <Route path="/login" component={AuthScreen} />
             <Route exact path="/groups" component={GroupsScreen} />
             <Route exact path="/groups/:groupId" component={GroupScreen} />
+            <Route path='/profile' component={ProfileScreen} />
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );
