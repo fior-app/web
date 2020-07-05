@@ -1,13 +1,11 @@
 import axios from "axios";
 import AxiosConfig from "../../config/axios-config";
 
+// Sign in action
 export const signInEmail = (credentials) => {
   return (dispatch) => {
     axios
-      .post("/auth/signin/email", {
-        email: credentials.email,
-        password: credentials.password,
-      })
+      .post("/auth/signin/email", credentials)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         AxiosConfig.config();
@@ -21,6 +19,25 @@ export const signInEmail = (credentials) => {
           type: "LOGIN_ERROR",
           error,
         });
+      });
+  };
+};
+
+// Register action
+export const registerWithEmailAndPassword = (user) => {
+  return (dispatch) => {
+    axios
+      .post("/auth/signup", user)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        AxiosConfig.config();
+        dispatch({
+          type: "REGISTER_SUCCESS",
+        });
+        userMeFetch(dispatch);
+      })
+      .catch((error) => {
+        dispatch({ type: "REGISTER_ERROR", error });
       });
   };
 };
@@ -47,4 +64,11 @@ const userMeFetch = (dispatch) => {
         error,
       });
     });
+};
+
+export const signOut = () => {
+  return (dispatch) => {
+    localStorage.removeItem("token");
+    dispatch({ type: "SIGN_OUT" });
+  };
 };

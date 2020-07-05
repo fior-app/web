@@ -1,13 +1,6 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Image,
-  Icon,
-  Accordion,
-  Grid,
-  Card,
-  Label,
-} from "semantic-ui-react";
+import { Grid, Card } from "semantic-ui-react";
+import { connect } from "react-redux";
 
 class ProfileScreen extends Component {
   state = {
@@ -16,6 +9,8 @@ class ProfileScreen extends Component {
 
   render() {
     const { avatarUrl } = this.state;
+
+    const { user } = this.props;
 
     return (
       <div className='container'>
@@ -68,8 +63,8 @@ class ProfileScreen extends Component {
               <img src={avatarUrl} alt='avatar' className='avatar' />
             </Grid.Column>
             <Grid.Column width={8}>
-              <h2>John Doe</h2>
-              <h4>Software Engineer at WSO2</h4>
+              <h2>{user && user.name}</h2>
+              <h4>Freelance Developer</h4>
               <div className='row'>
                 <label className='label-primary'>Javascript</label>
                 <div className='spacer-1'></div>
@@ -145,4 +140,8 @@ class ProfileScreen extends Component {
   }
 }
 
-export default ProfileScreen;
+const mapStateToProps = (state) => ({
+  user: state.auth.currentUser,
+});
+
+export default connect(mapStateToProps)(ProfileScreen);
