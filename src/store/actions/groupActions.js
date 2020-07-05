@@ -18,6 +18,23 @@ export const getGroupsMe = () => {
   };
 };
 
+export const getGroup = (groupId) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_GROUP_START });
+    axios
+      .get("/groups/" + groupId)
+      .then((res) => {
+        dispatch({ type: actions.GET_GROUP, payload: res.data });
+        dispatch({ type: actions.GET_GROUP_SUCCESS });
+        dispatch({ type: actions.GET_GROUP_END });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_GROUP_FAILED, payload: error });
+        dispatch({ type: actions.GET_GROUP_END });
+      });
+  };
+};
+
 export const createGroup = (group) => {
   return (dispatch) => {
     dispatch({ type: actions.CREATE_GROUP_START });

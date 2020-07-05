@@ -6,6 +6,7 @@ import LandingScreen from "./screens/landing/landing_screen";
 import Navbar from "./components/navbar/navbar_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
 import GroupsScreen from "./screens/groups/GroupsScreen";
+import GroupScreen from "./screens/groups/GroupScreen";
 
 import { userMe } from "./store/actions/authActions";
 
@@ -23,6 +24,7 @@ class FiorApp extends Component {
             <Route exact path="/" component={LandingScreen} />
             <Route path="/login" component={AuthScreen} />
             <Route exact path="/groups" component={GroupsScreen} />
+            <Route exact path="/groups/:groupId" component={GroupScreen} />
           </Switch>
         </div>
       </BrowserRouter>
