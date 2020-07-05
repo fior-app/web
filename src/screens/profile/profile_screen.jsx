@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Button, Image, Icon, Accordion } from "semantic-ui-react";
+import {
+  Button,
+  Image,
+  Icon,
+  Accordion,
+  Grid,
+  Card,
+  Label,
+} from "semantic-ui-react";
 import "./profile.css";
 
 class ProfileScreen extends Component {
@@ -11,27 +19,9 @@ class ProfileScreen extends Component {
   render() {
     const { avatarUrl } = this.state;
 
-    const panels = [
-      {
-        key: 0,
-        title: "Rewards and Certificates",
-        content: "Content 1",
-      },
-      {
-        key: 1,
-        title: "Group",
-        content: "Content 2",
-      },
-      {
-        key: 2,
-        title: "Organization",
-        content: "Content 3",
-      },
-    ];
-
     return (
       <div className='container'>
-        <div className='row end'>
+        {/* <div className='row end'>
           <Button>Switch to mentor profile</Button>
         </div>
         <div className='v-spacer-2'></div>
@@ -55,7 +45,99 @@ class ProfileScreen extends Component {
           exclusive={false}
           fluid
           styled
-        />
+        /> */}
+
+        <Grid columns='equal'>
+          <Grid.Row>
+            <Grid.Column>
+              <Button>Mentor Profile</Button>
+            </Grid.Column>
+
+            <Grid.Column>
+              <Button>Mentee Profile</Button>
+            </Grid.Column>
+
+            <Grid.Column>
+              <Button>Profile Settings</Button>
+            </Grid.Column>
+
+            <Grid.Column width={8}></Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row>
+            <Grid.Column>
+              <Image src={avatarUrl} size='small' circular />
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <h2>John Doe</h2>
+              <h4>Software Engineer at WSO2</h4>
+              <Label>Javascript</Label>
+              <Label>DevOps</Label>
+            </Grid.Column>
+            <Grid.Column>
+              <Card>
+                <Card.Content>
+                  <Card.Header>Activity</Card.Header>
+                  <Card.Description>
+                    You don't have any activity yet
+                  </Card.Description>
+                </Card.Content>
+              </Card>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={6}>
+              <div>
+                <h2>Groups</h2>
+                <div className='v-spacer-2'></div>
+                <div>You haven't joined to any group yet</div>
+                <div className='v-spacer-2'></div>
+              </div>
+              <div className='v-spacer-4'></div>
+              <div>
+                <h2>Organizations</h2>
+                <div className='v-spacer-2'></div>
+                <div>You haven't joined to any organization yet</div>
+                <div className='v-spacer-2'></div>
+              </div>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <div>
+                <h2>Skills</h2>
+                <div className='divider-color'></div>
+                <div className='v-spacer-2'></div>
+                <div>You don't have added any skills yet</div>
+                <div className='v-spacer-2'></div>
+              </div>
+              <div className='v-spacer-4'></div>
+              <div>
+                <h2>Medals</h2>
+                <div className='divider-color'></div>
+                <div className='v-spacer-2'></div>
+                <div>You don't have added any medals yet</div>
+                <div className='v-spacer-2'></div>
+              </div>
+              <div className='v-spacer-4'></div>
+              <div>
+                <h2>Active Points</h2>
+                <div className='divider-color'></div>
+                <div className='v-spacer-2'></div>
+                <div>You don't have added any active points yet</div>
+                <div className='v-spacer-2'></div>
+              </div>
+              <div className='v-spacer-4'></div>
+              <div>
+                <h2>Feedbacks</h2>
+                <div className='divider-color'></div>
+                <div className='v-spacer-2'></div>
+                <div>You haven't recieved any feedback yet</div>
+                <div className='v-spacer-2'></div>
+              </div>
+              <div className='v-spacer-4'></div>
+            </Grid.Column>
+            <Grid.Column></Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }
