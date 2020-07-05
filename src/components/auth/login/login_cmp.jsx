@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Form, Button, Icon, Divider, Input } from "semantic-ui-react";
+import { Card, Form, Button, Icon, Divider } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import { signInEmail } from "../../../store/actions/authActions";

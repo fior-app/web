@@ -5,10 +5,7 @@ import AxiosConfig from "../../config/axios-config";
 export const signInEmail = (credentials) => {
   return (dispatch) => {
     axios
-      .post("/auth/signin/email", {
-        email: credentials.email,
-        password: credentials.password,
-      })
+      .post("/auth/signin/email", credentials)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         AxiosConfig.config();
@@ -27,14 +24,10 @@ export const signInEmail = (credentials) => {
 };
 
 // Register action
-export const registerWithEmailAndPassword = (credentials) => {
+export const registerWithEmailAndPassword = (user) => {
   return (dispatch) => {
     axios
-      .post("/auth/signup", {
-        email: credentials.email,
-        username: credentials.username,
-        password: credentials.password,
-      })
+      .post("/auth/signup", user)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         AxiosConfig.config();
@@ -71,4 +64,11 @@ const userMeFetch = (dispatch) => {
         error,
       });
     });
+};
+
+export const signOut = () => {
+  return (dispatch) => {
+    localStorage.removeItem("token");
+    dispatch({ type: "SIGN_OUT" });
+  };
 };
