@@ -52,6 +52,23 @@ export const getGroupMembers = (groupId) => {
   };
 };
 
+export const getGroupMessages = (groupId) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_GROUP_MESSAGES_START });
+    axios
+      .get("/chatrooms/groups/" + groupId + "/messages")
+      .then((res) => {
+        dispatch({ type: actions.GET_GROUP_MESSAGES, payload: res.data });
+        dispatch({ type: actions.GET_GROUP_MESSAGES_SUCCESS });
+        dispatch({ type: actions.GET_GROUP_MESSAGES_END });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_GROUP_MESSAGES_FAILED, payload: error });
+        dispatch({ type: actions.GET_GROUP_MESSAGES_END });
+      });
+  };
+};
+
 export const createGroup = (group) => {
   return (dispatch) => {
     dispatch({ type: actions.CREATE_GROUP_START });
@@ -65,6 +82,23 @@ export const createGroup = (group) => {
       .catch((error) => {
         dispatch({ type: actions.CREATE_GROUP_FAILED, payload: error });
         dispatch({ type: actions.CREATE_GROUP_END });
+      });
+  };
+};
+
+export const sendGroupMessage = (roomId, message) => {
+  return (dispatch) => {
+    dispatch({ type: actions.SEND_GROUP_MESSAGE_START });
+    axios
+      .post("/chatrooms/" + roomId + "/send", message)
+      .then((res) => {
+        dispatch({ type: actions.SEND_GROUP_MESSAGE_SUCCESS });
+        dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
+        getGroupsMe()(dispatch);
+      })
+      .catch((error) => {
+        dispatch({ type: actions.SEND_GROUP_MESSAGE_FAILED, payload: error });
+        dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
       });
   };
 };

@@ -20,6 +20,15 @@ const initState = {
     loading: false,
     error: null,
   },
+  groupMessages: {
+    messages: [],
+    loading: false,
+    error: null,
+  },
+  sendGroupMessage: {
+    sending: false,
+    error: null,
+  },
 };
 
 const createGroupStart = (state) => {
@@ -101,6 +110,63 @@ const getGroupMembers = (state, payload) => {
   };
 };
 
+const getGroupMessagesStart = (state) => {
+  return { ...state, groupMessages: { ...state.groupMessages, loading: true } };
+};
+
+const getGroupMessagesEnd = (state) => {
+  return {
+    ...state,
+    groupMessages: { ...state.groupMessages, loading: false },
+  };
+};
+
+const getGroupMessagesFailed = (state, payload) => {
+  return {
+    ...state,
+    groupMessages: { ...state.groupMessages, error: payload },
+  };
+};
+
+const getGroupMessagesSuccess = (state) => {
+  return { ...state, groupMessages: { ...state.groupMessages, error: null } };
+};
+
+const getGroupMessages = (state, payload) => {
+  return {
+    ...state,
+    groupMessages: { ...state.groupMessages, messages: payload },
+  };
+};
+
+const sendGroupMessageStart = (state) => {
+  return {
+    ...state,
+    sendGroupMessage: { ...state.sendGroupMessage, sending: true },
+  };
+};
+
+const sendGroupMessageEnd = (state) => {
+  return {
+    ...state,
+    sendGroupMessage: { ...state.sendGroupMessage, sending: false },
+  };
+};
+
+const sendGroupMessageFailed = (state, payload) => {
+  return {
+    ...state,
+    sendGroupMessage: { ...state.sendGroupMessage, error: payload },
+  };
+};
+
+const sendGroupMessageSuccess = (state) => {
+  return {
+    ...state,
+    sendGroupMessage: { ...state.sendGroupMessage, error: null },
+  };
+};
+
 const groupsReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.GET_MY_GROUPS_START:
@@ -159,6 +225,33 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.CREATE_GROUP_FAILED:
       return createGroupFailed(state, action.payload);
+
+    case actions.GET_GROUP_MESSAGES_START:
+      return getGroupMessagesStart(state);
+
+    case actions.GET_GROUP_MESSAGES_END:
+      return getGroupMessagesEnd(state);
+
+    case actions.GET_GROUP_MESSAGES_SUCCESS:
+      return getGroupMessagesSuccess(state);
+
+    case actions.GET_GROUP_MESSAGES_FAILED:
+      return getGroupMessagesFailed(state, action.payload);
+
+    case actions.GET_GROUP_MESSAGES:
+      return getGroupMessages(state, action.payload);
+
+    case actions.SEND_GROUP_MESSAGE_START:
+      return sendGroupMessageStart(state);
+
+    case actions.SEND_GROUP_MESSAGE_END:
+      return sendGroupMessageEnd(state);
+
+    case actions.SEND_GROUP_MESSAGE_SUCCESS:
+      return sendGroupMessageSuccess(state);
+
+    case actions.SEND_GROUP_MESSAGE_FAILED:
+      return sendGroupMessageFailed(state, action.payload);
 
     default:
       return state;

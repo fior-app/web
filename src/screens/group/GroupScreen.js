@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { getGroup } from "../../store/actions/groupActions";
 import GroupMembers from "./GroupMembers";
+import GroupChat from "./GroupChat";
 
 export class GroupScreen extends Component {
   state = {
@@ -16,15 +17,12 @@ export class GroupScreen extends Component {
     });
   };
 
-  handleSendMessage = (e) => {};
-
   componentDidMount() {
     this.props.getGroup(this.props.match.params.groupId);
   }
 
   render() {
     const { group, loading } = this.props;
-    const { groupId } = this.props.match.params;
 
     if (loading) return <div>Loading groups</div>;
 
@@ -34,7 +32,11 @@ export class GroupScreen extends Component {
         <div>{group && group.members}</div>
         <br />
         <br />
-        <GroupMembers groupId={groupId} />
+        <GroupMembers groupId={group && group.id} />
+        <GroupChat
+          groupId={group && group.id}
+          roomId={group && group.chatroom.id}
+        />
       </div>
     );
   }
