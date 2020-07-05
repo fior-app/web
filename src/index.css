@@ -37,3 +37,8 @@ body {
 .j-around {
   justify-content: space-around;
 }
+
+.container {
+  margin-left: 24rem;
+  margin-right: 24rem;
+}
