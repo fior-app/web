@@ -27,11 +27,9 @@ export class GroupScreen extends Component {
     if (loading) return <div>Loading groups</div>;
 
     return (
-      <div>
-        <div>{group && group.name}</div>
+      <div className='container'>
+        <h2>{group && group.name}</h2>
         <div>{group && group.members}</div>
-        <br />
-        <br />
         <GroupMembers groupId={group && group.id} />
         <GroupChat
           groupId={group && group.id}

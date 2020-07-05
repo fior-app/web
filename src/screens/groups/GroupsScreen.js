@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Popup from "reactjs-popup";
 
 import { getGroupsMe } from "../../store/actions/groupActions";
 import CreateGroup from "./CreateGroup";
 import { Link } from "react-router-dom";
+import { Modal, Grid } from "semantic-ui-react";
 
 export class GroupsScreen extends Component {
   componentDidMount() {
@@ -14,23 +14,39 @@ export class GroupsScreen extends Component {
   render() {
     const { loading, groups, error } = this.props;
 
-    if (loading) return <div>Loading groups</div>;
+    console.log(groups);
+
+    // if (loading) return <div>Loading groups</div>;
     return (
-      <div>
-        <Popup trigger={<button>Create Group</button>} modal>
-          {(close) => <CreateGroup close={close} />}
-        </Popup>
-        <div>groups</div>
+      <div className='container'>
+        <div className='v-spacer-2' />
+        <Modal trigger={<div className='btn-primary'>Create Group</div>} modal>
+          <CreateGroup />
+        </Modal>
+        <div className='v-spacer-2' />
+        <h2>
+          <div className='margin-to-align'>Groups</div>
+        </h2>
+        <div className='v-spacer-2' />
         <ul>
-          {groups.map((member) => {
-            return (
-              <Link to={`/groups/${member.group.id}`} key={member.id}>
-                <li>
-                  {member.group.name} - ({member.group.members})
-                </li>
-              </Link>
-            );
-          })}
+          <Grid>
+            <Grid.Row>
+              {groups.map((groupItem) => {
+                return (
+                  <Link to={`/groups/${groupItem.group.id}`} key={groupItem.id}>
+                    <div className='group-item'>
+                      <div className='group-header'>{groupItem.group.name}</div>
+                      <div className='v-spacer' />
+                      <div>
+                        Created by &nbsp;
+                        <span>{groupItem.group.createdBy.name}</span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </Grid.Row>
+          </Grid>
         </ul>
         {error ? <div>error while loading {JSON.stringify(error)}</div> : null}
       </div>

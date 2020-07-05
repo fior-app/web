@@ -51,8 +51,8 @@ export class GroupChat extends Component {
           )}
         </ul>
         <input
-          type="text"
-          id="message"
+          type='text'
+          id='message'
           value={this.state.message}
           onChange={this.handleOnChangeInput}
         />
