@@ -7,6 +7,7 @@ import Navbar from "./components/navbar/navbar_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
 import ProfileScreen from "./screens/profile/profile_screen";
 import { userMe } from "./store/actions/authActions";
+import Footer from "./components/footer/footer";
 
 class FiorApp extends Component {
   componentDidMount = () => {
@@ -23,6 +24,7 @@ class FiorApp extends Component {
             <Route path='/login' component={AuthScreen} />
             <Route path='/profile' component={ProfileScreen} />
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );
