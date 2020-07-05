@@ -171,6 +171,18 @@ body {
   box-shadow: -6px -6px 12px #ffffff, 6px 6px 12px #becde2;
 }
 
+/* Should update */
+.avatar-mini {
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background: #f2f3f7;
+  box-shadow: -4px -4px 12px #ffffff, 4px 4px 12px #becde2;
+}
+
 /* Navbar */
 
 .logo {
@@ -180,13 +192,26 @@ body {
 
 .nav-item {
   margin-right: 1rem;
-  width: 80px;
+  width: 120px;
   text-align: center;
   color: black;
 }
 
 .navbar {
   margin: 1rem;
+}
+
+.searchbar {
+  margin-left: 4rem;
+  padding: 10px 18px;
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: #f2f3f7;
+  box-shadow: inset -4px -4px 8px #ffffff, inset 4px 4px 8px #becde2;
+  border-radius: 8px;
+  color: #4a4a4a;
 }
 
 /* Footer */
