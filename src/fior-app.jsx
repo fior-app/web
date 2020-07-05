@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import LandingScreen from "./screens/landing/landing_screen";
 import Navbar from "./components/navbar/navbar_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
+import ProfileScreen from "./screens/profile/profile_screen";
 import GroupsScreen from "./screens/groups/GroupsScreen";
 import GroupScreen from "./screens/groups/GroupScreen";
 
@@ -23,6 +24,7 @@ class FiorApp extends Component {
           <Switch>
             <Route exact path="/" component={LandingScreen} />
             <Route path="/login" component={AuthScreen} />
+            <Route path='/profile' component={ProfileScreen} />
             <Route exact path="/groups" component={GroupsScreen} />
             <Route exact path="/groups/:groupId" component={GroupScreen} />
           </Switch>
