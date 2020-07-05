@@ -15,6 +15,16 @@ const authReducer = (state = initState, action) => {
         ...state,
         authError: null,
       };
+    case "REGISTER_SUCCESS":
+      return {
+        ...state,
+        authError: null,
+      };
+    case "REGISTER_ERROR":
+      return {
+        ...state,
+        authError: "Register failed!",
+      };
     case "CURRENT_USER":
       return {
         ...state,

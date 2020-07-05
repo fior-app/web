@@ -1,6 +1,7 @@
 import axios from "axios";
 import AxiosConfig from "../../config/axios-config";
 
+// Sign in action
 export const signInEmail = (credentials) => {
   return (dispatch) => {
     axios
@@ -21,6 +22,29 @@ export const signInEmail = (credentials) => {
           type: "LOGIN_ERROR",
           error,
         });
+      });
+  };
+};
+
+// Register action
+export const registerWithEmailAndPassword = (credentials) => {
+  return (dispatch) => {
+    axios
+      .post("/auth/signup", {
+        email: credentials.email,
+        username: credentials.username,
+        password: credentials.password,
+      })
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        AxiosConfig.config();
+        dispatch({
+          type: "REGISTER_SUCCESS",
+        });
+        userMeFetch(dispatch);
+      })
+      .catch((error) => {
+        dispatch({ type: "REGISTER_ERROR", error });
       });
   };
 };
