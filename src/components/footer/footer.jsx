@@ -1,8 +1,6 @@
 import React from "react";
 import { Grid, Icon } from "semantic-ui-react";
 
-import "./footer.css";
-
 const Footer = () => {
   return (
     <div className='footer-container'>

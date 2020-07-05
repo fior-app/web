@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 
-import "./auth.css";
 import Register from "../../components/auth/register/register_cmp";
 import Login from "../../components/auth/login/login_cmp";
 import { Redirect } from "react-router-dom";
@@ -15,29 +14,29 @@ class AuthScreen extends Component {
   render() {
     const { loginComponent } = this.state;
 
-    if (this.props.currentUser) return <Redirect to="/" />;
+    if (this.props.currentUser) return <Redirect to='/' />;
 
     return (
       <React.Fragment>
-        <div className="container">
-          <div className="row j-around">
-            <div className="placeholder">
-              <Image src="../../assets/img/auth.svg" size="massive" />
+        <div className='container'>
+          <div className='row j-around'>
+            <div className='placeholder'>
+              <Image src='../../assets/img/auth.svg' size='massive' />
             </div>
-            <div className="items-right">
-              <div className="row menu">
-                <div className="menu-item">
+            <div className='items-right'>
+              <div className='row menu'>
+                <div className='menu-item'>
                   <div
-                    id="login"
+                    id='login'
                     className={this.getActiveStyle(1)}
                     onClick={this.changeComponent}
                   >
                     Login
                   </div>
                 </div>
-                <div className="menu-item">
+                <div className='menu-item'>
                   <div
-                    id="register"
+                    id='register'
                     className={this.getActiveStyle(0)}
                     onClick={this.changeComponent}
                   >

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import "./landing.css";
-
 class LandingScreen extends Component {
   state = {};
   render() {

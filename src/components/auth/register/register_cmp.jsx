@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Card, Form, Button, Icon, Divider } from "semantic-ui-react";
-import "./register.css";
 
 class Register extends Component {
   state = {
