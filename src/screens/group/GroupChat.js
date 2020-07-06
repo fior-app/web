@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   getGroupMessages,
   sendGroupMessage,
+  getGroupMessagesStream,
 } from "../../store/actions/groupActions";
 import Message from "./Message";
 
@@ -14,6 +15,7 @@ export class GroupChat extends Component {
 
   componentDidMount() {
     this.props.getGroupMessages(this.props.groupId);
+    this.props.getGroupMessagesStream(this.props.roomId);
   }
 
   handleOnChangeInput = (e) => {
@@ -72,5 +74,6 @@ const mapDispatchToProps = (dispatch) => ({
   getGroupMessages: (groupId) => dispatch(getGroupMessages(groupId)),
   sendGroupMessage: (roomId, message) =>
     dispatch(sendGroupMessage(roomId, message)),
+  getGroupMessagesStream: (roomId) => dispatch(getGroupMessagesStream(roomId)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(GroupChat);
