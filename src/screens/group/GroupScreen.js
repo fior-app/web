@@ -27,12 +27,12 @@ export class GroupScreen extends Component {
     if (loading) return <div>Loading groups</div>;
 
     return (
-      <div>
-        <div>{group && group.name}</div>
-        <div>{group && group.members}</div>
-        <br />
-        <br />
+      <div className='container'>
+        <div className='v-spacer-2' />
+        <h2>{group && group.name}</h2>
+        {/* <div>{group && group.members}</div> */}
         <GroupMembers groupId={group && group.id} />
+        <div className='v-spacer-10' />
         <GroupChat
           groupId={group && group.id}
           roomId={group && group.chatroom.id}

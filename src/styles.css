@@ -48,6 +48,10 @@ body {
   margin-right: 24rem;
 }
 
+.spacer-1 {
+  width: 1rem;
+}
+
 .v-spacer {
   height: 1rem;
 }
@@ -90,6 +94,17 @@ body {
 
 /* Custom theme */
 
+.online {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: rgba(2, 195, 154, 1);
+}
+
+.section {
+  margin: 1rem 0rem;
+}
+
 .btn-primary {
   margin: 4px;
   padding: 10px 18px;
@@ -100,12 +115,17 @@ body {
   background: #f2f3f7;
   box-shadow: -6px -6px 12px #ffffff, 6px 6px 12px #becde2;
   border-radius: 12px;
+  max-width: 10rem;
 }
 
 .btn-primary:hover {
   background: #f2f3f7;
   box-shadow: inset -6px -6px 12px #ffffff, inset 6px 6px 12px #becde2;
   border-radius: 12px;
+}
+
+.margin-to-align {
+  margin-left: 1rem;
 }
 
 .btn-alternate {
@@ -119,6 +139,7 @@ body {
   background: linear-gradient(108.12deg, #028090 0%, #02c39a 100%);
   box-shadow: -6px -6px 12px #ffffff, 6px 6px 12px #becde2;
   border-radius: 12px;
+  max-width: 10rem;
 }
 
 .btn-alternate:hover {
@@ -157,6 +178,25 @@ body {
   font-size: 18px;
   font-weight: 800;
   margin-bottom: 1rem;
+}
+
+.group-item {
+  margin: 0rem 1rem;
+  padding: 2rem;
+  min-width: 12rem;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f2f3f7;
+  box-shadow: -6px -6px 12px #ffffff, 6px 6px 12px #becde2;
+  border-radius: 12px;
+}
+
+.group-header {
+  color: #1f1f1f;
+  font-size: 18px;
 }
 
 /* Should update */
@@ -228,6 +268,15 @@ body {
     rgba(2, 128, 144, 1) 0%,
     rgba(2, 195, 154, 1) 100%
   );
+
+  /* Remove this */
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.modal {
+  padding: 1rem;
 }
 
 .social-container {

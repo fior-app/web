@@ -7,6 +7,7 @@ import {
   getGroupMessagesStream,
 } from "../../store/actions/groupActions";
 import Message from "./Message";
+import { Form, Input, Icon } from "semantic-ui-react";
 
 export class GroupChat extends Component {
   state = {
@@ -25,7 +26,8 @@ export class GroupChat extends Component {
   };
 
   handleSendMessage = (e) => {
-    this.props.sendGroupMessage(this.props.roomId, this.state);
+    if (this.state.message !== "")
+      this.props.sendGroupMessage(this.props.roomId, this.state);
   };
 
   render() {
@@ -35,28 +37,33 @@ export class GroupChat extends Component {
 
     return (
       <div>
-        Messages
         {error ? JSON.stringify(error) : null}
-        <ul>
-          {messages ? (
-            messages.map((message) => {
-              return (
-                <li key={message.id}>
-                  <Message message={message} />
-                </li>
-              );
-            })
-          ) : (
-            <li>no messages</li>
-          )}
-        </ul>
-        <input
-          type="text"
-          id="message"
-          value={this.state.message}
-          onChange={this.handleOnChangeInput}
-        />
-        <button onClick={this.handleSendMessage}>send</button>
+
+        {messages ? (
+          messages.map((message) => {
+            return (
+              <div key={message.id}>
+                <Message message={message} />
+              </div>
+            );
+          })
+        ) : (
+          <li>no messages</li>
+        )}
+        <div className='v-spacer-2' />
+        <Form>
+          <Form.Field>
+            <Input
+              type='text'
+              id='message'
+              value={this.state.message}
+              onChange={this.handleOnChangeInput}
+              action={{ icon: "send", color: "teal" }}
+              onClick={this.handleSendMessage}
+            />
+          </Form.Field>
+        </Form>
+        {/* <button onClick={this.handleSendMessage}>send</button> */}
       </div>
     );
   }

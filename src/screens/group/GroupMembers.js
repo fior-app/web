@@ -16,12 +16,16 @@ export class GroupMembers extends Component {
 
     return (
       <div>
-        members
-        <ul>
-          {members.map((member) => {
-            return <li key={member.id}>{member.member.name}</li>;
-          })}
-        </ul>
+        <h3>Online</h3>
+        {members.map((member) => {
+          return (
+            <div className='row section v-align'>
+              <div key={member.id}>{member.member.name}</div>;
+              <div className='spacer-1' />
+              <div className='online' />
+            </div>
+          );
+        })}
       </div>
     );
   }

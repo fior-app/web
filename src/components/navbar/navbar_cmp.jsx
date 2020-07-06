@@ -51,6 +51,9 @@ class Navbar extends Component {
         <NavLink to='/'>
           <div className='nav-item'>Find Mentors</div>
         </NavLink>
+        <NavLink to='/groups'>
+          <div className='nav-item'>Groups</div>
+        </NavLink>
 
         <Dropdown
           options={options.map((option, i) => {
