@@ -167,6 +167,19 @@ const sendGroupMessageSuccess = (state) => {
   };
 };
 
+const streamGroupMessage = (state, payload) => {
+  console.log("state");
+  console.log(state);
+  console.log(payload);
+  return {
+    ...state,
+    groupMessages: {
+      ...state.groupMessages,
+      messages: [...state.groupMessages.messages, payload],
+    },
+  };
+};
+
 const groupsReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.GET_MY_GROUPS_START:
@@ -252,6 +265,9 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.SEND_GROUP_MESSAGE_FAILED:
       return sendGroupMessageFailed(state, action.payload);
+
+    case actions.GROUP_MESSAGES_STREAM:
+      return streamGroupMessage(state, action.payload);
 
     default:
       return state;

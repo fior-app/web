@@ -1,5 +1,6 @@
 import * as actions from "./types";
 import axios from "axios";
+import { EventSourcePolyfill } from "event-source-polyfill";
 
 export const getGroupsMe = () => {
   return (dispatch) => {
@@ -66,6 +67,34 @@ export const getGroupMessages = (groupId) => {
         dispatch({ type: actions.GET_GROUP_MESSAGES_FAILED, payload: error });
         dispatch({ type: actions.GET_GROUP_MESSAGES_END });
       });
+  };
+};
+
+export const getGroupMessagesStream = (roomId) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GROUP_MESSAGES_STREAM_START });
+
+    let es = new EventSourcePolyfill(
+      process.env.REACT_APP_API_BASE_URL + "/sse/chatroom/" + roomId,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+
+    es.onmessage = (res) => {
+      dispatch({
+        type: actions.GROUP_MESSAGES_STREAM,
+        payload: JSON.parse(res.data),
+      });
+      dispatch({ type: actions.GROUP_MESSAGES_STREAM_END });
+    };
+
+    es.onerror = (error) => {
+      dispatch({ type: actions.GROUP_MESSAGES_STREAM_FAILED, payload: error });
+      dispatch({ type: actions.GROUP_MESSAGES_STREAM_END });
+    };
   };
 };
 
