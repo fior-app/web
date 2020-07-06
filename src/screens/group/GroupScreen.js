@@ -28,9 +28,11 @@ export class GroupScreen extends Component {
 
     return (
       <div className='container'>
+        <div className='v-spacer-2' />
         <h2>{group && group.name}</h2>
-        <div>{group && group.members}</div>
+        {/* <div>{group && group.members}</div> */}
         <GroupMembers groupId={group && group.id} />
+        <div className='v-spacer-10' />
         <GroupChat
           groupId={group && group.id}
           roomId={group && group.chatroom.id}

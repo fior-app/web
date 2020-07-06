@@ -48,6 +48,10 @@ body {
   margin-right: 24rem;
 }
 
+.spacer-1 {
+  width: 1rem;
+}
+
 .v-spacer {
   height: 1rem;
 }
@@ -89,6 +93,17 @@ body {
 }
 
 /* Custom theme */
+
+.online {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: rgba(2, 195, 154, 1);
+}
+
+.section {
+  margin: 1rem 0rem;
+}
 
 .btn-primary {
   margin: 4px;
