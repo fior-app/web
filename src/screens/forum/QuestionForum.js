@@ -42,6 +42,25 @@ export class QuestionForum extends Component {
                 </div>
             </div>
         </div>
+        <div className='blog_right_row'>
+            <div className='blog_catergory'>
+                <div className='catergory_title'>
+                    <p>Categories</p>
+                    <div className='catergory_types'>
+                        <p className="cat_name">Category Name</p>
+                    </div>
+                    <div className='catergory_types2'>
+                        <p className="cat_name">Category Name</p>
+                    </div>
+                    <div className='catergory_types3'>
+                        <p className="cat_name">Category Name</p>
+                    </div>
+                    <div className='catergory_types4'>
+                        <p className="cat_name">Category Name</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     }
 }
