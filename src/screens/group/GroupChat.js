@@ -28,6 +28,8 @@ export class GroupChat extends Component {
   handleSendMessage = (e) => {
     if (this.state.message !== "")
       this.props.sendGroupMessage(this.props.roomId, this.state);
+
+    this.setState({ message: "" });
   };
 
   render() {
@@ -50,16 +52,19 @@ export class GroupChat extends Component {
         ) : (
           <li>no messages</li>
         )}
-        <div className='v-spacer-2' />
+        <div className="v-spacer-2" />
         <Form>
           <Form.Field>
             <Input
-              type='text'
-              id='message'
+              type="text"
+              id="message"
               value={this.state.message}
               onChange={this.handleOnChangeInput}
-              action={{ icon: "send", color: "teal" }}
-              onClick={this.handleSendMessage}
+              action={{
+                icon: "send",
+                color: "teal",
+                onClick: () => this.handleSendMessage(),
+              }}
             />
           </Form.Field>
         </Form>
