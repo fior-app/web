@@ -260,18 +260,48 @@ body {
 /* Footer */
 
 .footer-container {
-  color: white;
-  padding: 2rem 20rem;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  position: relative;
   width: 100%;
-  background: rgb(2, 128, 144);
-  background: linear-gradient( 90deg, rgba(2, 128, 144, 1) 0%, rgba(2, 195, 154, 1) 100%);
-  /* Remove this */
-  position: fixed;
+  height: 25vw;
+  background: linear-gradient(111.19deg, #028090 0%, #02C39A 100%);
+  box-shadow: -6px -6px 16px #FFFFFF;
+  border-radius: 20px 20px 0px 0px;
   left: 0;
   bottom: 0;
-  display: none;
+}
+
+.footer_grid_column {
+  position: relative;
+  width: 8.9vw;
+  height: 17.2vw;
+  /* left: 220px; */
+  top: 4vw;
+}
+
+.footer_item_heading {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.67vw;
+  line-height: 1vw;
+  /* identical to box height, or 62% */
+  display: flex;
+  align-items: center;
+  color: #F2F3F7;
+  padding-bottom: 2.1vw;
+}
+
+.footer_column_item {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1vw;
+  line-height: 1vw;
+  /* identical to box height, or 83% */
+  display: flex;
+  align-items: center;
+  color: #F2F3F7;
+  padding-bottom: 1.25vw;
 }
 
 .modal {
@@ -279,15 +309,20 @@ body {
 }
 
 .social-container {
-  margin: 0rem 2rem;
-  height: 45px;
-  width: 45px;
-  background-color: white;
-  border-radius: 6px;
-  box-shadow: 4px 4px 10px #1f1f1f, -4px -4px 10px #f1f1f1;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0vw 0.5vw;
+  width: 3.9vw;
+  height: 3.9vw;
+  background: #F2F3F7;
+  box-shadow: 6px 6px 6px #015D69, -6px -6px 6px rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+}
+
+.social_icon {
+  width: 1.875vw;
+  height: 1.875vw;
 }
 
 .fake-spacer {
@@ -390,7 +425,7 @@ body {
 .login-forms {
   position: absolute;
   width: 37.5vw;
-  height: 43vw;
+  height: 41vw;
   left: 57.5vw;
   top: 7vw;
 }
@@ -402,7 +437,7 @@ body {
   top: 0.5vw;
   bottom: 0.5vw;
   width: 36.5vw;
-  height: 42vw;
+  height: 40vw;
   background: #F2F3F7;
   box-shadow: 6px -6px 16px #BECDE2;
   border-radius: 20px;
@@ -431,7 +466,7 @@ body {
 .register_text {
   position: absolute;
   height: 1vw;
-  left: 25vw;
+  left: 23vw;
   /* right: 110px; */
   top: 3vw;
   font-family: Roboto;

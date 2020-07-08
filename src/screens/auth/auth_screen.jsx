@@ -49,6 +49,8 @@ class AuthScreen extends Component {
           </div>
         </div> */}
         <div className='container'>
+
+          {/* Background Vectors */}
           <div className='vectors'>
             <Image src='../../assets/vectors/cross.svg' className='cross' />
             <Image src='../../assets/vectors/double_circle.svg' className='double_circle' />
@@ -58,20 +60,39 @@ class AuthScreen extends Component {
             <Image src='../../assets/vectors/overlap_sqr.svg' className='overlap_sqr' />
             <Image src='../../assets/vectors/double_square.svg' className='double_square' />
           </div>
+          {/* End of Background Vectors */}
+
+          {/* Login and Register Forms */}
           <div className='login-forms row'>
             <Image src='../../assets/vectors/signin_bg.svg' className='signin_bg' />
+
+            {/* Tabs */}
             <Image src='../../assets/vectors/form_tab_right.svg' className='form_tab_right' />
             <p className='signin_text'>Sign In</p>
             <p className='register_text'>Register</p>
+            {/* Enf of Tabs */}
+
+            {/* Form Fields */}
             <form>
               <input type="text" name="username" className="username" placeholder="Username" />
               <input type="password" name="password" className="password" placeholder="Password" />
             </form>
+            {/* End of Form Fields */}
+
+            {/* Secondary Btn */}
             <button className='btn_secondary'>Sign In</button>
+            {/* End of Secondary Btn */}
+
             <p className='or_divider'>OR</p>
+
+            {/* Google sign in LinkedIn sign in btns */}
             <button className='google_signin_btn'><Image src='../../assets/icons/flat-color-icons_google.svg' className='google_icon' /><p>SignIn with Google</p></button>
             <button className='linkedin_signin_btn'><Image src='../../assets/icons/linkedin.svg' className='linkedin_icon' /><p>SignIn with LinkedIn</p></button>
+            {/* End of Google sign in LinkedIn sign in btns */}
+
           </div>
+          {/* End of Login and Register Forms */}
+          
         </div>
       </React.Fragment>
     );
