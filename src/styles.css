@@ -364,6 +364,8 @@ body {
 
 /* auth */
 
+/* Vectors */
+
 .cross {
   position: absolute;
   width: 10vw;
@@ -430,7 +432,7 @@ body {
   top: 7vw;
 }
 
-.signin_bg {
+.signin_bg, .register_bg {
   position: relative;
   left: 0.5vw;
   right: 0.5vw;
@@ -444,16 +446,19 @@ body {
   z-index: 0;
 }
 
-.signin_text {
+.register_bg {
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.signin_text, .register_text {
   position: absolute;
   height: 1vw;
   left: 6.3vw;
-  /* right: 571px; */
-  top: 3vw;
+  top: 2.8vw;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
-  font-size: 1.8vw;
+  font-size: 1.5vw;
   line-height: 1vw;
   display: flex;
   align-items: center;
@@ -461,42 +466,48 @@ body {
   color: #3B5266;
   text-shadow: 6px 6px 16px #8C94A0, -6px -6px 16px #FFFFFF;
   z-index: 2;
+}
+
+.signin_text {
+  left: 7.5vw;
+  /* right: 571px; */
 }
 
 .register_text {
-  position: absolute;
-  height: 1vw;
-  left: 23vw;
+  left: 25vw;
   /* right: 110px; */
-  top: 3vw;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 1.8vw;
-  line-height: 1vw;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #3B5266;
-  text-shadow: 6px 6px 16px #8C94A0, -6px -6px 16px #FFFFFF;
-  z-index: 2;
 }
 
-.form_tab_right {
+.form_tab_right, .form_tab_left {
   position: absolute;
   width: 19.6vw;
   height: 8.25vw;
-  left: -19vw;
   top: -0.5vw;
   z-index: 1;
 }
 
+/* .form_tab_right {
+  left: -19vw;
+} */
+
+/* onclick register tab */
+
+.form_tab_left {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  left: -34.5vw;
+}
+
 .username, .password {
+  position: absolute;
   background: #F2F3F7;
   box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
   border-radius: 8px;
   border: none;
   padding: 1vw;
+  height: 3.125vw;
+  width: 26vw;
+  left: calc(50% - 26vw/2);
   /* font */
   font-family: Roboto;
   font-style: normal;
@@ -509,31 +520,146 @@ body {
 }
 
 .username {
-  position: absolute;
-  width: 31.25vw;
-  height: 3.125vw;
-  left: calc(50% - 31.25vw/2);
   top: 11.6vw;
 }
 
-.password {
+.register_name_row {
   position: absolute;
-  width: 31.25vw;
-  height: 3.125vw;
-  left: calc(50% - 31.25vw/2);
+  width: 26vw;
+  height: 1.5625vw;
+  left: calc(50% - 26vw/2);
+  top: 8.3vw;
+  /* display: flex; */
+  /* align-items: center; */
+}
+
+.firstname, .lastname, .email, .password_register {
+  position: absolute;
+  height: 1.5625vw;
+  background: #F2F3F7;
+  /* btn inner shadow - light */
+  box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
+  border-radius: 8px;
+  border: none;
+  padding: 1vw;
+  /* text */
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.6vw;
+  line-height: 1vw;
+  /* identical to box height, or 100% */
+  display: flex;
+  align-items: center;
+  /* font medium dark */
+  color: #456078;
+}
+
+.firstname {
+  left: calc(50% - 12vw/2 - 7vw);
+  /* top: 159px; */
+  width: 12vw;
+}
+
+.lastname {
+  left: calc(50% - 12vw/2 + 7vw);
+  /* top: 159px; */
+  width: 12vw;
+}
+
+.email {
+  left: calc(50% - 26vw/2);
+  top: 11.97vw;
+  width: 26vw;
+}
+
+.password {
   top: 16.3vw;
 }
 
-.btn_secondary {
+.password_register {
+  left: calc(50% - 26vw/2);
+  top: 15.65vw;
+  width: 26vw;
+}
+
+.allow_tnc {
+  position: absolute;
+  width: 352px;
+  height: 32px;
+  left: calc(50% - 352px/2);
+  top: 429px;
+}
+
+.tnc_checkbox {
+  position: absolute;
+  /* width: 32px; */
+  /* height: 32px; */
+  transform: scale(3);
+  opacity: 0;
+  left: calc(50% - 32px/2 - 150px);
+  /* top: 429px; */
+}
+
+.checkmark {
+  position: absolute;
+  left: calc(50% - 32px/2 - 150px);
+  height: 32px;
+  width: 32px;
+  background-color: #F2F3F7;
+  box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
+  border-radius: 4px;
+}
+
+.allow_tnc input:checked~.checkmark {
+  background: linear-gradient(135deg, #028090 0%, #02C39A 100%);
+  box-shadow: inset 6px 6px 6px #015D69, inset -6px -6px 6px rgba(255, 255, 255, 0.25);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.allow_tnc input:checked~.checkmark:after {
+  display: block;
+}
+
+.allow_tnc .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.tnc_label {
+  position: absolute;
+  width: 300px;
+  height: 20px;
+  left: calc(50% - 300px/2 + 26px);
+  top: 6px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 20px;
+  /* identical to box height, or 91% */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #456078;
+}
+
+.secondary_btn {
   display: flex;
   flex-direction: row;
   padding: 1vw 3.2vw;
-  position: absolute;
-  /* width: 190px; */
-  /* height: 60px; */
-  left: calc(50% - 9.9vw/2);
-  top: 21vw;
-  /* btn color gradient angle */
   background: linear-gradient(105.32deg, #028090 0%, #02C39A 100%);
   /* btn drop shadow - light */
   box-shadow: -6px -6px 6px #FFFFFF, 6px 6px 6px #BECDE2;
@@ -546,7 +672,6 @@ body {
   font-size: 1.1vw;
   line-height: 1vw;
   /* identical to box height, or 91% */
-  display: flex;
   align-items: center;
   text-align: center;
   /* bg medium white */
@@ -556,6 +681,23 @@ body {
   order: 0;
   align-self: center;
   margin: 0.5vw 0px;
+}
+
+.signin_btn {
+  position: absolute;
+  left: calc(50% - 9.9vw/2);
+  top: 21vw;
+  /* btn color gradient angle */
+}
+
+.register_btn {
+  position: absolute;
+  left: calc(50% - 10.625vw/2);
+  top: 25.5vw;
+}
+
+.signin_btn:hover {
+  box-shadow: inset 6px 6px 6px #015D69, inset -6px -6px 6px rgba(255, 255, 255, 0.25);
 }
 
 .or_divider {
@@ -577,8 +719,12 @@ body {
   color: #3B5266;
 }
 
-.google_signin_btn {
+.google_signin {
   top: 28.3vw;
+}
+
+.google_register {
+  top: 591px;
 }
 
 .google_signin_btn p, .linkedin_signin_btn p {
@@ -593,8 +739,12 @@ body {
   top: calc(50% - 1.67vw/2);
 }
 
-.linkedin_signin_btn {
+.linkedin_signin {
   top: 33vw;
+}
+
+.linkedin_register {
+  top: 681px;
 }
 
 .google_signin_btn, .linkedin_signin_btn {
