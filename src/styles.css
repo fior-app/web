@@ -930,3 +930,13 @@ body {
 .google_signin_btn:hover, .linkedin_signin_btn:hover {
   box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
 }
+
+/* blog */
+.blog_header {
+  position: absolute;
+  height: 12.5vw;
+  width: 18.23vw;
+  left: 25.85vw;
+  /* right: 74vw; */
+  top: 8vw;
+}
