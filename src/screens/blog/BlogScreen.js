@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 
 export class BlogScreen extends Component {
   render() {
-    return <div>blog</div>;
+    return <div className='container'>
+      <div className='blog_header'>
+        <img src='../../assets/blogicon.svg' />
+      </div>
+    </div>;
   }
 }
 

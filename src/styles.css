@@ -327,3 +327,13 @@ body {
 .menu {
   margin-bottom: 1rem;
 }
+
+/* blog */
+.blog_header {
+  position: absolute;
+  height: 12.5vw;
+  width: 18.23vw;
+  left: 25.85vw;
+  /* right: 74vw; */
+  top: 8vw;
+}
