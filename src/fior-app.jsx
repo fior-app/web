@@ -8,6 +8,7 @@ import AuthScreen from "./screens/auth/auth_screen";
 import GroupsScreen from "./screens/groups/GroupsScreen";
 import GroupScreen from "./screens/group/GroupScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
+import BlogScreen from "./screens/blog/BlogScreen";
 
 import { userMe } from "./store/actions/authActions";
 import Footer from "./components/footer/footer";
@@ -20,14 +21,15 @@ class FiorApp extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className='App'>
+        <div className="App">
           <Navbar />
           <Switch>
             <Route exact path="/" component={LandingScreen} />
             <Route path="/login" component={AuthScreen} />
             <Route exact path="/groups" component={GroupsScreen} />
             <Route exact path="/groups/:groupId" component={GroupScreen} />
-            <Route path='/profile' component={ProfileScreen} />
+            <Route path="/profile" component={ProfileScreen} />
+            <Route path="/blogs" component={BlogScreen} />
           </Switch>
           <Footer />
         </div>
