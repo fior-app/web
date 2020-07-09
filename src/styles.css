@@ -442,23 +442,23 @@ body {
 /* 1600px private nav */
 .private_nav_btn1 {
   position: absolute;
-  left: 1100px;
+  left: 57.8125vw;
   top: auto;
 }
 
 /* 1600px private nav */
 .private_nav_btn2 {
   position: absolute;
-  left: 1290px;
+  left: 67.1875vw;
   top: auto;
 }
 
 /* 1600px private nav */
 .profile_icon, .profile_icon_private {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  right: 70px;
+  width: 2.6vw;
+  height: 2.6vw;
+  right: 3.65vw;
   top: auto;
 }
 
