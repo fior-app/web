@@ -4,30 +4,30 @@ import { Grid, Icon } from "semantic-ui-react";
 const Footer = () => {
   return (
     <div className='footer-container'>
-      <Grid columns='equal'>
+      <Grid container columns='equal'>
         <Grid.Row>
-          <Grid.Column stretched>
-            <h3>Fior</h3>
-            <div>Find Mentors</div>
-            <div>Find Mentees</div>
-            <div>Question Forum</div>
-            <div>Blog</div>
-            <div>Pricing Plan</div>
-            <div>Public Users</div>
+          <Grid.Column className='footer_grid_column'>
+            <h3 className='footer_item_heading'>Fior</h3>
+            <div className='footer_column_item'>Find Mentors</div>
+            <div className='footer_column_item'>Find Mentees</div>
+            <div className='footer_column_item'>Question Forum</div>
+            <div className='footer_column_item'>Blog</div>
+            <div className='footer_column_item'>Pricing Plan</div>
+            <div className='footer_column_item'>Public Users</div>
           </Grid.Column>
-          <Grid.Column>
-            <h3>Products</h3>
-            <div>Groups</div>
-            <div>Organizations</div>
+          <Grid.Column className='footer_grid_column'>
+            <h3 className='footer_item_heading'>Products</h3>
+            <div className='footer_column_item'>Groups</div>
+            <div className='footer_column_item'>Organizations</div>
           </Grid.Column>
-          <Grid.Column>
-            <h3>About Us</h3>
-            <div>About Fior</div>
-            <div>Privacy Policy</div>
-            <div>Help</div>
-            <div>Contact Us</div>
+          <Grid.Column className='footer_grid_column'>
+            <h3 className='footer_item_heading'>About Us</h3>
+            <div className='footer_column_item'>About Fior</div>
+            <div className='footer_column_item'>Privacy Policy</div>
+            <div className='footer_column_item'>Help</div>
+            <div className='footer_column_item'>Contact Us</div>
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={6} className='footer_grid_column'>
             <Grid columns='equal'>
               <Grid.Row>
                 <a
@@ -35,28 +35,31 @@ const Footer = () => {
                   target='blank'
                   className='social-container'
                 >
-                  <Icon name='facebook' color='black' size='big' />
+                  <img src="../../assets/icons/facebook.svg" alt="Fior - Facebook" className='social_icon' />
                 </a>
                 <a
                   href='https://www.twitter.com/fior'
                   target='blank'
                   className='social-container'
                 >
-                  <Icon name='twitter square' color='black' size='big' />
+                  {/* <Icon name='twitter square' color='black' size='big' /> */}
+                  <img src="../../assets/icons/twitter.svg" alt="Fior - Twitter" className='social_icon' />
                 </a>
                 <a
                   href='https://www.linkedin.com/fior'
                   target='blank'
                   className='social-container'
                 >
-                  <Icon name='linkedin' color='black' size='big' />
+                  {/* <Icon name='linkedin' color='black' size='big' /> */}
+                  <img src="../../assets/icons/linkedin-logo.svg" alt="Fior - LinkedIn" className='social_icon' />
                 </a>
                 <a
                   href='https://www.instagram.com/fior'
                   target='blank'
                   className='social-container'
                 >
-                  <Icon name='instagram' color='black' size='big' />
+                  {/* <Icon name='instagram' color='black' size='big' /> */}
+                  <img src="../../assets/icons/instagram.svg" alt="Fior - Instagram" className='social_icon' />
                 </a>
               </Grid.Row>
             </Grid>
