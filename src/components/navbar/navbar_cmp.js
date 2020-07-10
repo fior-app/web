@@ -46,10 +46,18 @@ class Navbar extends Component {
           <Menu.Menu position="right">
             {user ? (
               <>
-                <Menu.Item>Find Mentees</Menu.Item>
-                <Menu.Item as={NavLink} to="/mentors">
-                  Find Mentors
-                </Menu.Item>
+                {/* <Menu.Item> */}
+                <button className={styles.btn_primary}>Find Mentees</button>
+                {/* </Menu.Item> */}
+                {/* <Menu.Item> */}
+                <button
+                  as={NavLink}
+                  to="/mentors"
+                  className={styles.btn_primary}
+                >
+                  Find Mentees
+                </button>
+                {/* </Menu.Item> */}
                 <Menu.Item name="notifiations" as={NavLink} to="/notifications">
                   <Icon name="bell" />
                 </Menu.Item>
