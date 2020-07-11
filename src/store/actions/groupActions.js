@@ -149,3 +149,20 @@ export const inviteMember = (groupId, email) => {
       });
   };
 };
+
+export const getGroupsRequests = () => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_GROUPS_REQUESTS_START });
+    axios
+      .get("/groups/me/requests")
+      .then((res) => {
+        dispatch({ type: actions.GET_GROUPS_REQUESTS, payload: res.data });
+        dispatch({ type: actions.GET_GROUPS_REQUESTS_SUCCESS });
+        dispatch({ type: actions.GET_GROUPS_REQUESTS_END });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_GROUPS_REQUESTS_FAILED, payload: error });
+        dispatch({ type: actions.GET_GROUPS_REQUESTS_END });
+      });
+  };
+};

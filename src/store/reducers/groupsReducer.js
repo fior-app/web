@@ -6,6 +6,11 @@ const initState = {
     loading: false,
     groups: [],
   },
+  groupsRequests: {
+    error: null,
+    loading: false,
+    groups: [],
+  },
   createGroup: {
     loading: false,
     error: null,
@@ -197,6 +202,38 @@ const inviteMemberSuccess = (state) => {
   return { ...state, inviteMember: { ...state.inviteMember, error: null } };
 };
 
+const getGroupsRequestsStart = (state) => {
+  return {
+    ...state,
+    groupsRequests: { ...state.groupsRequests, loading: true },
+  };
+};
+
+const getGroupsRequestsEnd = (state) => {
+  return {
+    ...state,
+    groupsRequests: { ...state.groupsRequests, loading: false },
+  };
+};
+
+const getGroupsRequestsFailed = (state, payload) => {
+  return {
+    ...state,
+    groupsRequests: { ...state.groupsRequests, error: payload },
+  };
+};
+
+const getGroupsRequestsSuccess = (state) => {
+  return { ...state, groupsRequests: { ...state.groupsRequests, error: null } };
+};
+
+const getGroupsRequests = (state, payload) => {
+  return {
+    ...state,
+    groupsRequests: { ...state.groupsRequests, groups: payload },
+  };
+};
+
 const groupsReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.GET_MY_GROUPS_START:
@@ -297,6 +334,21 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.INVITE_MEMBER_FAILED:
       return inviteMemberFailed(state, action.payload);
+
+    case actions.GET_GROUPS_REQUESTS_START:
+      return getGroupsRequestsStart(state);
+
+    case actions.GET_GROUPS_REQUESTS_END:
+      return getGroupsRequestsEnd(state);
+
+    case actions.GET_GROUPS_REQUESTS_SUCCESS:
+      return getGroupsRequestsSuccess(state);
+
+    case actions.GET_GROUPS_REQUESTS_FAILED:
+      return getGroupsRequestsFailed(state, action.payload);
+
+    case actions.GET_GROUPS_REQUESTS:
+      return getGroupsRequests(state, action.payload);
 
     default:
       return state;

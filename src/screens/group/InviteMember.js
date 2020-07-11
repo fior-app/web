@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Input, Form, Modal } from "semantic-ui-react";
+import { Form, Modal } from "semantic-ui-react";
 
 import { inviteMember } from "../../store/actions/groupActions";
 
