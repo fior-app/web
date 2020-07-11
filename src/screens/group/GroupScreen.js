@@ -6,6 +6,7 @@ import { getGroup } from "../../store/actions/groupActions";
 import GroupMembers from "./GroupMembers";
 import GroupChat from "./GroupChat";
 import InviteMember from "./InviteMember";
+import GroupConfirm from "./GroupConfirm";
 
 export class GroupScreen extends Component {
   state = {
@@ -24,23 +25,41 @@ export class GroupScreen extends Component {
   }
 
   render() {
-    const { group, loading } = this.props;
-
+    const { member, loading } = this.props;
     if (loading) return <div>Loading groups</div>;
 
     return (
       <div className="container">
         <div className="v-spacer-2" />
-        <h2>{group && group.name}</h2>
-        <GroupMembers groupId={group && group.id} />
-        <Modal trigger={<div className="btn-primary">Create Group</div>} modal>
-          <InviteMember groupId={this.props.match.params.groupId} />
-        </Modal>
+        <h2>{member && member.group.name}</h2>
+        {member && member.state === "CONFIRM" ? (
+          <GroupConfirm groupId={this.props.match.params.groupId} />
+        ) : null}
+        <GroupMembers groupId={member && member.group.id} />
+        {member && member.state === "OK" ? (
+          <Modal
+            trigger={
+              <button
+                className="btn-primary"
+                disabled={
+                  member && !member.permissions.includes("SEND_MEMBER_REQUESTS")
+                }
+              >
+                Invite member
+              </button>
+            }
+            modal
+          >
+            <InviteMember groupId={this.props.match.params.groupId} />
+          </Modal>
+        ) : null}
         <div className="v-spacer-10" />
-        <GroupChat
-          groupId={group && group.id}
-          roomId={group && group.chatroom.id}
-        />
+        {member && member.state === "OK" ? (
+          <GroupChat
+            groupId={member && member.group.id}
+            roomId={member && member.group.chatroom.id}
+          />
+        ) : null}
       </div>
     );
   }
@@ -48,7 +67,7 @@ export class GroupScreen extends Component {
 
 const mapStateToProps = (state) => ({
   loading: state.groups.group.loading,
-  group: state.groups.group.group,
+  member: state.groups.group.member,
   error: state.groups.group.error,
 });
 
