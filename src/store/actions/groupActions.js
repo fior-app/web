@@ -123,7 +123,6 @@ export const sendGroupMessage = (roomId, message) => {
       .then((res) => {
         dispatch({ type: actions.SEND_GROUP_MESSAGE_SUCCESS });
         dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
-        getGroupsMe()(dispatch);
       })
       .catch((error) => {
         dispatch({ type: actions.SEND_GROUP_MESSAGE_FAILED, payload: error });
@@ -141,7 +140,6 @@ export const inviteMember = (groupId, email) => {
       .then((res) => {
         dispatch({ type: actions.INVITE_MEMBER_SUCCESS });
         dispatch({ type: actions.INVITE_MEMBER_END });
-        getGroupsMe()(dispatch);
       })
       .catch((error) => {
         dispatch({ type: actions.INVITE_MEMBER_FAILED, payload: error });
@@ -163,6 +161,27 @@ export const getGroupsRequests = () => {
       .catch((error) => {
         dispatch({ type: actions.GET_GROUPS_REQUESTS_FAILED, payload: error });
         dispatch({ type: actions.GET_GROUPS_REQUESTS_END });
+      });
+  };
+};
+
+export const changeGroupState = (groupId, state) => {
+  return (dispatch) => {
+    dispatch({ type: actions.CHANGE_GROUP_STATE_START });
+    console.log(state);
+    console.log(`/groups/${groupId}/member/state`);
+    axios
+      .post(`/groups/${groupId}/member/state`, state)
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: actions.CHANGE_GROUP_STATE_SUCCESS });
+        dispatch({ type: actions.CHANGE_GROUP_STATE_END });
+        getGroup(groupId)(dispatch);
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: actions.CHANGE_GROUP_STATE_FAILED, payload: error });
+        dispatch({ type: actions.CHANGE_GROUP_STATE_END });
       });
   };
 };

@@ -15,10 +15,14 @@ const initState = {
     loading: false,
     error: null,
   },
+  changeGroupState: {
+    loading: false,
+    error: null,
+  },
   group: {
     error: null,
     loading: false,
-    group: null,
+    member: null,
   },
   groupMembers: {
     members: [],
@@ -93,7 +97,7 @@ const getGroupSuccess = (state) => {
 };
 
 const getGroup = (state, payload) => {
-  return { ...state, group: { ...state.group, group: payload } };
+  return { ...state, group: { ...state.group, member: payload } };
 };
 
 const getGroupMembersStart = (state) => {
@@ -234,6 +238,34 @@ const getGroupsRequests = (state, payload) => {
   };
 };
 
+const changeGroupStateStart = (state) => {
+  return {
+    ...state,
+    changeGroupState: { ...state.changeGroupState, loading: true },
+  };
+};
+
+const changeGroupStateEnd = (state) => {
+  return {
+    ...state,
+    changeGroupState: { ...state.changeGroupState, loading: false },
+  };
+};
+
+const changeGroupStateFailed = (state, payload) => {
+  return {
+    ...state,
+    changeGroupState: { ...state.changeGroupState, error: payload },
+  };
+};
+
+const changeGroupStateSuccess = (state) => {
+  return {
+    ...state,
+    changeGroupState: { ...state.changeGroupState, error: null },
+  };
+};
+
 const groupsReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.GET_MY_GROUPS_START:
@@ -349,6 +381,18 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.GET_GROUPS_REQUESTS:
       return getGroupsRequests(state, action.payload);
+
+    case actions.CHANGE_GROUP_STATE_START:
+      return changeGroupStateStart(state);
+
+    case actions.CHANGE_GROUP_STATE_END:
+      return changeGroupStateEnd(state);
+
+    case actions.CHANGE_GROUP_STATE_SUCCESS:
+      return changeGroupStateSuccess(state);
+
+    case actions.CHANGE_GROUP_STATE_FAILED:
+      return changeGroupStateFailed(state, action.payload);
 
     default:
       return state;
