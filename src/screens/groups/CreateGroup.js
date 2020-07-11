@@ -21,34 +21,30 @@ export class CreateGroup extends Component {
     this.props.createGroup(this.state);
   };
 
-  closePopup = (e) => {
-    this.props.close();
-  };
-
   render() {
     const { error, loading } = this.props;
 
     return (
-      <div className='modal'>
-        <div className='card-header'>Create Group</div>
+      <div className="modal">
+        <div className="card-header">Create Group</div>
         <Modal.Content>
           <Modal.Description>
             {loading ? <div>creating..</div> : null}
             <Form>
               <Form.Field>
                 <input
-                  type='text'
-                  id='name'
-                  placeholder='Name'
+                  type="text"
+                  id="name"
+                  placeholder="Name"
                   value={this.state.name}
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
               <Form.Field>
                 <input
-                  type='text'
-                  id='description'
-                  placeholder='Description'
+                  type="text"
+                  id="description"
+                  placeholder="Description"
                   value={this.state.description}
                   onChange={this.handleOnChangeInput}
                 />
@@ -56,9 +52,9 @@ export class CreateGroup extends Component {
               {/* since any storage bucket not installed in system. lets continue with a link */}
               <Form.Field>
                 <input
-                  type='text'
-                  id='icon'
-                  placeholder='Icon'
+                  type="text"
+                  id="icon"
+                  placeholder="Icon"
                   value={this.state.icon}
                   onChange={this.handleOnChangeInput}
                 />
@@ -67,9 +63,9 @@ export class CreateGroup extends Component {
                 {error ? <div>Error.. {error}</div> : null}
               </Form.Field>
 
-              <div className='row end'>
+              <div className="row end">
                 <div
-                  className='btn-alternate'
+                  className="btn-alternate"
                   disabled={loading}
                   onClick={this.handleCreateGroup}
                 >

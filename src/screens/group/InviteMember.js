@@ -1,0 +1,71 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Input, Form, Modal } from "semantic-ui-react";
+
+import { inviteMember } from "../../store/actions/groupActions";
+
+export class InviteMember extends Component {
+  state = {
+    email: "",
+  };
+
+  handleOnChangeInput = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  handleInviteMember = (e) => {
+    this.props.inviteMember(this.props.groupId, this.state);
+  };
+
+  render() {
+    const { error, loading } = this.props;
+
+    return (
+      <div className="modal">
+        <div className="card-header">Invite member</div>
+        <Modal.Content>
+          <Modal.Description>
+            {loading ? <div>creating..</div> : null}
+            <Form>
+              <Form.Field>
+                <input
+                  type="text"
+                  id="email"
+                  placeholder="Email"
+                  value={this.state.email}
+                  onChange={this.handleOnChangeInput}
+                />
+              </Form.Field>
+              <Form.Field>
+                {error ? <div>Error.. {JSON.stringify(error)}</div> : null}
+              </Form.Field>
+
+              <div className="row end">
+                <div
+                  className="btn-alternate"
+                  disabled={loading}
+                  onClick={this.handleInviteMember}
+                >
+                  Invite
+                </div>
+              </div>
+            </Form>
+          </Modal.Description>
+        </Modal.Content>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  loading: state.groups.inviteMember.loading,
+  error: state.groups.inviteMember.error,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  inviteMember: (groupId, email) => dispatch(inviteMember(groupId, email)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(InviteMember);

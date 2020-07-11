@@ -14,29 +14,27 @@ export class GroupsScreen extends Component {
   render() {
     const { loading, groups, error } = this.props;
 
-    console.log(groups);
-
     // if (loading) return <div>Loading groups</div>;
     return (
-      <div className='container'>
-        <div className='v-spacer-2' />
-        <Modal trigger={<div className='btn-primary'>Create Group</div>} modal>
+      <div className="container">
+        <div className="v-spacer-2" style={{ marginTop: "50px" }} />
+        <Modal trigger={<div className="btn-primary">Create Group</div>} modal>
           <CreateGroup />
         </Modal>
-        <div className='v-spacer-2' />
+        <div className="v-spacer-2" />
         <h2>
-          <div className='margin-to-align'>Groups</div>
+          <div className="margin-to-align">Groups</div>
         </h2>
-        <div className='v-spacer-2' />
+        <div className="v-spacer-2" />
         <ul>
           <Grid>
             <Grid.Row>
               {groups.map((groupItem) => {
                 return (
                   <Link to={`/groups/${groupItem.group.id}`} key={groupItem.id}>
-                    <div className='group-item'>
-                      <div className='group-header'>{groupItem.group.name}</div>
-                      <div className='v-spacer' />
+                    <div className="group-item">
+                      <div className="group-header">{groupItem.group.name}</div>
+                      <div className="v-spacer" />
                       <div>
                         Created by &nbsp;
                         <span>{groupItem.group.createdBy.name}</span>
