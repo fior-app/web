@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Modal } from "semantic-ui-react";
 
 import { getGroup } from "../../store/actions/groupActions";
 import GroupMembers from "./GroupMembers";
 import GroupChat from "./GroupChat";
+import InviteMember from "./InviteMember";
 
 export class GroupScreen extends Component {
   state = {
@@ -27,12 +29,14 @@ export class GroupScreen extends Component {
     if (loading) return <div>Loading groups</div>;
 
     return (
-      <div className='container'>
-        <div className='v-spacer-2' />
+      <div className="container">
+        <div className="v-spacer-2" />
         <h2>{group && group.name}</h2>
-        {/* <div>{group && group.members}</div> */}
         <GroupMembers groupId={group && group.id} />
-        <div className='v-spacer-10' />
+        <Modal trigger={<div className="btn-primary">Create Group</div>} modal>
+          <InviteMember groupId={this.props.match.params.groupId} />
+        </Modal>
+        <div className="v-spacer-10" />
         <GroupChat
           groupId={group && group.id}
           roomId={group && group.chatroom.id}

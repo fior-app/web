@@ -29,6 +29,10 @@ const initState = {
     sending: false,
     error: null,
   },
+  inviteMember: {
+    loading: false,
+    error: null,
+  },
 };
 
 const createGroupStart = (state) => {
@@ -168,9 +172,6 @@ const sendGroupMessageSuccess = (state) => {
 };
 
 const streamGroupMessage = (state, payload) => {
-  console.log("state");
-  console.log(state);
-  console.log(payload);
   return {
     ...state,
     groupMessages: {
@@ -178,6 +179,22 @@ const streamGroupMessage = (state, payload) => {
       messages: [...state.groupMessages.messages, payload],
     },
   };
+};
+
+const inviteMemberStart = (state) => {
+  return { ...state, inviteMember: { ...state.inviteMember, loading: true } };
+};
+
+const inviteMemberEnd = (state) => {
+  return { ...state, inviteMember: { ...state.inviteMember, loading: false } };
+};
+
+const inviteMemberFailed = (state, payload) => {
+  return { ...state, inviteMember: { ...state.inviteMember, error: payload } };
+};
+
+const inviteMemberSuccess = (state) => {
+  return { ...state, inviteMember: { ...state.inviteMember, error: null } };
 };
 
 const groupsReducer = (state = initState, action) => {
@@ -268,6 +285,18 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.GROUP_MESSAGES_STREAM:
       return streamGroupMessage(state, action.payload);
+
+    case actions.INVITE_MEMBER_START:
+      return inviteMemberStart(state);
+
+    case actions.INVITE_MEMBER_END:
+      return inviteMemberEnd(state);
+
+    case actions.INVITE_MEMBER_SUCCESS:
+      return inviteMemberSuccess(state);
+
+    case actions.INVITE_MEMBER_FAILED:
+      return inviteMemberFailed(state, action.payload);
 
     default:
       return state;
