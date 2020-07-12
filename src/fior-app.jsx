@@ -9,7 +9,7 @@ import GroupsScreen from "./screens/groups/GroupsScreen";
 import GroupScreen from "./screens/group/GroupScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
 import BlogScreen from "./screens/blog/BlogScreen";
-import Blogdetail from "./screens/blog/Blogdetail";
+import Blogdetail from "./screens/blog/blogdetail";
 
 import { userMe } from "./store/actions/authActions";
 import Footer from "./components/footer/footer";
