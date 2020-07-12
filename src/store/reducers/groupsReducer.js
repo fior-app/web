@@ -6,14 +6,23 @@ const initState = {
     loading: false,
     groups: [],
   },
+  groupsRequests: {
+    error: null,
+    loading: false,
+    groups: [],
+  },
   createGroup: {
+    loading: false,
+    error: null,
+  },
+  changeGroupState: {
     loading: false,
     error: null,
   },
   group: {
     error: null,
     loading: false,
-    group: null,
+    member: null,
   },
   groupMembers: {
     members: [],
@@ -27,6 +36,10 @@ const initState = {
   },
   sendGroupMessage: {
     sending: false,
+    error: null,
+  },
+  inviteMember: {
+    loading: false,
     error: null,
   },
 };
@@ -84,7 +97,7 @@ const getGroupSuccess = (state) => {
 };
 
 const getGroup = (state, payload) => {
-  return { ...state, group: { ...state.group, group: payload } };
+  return { ...state, group: { ...state.group, member: payload } };
 };
 
 const getGroupMembersStart = (state) => {
@@ -168,15 +181,88 @@ const sendGroupMessageSuccess = (state) => {
 };
 
 const streamGroupMessage = (state, payload) => {
-  console.log("state");
-  console.log(state);
-  console.log(payload);
   return {
     ...state,
     groupMessages: {
       ...state.groupMessages,
       messages: [...state.groupMessages.messages, payload],
     },
+  };
+};
+
+const inviteMemberStart = (state) => {
+  return { ...state, inviteMember: { ...state.inviteMember, loading: true } };
+};
+
+const inviteMemberEnd = (state) => {
+  return { ...state, inviteMember: { ...state.inviteMember, loading: false } };
+};
+
+const inviteMemberFailed = (state, payload) => {
+  return { ...state, inviteMember: { ...state.inviteMember, error: payload } };
+};
+
+const inviteMemberSuccess = (state) => {
+  return { ...state, inviteMember: { ...state.inviteMember, error: null } };
+};
+
+const getGroupsRequestsStart = (state) => {
+  return {
+    ...state,
+    groupsRequests: { ...state.groupsRequests, loading: true },
+  };
+};
+
+const getGroupsRequestsEnd = (state) => {
+  return {
+    ...state,
+    groupsRequests: { ...state.groupsRequests, loading: false },
+  };
+};
+
+const getGroupsRequestsFailed = (state, payload) => {
+  return {
+    ...state,
+    groupsRequests: { ...state.groupsRequests, error: payload },
+  };
+};
+
+const getGroupsRequestsSuccess = (state) => {
+  return { ...state, groupsRequests: { ...state.groupsRequests, error: null } };
+};
+
+const getGroupsRequests = (state, payload) => {
+  return {
+    ...state,
+    groupsRequests: { ...state.groupsRequests, groups: payload },
+  };
+};
+
+const changeGroupStateStart = (state) => {
+  return {
+    ...state,
+    changeGroupState: { ...state.changeGroupState, loading: true },
+  };
+};
+
+const changeGroupStateEnd = (state) => {
+  return {
+    ...state,
+    changeGroupState: { ...state.changeGroupState, loading: false },
+  };
+};
+
+const changeGroupStateFailed = (state, payload) => {
+  return {
+    ...state,
+    changeGroupState: { ...state.changeGroupState, error: payload },
+  };
+};
+
+const changeGroupStateSuccess = (state) => {
+  return {
+    ...state,
+    changeGroupState: { ...state.changeGroupState, error: null },
   };
 };
 
@@ -268,6 +354,45 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.GROUP_MESSAGES_STREAM:
       return streamGroupMessage(state, action.payload);
+
+    case actions.INVITE_MEMBER_START:
+      return inviteMemberStart(state);
+
+    case actions.INVITE_MEMBER_END:
+      return inviteMemberEnd(state);
+
+    case actions.INVITE_MEMBER_SUCCESS:
+      return inviteMemberSuccess(state);
+
+    case actions.INVITE_MEMBER_FAILED:
+      return inviteMemberFailed(state, action.payload);
+
+    case actions.GET_GROUPS_REQUESTS_START:
+      return getGroupsRequestsStart(state);
+
+    case actions.GET_GROUPS_REQUESTS_END:
+      return getGroupsRequestsEnd(state);
+
+    case actions.GET_GROUPS_REQUESTS_SUCCESS:
+      return getGroupsRequestsSuccess(state);
+
+    case actions.GET_GROUPS_REQUESTS_FAILED:
+      return getGroupsRequestsFailed(state, action.payload);
+
+    case actions.GET_GROUPS_REQUESTS:
+      return getGroupsRequests(state, action.payload);
+
+    case actions.CHANGE_GROUP_STATE_START:
+      return changeGroupStateStart(state);
+
+    case actions.CHANGE_GROUP_STATE_END:
+      return changeGroupStateEnd(state);
+
+    case actions.CHANGE_GROUP_STATE_SUCCESS:
+      return changeGroupStateSuccess(state);
+
+    case actions.CHANGE_GROUP_STATE_FAILED:
+      return changeGroupStateFailed(state, action.payload);
 
     default:
       return state;

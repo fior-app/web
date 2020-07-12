@@ -123,11 +123,65 @@ export const sendGroupMessage = (roomId, message) => {
       .then((res) => {
         dispatch({ type: actions.SEND_GROUP_MESSAGE_SUCCESS });
         dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
-        getGroupsMe()(dispatch);
       })
       .catch((error) => {
         dispatch({ type: actions.SEND_GROUP_MESSAGE_FAILED, payload: error });
         dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
+      });
+  };
+};
+
+export const inviteMember = (groupId, email) => {
+  return (dispatch) => {
+    dispatch({ type: actions.INVITE_MEMBER_START });
+    console.log(`/groups/${groupId}/member`);
+    axios
+      .post(`/groups/${groupId}/member`, email)
+      .then((res) => {
+        dispatch({ type: actions.INVITE_MEMBER_SUCCESS });
+        dispatch({ type: actions.INVITE_MEMBER_END });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.INVITE_MEMBER_FAILED, payload: error });
+        dispatch({ type: actions.INVITE_MEMBER_END });
+      });
+  };
+};
+
+export const getGroupsRequests = () => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_GROUPS_REQUESTS_START });
+    axios
+      .get("/groups/me/requests")
+      .then((res) => {
+        dispatch({ type: actions.GET_GROUPS_REQUESTS, payload: res.data });
+        dispatch({ type: actions.GET_GROUPS_REQUESTS_SUCCESS });
+        dispatch({ type: actions.GET_GROUPS_REQUESTS_END });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_GROUPS_REQUESTS_FAILED, payload: error });
+        dispatch({ type: actions.GET_GROUPS_REQUESTS_END });
+      });
+  };
+};
+
+export const changeGroupState = (groupId, state) => {
+  return (dispatch) => {
+    dispatch({ type: actions.CHANGE_GROUP_STATE_START });
+    console.log(state);
+    console.log(`/groups/${groupId}/member/state`);
+    axios
+      .post(`/groups/${groupId}/member/state`, state)
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: actions.CHANGE_GROUP_STATE_SUCCESS });
+        dispatch({ type: actions.CHANGE_GROUP_STATE_END });
+        getGroup(groupId)(dispatch);
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: actions.CHANGE_GROUP_STATE_FAILED, payload: error });
+        dispatch({ type: actions.CHANGE_GROUP_STATE_END });
       });
   };
 };

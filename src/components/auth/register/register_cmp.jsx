@@ -1,20 +1,13 @@
 import React, { Component } from "react";
-import {
-  Card,
-  Form,
-  Button,
-  Icon,
-  Divider,
-  Input,
-  Message,
-} from "semantic-ui-react";
+import { Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { registerWithEmailAndPassword } from "../../../store/actions/authActions";
 
 class Register extends Component {
   state = {
     email: "",
-    name: "",
+    firstname: "",
+    lastname: "",
     password: "",
     passwordVerify: "",
     isMatching: true,
@@ -29,11 +22,16 @@ class Register extends Component {
   };
 
   handleSubmit = (e) => {
-    const { email, name, password, passwordVerify } = this.state;
+    const { email, firstname, lastname, password, passwordVerify } = this.state;
 
     e.preventDefault();
     if (password === passwordVerify)
-      this.props.registerWithEmailAndPassword({ email, name, password });
+      this.props.registerWithEmailAndPassword({
+        email,
+        firstname,
+        lastname,
+        password,
+      });
     else this.setState({ isMatching: false });
   };
 
@@ -41,80 +39,87 @@ class Register extends Component {
     const { isMatching } = this.state;
 
     return (
-      <div className='center'>
-        {this.props.auth.isRegisterSuccess ? (
-          <Message success>Account successfully created</Message>
-        ) : (
-          <Card>
-            <Card.Content>
-              <Card.Description>
-                <Button color='google plus' fluid>
-                  <Icon name='google' />
-                  Sign Up with Google
-                </Button>
-                <div className='v-spacer'></div>
-                <Button color='linkedin' fluid>
-                  <Icon name='linkedin' />
-                  Sign Up with LinkedIn
-                </Button>
-                <div className='v-spacer'></div>
-                <Divider horizontal>OR</Divider>
-                {/* <Card.Meta>Enter your email and password to Register</Card.Meta> */}
-                <Form onSubmit={this.handleSubmit}>
-                  <Form.Field>
-                    <Input
-                      id='email'
-                      type='email'
-                      placeholder='Email'
-                      required
-                      onChange={this.handleChange}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Input
-                      id='name'
-                      type='text'
-                      placeholder='Name'
-                      required
-                      onChange={this.handleChange}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Input
-                      id='password'
-                      type='password'
-                      placeholder='Password'
-                      error={!isMatching}
-                      required
-                      onChange={this.handleChange}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Input
-                      id='passwordVerify'
-                      type='password'
-                      placeholder='Verify Password'
-                      error={!isMatching}
-                      required
-                      onChange={this.handleChange}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    {!isMatching && (
-                      <div className='error'>Passwords should match</div>
-                    )}
-                  </Form.Field>
+      /* TODO: Show login success */
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <div className='register_name_row row'>
+            <input
+              type='text'
+              name='firstname'
+              className='firstname'
+              placeholder='First Name'
+              required
+              onChange={this.handleChange}
+            />
+            <input
+              type='text'
+              name='lastname'
+              className='lastname'
+              placeholder='Last Name'
+              required
+              onChange={this.handleChange}
+            />
+          </div>
+          <input
+            id='email'
+            type='email'
+            placeholder='Email'
+            className='email'
+            required
+            onChange={this.handleChange}
+          />
+          <input
+            id='password'
+            type='password'
+            placeholder='Password'
+            className='password_register'
+            error={!isMatching}
+            required
+            onChange={this.handleChange}
+          />
+          <input
+            id='passwordVerify'
+            type='password'
+            placeholder='Verify Password'
+            className='password_register'
+            error={!isMatching}
+            required
+            onChange={this.handleChange}
+          />
+          {!isMatching && <div className='error'>Passwords should match</div>}
+          <div className='allow_tnc row'>
+            <input
+              type='checkbox'
+              name='tnc_checkbox'
+              className='tnc_checkbox'
+            />
+            {/* add checked="checked" on checked */}
+            <span className='checkmark'></span>
+            <label htmlFor='TnC' className='tnc_label'>
+              Agree to Terms and Conditions
+            </label>
+          </div>
 
-                  <div>
-                    <Button type='submit' fluid>
-                      Register
-                    </Button>
-                  </div>
-                </Form>
-              </Card.Description>
-            </Card.Content>
-          </Card>
-        )}
+          <div>
+            <button type='submit' className='register_btn secondary_btn'>
+              Register
+            </button>
+          </div>
+        </form>
+        <button className='google_signin_btn google_register'>
+          <Image
+            src='../../assets/icons/flat-color-icons_google.svg'
+            className='google_icon'
+          />
+          <p>Register with Google</p>
+        </button>
+        <button className='linkedin_signin_btn linkedin_register'>
+          <Image
+            src='../../assets/icons/linkedin.svg'
+            className='linkedin_icon'
+          />
+          <p>Register with LinkedIn</p>
+        </button>
       </div>
     );
   }
