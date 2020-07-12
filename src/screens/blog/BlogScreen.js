@@ -17,13 +17,13 @@ export class BlogScreen extends Component {
           <img className="blogicon3" src="../../assets/vectors/blogicon3.svg" />
         </div>
 
-        <div style={{ marginTop: "550px", position: "absolute" }}>
+        {/* <div style={{ marginTop: "550px", position: "absolute" }}>
           <WriteBlogScreen />
         </div>
 
-        <Posts />
+        <Posts /> */}
 
-        {/* <div className="blog_content">
+        { <div className="blog_content">
           <div className="blog_item row">
             <div className="rectangle">
               <p className="blog_date">date of post</p>
@@ -40,7 +40,7 @@ export class BlogScreen extends Component {
               </div>
             </div>
           </div>
-        </div> */}
+        </div> }
         <div className="blog_right_row">
           <div className="blog_catergory">
             <div className="catergory_title">

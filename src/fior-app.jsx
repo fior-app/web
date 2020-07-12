@@ -9,6 +9,7 @@ import GroupsScreen from "./screens/groups/GroupsScreen";
 import GroupScreen from "./screens/group/GroupScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
 import BlogScreen from "./screens/blog/BlogScreen";
+import Blogdetail from "./screens/blog/Blogdetail";
 
 import { userMe } from "./store/actions/authActions";
 import Footer from "./components/footer/footer";
@@ -30,6 +31,7 @@ class FiorApp extends Component {
             <Route exact path="/groups/:groupId" component={GroupScreen} />
             <Route path="/profile" component={ProfileScreen} />
             <Route path="/blogs" component={BlogScreen} />
+            <Route path="/view_blogs" component={Blogdetail} />
           </Switch>
           <Footer />
         </div>
