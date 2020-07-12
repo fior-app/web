@@ -23,52 +23,28 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='center'>
-        <Card>
-          <Card.Content>
-            <Card.Description>
-              <Button color='google plus' fluid>
-                <Icon name='google' />
-                Sign in with Google
-              </Button>
-              <div className='v-spacer'></div>
-              <Button color='linkedin' fluid>
-                <Icon name='linkedin' />
-                Sign in with LinkedIn
-              </Button>
-              <div className='v-spacer'></div>
-              <Divider horizontal>OR</Divider>
-              {/* <Card.Meta>Enter your email and password to login</Card.Meta> */}
-              <Form onSubmit={this.handleSubmit}>
-                <Form.Field>
-                  <input
-                    type='email'
-                    required
-                    placeholder='Email'
-                    id='email'
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <input
-                    type='password'
-                    required
-                    placeholder='Password'
-                    id='password'
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <div className='end'>
-                  <Button type='submit' fluid>
-                    Login
-                  </Button>
-                </div>
-                <div>{this.props.auth.authError}</div>
-              </Form>
-            </Card.Description>
-          </Card.Content>
-        </Card>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="email"
+          required
+          placeholder="Email"
+          className="username"
+          id="email"
+          onChange={this.handleChange}
+        />
+        <input
+          type="password"
+          required
+          placeholder="Password"
+          className="password"
+          id="password"
+          onChange={this.handleChange}
+        />
+        <button type="submit" className="signin_btn secondary_btn">
+          Sign In
+        </button>
+        <div>{this.props.auth.authError}</div>
+      </form>
     );
   }
 }

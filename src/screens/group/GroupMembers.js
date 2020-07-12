@@ -19,10 +19,10 @@ export class GroupMembers extends Component {
         <h3>Online</h3>
         {members.map((member) => {
           return (
-            <div className='row section v-align'>
+            <div className="row section v-align" key={member.id}>
               <div key={member.id}>{member.member.name}</div>;
-              <div className='spacer-1' />
-              <div className='online' />
+              <div className="spacer-1" />
+              <div className="online" />
             </div>
           );
         })}
