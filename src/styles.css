@@ -3,7 +3,9 @@
 }
 
 body {
-  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #F2F3F7;
@@ -50,6 +52,7 @@ body {
 .container {
   margin-left: 0 !important;
   margin-right: 0 !important;
+  flex-grow: 1;
 }
 
 .spacer-1 {
@@ -471,14 +474,16 @@ body {
 /* Footer */
 
 .footer-container {
-  position: relative;
+  /* position: sticky; */
   width: 100%;
   height: 25vw;
   background: linear-gradient(111.19deg, #028090 0%, #02C39A 100%);
   box-shadow: -6px -6px 16px #FFFFFF;
   border-radius: 20px 20px 0px 0px;
   left: 0;
+  right: 0;
   bottom: 0;
+  flex-shrink: 0;
 }
 
 .footer_grid_column {
