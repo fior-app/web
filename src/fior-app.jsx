@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
 
 import LandingScreen from "./screens/landing/landing_screen";
 import Navbar from "./components/navbar/navbar_cmp";
@@ -9,16 +8,14 @@ import GroupsScreen from "./screens/groups/GroupsScreen";
 import GroupScreen from "./screens/group/GroupScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
 import BlogScreen from "./screens/blog/BlogScreen";
-import Blogdetail from "./screens/blog/Blogdetail";
+import Blogdetail from "./screens/blog/blogdetail";
 
-import { userMe } from "./store/actions/authActions";
 import Footer from "./components/footer/footer";
 
-class FiorApp extends Component {
-  componentDidMount = () => {
-    this.props.userMe();
-  };
+import AuthRequire from "./HOC/authRequire";
+import UnauthRequire from "./HOC/unauthRequire";
 
+class FiorApp extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -26,12 +23,24 @@ class FiorApp extends Component {
           <Navbar />
           <Switch>
             <Route exact path="/" component={LandingScreen} />
-            <Route path="/login" component={AuthScreen} />
-            <Route exact path="/groups" component={GroupsScreen} />
-            <Route exact path="/groups/:groupId" component={GroupScreen} />
-            <Route path="/profile" component={ProfileScreen} />
-            <Route path="/blogs" component={BlogScreen} />
-            <Route path="/view_blogs" component={Blogdetail} />
+            <Route exact path="/login" component={UnauthRequire(AuthScreen)} />
+            <Route exact path="/groups" component={AuthRequire(GroupsScreen)} />
+            <Route
+              exact
+              path="/groups/:groupId"
+              component={AuthRequire(GroupScreen)}
+            />
+            <Route
+              exact
+              path="/profile"
+              component={AuthRequire(ProfileScreen)}
+            />
+            <Route exact path="/blogs" component={AuthRequire(BlogScreen)} />
+            <Route
+              exact
+              path="/view_blogs"
+              component={AuthRequire(Blogdetail)}
+            />
           </Switch>
           <Footer />
         </div>
@@ -39,8 +48,5 @@ class FiorApp extends Component {
     );
   }
 }
-const mapDispatchToProps = (dispatch) => ({
-  userMe: () => dispatch(userMe()),
-});
 
-export default connect(null, mapDispatchToProps)(FiorApp);
+export default FiorApp;
