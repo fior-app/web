@@ -80,34 +80,36 @@ class LandingScreen extends Component {
             {/* End of Content Row 2 */}
 
             {/* Detail Card 1 */}
-            <div className='detail_card1 row'>
-              <img src="../../assets/img/verified.svg" alt="Verified Assistant In Learning" />
-              <div className='column'>
-                <p><span>Verifed Assistant In Learning</span><br />Complete tasks to get skill 
+            <div className='landing_detail_cards'>
+              <div className='detail_card1 row'>
+                <img src="../../assets/img/verified.svg" alt="Verified Assistant In Learning" />
+                <div className='column'>
+                  <p><span>Verifed Assistant In Learning</span><br />Complete tasks to get skill
                 validations before mentoring your mentee or the group of mentees</p>
+                </div>
               </div>
-            </div>
-            {/* End of Detail Card 1 */}
+              {/* End of Detail Card 1 */}
 
-            {/* Detail Card 2 */}
-            <div className='detail_card2 row'>
-              <div className='column'>
-                <p><span>Rewards And Certificates</span><br />Complete tasks to achieve 
+              {/* Detail Card 2 */}
+              <div className='detail_card2 row'>
+                <div className='column'>
+                  <p><span>Rewards And Certificates</span><br />Complete tasks to achieve
                 targets and obtain rewards and showcase in your profile</p>
+                </div>
+                <img src="../../assets/img/medal.svg" alt="Rewards And Certificates" />
               </div>
-              <img src="../../assets/img/medal.svg" alt="Rewards And Certificates" />
-            </div>
-            {/* End of Detail Card 2 */}
+              {/* End of Detail Card 2 */}
 
-            {/* Detail Card 1 */}
-            <div className='detail_card3 row'>
-              <img src="../../assets/img/cv.svg" alt="Personal Reputation" />
-              <div className='column'>
-                <p><span>Personal Reputation</span><br />Share your public profile on 
+              {/* Detail Card 3 */}
+              <div className='detail_card3 row'>
+                <img src="../../assets/img/cv.svg" alt="Personal Reputation" />
+                <div className='column'>
+                  <p><span>Personal Reputation</span><br />Share your public profile on
                 your resume to gain personal reputation for yourself</p>
+                </div>
               </div>
+              {/* End of Detail Card 3 */}
             </div>
-            {/* End of Detail Card 1 */}
 
           </div>
           {/* End of Landing Page Body */}
