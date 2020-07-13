@@ -61,6 +61,21 @@ export class QuestionForum extends Component {
                 </div>
             </div>
         </div>
+        <div className='recent_question'>
+            <p className='recent_question_heading'>Recent Questions</p>
+            <div className='recent_question_title'>
+                <p className='question_title'>Question Title : This is the question</p>
+            </div>
+            <div className='recent_question_title2'>
+                <p className='question_title'>Question Title2 : This is the question</p>
+            </div>
+            <div className='recent_question_title3'>
+                <p className='question_title'>Question Title3 : This is the question</p>
+            </div>
+            <div className='recent_question_title4'>
+                <p className='question_title'>Question Title4 : This is the question</p>
+            </div>
+        </div>
     </div>
     }
 }
