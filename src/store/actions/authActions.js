@@ -1,5 +1,6 @@
 import axios from "axios";
 import AxiosConfig from "../../config/axios-config";
+import * as utils from "../../util/utils";
 
 // Sign in action
 export const signInEmail = (credentials) => {
@@ -7,7 +8,7 @@ export const signInEmail = (credentials) => {
     axios
       .post("/auth/signin/email", credentials)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        utils.setWithExpiry("token", res.data.token);
         AxiosConfig.config();
         dispatch({
           type: "LOGIN_SUCCESS",
@@ -29,7 +30,7 @@ export const registerWithEmailAndPassword = (user) => {
     axios
       .post("/auth/signup", user)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        utils.setWithExpiry("token", res.data.token);
         AxiosConfig.config();
         dispatch({
           type: "REGISTER_SUCCESS",
