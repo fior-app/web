@@ -1128,7 +1128,7 @@ body {
   height: 3.125vw;
   left: calc(50% - 16.15vw/2 + 1.5625vw);
   /* top: 30px; */
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 0.83vw;
@@ -1579,6 +1579,7 @@ body {
   top: 1.5625vw;
 }
 
+/* Pricing Plan Section */
 .landing_pricing_plan_bg {
   position: relative;
   width: 1920px;
@@ -1930,7 +1931,7 @@ body {
   height: 20px;
   left: calc(50% - 300px/2);
   top: 0;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 26px;
@@ -1950,7 +1951,7 @@ body {
   height: 44px;
   left: 0;
   top: 30px;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -2085,7 +2086,7 @@ body {
 
 .blog_date {
   position: relative;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -2148,7 +2149,7 @@ body {
   left: 1.82vw;
   right: 1.82vw;
   top: 16.4vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -2171,7 +2172,7 @@ body {
   left: -1vw;
   right: 1.82vw;
   top: 2vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 20.25vw;
@@ -2191,7 +2192,7 @@ body {
   left: -10vw;
   right: 1.82vw;
   top: 10vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 0.98vw;
@@ -2229,7 +2230,7 @@ body {
   height: 1.04vw;
   left: -2vw;
   top: 1.4vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.66vw;
@@ -2282,7 +2283,7 @@ body {
   height: 1.04;
   left: 1.04vw;
   top: 1.04vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 1.14vw;
@@ -2318,7 +2319,7 @@ body {
   height: 1.04vw;
   left: -2vw;
   top: 1.4vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.66vw;
@@ -2364,7 +2365,7 @@ body {
   height: 2.81vw;
   left: 1.04vw;
   top: 1.04vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 1.04vw;
@@ -2388,7 +2389,7 @@ body {
   height: 2.60vw;
   left: 14vw;
   top: 8vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 2.91vw;
@@ -2426,7 +2427,7 @@ body {
   height: 18.22vw;
   left: 14vw;
   top: 39vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 1vw;
@@ -2465,7 +2466,7 @@ body {
   height: 2.04vw;
   left: -2vw;
   top: 0vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.5vw;
@@ -2506,7 +2507,7 @@ body {
   height: 1.04vw;
   left: 1.04vw;
   top: 1.04vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 1.1vw;
@@ -2525,7 +2526,7 @@ body {
   height: 1.04;
   left: 1.04vw;
   top: 0.8vw;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 1.14vw;
@@ -2560,7 +2561,7 @@ body {
   height: 1.04vw;
   left: -1.75vw;
   top: 2.08;
-  font-family: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.3vw;
@@ -2600,7 +2601,7 @@ width: 12.08vw;
 height: 4.21vw;
 left: 1.04vw;
 top: 1.04vw;
-font-family: Roboto;
+font-family: 'Roboto', sans-serif;
 font-style: normal;
 font-weight: normal;
 font-size: 1.04vw;
