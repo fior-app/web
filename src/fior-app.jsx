@@ -25,6 +25,7 @@ class FiorApp extends Component {
             <Route exact path="/" component={LandingScreen} />
             <Route exact path="/login" component={UnauthRequire(AuthScreen)} />
             <Route exact path="/groups" component={AuthRequire(GroupsScreen)} />
+            <Route exact path="/blogs" component={BlogScreen} />
             <Route
               exact
               path="/groups/:groupId"
@@ -35,7 +36,7 @@ class FiorApp extends Component {
               path="/profile"
               component={AuthRequire(ProfileScreen)}
             />
-            <Route exact path="/blogs" component={AuthRequire(BlogScreen)} />
+            {/* <Route exact path="/blogs" component={UnAuthRequire(BlogScreen)} /> */}
             <Route
               exact
               path="/view_blogs"
