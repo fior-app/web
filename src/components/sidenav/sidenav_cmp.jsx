@@ -10,4 +10,4 @@ class SideNav extends Component {
   }
 }
 
-export default Navbar;
+export default SideNav;
