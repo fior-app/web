@@ -53,7 +53,14 @@ body {
   margin-right: 0 !important;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: row;
   /* flex-grow: 1; */
+}
+
+.container_right {
+  display: flex;
+  flex-direction: column;
 }
 
 .spacer-1 {
@@ -490,6 +497,66 @@ body {
 
 /* } */
 
+/* Side Nav */
+.sidenav_container {
+  position: sticky;
+  width: 320px;
+  height: 1080px;
+  left: 0;
+  top: 0; 
+  background: #F2F3F7;
+  box-shadow: inset -6px -6px 16px #BECDE2, inset 6px 6px 16px #FFFFFF;
+  /* z-index: 6;  */
+}
+
+.sidenav_container img {
+  position: relative;
+  width: 180px;
+  height: 54.58px;
+  left: calc(50% - 180px/2);
+  top: 30px;
+  cursor: pointer;
+}
+
+.sidenav_items {
+  position: relative;
+  width: 250px;
+  top: 60px;
+  left: calc(50% - 250px/2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-content: space-between; */
+}
+
+.sidenav_items a button {
+  flex-basis: 100%;
+  top: 0;
+  width: 100%;
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0 0 25px 0;
+  cursor: pointer;
+}
+
+.sidenav_items a button:hover {
+  box-shadow: -6px -6px 6px #FFFFFF, 6px 6px 6px #BECDE2;
+  border-radius: 12px;
+}
+
+.sidenav_items a button:active {
+  background: #f2f3f7;
+  box-shadow: inset -6px -6px 12px #ffffff, inset 6px 6px 12px #becde2;
+  border-radius: 12px;
+}
+
+/* when the navigated page in active */
+.sidenav_items a button:on_active {
+  background: #BECDE2;
+  box-shadow: -6px -6px 6px #FFFFFF, 6px 6px 6px #BECDE2;
+  border-radius: 12px;
+}
+
 /* Footer */
 
 .footer-container {
@@ -501,8 +568,10 @@ body {
   border-radius: 20px 20px 0px 0px;
   left: 0;
   right: 0;
+  top: 0;
   /* margin-top: 100px; */
   bottom: 0vw;
+  /* z-index: 12; */
   /* flex-shrink: 0; */
   /* display: none; */
 }
@@ -1976,7 +2045,7 @@ body {
   position: relative;
   width: 74.84vw;
   height: 25.83vw;
-  left: 20.91vw;
+  left: 4.27vw;
   top: 4.23vw;
 }
 
@@ -2056,8 +2125,8 @@ body {
   position: relative;
   width: 83.33vw;
   height: auto;
-  left: 16.67vw;
-  top: 6.77vw;
+  left: 0;
+  top: 10vw;
   margin-bottom: 5.2vw;
 }
 

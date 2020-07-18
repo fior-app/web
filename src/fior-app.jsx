@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import LandingScreen from "./screens/landing/landing_screen";
 import Navbar from "./components/navbar/navbar_cmp";
-import SideNav from "./components/sidenav/sidenav_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
 import GroupsScreen from "./screens/groups/GroupsScreen";
 import GroupScreen from "./screens/group/GroupScreen";
@@ -21,8 +20,7 @@ class FiorApp extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar />
-          <SideNav />
+          <Navbar />          
           <Switch>
             <Route exact path="/" component={LandingScreen} />
             <Route exact path="/login" component={UnauthRequire(AuthScreen)} />
