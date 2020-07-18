@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Card } from "semantic-ui-react";
 import { connect } from "react-redux";
+import SideNav from "../../components/sidenav/sidenav_cmp";
 
 class ProfileScreen extends Component {
   state = {
@@ -14,6 +15,7 @@ class ProfileScreen extends Component {
 
     return (
       <div className='container'>
+        <SideNav />
         {/* <div className='row end'>
           <Button>Switch to mentor profile</Button>
         </div>
