@@ -20,7 +20,7 @@ class FiorApp extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar />
+          <Navbar />          
           <Switch>
             <Route exact path="/" component={LandingScreen} />
             <Route exact path="/login" component={UnauthRequire(AuthScreen)} />
