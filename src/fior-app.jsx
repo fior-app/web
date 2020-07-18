@@ -8,7 +8,7 @@ import GroupsScreen from "./screens/groups/GroupsScreen";
 import GroupScreen from "./screens/group/GroupScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
 import BlogScreen from "./screens/blog/BlogScreen";
-import Blogdetail from "./screens/blog/Blogdetail";
+import Blogdetail from "./screens/blog/blogdetail";
 
 import Footer from "./components/footer/footer";
 
@@ -20,7 +20,7 @@ class FiorApp extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar />          
+          <Navbar />
           <Switch>
             <Route exact path="/" component={LandingScreen} />
             <Route exact path="/login" component={UnauthRequire(AuthScreen)} />
