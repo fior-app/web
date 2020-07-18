@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Input, Form, Modal } from "semantic-ui-react";
+import { Form, Modal } from "semantic-ui-react";
 
-import { createGroup } from "../../store/actions/groupActions";
-
-export class CreateGroup extends Component {
+export class ProjectDetails extends Component {
   state = {
-    name: "",
+    title: "",
     description: "",
-    icon: "",
+    github: [],
+    githubLinks: 1,
   };
 
   handleOnChangeInput = (e) => {
@@ -18,25 +16,32 @@ export class CreateGroup extends Component {
   };
 
   handleCreateGroup = (e) => {
-    this.props.createGroup(this.state);
+    this.props.handleCreateGroup("project", this.state);
   };
+
+  handleBack = (e) => {
+    this.props.handleBack("project", this.state);
+  };
+
+  componentDidMount() {
+    this.setState({ ...this.state, ...this.props.project });
+  }
 
   render() {
     const { error, loading } = this.props;
 
     return (
       <div className="modal">
-        <div className="card-header">Create Group</div>
+        <div className="card-header">Project Details</div>
         <Modal.Content>
           <Modal.Description>
-            {loading ? <div>creating..</div> : null}
             <Form>
               <Form.Field>
                 <input
                   type="text"
-                  id="name"
-                  placeholder="Name"
-                  value={this.state.name}
+                  id="title"
+                  placeholder="Title"
+                  value={this.state.title}
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
@@ -64,6 +69,9 @@ export class CreateGroup extends Component {
               </Form.Field>
 
               <div className="row end">
+                <div className="btn-alternate" onClick={this.handleBack}>
+                  Back
+                </div>
                 <div
                   className="btn-alternate"
                   disabled={loading}
@@ -80,13 +88,4 @@ export class CreateGroup extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.groups.createGroup.loading,
-  error: state.groups.createGroup.error,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  createGroup: (group) => dispatch(createGroup(group)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateGroup);
+export default ProjectDetails;
