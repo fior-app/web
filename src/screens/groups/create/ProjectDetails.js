@@ -40,6 +40,7 @@ export class ProjectDetails extends Component {
                 <input
                   type="text"
                   id="title"
+                  required
                   placeholder="Title"
                   value={this.state.title}
                   onChange={this.handleOnChangeInput}
@@ -49,6 +50,7 @@ export class ProjectDetails extends Component {
                 <input
                   type="text"
                   id="description"
+                  required
                   placeholder="Description"
                   value={this.state.description}
                   onChange={this.handleOnChangeInput}
@@ -65,9 +67,11 @@ export class ProjectDetails extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                {error ? <div>Error.. {error}</div> : null}
+                {error ? <div>Error.. {JSON.stringify(error)}</div> : null}
               </Form.Field>
-
+              <Form.Field>
+                {loading ? <div>Creating group..</div> : null}
+              </Form.Field>
               <div className="row end">
                 <div className="btn-alternate" onClick={this.handleBack}>
                   Back

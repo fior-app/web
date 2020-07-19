@@ -14,7 +14,7 @@ export class CreateGroup extends Component {
 
   handleCreateGroup = async (type, value) => {
     await this.setState({ [type]: value });
-    this.props.createGroup(this.state.group, this.props.closeModal);
+    this.props.createGroup(this.state, this.props.closeModal);
   };
 
   handleNext = (type, value) => {
