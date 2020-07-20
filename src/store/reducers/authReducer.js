@@ -1,21 +1,43 @@
+import * as actions from "../actions/types";
+
 const initState = {
-  authError: null,
+  emailAuth: {
+    signingIn: false,
+    error: null,
+  },
   currentUser: null,
   isRegisterSuccess: false,
+};
+const signInEmailStart = (state) => {
+  return { ...state, emailAuth: { ...state.emailAuth, signingIn: true } };
+};
+
+const signInEmailEnd = (state) => {
+  return { ...state, emailAuth: { ...state.emailAuth, signingIn: false } };
+};
+
+const signInEmailFailed = (state, payload) => {
+  return { ...state, emailAuth: { ...state.emailAuth, error: payload } };
+};
+
+const signInEmailSuccess = (state) => {
+  return { ...state, emailAuth: { ...state.emailAuth, error: null } };
 };
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
-    case "LOGIN_ERROR":
-      return {
-        ...state,
-        authError: "Login failed!",
-      };
-    case "LOGIN_SUCCESS":
-      return {
-        ...state,
-        authError: null,
-      };
+    case actions.SIGN_IN_EMAIL_START:
+      return signInEmailStart(state);
+
+    case actions.SIGN_IN_EMAIL_END:
+      return signInEmailEnd(state);
+
+    case actions.SIGN_IN_EMAIL_SUCCESS:
+      return signInEmailSuccess(state);
+
+    case actions.SIGN_IN_EMAIL_FAILED:
+      return signInEmailFailed(state, action.payload);
+
     case "REGISTER_SUCCESS":
       return {
         ...state,

@@ -1,24 +1,32 @@
 import axios from "axios";
 import AxiosConfig from "../../config/axios-config";
 import * as utils from "../../util/utils";
+import * as actions from "../actions/types";
 
 // Sign in action
 export const signInEmail = (credentials) => {
   return (dispatch) => {
+    dispatch({ type: actions.SIGN_IN_EMAIL_START });
     axios
       .post("/auth/signin/email", credentials)
       .then((res) => {
         utils.setWithExpiry("token", res.data.token);
         AxiosConfig.config();
         dispatch({
-          type: "LOGIN_SUCCESS",
+          type: actions.SIGN_IN_EMAIL_SUCCESS,
+        });
+        dispatch({
+          type: actions.SIGN_IN_EMAIL_END,
         });
         userMeFetch(dispatch);
       })
       .catch((error) => {
         dispatch({
-          type: "LOGIN_ERROR",
-          error,
+          type: actions.SIGN_IN_EMAIL_FAILED,
+          payload: error.response,
+        });
+        dispatch({
+          type: actions.SIGN_IN_EMAIL_END,
         });
       });
   };
