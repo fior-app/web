@@ -1589,3 +1589,214 @@ top: 267px;
   margin: 0px 15px;
 }
 
+.contentt{
+  position: static;
+  height: 0.2vw;
+  left: -10vw;
+  right: 1.82vw;
+  top: 10vw;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.98vw;
+  line-height: 135.4%;
+  text-align: justify;
+  color: #3B5266;
+  flex: none;
+  order: 3;
+  align-self: center;
+  margin: 0px 15px;
+}
+
+
+.forum_by{
+  position: static;
+  height: 0.989583vw;
+  left: 37.812500vw;
+  right: 1.822917vw;
+  top: 8.906250vw;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.833333vw;
+  line-height: 0.989583vw;
+  /* identical to box height */
+
+  text-align: right;
+
+  /* font dark */
+
+  color: #3B5266;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 3;
+  align-self: flex-end;
+  margin: 0vw 0.781250vw;
+}
+
+.recent_question{
+  display: flex;
+  flex-direction: column;
+  padding: 2.08vw 1.56vw; 
+  position: absolute;
+  width: 25vw;
+  height: 28vw;
+  left: 60.93vw;
+  top: 57.38vw;
+  background: #F2F3F7;
+  /* btn drop shadow - light */
+  box-shadow: -6px -6px 6px #FFFFFF, 6px 6px 6px #BECDE2;
+  border-radius: 2.08vw;  
+}
+
+.recent_question_heading{
+  position: relative;
+  width: 13.89vw;
+  height: 1.04vw;
+  left: -2vw;
+  top: 1.40vw;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.66vw;
+  line-height: 1.04vw;
+  /* identical to box height, or 62% */
+  display: flex;
+  align-items: center;
+  color: #456078;
+  /* Inside Auto Layout */
+  flex: none;
+  order: 0;
+  align-self: flex-start;
+  margin: 0px 1.8vw;
+}
+
+/*resent post title*/
+.recent_question_title{
+  display: flex;
+  flex-direction: row;
+  padding: 1.04vw;
+  position: absolute;
+  width: 21.87vw;
+  height: 4.89vw;
+  left: -1vw;
+  top: 5.96vw;
+  background: #F2F3F7;
+  /* btn inner shadow - light */
+  box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
+  border-radius: 20px;
+  /* Inside Auto Layout */
+  flex: none;
+  order: 1;
+  align-self: flex-start;
+  margin: 0px 1.8vw;
+}
+
+.recent_question_title2{
+  display: flex;
+  flex-direction: row;
+  padding: 1.04vw;
+  position: absolute;
+  width: 21.87vw;
+  height: 4.89vw;
+  left: -1vw;
+  top: 11.36vw;
+  background: #F2F3F7;
+  /* btn inner shadow - light */
+  box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
+  border-radius: 20px;
+  /* Inside Auto Layout */
+  flex: none;
+  order: 1;
+  align-self: flex-start;
+  margin: 0px 1.8vw;
+}
+
+.recent_question_title3{
+  display: flex;
+  flex-direction: row;
+  padding: 1.04vw;
+  position: absolute;
+  width: 21.87vw;
+  height: 4.89vw;
+  left: -1vw;
+  top: 16.56vw;
+  background: #F2F3F7;
+  /* btn inner shadow - light */
+  box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
+  border-radius: 20px;
+  /* Inside Auto Layout */
+  flex: none;
+  order: 1;
+  align-self: flex-start;
+  margin: 0px 1.8vw;
+}
+.recent_question_title4{
+  display: flex;
+  flex-direction: row;
+  padding: 1.04vw;
+  position: absolute;
+  width: 21.87vw;
+  height: 4.89vw;
+  left: -1vw;
+  top: 21.96vw;
+  background: #F2F3F7;
+  /* btn inner shadow - light */
+  box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
+  border-radius: 20px;
+  /* Inside Auto Layout */
+  flex: none;
+  order: 1;
+  align-self: flex-start;
+  margin: 0px 1.8vw;
+}
+
+.catergory_types2{
+  position: absolute;
+  width: 10.05vw;
+  height: 3.12vw;
+  left: 12vw;
+  top: 1.68vw;
+  background: #F2F3F7;
+  /* btn inner shadow - light */
+  box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
+  border-radius: 20px; 
+}
+.catergory_types3{
+  position: absolute;
+  width: 10.05vw;
+  height: 3.12vw;
+  left: 12vw;
+  top: 5.68vw;
+  background: #F2F3F7;
+  /* btn inner shadow - light */
+  box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
+  border-radius: 20px; 
+}
+.catergory_types4{
+  position: absolute;
+  width: 10.05vw;
+  height: 3.12vw;
+  left: 0vw;
+  top: 5.68vw;
+  background: #F2F3F7;
+  /* btn inner shadow - light */
+  box-shadow: inset -6px -6px 6px #FFFFFF, inset 6px 6px 6px #BECDE2;
+  border-radius: 20px; 
+}
+
+/*Page switching buttons */
+.previous_page{
+width: 32px;
+height: 32px;
+left: 32px;
+top: 32px;
+border-radius: 50px;
+/* bg medium white */
+
+background: #F2F3F7;
+transform: rotate(180deg);
+}
