@@ -3,14 +3,15 @@ import { connect } from "react-redux";
 import SideNav from "../../components/sidenav/sidenav_cmp";
 import WriteBlogScreen from "./WriteBlogScreen";
 import Posts from "./Posts";
+import './blog.css'
 
 export class BlogScreen extends Component {
   render() {
     return (
       <div className="container">
-        <SideNav />
+        {/* <SideNav /> */}
 
-        <div className='container_right'>
+        <div className='blog_container_right'>
           {/* Blog Header */}
           <div className="blog_header">
             <img className="blogicon" src="../../assets/vectors/blogicon.svg" />
@@ -30,13 +31,61 @@ export class BlogScreen extends Component {
         <Posts /> */}
 
           {/* Blog Content */}
-          <div className='blog_content row'>
+          <div className='blog_content'>
 
             {/* Mid Col Blog Items */}
             <div className="blog_items_col">
 
               {/* Blog Item Row */}
-              <div className="blog_item row">
+              <div className="blog_item">
+
+                {/* Blog Date */}
+                <div className="blog_date_bg">
+                  <p className="blog_date">date of post</p>
+                </div>
+                {/* End of Blog Date */}
+
+                {/* Blog Card */}
+                <div className="blog_card">
+                  <img className="blog_image" src="../../assets/vectors/blogimage.svg" />
+                  <div className="blog_card_catergory">
+                    <p>Catergory</p>
+                    <p className="post_title">Post title</p>
+                    <p className="post_meta">Here is the content of the blog</p>
+                    <p className="post_author">Author</p>
+                  </div>
+                </div>
+                {/* End of Blog Card */}
+
+              </div>
+              {/* End of Blog Item Row */}
+
+              {/* Blog Item Row */}
+              <div className="blog_item">
+
+                {/* Blog Date */}
+                <div className="blog_date_bg">
+                  <p className="blog_date">date of post</p>
+                </div>
+                {/* End of Blog Date */}
+
+                {/* Blog Card */}
+                <div className="blog_card">
+                  <img className="blog_image" src="../../assets/vectors/blogimage.svg" />
+                  <div className="blog_card_catergory">
+                    <p>Catergory</p>
+                    <p className="post_title">Post title</p>
+                    <p className="post_meta">Here is the content of the blog</p>
+                    <p className="post_author">Author</p>
+                  </div>
+                </div>
+                {/* End of Blog Card */}
+
+              </div>
+              {/* End of Blog Item Row */}
+
+              {/* Blog Item Row */}
+              <div className="blog_item">
 
                 {/* Blog Date */}
                 <div className="blog_date_bg">
@@ -68,10 +117,10 @@ export class BlogScreen extends Component {
               <button className='icon_btn secondary_btn'>
                 <img src='../../assets/icons/add.svg' />
               Create new post
-            </button>
+              </button>
 
               <div className="blog_catergory">
-                <p className="catergory_title">Catergory</p>
+                <p className="catergory_title1">Catergory</p>
 
                 <div className='catergory_types'>
                   <div className="catergory_name">
@@ -82,10 +131,10 @@ export class BlogScreen extends Component {
               </div>
 
               <div className="blog_recent_posts">
-                <p className="recent_blog_title">Recent Posts</p>
+                <p className="recent_blog_title1">Recent Posts</p>
 
                 <div className='recent_posts_types'>
-                  <div className="recent_post_title">
+                  <div className="recent_post_title1">
                     <p>post title</p>
                   </div>
                 </div>
@@ -97,6 +146,16 @@ export class BlogScreen extends Component {
 
           </div>
           {/* End of Blog Content */}
+
+          {/* Pagination */}
+          <div className='pagination'>
+            <div className='pagination_content'>
+              <button>Prev</button>
+              <input type='number'/>              
+              <button>Next</button>
+            </div>
+          </div>
+          {/* End of Pagination */}
 
         </div>
       </div>

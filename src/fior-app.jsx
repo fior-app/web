@@ -8,12 +8,13 @@ import GroupsScreen from "./screens/groups/GroupsScreen";
 import GroupScreen from "./screens/group/GroupScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
 import BlogScreen from "./screens/blog/BlogScreen";
-import Blogdetail from "./screens/blog/blogdetail";
+import Blogdetail from "./screens/blog/blogdetails/blogdetail";
 
 import Footer from "./components/footer/footer";
 
 import AuthRequire from "./HOC/authRequire";
 import UnauthRequire from "./HOC/unauthRequire";
+import SideNav from "./components/sidenav/sidenav_cmp";
 
 class FiorApp extends Component {
   render() {
@@ -21,11 +22,14 @@ class FiorApp extends Component {
       <BrowserRouter>
         <div className="App">
           <Navbar />
+          <div className='row'>
+          <SideNav />
           <Switch>
             <Route exact path="/" component={LandingScreen} />
             <Route exact path="/login" component={UnauthRequire(AuthScreen)} />
             <Route exact path="/groups" component={AuthRequire(GroupsScreen)} />
             <Route exact path="/blogs" component={BlogScreen} />
+            <Route exact path="/view_blogs" component={Blogdetail} />
             <Route
               exact
               path="/groups/:groupId"
@@ -37,12 +41,13 @@ class FiorApp extends Component {
               component={AuthRequire(ProfileScreen)}
             />
             {/* <Route exact path="/blogs" component={UnAuthRequire(BlogScreen)} /> */}
-            <Route
+            {/* <Route
               exact
               path="/view_blogs"
               component={AuthRequire(Blogdetail)}
-            />
+            /> */}
           </Switch>
+          </div>
           <Footer />
         </div>
       </BrowserRouter>
