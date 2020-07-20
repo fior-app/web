@@ -98,7 +98,7 @@ export const getGroupMessagesStream = (roomId) => {
   };
 };
 
-export const createGroup = (group) => {
+export const createGroup = (group, cb) => {
   return (dispatch) => {
     dispatch({ type: actions.CREATE_GROUP_START });
     axios
@@ -106,6 +106,7 @@ export const createGroup = (group) => {
       .then((res) => {
         dispatch({ type: actions.CREATE_GROUP_SUCCESS });
         dispatch({ type: actions.CREATE_GROUP_END });
+        cb && cb();
         getGroupsMe()(dispatch);
       })
       .catch((error) => {

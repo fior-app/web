@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Input, Form, Modal } from "semantic-ui-react";
+import { Form, Modal } from "semantic-ui-react";
 
-import { createGroup } from "../../store/actions/groupActions";
-
-export class CreateGroup extends Component {
+export class GroupDetails extends Component {
   state = {
     name: "",
     description: "",
@@ -17,19 +14,20 @@ export class CreateGroup extends Component {
     });
   };
 
-  handleCreateGroup = (e) => {
-    this.props.createGroup(this.state);
+  handleNext = (e) => {
+    this.props.handleNext("group", this.state);
   };
 
-  render() {
-    const { error, loading } = this.props;
+  componentDidMount() {
+    this.setState({ ...this.state, ...this.props.group });
+  }
 
+  render() {
     return (
       <div className="modal">
-        <div className="card-header">Create Group</div>
+        <div className="card-header">Group Details</div>
         <Modal.Content>
           <Modal.Description>
-            {loading ? <div>creating..</div> : null}
             <Form>
               <Form.Field>
                 <input
@@ -59,17 +57,10 @@ export class CreateGroup extends Component {
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
-              <Form.Field>
-                {error ? <div>Error.. {error}</div> : null}
-              </Form.Field>
 
               <div className="row end">
-                <div
-                  className="btn-alternate"
-                  disabled={loading}
-                  onClick={this.handleCreateGroup}
-                >
-                  Create
+                <div className="btn-alternate" onClick={this.handleNext}>
+                  Next
                 </div>
               </div>
             </Form>
@@ -80,13 +71,4 @@ export class CreateGroup extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.groups.createGroup.loading,
-  error: state.groups.createGroup.error,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  createGroup: (group) => dispatch(createGroup(group)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateGroup);
+export default GroupDetails;
