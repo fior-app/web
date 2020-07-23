@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal } from "semantic-ui-react";
 
-import { getGroup } from "../../store/actions/groupActions";
-import GroupMembers from "./GroupMembers";
+import { getGroup } from "../../store/actions/mentorspaceActions";
+import MentorspaceMembers from "./MentorspaceMembers";
 import GroupChat from "./GroupChat";
 import InviteMember from "./InviteMember";
 import GroupConfirm from "./GroupConfirm";
 
-export class GroupScreen extends Component {
+export class MentorspaceScreen extends Component {
   state = {
     message: "",
     messages: [],
@@ -21,21 +21,21 @@ export class GroupScreen extends Component {
   };
 
   componentDidMount() {
-    this.props.getGroup(this.props.match.params.groupId);
+    this.props.getGroup(this.props.match.params.mentorspaceId);
   }
 
   render() {
     const { member, loading } = this.props;
-    if (loading) return <div>Loading groups</div>;
+    if (loading) return <div>Loading Mentorspace</div>;
 
     return (
       <div className="container">
         <div className="v-spacer-2" />
         <h2>{member && member.group.name}</h2>
         {member && member.state === "CONFIRM" ? (
-          <GroupConfirm groupId={this.props.match.params.groupId} />
+          <GroupConfirm groupId={this.props.match.params.mentorspaceId} />
         ) : null}
-        <GroupMembers groupId={member && member.group.id} />
+        <MentorspaceMembers groupId={member && member.group.id} />
         {member && member.state === "OK" ? (
           <Modal
             trigger={
@@ -50,7 +50,7 @@ export class GroupScreen extends Component {
             }
             modal
           >
-            <InviteMember groupId={this.props.match.params.groupId} />
+            <InviteMember groupId={this.props.match.params.mentorspaceId} />
           </Modal>
         ) : null}
         <div className="v-spacer-10" />
@@ -75,4 +75,4 @@ const mapDispatchToProps = (dispatch) => ({
   getGroup: (groupId) => dispatch(getGroup(groupId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MentorspaceScreen);

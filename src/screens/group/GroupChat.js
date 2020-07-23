@@ -5,9 +5,9 @@ import {
   getGroupMessages,
   sendGroupMessage,
   getGroupMessagesStream,
-} from "../../store/actions/groupActions";
+} from "../../store/actions/mentorspaceActions";
 import Message from "./Message";
-import { Form, Input, Icon } from "semantic-ui-react";
+import { Form, Input } from "semantic-ui-react";
 
 export class GroupChat extends Component {
   state = {
@@ -39,6 +39,12 @@ export class GroupChat extends Component {
 
     return (
       <div>
+        <h1>messages</h1>
+        <h1>messages</h1>
+        <h1>messages</h1>
+        <h1>messages</h1>
+        <h1>messages</h1>
+        <h1>messages</h1>
         {error ? JSON.stringify(error) : null}
 
         {messages ? (
