@@ -9,6 +9,7 @@ import MentorspaceScreen from "./screens/group/MentorspaceScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
 import BlogScreen from "./screens/blog/BlogScreen";
 import Blogdetail from "./screens/blog/blogdetails/blogdetail";
+import NotFound from "./screens/notfound/NotFound";
 
 import Footer from "./components/footer/footer";
 
@@ -36,13 +37,13 @@ class FiorApp extends Component {
                 path="/mentorspaces"
                 component={AuthRequire(MentorspacesScreen)}
               />
-              <Route exact path="/blogs" component={BlogScreen} />
-              <Route exact path="/view_blogs" component={Blogdetail} />
               <Route
                 exact
                 path="/mentorspaces/:mentorspaceId"
                 component={AuthRequire(MentorspaceScreen)}
               />
+              <Route exact path="/blogs" component={BlogScreen} />
+              <Route exact path="/view_blogs" component={Blogdetail} />
               <Route
                 exact
                 path="/profile"
@@ -54,6 +55,7 @@ class FiorApp extends Component {
               path="/view_blogs"
               component={AuthRequire(Blogdetail)}
             /> */}
+              <Route exact path="*" component={NotFound} />
             </Switch>
           </div>
           <Footer />
