@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Modal } from "semantic-ui-react";
 
-export class GroupDetails extends Component {
+export class MentorspaceDetails extends Component {
   state = {
     name: "",
     description: "",
@@ -25,7 +25,7 @@ export class GroupDetails extends Component {
   render() {
     return (
       <div className="modal">
-        <div className="card-header">Group Details</div>
+        <div className="card-header">Mentorspace Details</div>
         <Modal.Content>
           <Modal.Description>
             <Form>
@@ -71,4 +71,4 @@ export class GroupDetails extends Component {
   }
 }
 
-export default GroupDetails;
+export default MentorspaceDetails;

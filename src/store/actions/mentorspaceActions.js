@@ -149,7 +149,7 @@ export const inviteMember = (groupId, email) => {
   };
 };
 
-export const getGroupsRequests = () => {
+export const getMentorspaceRequests = () => {
   return (dispatch) => {
     dispatch({ type: actions.GET_GROUPS_REQUESTS_START });
     axios

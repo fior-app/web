@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal } from "semantic-ui-react";
 
-import { getGroup } from "../../store/actions/groupActions";
+import { getGroup } from "../../store/actions/mentorspaceActions";
 import GroupMembers from "./GroupMembers";
 import GroupChat from "./GroupChat";
 import InviteMember from "./InviteMember";

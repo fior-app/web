@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { changeGroupState } from "../../store/actions/groupActions";
+import { changeGroupState } from "../../store/actions/mentorspaceActions";
 
 export class GroupConfirm extends Component {
   handleChangeState = (state) => {

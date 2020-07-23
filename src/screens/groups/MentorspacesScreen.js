@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import CreateGroup from "./create/CreateGroup";
+import CreateMentorspace from "./create/CreateMentorspace";
 import { Modal } from "semantic-ui-react";
 
-import MyGroups from "./MyGroups";
-import GroupsRequests from "./GroupsRequests";
+import MyMentorspaces from "./MyMentorspaces";
+import MentorspaceRequests from "./MentorspaceRequests";
 
-export class GroupsScreen extends Component {
+export class MentorspacesScreen extends Component {
   state = {
     showModal: false,
   };
@@ -25,29 +25,29 @@ export class GroupsScreen extends Component {
               className="btn-primary"
               onClick={() => this.setState({ showModal: true })}
             >
-              Create Group
+              Create Mentorspace
             </div>
           }
           closeIcon
           onClose={this.closeModal}
           open={this.state.showModal}
         >
-          <CreateGroup closeModal={this.closeModal} />
+          <CreateMentorspace closeModal={this.closeModal} />
         </Modal>
         <div className="v-spacer-2" />
         <h2>
-          <div className="margin-to-align">Groups</div>
+          <div className="margin-to-align">Mentorspaces</div>
         </h2>
         <div className="v-spacer-2" />
-        <MyGroups />
+        <MyMentorspaces />
         <h2>
-          <div className="margin-to-align">Group Request</div>
+          <div className="margin-to-align">mentorspace Requests</div>
         </h2>
         <div className="v-spacer-2" />
-        <GroupsRequests />
+        <MentorspaceRequests />
       </div>
     );
   }
 }
 
-export default GroupsScreen;
+export default MentorspacesScreen;

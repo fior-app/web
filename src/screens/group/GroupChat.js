@@ -5,7 +5,7 @@ import {
   getGroupMessages,
   sendGroupMessage,
   getGroupMessagesStream,
-} from "../../store/actions/groupActions";
+} from "../../store/actions/mentorspaceActions";
 import Message from "./Message";
 import { Form, Input, Icon } from "semantic-ui-react";
 

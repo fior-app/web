@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 import { Grid } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-import { getGroupsRequests } from "../../store/actions/groupActions";
+import { getGroupsMe } from "../../store/actions/mentorspaceActions";
 
-export class GroupsRequests extends Component {
+export class MyMentorspaces extends Component {
   componentDidMount() {
-    this.props.getGroupsRequests();
+    this.props.getGroupsMe();
   }
 
   render() {
-    const { loading, groups, error } = this.props;
+    const { loading, mentorspaces, error } = this.props;
 
     if (loading)
       return (
@@ -29,15 +29,20 @@ export class GroupsRequests extends Component {
     return (
       <Grid>
         <Grid.Row>
-          {groups.map((groupItem) => {
+          {mentorspaces.map((mentorspaceItem) => {
             return (
-              <Link to={`/groups/${groupItem.group.id}`} key={groupItem.id}>
+              <Link
+                to={`/groups/${mentorspaceItem.group.id}`}
+                key={mentorspaceItem.id}
+              >
                 <div className="group-item">
-                  <div className="group-header">{groupItem.group.name}</div>
+                  <div className="group-header">
+                    {mentorspaceItem.group.name}
+                  </div>
                   <div className="v-spacer" />
                   <div>
                     Created by &nbsp;
-                    <span>{groupItem.group.createdBy.name}</span>
+                    <span>{mentorspaceItem.group.createdBy.name}</span>
                   </div>
                 </div>
               </Link>
@@ -51,13 +56,13 @@ export class GroupsRequests extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.groups.groupsRequests.loading,
-  groups: state.groups.groupsRequests.groups,
-  error: state.groups.groupsRequests.error,
+  loading: state.groups.groups.loading,
+  mentorspaces: state.groups.groups.groups,
+  error: state.groups.groups.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getGroupsRequests: () => dispatch(getGroupsRequests()),
+  getGroupsMe: () => dispatch(getGroupsMe()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupsRequests);
+export default connect(mapStateToProps, mapDispatchToProps)(MyMentorspaces);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getGroupMembers } from "../../store/actions/groupActions";
+import { getGroupMembers } from "../../store/actions/mentorspaceActions";
 
 export class GroupMembers extends Component {
   componentDidMount() {
