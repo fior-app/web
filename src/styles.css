@@ -54,8 +54,6 @@ body {
   height: max-content;
   width: 100%;
   display: flex;
-  /* flex-direction: row; */
-  /* flex-grow: 1; */
 }
 
 .spacer-1 {
@@ -100,6 +98,10 @@ body {
 
 .v-spacer-10 {
   height: 10rem; /* 160px col-lg-1 */
+}
+
+.keep-margin {
+  margin: 140px 100px;
 }
 
 /* Custom theme */
