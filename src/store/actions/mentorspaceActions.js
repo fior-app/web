@@ -1,6 +1,7 @@
 import * as actions from "./types";
 import axios from "axios";
 import { EventSourcePolyfill } from "event-source-polyfill";
+import * as utils from "../../util/utils";
 
 export const getGroupsMe = () => {
   return (dispatch) => {
@@ -78,7 +79,7 @@ export const getGroupMessagesStream = (roomId) => {
       process.env.REACT_APP_API_BASE_URL + "/sse/chatroom/" + roomId,
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + utils.getWithExpiry("token"),
         },
       }
     );

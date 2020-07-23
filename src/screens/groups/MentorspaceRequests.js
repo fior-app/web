@@ -32,7 +32,7 @@ export class MentorspaceRequests extends Component {
           {mentorspaces.map((MentorspaceItem) => {
             return (
               <Link
-                to={`/groups/${MentorspaceItem.group.id}`}
+                to={`/mentorspaces/${MentorspaceItem.group.id}`}
                 key={MentorspaceItem.id}
               >
                 <div className="group-item">
