@@ -24,8 +24,6 @@ class Login extends Component {
   render() {
     const { emailAuth } = this.props;
 
-    console.log(emailAuth);
-
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
