@@ -4,8 +4,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LandingScreen from "./screens/landing/landing_screen";
 import Navbar from "./components/navbar/navbar_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
-import GroupsScreen from "./screens/groups/GroupsScreen";
-import GroupScreen from "./screens/group/GroupScreen";
+import MentorspacesScreen from "./screens/groups/MentorspacesScreen";
+import MentorspaceScreen from "./screens/group/MentorspaceScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
 import BlogScreen from "./screens/blog/BlogScreen";
 import Blogdetail from "./screens/blog/blogdetails/blogdetail";
@@ -20,30 +20,40 @@ class FiorApp extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className='App'>
+        <div className="App">
           <Navbar />
-          <div className='row'>
+          <div className="row">
             <SideNav />
             <Switch>
-              <Route exact path='/' component={LandingScreen} />
+              <Route exact path="/" component={LandingScreen} />
               <Route
                 exact
-                path='/login'
+                path="/login"
                 component={UnauthRequire(AuthScreen)}
               />
               <Route
                 exact
-                path='/mentorspace'
-                component={AuthRequire(GroupsScreen)}
+                path="/mentorspaces"
+                component={AuthRequire(MentorspacesScreen)}
               />
-              <Route exact path='/orgs' component={LandingScreen} />
-              <Route exact path='/question-forum' component={LandingScreen} />
-              <Route exact path='/blog' component={BlogScreen} />
-              <Route exact path='/users' component={LandingScreen} />
-              <Route exact path='/notifications' component={LandingScreen} />
-              <Route exact path='/settings' component={LandingScreen} />
-              <Route exact path='/pricing' component={LandingScreen} />
-              <Route exact path='/about' component={LandingScreen} />
+              <Route exact path="/blogs" component={BlogScreen} />
+              <Route exact path="/view_blogs" component={Blogdetail} />
+              <Route
+                exact
+                path="/mentorspaces/:mentorspaceId"
+                component={AuthRequire(MentorspaceScreen)}
+              />
+              <Route
+                exact
+                path="/profile"
+                component={AuthRequire(ProfileScreen)}
+              />
+              {/* <Route exact path="/blogs" component={UnAuthRequire(BlogScreen)} /> */}
+              {/* <Route
+              exact
+              path="/view_blogs"
+              component={AuthRequire(Blogdetail)}
+            /> */}
             </Switch>
           </div>
           <Footer />
