@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Grid, Card } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+
+import { signOut } from "../../store/actions/authActions";
 
 class ProfileScreen extends Component {
   state = {
@@ -11,6 +14,8 @@ class ProfileScreen extends Component {
     const { avatarUrl } = this.state;
 
     const { user } = this.props;
+
+    if (!user) return <Redirect to='/' />;
 
     return (
       <div className='container'>
@@ -111,19 +116,29 @@ class ProfileScreen extends Component {
             </Grid.Row>
           </Grid>
           <div className='v-spacer-2' />
-          <button className='btn-primary' onClick={this.handleSignOut}>
-            Sign Out
-          </button>
+          <div className='row end'>
+            <button className='btn-primary' onClick={this.handleSignOut}>
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
     );
   }
+
+  handleSignOut = () => {
+    this.props.signOut();
+  };
 }
 
 const mapStateToProps = (state) => ({
   user: state.auth.currentUser,
 });
 
-const mapActionsToProps = () => {};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut()),
+  };
+};
 
-export default connect(mapStateToProps)(ProfileScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

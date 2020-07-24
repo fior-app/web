@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Icon } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 const Footer = () => {
   return (
@@ -35,7 +35,11 @@ const Footer = () => {
                   target='blank'
                   className='social-container'
                 >
-                  <img src="../../assets/icons/facebook.svg" alt="Fior - Facebook" className='social_icon' />
+                  <img
+                    src='../../assets/icons/facebook.svg'
+                    alt='Fior - Facebook'
+                    className='social_icon'
+                  />
                 </a>
                 <a
                   href='https://www.twitter.com/fior'
@@ -43,7 +47,11 @@ const Footer = () => {
                   className='social-container'
                 >
                   {/* <Icon name='twitter square' color='black' size='big' /> */}
-                  <img src="../../assets/icons/twitter.svg" alt="Fior - Twitter" className='social_icon' />
+                  <img
+                    src='../../assets/icons/twitter.svg'
+                    alt='Fior - Twitter'
+                    className='social_icon'
+                  />
                 </a>
                 <a
                   href='https://www.linkedin.com/fior'
@@ -51,7 +59,11 @@ const Footer = () => {
                   className='social-container'
                 >
                   {/* <Icon name='linkedin' color='black' size='big' /> */}
-                  <img src="../../assets/icons/linkedin-logo.svg" alt="Fior - LinkedIn" className='social_icon' />
+                  <img
+                    src='../../assets/icons/linkedin-logo.svg'
+                    alt='Fior - LinkedIn'
+                    className='social_icon'
+                  />
                 </a>
                 <a
                   href='https://www.instagram.com/fior'
@@ -59,7 +71,11 @@ const Footer = () => {
                   className='social-container'
                 >
                   {/* <Icon name='instagram' color='black' size='big' /> */}
-                  <img src="../../assets/icons/instagram.svg" alt="Fior - Instagram" className='social_icon' />
+                  <img
+                    src='../../assets/icons/instagram.svg'
+                    alt='Fior - Instagram'
+                    className='social_icon'
+                  />
                 </a>
               </Grid.Row>
             </Grid>

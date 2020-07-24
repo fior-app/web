@@ -100,6 +100,10 @@ body {
   height: 10rem; /* 160px col-lg-1 */
 }
 
+.full-loading {
+  margin-top: 12rem;
+}
+
 .keep-margin {
   margin: 140px 100px;
 }
@@ -150,6 +154,12 @@ body {
 
 .btn-primary:focus {
   outline: 0;
+}
+
+.not-found-logo {
+  position: absolute;
+  top: 12vw;
+  left: 40vw;
 }
 
 .secondary_btn {
@@ -432,11 +442,9 @@ body {
 
 /* 1600px public nav */
 
-/* .nav_signin_btn_public { */
-
-/* left: 64.84vw; */
-
-/* } */
+.nav_signin_btn_public {
+  left: 74.84vw;
+}
 
 /* 1600px private nav */
 
@@ -460,11 +468,9 @@ body {
 
 /* 1600px public nav */
 
-/* .nav_register_btn_public { */
-
-/* left: 73.44vw; */
-
-/* } */
+.nav_register_btn_public {
+  left: 73.44vw;
+}
 
 /* 1600px private nav */
 
@@ -646,6 +652,10 @@ body {
 .social_icon {
   width: 1.875vw;
   height: 1.875vw;
+}
+
+.keep-margin-top {
+  margin-top: 10rem;
 }
 
 .fake-spacer {
@@ -839,6 +849,15 @@ body {
   display: flex;
   align-items: center;
   color: #456078;
+}
+
+.auth-loading {
+  position: absolute;
+  top: 17vw;
+  left: 20vw;
+
+  display: flex;
+  align-items: center;
 }
 
 .username {
