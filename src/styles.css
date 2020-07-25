@@ -100,6 +100,10 @@ body {
   height: 10rem; /* 160px col-lg-1 */
 }
 
+.full-loading {
+  margin-top: 12rem;
+}
+
 .keep-margin {
   margin: 140px 100px;
 }

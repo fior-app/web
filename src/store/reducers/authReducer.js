@@ -7,6 +7,7 @@ const initState = {
   },
   currentUser: null,
   isRegisterSuccess: false,
+  initialSignIn: false,
 };
 const signInEmailStart = (state) => {
   return { ...state, authState: { ...state.authState, signingIn: true } };
@@ -32,6 +33,10 @@ const googleSignInSuccess = (state) => {
   return { ...state, authState: { ...state.authState, signingIn: false } };
 };
 
+const initialSignIn = (state) => {
+  return { ...state, initialSignIn: true };
+};
+
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.SIGN_IN_EMAIL_START:
@@ -52,6 +57,9 @@ const authReducer = (state = initState, action) => {
     case actions.GOOGLE_SIGN_IN_SUCCESS:
       return googleSignInSuccess(state);
 
+    case "INITIAL_SIGNIN":
+      return initialSignIn(state);
+
     case "REGISTER_SUCCESS":
       return {
         ...state,
@@ -65,16 +73,16 @@ const authReducer = (state = initState, action) => {
         isRegisterSuccess: false,
       };
     case "CURRENT_USER":
-      console.log("Current user loaded");
-
       return {
         ...state,
         currentUser: action.payload,
+        initialSignIn: false,
       };
     case "CURRENT_USER_ERROR":
       return {
         ...state,
         currentUser: null,
+        initialSignIn: false,
       };
     case "SIGN_OUT":
       return {

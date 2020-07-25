@@ -72,6 +72,15 @@ export const userMe = () => {
   };
 };
 
+export const userMeInitial = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "INITIAL_SIGNIN",
+    });
+    userMeFetch(dispatch);
+  };
+};
+
 const userMeFetch = (dispatch) => {
   axios
     .get("/users/me")
