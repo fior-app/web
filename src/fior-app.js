@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LandingScreen from "./screens/landing/landing_screen";
 import Navbar from "./components/navbar/navbar_cmp";
 import AuthScreen from "./screens/auth/auth_screen";
+import LinkedInCallbackScreen from "./screens/auth/linkedin_callback_screen";
 import MentorspacesScreen from "./screens/groups/MentorspacesScreen";
 import MentorspaceScreen from "./screens/group/MentorspaceScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
@@ -35,6 +36,7 @@ class FiorApp extends Component {
             <SideNav />
             <Switch>
               <Route exact path='/' component={LandingScreen} />
+              <Route exact path='/auth/linkedin/callback' component={UnauthRequire(LinkedInCallbackScreen)} />
               <Route
                 exact
                 path='/login'
