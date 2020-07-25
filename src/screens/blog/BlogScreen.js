@@ -72,6 +72,7 @@ export class BlogScreen extends Component {
                   <img
                     className='blog_image'
                     src='../../assets/vectors/blogimage.svg'
+                    alt='desgin'
                   />
                   <div className='blog_card_catergory'>
                     <p>Catergory</p>
@@ -97,6 +98,7 @@ export class BlogScreen extends Component {
                   <img
                     className='blog_image'
                     src='../../assets/vectors/blogimage.svg'
+                    alt='desgin'
                   />
                   <div className='blog_card_catergory'>
                     <p>Catergory</p>
@@ -122,6 +124,7 @@ export class BlogScreen extends Component {
                   <img
                     className='blog_image'
                     src='../../assets/vectors/blogimage.svg'
+                    alt='desgin'
                   />
                   <div className='blog_card_catergory'>
                     <p>Catergory</p>
@@ -139,7 +142,7 @@ export class BlogScreen extends Component {
             {/* Right Nav */}
             <div className='blog_right_row'>
               <button className='icon_btn secondary_btn'>
-                <img src='../../assets/icons/add.svg' />
+                <img src='../../assets/icons/add.svg' alt='desgin' />
                 Create new post
               </button>
 
