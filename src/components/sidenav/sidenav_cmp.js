@@ -14,7 +14,7 @@ class SideNav extends Component {
             <NavLink to='/'>
               <button className='btn-primary'>Home</button>
             </NavLink>
-            <NavLink to='/mentorspace'>
+            <NavLink to='/mentorspaces'>
               <button className='btn-primary'>Mentorspace</button>
             </NavLink>
             <NavLink to='/orgs'>
