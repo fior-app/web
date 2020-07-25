@@ -15,7 +15,9 @@ class QuestionScreen extends Component {
     return (
       <div className='keep-margin'>
         <h4>Question Screen</h4>
-        <button className='secondary_btn'>Add New</button>
+        <button className='secondary_btn' onClick={this.handleQuestionCreate}>
+          Add New
+        </button>
         {questions &&
           questions.map((question) => (
             <div>
@@ -26,6 +28,10 @@ class QuestionScreen extends Component {
       </div>
     );
   }
+
+  handleQuestionCreate = () => {
+    this.props.history.push("/question-forum/create");
+  };
 }
 
 const mapStateToProps = (state) => ({
