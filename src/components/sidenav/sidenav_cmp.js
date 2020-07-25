@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
 class SideNav extends Component {
   render() {
+    const { user } = this.props;
+
     return (
       <React.Fragment>
         <div className='sidenav_container'>
@@ -14,36 +17,42 @@ class SideNav extends Component {
             <NavLink to='/'>
               <button className='btn-primary'>Home</button>
             </NavLink>
-            <NavLink to='/mentorspaces'>
-              <button className='btn-primary'>Mentorspace</button>
-            </NavLink>
-            <NavLink to='/orgs'>
-              <button className='btn-primary'>Organizations</button>
-            </NavLink>
+            {user && (
+              <NavLink to='/mentorspaces'>
+                <button className='btn-primary'>Mentorspace</button>
+              </NavLink>
+            )}
+            {user && (
+              <NavLink to='/orgs'>
+                <button className='btn-primary'>Organizations</button>
+              </NavLink>
+            )}
             <NavLink to='question-forum'>
               <button className='btn-primary'>Question Forum</button>
             </NavLink>
             <NavLink to='/blog'>
               <button className='btn-primary'>Blog</button>
             </NavLink>
-            <NavLink to='/users'>
-              <button className='btn-primary'>Users</button>
-            </NavLink>
-            <NavLink to='/notifications'>
-              <button className='btn-primary authenticated'>
-                Notifications
-              </button>
-            </NavLink>
-            <NavLink to='/settings'>
-              <button className='btn-primary authenticated'>Settings</button>
-            </NavLink>
+            {user && (
+              <NavLink to='/users'>
+                <button className='btn-primary'>Users</button>
+              </NavLink>
+            )}
+            {user && (
+              <NavLink to='/notifications'>
+                <button className='btn-primary'>Notifications</button>
+              </NavLink>
+            )}
+            {user && (
+              <NavLink to='/settings'>
+                <button className='btn-primary'>Settings</button>
+              </NavLink>
+            )}
             <NavLink to='/pricing'>
-              <button className='btn-primary unauthenticated'>
-                Pricing Plan
-              </button>
+              <button className='btn-primary '>Pricing Plan</button>
             </NavLink>
             <NavLink to='about'>
-              <button className='btn-primary unauthenticated'>About Us</button>
+              <button className='btn-primary '>About Us</button>
             </NavLink>
           </div>
 
@@ -57,4 +66,8 @@ class SideNav extends Component {
   }
 }
 
-export default SideNav;
+const mapStateToProps = (state) => ({
+  user: state.auth.currentUser,
+});
+
+export default connect(mapStateToProps)(SideNav);

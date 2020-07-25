@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { Image, Icon, Dropdown } from "semantic-ui-react";
 import { signOut } from "../../store/actions/authActions";
 import { withRouter } from "react-router-dom";
 
-const options = ["Profile", "Sign Out"];
+// const options = ["Profile", "Sign Out"];
 
 class Navbar extends Component {
   state = {
@@ -50,8 +48,6 @@ class Navbar extends Component {
   }
 
   renderSignedInNavbar() {
-    const { avatarUrl } = this.state;
-
     return (
       <div
         className='row navbar 
