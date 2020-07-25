@@ -654,6 +654,10 @@ body {
   height: 1.875vw;
 }
 
+.keep-margin-top {
+  margin-top: 10rem;
+}
+
 .fake-spacer {
   height: 52rem;
 }

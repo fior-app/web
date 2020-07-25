@@ -19,6 +19,7 @@ import { userMeInitial } from "./store/actions/authActions";
 import { connect } from "react-redux";
 import { Image } from "semantic-ui-react";
 import PricingScreen from "./screens/pricing/pricing_screen";
+import QuestionScreen from "./screens/question/question_screen";
 
 class FiorApp extends Component {
   componentDidMount() {
@@ -52,7 +53,7 @@ class FiorApp extends Component {
                 component={AuthRequire(MentorspaceScreen)}
               />
               <Route exact path='/orgs' component={LandingScreen} />
-              <Route exact path='/question-forum' component={LandingScreen} />
+              <Route exact path='/question-forum' component={QuestionScreen} />
               <Route exact path='/blog' component={BlogScreen} />
               <Route exact path='/users' component={LandingScreen} />
               <Route exact path='/notifications' component={LandingScreen} />
