@@ -15,10 +15,18 @@ import Footer from "./components/footer/footer";
 import AuthRequire from "./HOC/authRequire";
 import UnauthRequire from "./HOC/unauthRequire";
 import SideNav from "./components/sidenav/sidenav_cmp";
+import { userMe } from "./store/actions/authActions";
+import { connect } from "react-redux";
 
 class FiorApp extends Component {
+  componentDidMount() {
+    this.props.userMe();
+  }
+
   render() {
-    return (
+    return this.props.signingIn ? (
+      <h4>Loading</h4>
+    ) : (
       <BrowserRouter>
         <div className='App'>
           <Navbar />
@@ -60,4 +68,14 @@ class FiorApp extends Component {
   }
 }
 
-export default FiorApp;
+const mapStateToProps = (state) => ({
+  signingIn: state.auth.authState.signingIn,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userMe: () => dispatch(userMe()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FiorApp);

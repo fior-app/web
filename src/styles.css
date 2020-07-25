@@ -432,11 +432,9 @@ body {
 
 /* 1600px public nav */
 
-/* .nav_signin_btn_public { */
-
-/* left: 64.84vw; */
-
-/* } */
+.nav_signin_btn_public {
+  left: 74.84vw;
+}
 
 /* 1600px private nav */
 
@@ -460,11 +458,9 @@ body {
 
 /* 1600px public nav */
 
-/* .nav_register_btn_public { */
-
-/* left: 73.44vw; */
-
-/* } */
+.nav_register_btn_public {
+  left: 73.44vw;
+}
 
 /* 1600px private nav */
 

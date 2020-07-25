@@ -65,6 +65,8 @@ const authReducer = (state = initState, action) => {
         isRegisterSuccess: false,
       };
     case "CURRENT_USER":
+      console.log("Current user loaded");
+
       return {
         ...state,
         currentUser: action.payload,
