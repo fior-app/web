@@ -4,6 +4,7 @@ import { Image } from "semantic-ui-react";
 import GoogleLogin from "react-google-login";
 
 import { signInEmail, signInGoogle } from "../../../store/actions/authActions";
+import { REACT_APP_GOOGLE_CLIENT_ID } from "../../../config/config";
 
 class Login extends Component {
   state = {
@@ -65,7 +66,7 @@ class Login extends Component {
           <button className='google_signin_btn google_signin'>
             <GoogleLogin
               buttonText='Login with Google'
-              clientId='1080745962632-ihr6ogh2a89dm4si0bm95q685obe0a8t.apps.googleusercontent.com'
+              clientId={REACT_APP_GOOGLE_CLIENT_ID}
               onFailure={this.handleGSignFailure}
               onSuccess={this.handleGSginSuccess}
             />
