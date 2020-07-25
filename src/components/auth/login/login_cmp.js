@@ -63,14 +63,28 @@ class Login extends Component {
             </button>
           </form>
           <div className='v-spacer-2' />
-          <button className='google_signin_btn google_signin'>
-            <GoogleLogin
-              buttonText='Login with Google'
-              clientId={REACT_APP_GOOGLE_CLIENT_ID}
-              onFailure={this.handleGSignFailure}
-              onSuccess={this.handleGSginSuccess}
-            />
-          </button>
+          <GoogleLogin
+            buttonText='Login with Google'
+            clientId={REACT_APP_GOOGLE_CLIENT_ID}
+            onFailure={this.handleGSignFailure}
+            onSuccess={this.handleGSginSuccess}
+            cookiePolicy={"single_host_origin"}
+            render={(renderProps) => (
+              <button
+                className='google_signin_btn google_signin'
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <Image
+                  src='../../assets/icons/flat-color-icons_google.svg'
+                  className='google_icon'
+                />
+                <p>Login with Google</p>
+              </button>
+            )}
+          >
+            Puka deepan rukshan
+          </GoogleLogin>
           <button className='linkedin_signin_btn linkedin_signin'>
             <Image
               src='../../assets/icons/linkedin.svg'
