@@ -1,7 +1,7 @@
 import * as actions from "../actions/types";
 
 const initState = {
-  emailAuth: {
+  authState: {
     signingIn: false,
     error: null,
   },
@@ -9,19 +9,27 @@ const initState = {
   isRegisterSuccess: false,
 };
 const signInEmailStart = (state) => {
-  return { ...state, emailAuth: { ...state.emailAuth, signingIn: true } };
+  return { ...state, authState: { ...state.authState, signingIn: true } };
 };
 
 const signInEmailEnd = (state) => {
-  return { ...state, emailAuth: { ...state.emailAuth, signingIn: false } };
+  return { ...state, authState: { ...state.authState, signingIn: false } };
 };
 
 const signInEmailFailed = (state, payload) => {
-  return { ...state, emailAuth: { ...state.emailAuth, error: payload } };
+  return { ...state, authState: { ...state.authState, error: payload } };
 };
 
 const signInEmailSuccess = (state) => {
-  return { ...state, emailAuth: { ...state.emailAuth, error: null } };
+  return { ...state, authState: { ...state.authState, error: null } };
+};
+
+const googleSignInStart = (state) => {
+  return { ...state, authState: { ...state.authState, signingIn: true } };
+};
+
+const googleSignInSuccess = (state) => {
+  return { ...state, authState: { ...state.authState, signingIn: false } };
 };
 
 const authReducer = (state = initState, action) => {
@@ -37,6 +45,12 @@ const authReducer = (state = initState, action) => {
 
     case actions.SIGN_IN_EMAIL_FAILED:
       return signInEmailFailed(state, action.payload);
+
+    case actions.GOOGLE_SIGN_IN_START:
+      return googleSignInStart(state);
+
+    case actions.GOOGLE_SIGN_IN_SUCCESS:
+      return googleSignInSuccess(state);
 
     case "REGISTER_SUCCESS":
       return {

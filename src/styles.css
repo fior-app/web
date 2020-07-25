@@ -841,6 +841,15 @@ body {
   color: #456078;
 }
 
+.auth-loading {
+  position: absolute;
+  top: 17vw;
+  left: 20vw;
+
+  display: flex;
+  align-items: center;
+}
+
 .username {
   top: 11.1vw;
 }

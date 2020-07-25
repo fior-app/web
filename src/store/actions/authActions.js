@@ -51,6 +51,21 @@ export const registerWithEmailAndPassword = (user) => {
   };
 };
 
+export const signInGoogle = (idToken) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GOOGLE_SIGN_IN_START });
+    axios
+      .post("/auth/signin/google", { idToken })
+      .then((res) => {
+        utils.setWithExpiry("token", res.data.token);
+        AxiosConfig.config();
+        dispatch({ type: actions.GOOGLE_SIGN_IN_SUCCESS });
+        userMeFetch(dispatch);
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
 export const userMe = () => {
   return (dispatch) => {
     userMeFetch(dispatch);
@@ -79,5 +94,6 @@ export const signOut = () => {
   return (dispatch) => {
     localStorage.removeItem("token");
     dispatch({ type: "SIGN_OUT" });
+    console.log("Signed out");
   };
 };
