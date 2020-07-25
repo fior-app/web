@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Card } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import { signOut } from "../../store/actions/authActions";
 
@@ -14,7 +15,7 @@ class ProfileScreen extends Component {
 
     const { user } = this.props;
 
-    console.log(user);
+    if (!user) return <Redirect to='/' />;
 
     return (
       <div className='container'>
