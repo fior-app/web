@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Grid, Card } from "semantic-ui-react";
 import { connect } from "react-redux";
 
+import { signOut } from "../../store/actions/authActions";
+
 class ProfileScreen extends Component {
   state = {
     avatarUrl: "https://i.ytimg.com/vi/9K46DNoE3Ko/maxresdefault.jpg",
@@ -11,6 +13,8 @@ class ProfileScreen extends Component {
     const { avatarUrl } = this.state;
 
     const { user } = this.props;
+
+    console.log(user);
 
     return (
       <div className='container'>
@@ -118,12 +122,20 @@ class ProfileScreen extends Component {
       </div>
     );
   }
+
+  handleSignOut = () => {
+    this.props.signOut();
+  };
 }
 
 const mapStateToProps = (state) => ({
   user: state.auth.currentUser,
 });
 
-const mapActionsToProps = () => {};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut()),
+  };
+};
 
-export default connect(mapStateToProps)(ProfileScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
