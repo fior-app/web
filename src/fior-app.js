@@ -15,17 +15,18 @@ import Footer from "./components/footer/footer";
 import AuthRequire from "./HOC/authRequire";
 import UnauthRequire from "./HOC/unauthRequire";
 import SideNav from "./components/sidenav/sidenav_cmp";
-import { userMe } from "./store/actions/authActions";
+import { userMeInitial } from "./store/actions/authActions";
 import { connect } from "react-redux";
+import { Image } from "semantic-ui-react";
 
 class FiorApp extends Component {
   componentDidMount() {
-    this.props.userMe();
+    this.props.userMeInitial();
   }
 
   render() {
-    return this.props.signingIn ? (
-      <h4>Loading</h4>
+    return this.props.initialSignIn ? (
+      this.renderFullLoading()
     ) : (
       <BrowserRouter>
         <div className='App'>
@@ -66,15 +67,25 @@ class FiorApp extends Component {
       </BrowserRouter>
     );
   }
+
+  renderFullLoading = () => {
+    return (
+      <div className='row center'>
+        <div className='full-loading'>
+          <Image src='assets/svg/loading-full.svg' size='small' />
+        </div>
+      </div>
+    );
+  };
 }
 
 const mapStateToProps = (state) => ({
-  signingIn: state.auth.authState.signingIn,
+  initialSignIn: state.auth.initialSignIn,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    userMe: () => dispatch(userMe()),
+    userMeInitial: () => dispatch(userMeInitial()),
   };
 };
 

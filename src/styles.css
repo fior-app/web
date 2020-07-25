@@ -100,6 +100,10 @@ body {
   height: 10rem; /* 160px col-lg-1 */
 }
 
+.full-loading {
+  margin-top: 12rem;
+}
+
 .keep-margin {
   margin: 140px 100px;
 }
@@ -150,6 +154,12 @@ body {
 
 .btn-primary:focus {
   outline: 0;
+}
+
+.not-found-logo {
+  position: absolute;
+  top: 12vw;
+  left: 40vw;
 }
 
 .secondary_btn {
