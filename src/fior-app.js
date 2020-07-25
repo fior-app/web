@@ -8,7 +8,6 @@ import MentorspacesScreen from "./screens/groups/MentorspacesScreen";
 import MentorspaceScreen from "./screens/group/MentorspaceScreen";
 import ProfileScreen from "./screens/profile/profile_screen";
 import BlogScreen from "./screens/blog/BlogScreen";
-import Blogdetail from "./screens/blog/blogdetails/blogdetail";
 import NotFound from "./screens/notfound/NotFound";
 
 import Footer from "./components/footer/footer";
@@ -21,21 +20,26 @@ class FiorApp extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className='App'>
           <Navbar />
-          <div className="row">
+          <div className='row'>
             <SideNav />
             <Switch>
-              <Route exact path="/" component={LandingScreen} />
+              <Route exact path='/' component={LandingScreen} />
               <Route
                 exact
-                path="/login"
+                path='/login'
                 component={UnauthRequire(AuthScreen)}
               />
               <Route
                 exact
-                path="/mentorspaces"
+                path='/mentorspaces'
                 component={AuthRequire(MentorspacesScreen)}
+              />
+              <Route
+                exact
+                path='/mentorspaces/:mentorspaceId'
+                component={AuthRequire(MentorspaceScreen)}
               />
               <Route exact path='/orgs' component={LandingScreen} />
               <Route exact path='/question-forum' component={LandingScreen} />
@@ -46,6 +50,7 @@ class FiorApp extends Component {
               <Route exact path='/pricing' component={LandingScreen} />
               <Route exact path='/about' component={LandingScreen} />
               <Route exact path='/profile' component={ProfileScreen} />
+              <Route exact path='*' component={NotFound} />
             </Switch>
           </div>
           <Footer />
