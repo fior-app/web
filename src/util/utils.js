@@ -1,5 +1,7 @@
-const ttl = process.env.REACT_APP_ACCESS_TOKEN_DURATION_HOURS
-  ? +process.env.REACT_APP_ACCESS_TOKEN_DURATION_HOURS * 60 * 60 * 1000
+import { REACT_APP_ACCESS_TOKEN_DURATION_HOURS } from "../config/config";
+
+const ttl = REACT_APP_ACCESS_TOKEN_DURATION_HOURS
+  ? +REACT_APP_ACCESS_TOKEN_DURATION_HOURS * 60 * 60 * 1000
   : 8 * 60 * 60 * 1000; //8 hours
 
 export const setWithExpiry = (key, value) => {
