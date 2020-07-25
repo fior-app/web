@@ -37,6 +37,14 @@ const initialSignIn = (state) => {
   return { ...state, initialSignIn: true };
 };
 
+const linkedinSignInStart = (state) => {
+  return { ...state, authState: { ...state.authState, signingIn: true } };
+};
+
+const linkedinSignInSuccess = (state) => {
+  return { ...state, authState: { ...state.authState, signingIn: false } };
+};
+
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.SIGN_IN_EMAIL_START:
@@ -59,6 +67,12 @@ const authReducer = (state = initState, action) => {
 
     case "INITIAL_SIGNIN":
       return initialSignIn(state);
+
+    case actions.LINKEDIN_SIGN_IN_START:
+      return linkedinSignInStart(state);
+
+    case actions.LINKEDIN_SIGN_IN_SUCCESS:
+      return linkedinSignInSuccess(state);
 
     case "REGISTER_SUCCESS":
       return {
