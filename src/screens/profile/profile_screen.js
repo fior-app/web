@@ -12,8 +12,6 @@ class ProfileScreen extends Component {
 
     const { user } = this.props;
 
-    console.log(user);
-
     return (
       <div className='container'>
         <div className='keep-margin'>
@@ -112,6 +110,10 @@ class ProfileScreen extends Component {
               <Grid.Column></Grid.Column>
             </Grid.Row>
           </Grid>
+          <div className='v-spacer-2' />
+          <button className='btn-primary' onClick={this.handleSignOut}>
+            Sign Out
+          </button>
         </div>
       </div>
     );
@@ -121,5 +123,7 @@ class ProfileScreen extends Component {
 const mapStateToProps = (state) => ({
   user: state.auth.currentUser,
 });
+
+const mapActionsToProps = () => {};
 
 export default connect(mapStateToProps)(ProfileScreen);
