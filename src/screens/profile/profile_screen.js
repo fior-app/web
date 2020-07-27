@@ -116,9 +116,11 @@ class ProfileScreen extends Component {
             </Grid.Row>
           </Grid>
           <div className='v-spacer-2' />
-          <button className='btn-primary' onClick={this.handleSignOut}>
-            Sign Out
-          </button>
+          <div className='row end'>
+            <button className='btn-primary' onClick={this.handleSignOut}>
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
     );

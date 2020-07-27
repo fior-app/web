@@ -19,6 +19,9 @@ import SideNav from "./components/sidenav/sidenav_cmp";
 import { userMeInitial } from "./store/actions/authActions";
 import { connect } from "react-redux";
 import { Image } from "semantic-ui-react";
+import PricingScreen from "./screens/pricing/pricing_screen";
+import QuestionScreen from "./screens/question/question_screen";
+import CreateQuestion from "./screens/question/create_question";
 
 class FiorApp extends Component {
   componentDidMount() {
@@ -53,12 +56,17 @@ class FiorApp extends Component {
                 component={AuthRequire(MentorspaceScreen)}
               />
               <Route exact path='/orgs' component={LandingScreen} />
-              <Route exact path='/question-forum' component={LandingScreen} />
+              <Route exact path='/question-forum' component={QuestionScreen} />
+              <Route
+                exact
+                path='/question-forum/create'
+                component={CreateQuestion}
+              />
               <Route exact path='/blog' component={BlogScreen} />
               <Route exact path='/users' component={LandingScreen} />
               <Route exact path='/notifications' component={LandingScreen} />
               <Route exact path='/settings' component={LandingScreen} />
-              <Route exact path='/pricing' component={LandingScreen} />
+              <Route exact path='/pricing' component={PricingScreen} />
               <Route exact path='/about' component={LandingScreen} />
               <Route exact path='/profile' component={ProfileScreen} />
               <Route exact path='*' component={NotFound} />
