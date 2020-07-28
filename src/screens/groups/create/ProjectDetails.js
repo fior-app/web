@@ -15,8 +15,8 @@ export class ProjectDetails extends Component {
     });
   };
 
-  handleCreateGroup = (e) => {
-    this.props.handleCreateGroup("project", this.state);
+  handleCreateMentorspace = (e) => {
+    this.props.handleCreateMentorspace("project", this.state);
   };
 
   handleBack = (e) => {
@@ -70,7 +70,9 @@ export class ProjectDetails extends Component {
                 {error ? <div>Error.. {JSON.stringify(error)}</div> : null}
               </Form.Field>
               <Form.Field>
-                {loading ? <div>Creating group..</div> : null}
+                {loading ? (
+                  <div>Creating Mentor Space please wait..</div>
+                ) : null}
               </Form.Field>
               <div className="row end">
                 <div className="btn-alternate" onClick={this.handleBack}>
@@ -79,7 +81,7 @@ export class ProjectDetails extends Component {
                 <div
                   className="btn-alternate"
                   disabled={loading}
-                  onClick={this.handleCreateGroup}
+                  onClick={this.handleCreateMentorspace}
                 >
                   Create
                 </div>

@@ -1,9 +1,10 @@
 import axios from "axios";
 import * as utils from "../util/utils";
+import { REACT_APP_API_BASE_URL } from "./config";
 
 export default class AxiosConfig {
   static config = () => {
-    axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+    axios.defaults.baseURL = REACT_APP_API_BASE_URL;
     axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${utils.getWithExpiry("token")}`;

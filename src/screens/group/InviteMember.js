@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Modal } from "semantic-ui-react";
 
-import { inviteMember } from "../../store/actions/groupActions";
+import { inviteMember } from "../../store/actions/mentorspaceActions";
 
 export class InviteMember extends Component {
   state = {

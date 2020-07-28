@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { createGroup } from "../../../store/actions/groupActions";
-import GroupDetails from "./GroupDetails";
+import { createGroup } from "../../../store/actions/mentorspaceActions";
+import MentorspaceDetails from "./MentorspaceDetails";
 import ProjectDetails from "./ProjectDetails";
 
-export class CreateGroup extends Component {
+export class CreateMentorspace extends Component {
   state = {
     group: {},
     project: {},
     active: 0,
   };
 
-  handleCreateGroup = async (type, value) => {
+  handleCreateMentorspace = async (type, value) => {
     await this.setState({ [type]: value });
-    this.props.createGroup(this.state, this.props.closeModal);
+    this.props.createMentorspace(this.state, this.props.closeModal);
   };
 
   handleNext = (type, value) => {
@@ -31,7 +31,10 @@ export class CreateGroup extends Component {
     switch (this.state.active) {
       case 0:
         return (
-          <GroupDetails handleNext={this.handleNext} group={this.state.group} />
+          <MentorspaceDetails
+            handleNext={this.handleNext}
+            group={this.state.group}
+          />
         );
       case 1:
         return (
@@ -39,7 +42,7 @@ export class CreateGroup extends Component {
             handleBack={this.handleBack}
             error={error}
             loading={loading}
-            handleCreateGroup={this.handleCreateGroup}
+            handleCreateMentorspace={this.handleCreateMentorspace}
             project={this.state.project}
           />
         );
@@ -55,7 +58,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createGroup: (group, cb) => dispatch(createGroup(group, cb)),
+  createMentorspace: (mentorspace, cb) =>
+    dispatch(createGroup(mentorspace, cb)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateGroup);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateMentorspace);
