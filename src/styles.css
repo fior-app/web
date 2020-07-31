@@ -829,9 +829,22 @@ body {
   left: -30.8vw;
 } */
 
+.auth-loading {
+  display: flex;
+  align-items: center;
+}
+
+.auth_container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 8.3vw;
+  width: 23.4vw;
+  left: calc(50% - 23.4vw / 2);
+}
+
 .username,
 .password {
-  position: absolute;
   background: #f2f3f7;
   box-shadow: inset -6px -6px 6px #ffffff, inset 6px 6px 6px #becde2;
   border-radius: 8px;
@@ -849,36 +862,24 @@ body {
   display: flex;
   align-items: center;
   color: #456078;
+  margin-bottom: 1vw;
 }
 
-.auth-loading {
-  position: absolute;
-  top: 17vw;
-  left: 20vw;
-
+.register_email_container {
   display: flex;
-  align-items: center;
-}
-
-.username {
-  top: 11.1vw;
+  flex-direction: column;
+  justify-content: stretch;
 }
 
 .register_name_row {
-  position: absolute;
-  width: 23.4vw;
-  height: 1.5625vw;
-  left: calc(50% - 23.4vw / 2);
-  top: 8.3vw;
-  /* display: flex; */
-  /* align-items: center; */
+  display: flex;
+  justify-content: space-between;
 }
 
 .firstname,
 .lastname,
 .email,
 .password_register {
-  position: absolute;
   height: 1.5625vw;
   background: #f2f3f7;
   /* btn inner shadow - light */
@@ -894,85 +895,61 @@ body {
   line-height: 1.04vw;
   /* identical to box height, or 100% */
   display: flex;
-  align-items: center;
   /* font medium dark */
   color: #456078;
+  margin-bottom: 1vw;
 }
 
-.firstname {
-  left: calc(50% - 11.19vw / 2 - 6.12vw);
-  /* top: 159px; */
-  width: 11.19vw;
-}
-
+.firstname,
 .lastname {
-  left: calc(50% - 11.19vw / 2 + 6.12vw);
-  /* top: 159px; */
   width: 11.19vw;
-}
-
-.email {
-  left: calc(50% - 23.4vw / 2);
-  top: 11.61vw;
-  width: 23.4vw;
-}
-
-.password {
-  top: 14.21vw;
-}
-
-.password_register {
-  left: calc(50% - 23.4vw / 2);
-  top: 14.73vw;
-  width: 23.4vw;
 }
 
 .allow_tnc {
-  position: absolute;
-  width: 10.83vw;
-  height: 1.04vw;
-  left: calc(50% - 10.83vw / 2);
-  top: 17.86vw;
+  display: flex;
+  margin: 0 auto;
+  width: 15.83vw;
+  align-items: center;
 }
 
 .tnc_checkbox {
-  position: absolute;
   width: 20px;
   height: 20px;
-  /* transform: scale(3); */
   opacity: 0;
-  left: calc(50% - 20px / 2 - 94px);
   cursor: pointer;
-  /* top: 429px; */
+  z-index: 10;
 }
 
 .checkmark {
   position: absolute;
-  left: calc(50% - 20px / 2 - 94px);
   height: 20px;
   width: 20px;
   background-color: #f2f3f7;
   box-shadow: inset -6px -6px 6px #ffffff, inset 6px 6px 6px #becde2;
   border-radius: 4px;
+  z-index: 0;
 }
 
 .allow_tnc input:checked ~ .checkmark {
+  position: absolute;
   background: linear-gradient(135deg, #028090 0%, #02c39a 100%);
   box-shadow: inset 6px 6px 6px #015d69,
     inset -6px -6px 6px rgba(255, 255, 255, 0.25);
 }
 
 .checkmark:after {
-  content: "";
   position: absolute;
+  content: "";
   display: none;
 }
 
 .allow_tnc input:checked ~ .checkmark:after {
+  position: absolute;
   display: block;
 }
 
 .allow_tnc .checkmark:after {
+  position: absolute;
   left: 9px;
   top: 5px;
   width: 5px;
@@ -985,10 +962,7 @@ body {
 }
 
 .tnc_label {
-  position: absolute;
-  width: 10.27vw;
   height: 1.04vw;
-  left: calc(50% - 9.72vw / 2 + 0.78vw);
   /* top: 0.3125vw; */
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -1000,26 +974,17 @@ body {
   align-items: center;
   text-align: center;
   color: #456078;
+  margin-left: 2.5vw;
 }
 
 .signin_btn {
-  position: absolute;
-  left: calc(50% - 5.72vw / 2);
-  top: 17.34vw;
-}
-
-.register_btn {
-  position: absolute;
-  left: calc(50% - 6.25vw / 2);
-  top: 20.5vw;
+  margin: 1rem auto 0 auto;
 }
 
 .google_signin {
-  top: 21.5vw;
 }
 
 .google_register {
-  top: 24.63vw;
 }
 
 .google_signin_btn p,
@@ -1029,19 +994,8 @@ body {
 
 .google_signin_btn .google_icon,
 .linkedin_signin_btn .linkedin_icon {
-  position: absolute;
   width: 1.35vw;
   height: 1.35vw;
-  left: calc(50% - 1.35vw / 2 - 4vw);
-  top: calc(50% - 1.35vw / 2);
-}
-
-.linkedin_signin {
-  top: 25.47vw;
-}
-
-.linkedin_register {
-  top: 28.6vw;
 }
 
 .google_signin_btn,
@@ -1049,10 +1003,8 @@ body {
   display: flex;
   flex-direction: row;
   padding: 0.52vw 1.04vw;
-  position: absolute;
-  /* width: 15.625vw; */
+  width: 15.625vw;
   /* height: 3.125vw; */
-  left: calc(50% - 11.51vw / 2 + 0.03vw);
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1066,6 +1018,7 @@ body {
   border-radius: 12px;
   border: none;
   cursor: pointer;
+  margin: 1rem auto 0 auto;
 }
 
 .google_signin_btn:hover,

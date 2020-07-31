@@ -23,13 +23,12 @@ class Register extends Component {
 
   handleSubmit = (e) => {
     const { email, firstname, lastname, password, passwordVerify } = this.state;
-
+    
     e.preventDefault();
     if (password === passwordVerify)
       this.props.registerWithEmailAndPassword({
         email,
-        firstname,
-        lastname,
+        name: `${firstname} ${lastname}`,
         password,
       });
     else this.setState({ isMatching: false });
@@ -40,67 +39,66 @@ class Register extends Component {
 
     return (
       /* TODO: Show login success */
-      <div>
+      <div className='auth_container'>
         <form onSubmit={this.handleSubmit}>
-          <div className='register_name_row row'>
+          <div className='register_email_container'>
+            <div className='register_name_row'>
+              <input
+                type='text'
+                id='firstname'
+                className='firstname'
+                placeholder='First Name'
+                required
+                onChange={this.handleChange}
+              />
+              <input
+                type='text'
+                id='lastname'
+                className='lastname'
+                placeholder='Last Name'
+                required
+                onChange={this.handleChange}
+              />
+            </div>
             <input
-              type='text'
-              name='firstname'
-              className='firstname'
-              placeholder='First Name'
+              id='email'
+              type='email'
+              placeholder='Email'
+              className='email'
               required
               onChange={this.handleChange}
             />
             <input
-              type='text'
-              name='lastname'
-              className='lastname'
-              placeholder='Last Name'
+              id='password'
+              type='password'
+              placeholder='Password'
+              className='password_register'
               required
               onChange={this.handleChange}
             />
-          </div>
-          <input
-            id='email'
-            type='email'
-            placeholder='Email'
-            className='email'
-            required
-            onChange={this.handleChange}
-          />
-          <input
-            id='password'
-            type='password'
-            placeholder='Password'
-            className='password_register'
-            error={!isMatching}
-            required
-            onChange={this.handleChange}
-          />
-          <input
-            id='passwordVerify'
-            type='password'
-            placeholder='Verify Password'
-            className='password_register'
-            error={!isMatching}
-            required
-            onChange={this.handleChange}
-          />
-          {!isMatching && <div className='error'>Passwords should match</div>}
-          <div className='allow_tnc row'>
             <input
-              type='checkbox'
-              name='tnc_checkbox'
-              className='tnc_checkbox'
+              id='passwordVerify'
+              type='password'
+              placeholder='Verify Password'
+              className='password_register'
+              error={!isMatching ? "Passwords not matching" : null}
+              required
+              onChange={this.handleChange}
             />
-            {/* add checked="checked" on checked */}
-            <span className='checkmark'></span>
-            <label htmlFor='TnC' className='tnc_label'>
-              Agree to Terms and Conditions
+            {!isMatching && <div className='error'>Passwords should match</div>}
+            <div className='allow_tnc'>
+              <input
+                type='checkbox'
+                name='tnc_checkbox'
+                className='tnc_checkbox'
+              />
+              {/* add checked="checked" on checked */}
+              <span className='checkmark'></span>
+              <label htmlFor='TnC' className='tnc_label'>
+                Agree to Terms and Conditions
             </label>
-          </div>
+            </div>
 
-          <div>
             <button type='submit' className='register_btn secondary_btn'>
               Register
             </button>
