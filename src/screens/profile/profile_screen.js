@@ -103,6 +103,7 @@ class ProfileScreen extends Component {
                       trigger={
                         <Icon name="add" onClick={() => this.setState({ showModal: true })} ></Icon>
                       }
+                      size='mini'
                       closeIcon
                       onClose={this.closeModal}
                       open={this.state.showModal}

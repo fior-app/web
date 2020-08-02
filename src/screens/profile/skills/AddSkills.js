@@ -48,7 +48,7 @@ export const AddSkills = ({ existingSkills = [], closeModal = () => { }, onSubmi
 
   return (
     <div className="modal">
-      <div className="card-header">Edit Skills</div>
+      <div className="card-header">Add Skills</div>
       <Modal.Content>
         <Modal.Description>
           <Search
@@ -60,25 +60,33 @@ export const AddSkills = ({ existingSkills = [], closeModal = () => { }, onSubmi
             results={state.results}
             value={state.value}
           />
-          <div>
-            {existingSkills.map((skill) => (
-              <Label as='a' key={skill.id}>
-                {skill.name}
-              </Label>
-            ))}
-          </div>
-          <div>
+          <h4>Selected Skills</h4>
+          {state.selected.length > 0 ? <div>
             {state.selected.map((selected) => (
               <Label as='a' key={selected.id}>
                 {selected.title}
                 <Icon name='delete' onClick={() => removeSkill(selected)} />
               </Label>
             ))}
-          </div>
-          <div className="row end">
-            <div className="btn-alternate" onClick={handleOnSet}>
-              Set
+          </div> : <div>No skills selected yet.</div>}
+          {existingSkills.length > 0 ? <div>
+            <div className='v-spacer-1'></div>
+            <h4>Existing Skills</h4>
+            <div>
+              {existingSkills.map((skill) => (
+                <Label as='a' key={skill.id}>
+                  {skill.name}
+                </Label>
+              ))}
             </div>
+          </div> : null}
+          <div className="row end">
+            <button className="btn-alternate"
+              onClick={handleOnSet}
+              disabled={state.selected.length == 0}
+            >
+              Set
+            </button>
           </div>
         </Modal.Description>
       </Modal.Content>
