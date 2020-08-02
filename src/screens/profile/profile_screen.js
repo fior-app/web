@@ -1,13 +1,24 @@
 import React, { Component } from "react";
-import { Grid, Card } from "semantic-ui-react";
+import { Grid, Card, Icon, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { signOut } from "../../store/actions/authActions";
+import { AddSkills } from "./skills/AddSkills";
 
 class ProfileScreen extends Component {
+
   state = {
     avatarUrl: "https://i.ytimg.com/vi/9K46DNoE3Ko/maxresdefault.jpg",
+    showModal: false,
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
+  onSubmit = (skills) => {
+    console.log(skills)
   };
 
   render() {
@@ -80,7 +91,23 @@ class ProfileScreen extends Component {
               </Grid.Column>
               <Grid.Column width={8}>
                 <div>
-                  <h2>Skills</h2>
+                  <div className="row j-between">
+                    <h2>Skills</h2>
+                    <Modal
+                      trigger={
+                        <Icon name="edit" onClick={() => this.setState({ showModal: true })} ></Icon>
+                      }
+                      closeIcon
+                      onClose={this.closeModal}
+                      open={this.state.showModal}
+                    >
+                      <AddSkills
+                        existingSkills={[]}
+                        closeModal={this.closeModal}
+                        onSubmit={this.onSubmit}
+                      />
+                    </Modal>
+                  </div>
                   <div className='divider-color'></div>
                   <div className='v-spacer-2'></div>
                   <div>You don't have added any skills yet</div>
