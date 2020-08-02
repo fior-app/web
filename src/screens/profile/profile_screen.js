@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Grid, Card, Icon, Modal } from "semantic-ui-react";
+import { Grid, Card, Icon, Modal, Label } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { signOut } from "../../store/actions/authActions";
+import { getUserSkills, addUserSkills, deleteUserSkill } from "../../store/actions/skillActions";
 import { AddSkills } from "./skills/AddSkills";
 
 class ProfileScreen extends Component {
@@ -13,18 +14,23 @@ class ProfileScreen extends Component {
     showModal: false,
   };
 
+  componentDidMount() {
+    this.props.getUserSkills();
+  }
+
   closeModal = () => {
     this.setState({ showModal: false });
   };
 
   onSubmit = (skills) => {
     console.log(skills)
+    this.props.addUserSkills(skills.map((skill) => skill.id))
   };
 
   render() {
     const { avatarUrl } = this.state;
 
-    const { user } = this.props;
+    const { user, userSkills } = this.props;
 
     if (!user) return <Redirect to='/' />;
 
@@ -95,14 +101,14 @@ class ProfileScreen extends Component {
                     <h2>Skills</h2>
                     <Modal
                       trigger={
-                        <Icon name="edit" onClick={() => this.setState({ showModal: true })} ></Icon>
+                        <Icon name="add" onClick={() => this.setState({ showModal: true })} ></Icon>
                       }
                       closeIcon
                       onClose={this.closeModal}
                       open={this.state.showModal}
                     >
                       <AddSkills
-                        existingSkills={[]}
+                        existingSkills={userSkills.map((userSkill) => userSkill.skill)}
                         closeModal={this.closeModal}
                         onSubmit={this.onSubmit}
                       />
@@ -110,7 +116,12 @@ class ProfileScreen extends Component {
                   </div>
                   <div className='divider-color'></div>
                   <div className='v-spacer-2'></div>
-                  <div>You don't have added any skills yet</div>
+                  {userSkills.length > 0 ?
+                    userSkills.map((userSkill) => (<Label as='a' key={userSkill.id}>
+                      {userSkill.skill.name}
+                      <Icon name='delete' onClick={() => this.props.deleteUserSkill(userSkill.id)} />
+                    </Label>)) : <div>You don't have added any skills yet</div>
+                  }
                   <div className='v-spacer-2'></div>
                 </div>
                 <div className='v-spacer-4'></div>
@@ -160,11 +171,15 @@ class ProfileScreen extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.auth.currentUser,
+  userSkills: state.skills.userSkills
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     signOut: () => dispatch(signOut()),
+    getUserSkills: () => dispatch(getUserSkills()),
+    addUserSkills: (skillIds) => dispatch(addUserSkills(skillIds)),
+    deleteUserSkill: (userSkillId) => dispatch(deleteUserSkill(userSkillId)),
   };
 };
 

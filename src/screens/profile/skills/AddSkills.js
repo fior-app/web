@@ -33,6 +33,7 @@ export const AddSkills = ({ existingSkills = [], closeModal = () => { }, onSubmi
         ...state,
         isLoading: false,
         results: res.data.filter((item) => !existingIds.includes(item.id))
+          .filter((item) => !state.selected.map((result) => result.id).includes(item.id))
           .map((item) => ({ title: item.name, id: item.id })),
       }))
     }).catch((err) => {
@@ -59,6 +60,13 @@ export const AddSkills = ({ existingSkills = [], closeModal = () => { }, onSubmi
             results={state.results}
             value={state.value}
           />
+          <div>
+            {existingSkills.map((skill) => (
+              <Label as='a' key={skill.id}>
+                {skill.name}
+              </Label>
+            ))}
+          </div>
           <div>
             {state.selected.map((selected) => (
               <Label as='a' key={selected.id}>
