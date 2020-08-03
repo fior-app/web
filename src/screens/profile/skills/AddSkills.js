@@ -83,7 +83,7 @@ export const AddSkills = ({ existingSkills = [], closeModal = () => { }, onSubmi
           <div className="row end">
             <button className="btn-alternate"
               onClick={handleOnSet}
-              disabled={state.selected.length == 0}
+              disabled={state.selected.length === 0}
             >
               Set
             </button>

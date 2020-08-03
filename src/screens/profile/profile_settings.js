@@ -8,21 +8,25 @@ import { updateMe } from "../../store/actions/userActions";
 class ProfileSettings extends Component {
 
   state = {
-    name: null
+    name: "",
+    bio: "",
   };
 
   componentDidMount() {
     const { user } = this.props;
 
     if (user) {
-      this.setState({ name: user.name })
+      this.setState({ name: user.name, bio: user.bio })
     }
   }
 
   componentDidUpdate(oldProps) {
     const newProps = this.props
     if (oldProps.user !== newProps.user) {
-      this.setState({ name: newProps.user.name })
+      this.setState({
+        name: newProps.user.name,
+        bio: newProps.user.bio,
+      })
     }
   }
 
@@ -34,14 +38,12 @@ class ProfileSettings extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state)
 
-    this.props.updateMe(this.state.name)
+    this.props.updateMe(this.state.name, this.state.bio)
   };
 
   render() {
     const { user, updateState } = this.props;
-    console.log(updateState)
 
     if (!user) return <Redirect to='/' />;
 
@@ -64,6 +66,14 @@ class ProfileSettings extends Component {
                     value={this.state.name ? this.state.name : ""}
                     onChange={this.handleChange} />
                 </Form.Field>
+                <Form.Field>
+                  <label>Bio</label>
+                  <textarea
+                    name="bio"
+                    value={this.state.bio ? this.state.bio : ""}
+                    onChange={this.handleChange} >
+                  </textarea>
+                </Form.Field>
                 <div>Loading: {`${updateState.isLoading}`}</div>
                 <button
                   type='submit'
@@ -85,7 +95,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateMe: (name) => dispatch(updateMe(name))
+    updateMe: (name, bio) => dispatch(updateMe(name, bio))
   };
 };
 

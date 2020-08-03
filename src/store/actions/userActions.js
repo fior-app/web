@@ -1,12 +1,11 @@
 import axios from "axios";
 import * as actions from "../actions/types";
 
-export const updateMe = (name) => {
+export const updateMe = (name, bio) => {
   return (dispatch) => {
-    console.log("Puting", name)
     dispatch({ type: actions.UPDATE_ME_START });
     axios
-      .put("/users/me", { name })
+      .put("/users/me", { name, bio })
       .then(() => {
         dispatch({ type: actions.UPDATE_ME_SUCCESS });
         userMeFetch(dispatch);

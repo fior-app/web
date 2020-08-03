@@ -228,7 +228,7 @@ body {
 }
 
 .label-primary {
-  /* margin: 10px; */
+  margin-right: 1rem;
   padding: 8px 10px;
   display: flex;
   flex-direction: row;
@@ -236,6 +236,10 @@ body {
   background: #f2f3f7;
   box-shadow: -4px -4px 12px #ffffff, 4px 4px 12px #becde2;
   border-radius: 12px;
+}
+
+.label-primary > span {
+  margin-right: 8px;
 }
 
 .card-primary {

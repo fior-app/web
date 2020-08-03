@@ -44,12 +44,7 @@ class ProfileMentor extends Component {
             </Grid.Column>
             <Grid.Column width={8}>
               <h2>{user && user.name}</h2>
-              <h4>Freelance Developer</h4>
-              <div className='row'>
-                <label className='label-primary'>Javascript</label>
-                <div className='spacer-1'></div>
-                <label className='label-primary'>DevOps</label>
-              </div>
+              <h4>{user && user.bio ? user.bio : "Something interesting"}</h4>
             </Grid.Column>
             <Grid.Column>
               <div className='card-primary'>
@@ -101,12 +96,15 @@ class ProfileMentor extends Component {
                 </div>
                 <div className='divider-color'></div>
                 <div className='v-spacer-2'></div>
-                {userSkills.length > 0 ?
-                  userSkills.map((userSkill) => (<Label as='a' key={userSkill.id}>
-                    {userSkill.skill.name}
-                    <Icon name='delete' onClick={() => this.props.deleteUserSkill(userSkill.id)} />
-                  </Label>)) : <div>You don't have added any skills yet</div>
-                }
+                <div className='row'>{
+                  userSkills.length > 0 ?
+                    userSkills.map((userSkill) => (
+                      <label className='label-primary' key={userSkill.id}>
+                        <span>{userSkill.skill.name}</span>
+                        <Icon name='delete' onClick={() => this.props.deleteUserSkill(userSkill.id)} />
+                      </label>
+                    )) : <div>You don't have added any skills yet</div>
+                }</div>
                 <div className='v-spacer-2'></div>
               </div>
               <div className='v-spacer-4'></div>
