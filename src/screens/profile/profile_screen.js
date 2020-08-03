@@ -1,187 +1,45 @@
 import React, { Component } from "react";
-import { Grid, Card, Icon, Modal, Label } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 
-import { signOut } from "../../store/actions/authActions";
-import { getUserSkills, addUserSkills, deleteUserSkill } from "../../store/actions/skillActions";
-import { AddSkills } from "./skills/AddSkills";
+import ProfileMentor from "./profile_mentor";
+import ProfileSettings from "./profile_settings";
 
 class ProfileScreen extends Component {
 
-  state = {
-    avatarUrl: "https://i.ytimg.com/vi/9K46DNoE3Ko/maxresdefault.jpg",
-    showModal: false,
-  };
-
-  componentDidMount() {
-    this.props.getUserSkills();
-  }
-
-  closeModal = () => {
-    this.setState({ showModal: false });
-  };
-
-  onSubmit = (skills) => {
-    console.log(skills)
-    this.props.addUserSkills(skills.map((skill) => skill.id))
-  };
-
   render() {
-    const { avatarUrl } = this.state;
-
-    const { user, userSkills } = this.props;
-
-    if (!user) return <Redirect to='/' />;
-
     return (
       <div className='container'>
-        <div className='keep-margin'>
+        <div className='keep-margin spacer'>
           <Grid columns='equal'>
             <Grid.Row>
               <Grid.Column>
-                <div>Mentor Profile</div>
+                <NavLink to="/profile/mentor" activeClassName="active">
+                  <button className='btn-primary'>Mentor</button>
+                </NavLink>
               </Grid.Column>
-
               <Grid.Column>
-                <div>Mentee Profile</div>
+                <button className='btn-primary'>Mentee</button>
               </Grid.Column>
-
               <Grid.Column>
-                <div>Profile Settings</div>
+                <NavLink to="/profile/settings" activeClassName="active">
+                  <button className='btn-primary'>Settings</button>
+                </NavLink>
               </Grid.Column>
-
-              <Grid.Column width={8}></Grid.Column>
+              <Grid.Column width={10}></Grid.Column>
             </Grid.Row>
-            <div className='v-spacer-2' />
-            <Grid.Row>
-              <Grid.Column>
-                {/* <Image src={avatarUrl} size='small' circular /> */}
-                <img src={avatarUrl} alt='avatar' className='avatar' />
-              </Grid.Column>
-              <Grid.Column width={8}>
-                <h2>{user && user.name}</h2>
-                <h4>Freelance Developer</h4>
-                <div className='row'>
-                  <label className='label-primary'>Javascript</label>
-                  <div className='spacer-1'></div>
-                  <label className='label-primary'>DevOps</label>
-                </div>
-              </Grid.Column>
-              <Grid.Column>
-                <div className='card-primary'>
-                  <div className='card-content'>
-                    <div className='card-header'>Activity</div>
-                    <Card.Description>
-                      You don't have any activity yet
-                    </Card.Description>
-                  </div>
-                </div>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column width={6}>
-                <div>
-                  <h2>Groups</h2>
-                  <div className='v-spacer-2'></div>
-                  <div>You haven't joined to any group yet</div>
-                  <div className='v-spacer-2'></div>
-                </div>
-                <div className='v-spacer-4'></div>
-                <div>
-                  <h2>Organizations</h2>
-                  <div className='v-spacer-2'></div>
-                  <div>You haven't joined to any organization yet</div>
-                  <div className='v-spacer-2'></div>
-                </div>
-              </Grid.Column>
-              <Grid.Column width={8}>
-                <div>
-                  <div className="row j-between">
-                    <h2>Skills</h2>
-                    <Modal
-                      trigger={
-                        <Icon name="add" onClick={() => this.setState({ showModal: true })} ></Icon>
-                      }
-                      size='mini'
-                      closeIcon
-                      onClose={this.closeModal}
-                      open={this.state.showModal}
-                    >
-                      <AddSkills
-                        existingSkills={userSkills.map((userSkill) => userSkill.skill)}
-                        closeModal={this.closeModal}
-                        onSubmit={this.onSubmit}
-                      />
-                    </Modal>
-                  </div>
-                  <div className='divider-color'></div>
-                  <div className='v-spacer-2'></div>
-                  {userSkills.length > 0 ?
-                    userSkills.map((userSkill) => (<Label as='a' key={userSkill.id}>
-                      {userSkill.skill.name}
-                      <Icon name='delete' onClick={() => this.props.deleteUserSkill(userSkill.id)} />
-                    </Label>)) : <div>You don't have added any skills yet</div>
-                  }
-                  <div className='v-spacer-2'></div>
-                </div>
-                <div className='v-spacer-4'></div>
-                <div>
-                  <h2>Medals</h2>
-                  <div className='divider-color'></div>
-                  <div className='v-spacer-2'></div>
-                  <div>You don't have added any medals yet</div>
-                  <div className='v-spacer-2'></div>
-                </div>
-                <div className='v-spacer-4'></div>
-                <div>
-                  <h2>Active Points</h2>
-                  <div className='divider-color'></div>
-                  <div className='v-spacer-2'></div>
-                  <div>You don't have added any active points yet</div>
-                  <div className='v-spacer-2'></div>
-                </div>
-                <div className='v-spacer-4'></div>
-                <div>
-                  <h2>Feedbacks</h2>
-                  <div className='divider-color'></div>
-                  <div className='v-spacer-2'></div>
-                  <div>You haven't recieved any feedback yet</div>
-                  <div className='v-spacer-2'></div>
-                </div>
-                <div className='v-spacer-4'></div>
-              </Grid.Column>
-              <Grid.Column></Grid.Column>
-            </Grid.Row>
+            <div className='v-spacer-4' />
           </Grid>
-          <div className='v-spacer-2' />
-          <div className='row end'>
-            <button className='btn-primary' onClick={this.handleSignOut}>
-              Sign Out
-            </button>
-          </div>
+          <Switch>
+            <Route exact path='/profile/mentor' component={ProfileMentor} />
+            <Route exact path='/profile/settings' component={ProfileSettings} />
+            <Redirect exact path='/profile' to='/profile/mentor' />
+          </Switch>
         </div>
       </div>
     );
   }
-
-  handleSignOut = () => {
-    this.props.signOut();
-  };
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.currentUser,
-  userSkills: state.skills.userSkills
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signOut: () => dispatch(signOut()),
-    getUserSkills: () => dispatch(getUserSkills()),
-    addUserSkills: (skillIds) => dispatch(addUserSkills(skillIds)),
-    deleteUserSkill: (userSkillId) => dispatch(deleteUserSkill(userSkillId)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
+export default connect()(ProfileScreen);

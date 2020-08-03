@@ -68,7 +68,7 @@ class FiorApp extends Component {
               <Route exact path='/settings' component={LandingScreen} />
               <Route exact path='/pricing' component={PricingScreen} />
               <Route exact path='/about' component={LandingScreen} />
-              <Route exact path='/profile' component={ProfileScreen} />
+              <Route path='/profile' component={ProfileScreen} />
               <Route exact path='*' component={NotFound} />
             </Switch>
           </div>
