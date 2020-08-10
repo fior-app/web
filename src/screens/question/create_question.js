@@ -3,7 +3,7 @@ import {
   Button, Form, Container, Message, Modal, Icon, Header, Label,
 } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
-import { createQuestion } from "../../store/actions/questionActions";
+import { createQuestion,clearState } from "../../store/actions/questionActions";
 import { connect } from "react-redux";
 
 
@@ -20,7 +20,22 @@ class CreateQuestion extends Component {
     });
   };
 
+  onSuccessCallback = () => {
+    this.setState({
+      title: "",
+      description: "",
+    })
+  }
+
+  componentWillUnmount(){
+this.props.clearState();
+  }
+
   render() {
+
+    const { loading,successMsg} = this.props;
+    const { title, description } = this.state;
+    console.log(loading);
     return (
       <Container>
         <Link to="/forum">← Back to Question Forum</Link>
@@ -32,6 +47,7 @@ class CreateQuestion extends Component {
             className='username'
             type='text'
             placeholder='Title'
+            value={title}
             onChange={this.handleChange}
           />
           </Form.Field>
@@ -41,11 +57,19 @@ class CreateQuestion extends Component {
             className='password'
             type='textarea'
             placeholder='Description'
+            value={description}
             onChange={this.handleChange}
           />
           </Form.Field>
+          { successMsg ? 
+          <Message
+            success
+            header="Success"
+            content="Question uploaded successfully!"
+          /> : null}
           <Form.Field>
-            <Button type='submit'>
+            <Button secondary type='submit' disabled={loading}
+            loading={loading}>
               Create
             </Button>
           </Form.Field>
@@ -58,15 +82,21 @@ class CreateQuestion extends Component {
     const { title, description } = this.state;
 
     e.preventDefault();
-    console.log(this.state.title, this.state.description);
-    this.props.createQuestion({ title, description });
+    this.props.createQuestion({ title, description },this.onSuccessCallback);
   };
 }
 
+const mapStateToProps = (state) => ({
+  loading: state.question.isLoading,
+  error: state.question.error,
+  successMsg: state.question.successMsg,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    createQuestion: (question) => dispatch(createQuestion(question)),
+    createQuestion: (question,cb) => dispatch(createQuestion(question,cb)),
+    clearState: () => dispatch(clearState()),
   };
 };
 
-export default connect(null, mapDispatchToProps)(CreateQuestion);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateQuestion);
