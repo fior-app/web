@@ -2,22 +2,39 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {Link} from 'react-router-dom';
 
-import { Card, Container, Form, Button } from 'semantic-ui-react';
+import { Card, Container, Form, Button, Message, } from 'semantic-ui-react';
 
-import { getQuestion, createAnswer, getAnswer } from "../../store/actions/questionActions";
+import { getQuestion, createAnswer, getAnswer, clearState } from "../../store/actions/questionActions";
+import loading from "../blog/edit/edit_blog_post" ;
 
 class ViewQuestion extends Component {
-    state = {}
+    state = {
+        description: "",
+    };
 
     componentDidMount() {
         this.props.getQuestion(this.props.match.params.questionId);
         this.props.getAnswer(this.props.match.params.questionId);
     }
 
+    onSuccessCallback = () => {
+        this.setState({
+            description: "",
+        })
+    }
+
+    // componentWillUnmount(){
+    //     this.props.clearState();
+    // }
+
     render() {
 
         const { questionId } = this.props.match.params;
         const { question,answers,createAnswer } = this.props;
+        const { loading,successMsg} = this.props;
+        const { description } = this.state;
+
+        console.log(answers)
 
         return (
             <Container>
@@ -43,12 +60,16 @@ class ViewQuestion extends Component {
                         className='answer'
                         type='textarea'
                         placeholder='Answer'
+                        value={description}
                         onChange={this.handleChange}
                     />
                     </Form.Field>
                     <Form.Field>
-                        {createAnswer.loading ? "posting answer": null}
-                        <Button type='submit'>
+                        {answers.loading ? "Posted Successfully!" : null}
+                        <Button secondary type='submit'
+                            disabled={loading}
+                            loading={loading}
+                        >
                             Post
                         </Button>
                     </Form.Field>
@@ -83,7 +104,7 @@ class ViewQuestion extends Component {
     handleSubmit = (e) => {
         const { answer } = this.state;
         e.preventDefault();
-        this.props.createAnswer(this.state, this.props.match.params.questionId);
+        this.props.createAnswer(this.state, this.props.match.params.questionId,this.onSuccessCallback);
     };
 
     handleChange = (e) => {
@@ -95,6 +116,7 @@ class ViewQuestion extends Component {
 
 const mapStateToProps = (state) => {
     console.log(state.question)
+    
 return {
     question:{
         loading: state.question.singleQuestion.loading,
@@ -109,6 +131,7 @@ return {
     createAnswer:{
         loading: state.question.createAnswer.loading,
         error: state.question.createAnswer.error,
+        successMsg: state.question.successMsg,
     }
 }};
 

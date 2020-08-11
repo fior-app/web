@@ -4,6 +4,7 @@ const initState = {
   questions: null,
   isLoading: false,
   error: null,
+  successMsg: null,
   singleQuestion: {
     question: null,
     loading: false,
@@ -65,16 +66,19 @@ const getCreateAnswerStart = (state) => {
   return {
     ...state, createAnswer: {
       ...state.createAnswer,
-      loading: true,
+      isloading: true,
+      successMsg: null
     }
   };
 };
 
 const getCreateAnswerSuccess = (state, question) => {
   return {
-    ...state, createAnswer: {
+    ...state, 
+    createAnswer: {
       ...state.createAnswer,
-      loading: false,
+      isloading: false,
+      successMsg: "Answ"
     }
   };
 };
@@ -83,8 +87,8 @@ const getCreateAnswerFailure = (state, error) => {
   return {
     ...state, createAnswer: {
       ...state.createAnswer,
-      loading: false,
-      error: error,
+      isloading: false,
+      successMsg: null,
     }
   };
 };
@@ -120,21 +124,23 @@ const getAnswerFailure = (state, error) => {
 };
 
 const createQuestionStart = (state) => {
-  return { ...state, isLoading: true };
+  return { ...state, isLoading: true, successMsg: null };
 };
 
 const createQuestionSuccess = (state) => {
-  return { ...state, isLoading: false };
+  return { ...state, isLoading: false, successMsg: "Question uploaded successfully!" };
 };
 
 const createQuestionFailure = (state) => {
-  return { ...state, isLoading: false };
+  return { ...state, isLoading: false, successMsg: null };
+};
+
+
+const clearQuestion = (state) => {
+  return { ...state, isLoading: false, successMsg: null };
 };
 
 const questionReducer = (state = initState, action) => {
-
-  console.log(action.type)
-  console.log(actions.GET_ANSWER_SUCCESS)
 
   switch (action.type) {
     case actions.GET_ANSWER_START:
@@ -190,6 +196,9 @@ const questionReducer = (state = initState, action) => {
 
     case actions.CREATE_ANSWER_FAILED:
       return getSingleQuestionFailure(state, action.payload);
+
+    case actions.CLEAR_CEATE_QESTION_STATE:
+      return clearQuestion(state);
 
     default:
       return state;

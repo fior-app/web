@@ -21,7 +21,7 @@ export const getQuestions = () => (dispatch) => {
     });
 };
 
-export const createQuestion = (question) => (dispatch) => {
+export const createQuestion = (question,cb) => (dispatch) => {
   dispatch({ type: actions.CREATE_QUESTION_START });
   axios
     .post('/questions', {
@@ -34,6 +34,7 @@ export const createQuestion = (question) => (dispatch) => {
         type: actions.CREATE_QUESTION_SUCCESS,
         payload: res.data,
       });
+      cb();
     })
     .catch((error) => {
       dispatch({
@@ -42,6 +43,12 @@ export const createQuestion = (question) => (dispatch) => {
       });
     });
 };
+
+export const clearState = () => {
+  return (dispatch) => {
+    dispatch({ type: actions.CLEAR_CEATE_QESTION_STATE});
+  }
+}
 
 export const getQuestion = (questionId) => {
   return (dispatch) => {
@@ -57,16 +64,17 @@ export const getQuestion = (questionId) => {
   };
 };
 
-export const createAnswer =  (answer,questionId) => {
+export const createAnswer =  (answer,questionId,cb) => {
   return (dispatch) => {
     dispatch({ type: actions.GET_CREATE_ANSWER_START });
     axios
-      .post(`/questions/${questionId}/answers`,answer)
-      .then((res) => {
-        getAnswer(questionId)(dispatch);
-        dispatch({ type: actions.GET_CREATE_ANSWER_SUCCESS });
-      })
-      .catch((error) => {
+    .post(`/questions/${questionId}/answers`,answer)
+    .then((res) => {
+      console.log(res)
+      getAnswer(questionId)(dispatch);
+      dispatch({ type: actions.GET_CREATE_ANSWER_SUCCESS, payload: res.data, });
+    })
+    .catch((error) => {
         dispatch({ type: actions.GET_CREATE_ANSWER_FAILED, payload: error });
       });
   };
