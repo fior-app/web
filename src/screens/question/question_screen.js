@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  Container, Grid, Button, Pagination,Card,Feed, 
+  Container, Grid, Button, Pagination,Card,Feed, Header, 
 } from 'semantic-ui-react';
 import { getQuestions } from "../../store/actions/questionActions";
+import styles from '../../styles/question.module.css' ;
 
 class QuestionScreen extends Component {
   state = {};
@@ -18,9 +19,15 @@ class QuestionScreen extends Component {
 
     return (
     <Container>
+      <div className={styles.ques_screen_header}>
+      <Header as='h2'>
+        Question Forum
+      </Header>
+      </div>
       <Grid >
       <Grid.Column width={10}>
         {questions && questions.map((question) => (
+          <div className={styles.ques_screen}>
           <Card fluid onClick={() => this.handleQuestionClick(question.id)}>
           <Card.Content>
             <Card.Header>{question.title}</Card.Header>
@@ -30,9 +37,11 @@ class QuestionScreen extends Component {
             <Card.Meta textAlign={"right"}>3rd Oct 2020</Card.Meta>
           </Card.Content>
           </Card>
+          </div>
         ))}
       </Grid.Column>
       <Grid.Column width={1}></Grid.Column>
+      <div className={styles.ques_category}>
       <Grid.Column width={5}>
         <Grid.Row top="2">
           <Button onClick={this.handleQuestionCreate} primary>
@@ -75,7 +84,8 @@ class QuestionScreen extends Component {
             </Card.Content>
           </Card>
         </Grid.Row>
-      </Grid.Column>  
+      </Grid.Column> 
+      </div> 
       </Grid>  
     </Container>
     );
