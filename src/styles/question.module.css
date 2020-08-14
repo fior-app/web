@@ -6,7 +6,7 @@
 }
 
 .ques_content_description{
-    font-size: 17px;
+    font-size: 15px;
 }
 
 .answer_date{
@@ -15,4 +15,16 @@
 
 .ques_label{
     text-align: right;
+}
+
+.ques_screen{
+    margin-bottom: 25px;
+}
+
+.ques_category{
+    align-content: center;
+}
+
+.ques_screen_header{
+    margin-bottom: 50px;
 }
