@@ -55,7 +55,7 @@ class CreateQuestion extends Component {
         const { title, description } = this.state;
     
         e.preventDefault();
-        this.props.createQuestion({ title, description });
+        this.props.createQuestion({ title, description },this.onSuccessCallback);
       };
     }
     
@@ -67,10 +67,9 @@ class CreateQuestion extends Component {
     
     const mapDispatchToProps = (dispatch) => {
       return {
-        createQuestion: (question,cb) => dispatch(createQuestion(question)),
+        createQuestion: (question,cb) => dispatch(createQuestion(question,cb)),
         clearState: () => dispatch(clearState()),
       };
     };
     
-    export default connect(mapDispatchToProps)(CreateQuestion);
-}    
+    export default connect(mapStateToProps, mapDispatchToProps)(CreateQuestion);
