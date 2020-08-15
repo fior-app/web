@@ -1,4 +1,4 @@
-import * as actions from "./../actions/types";
+import * as actions from '../actions/types';
 
 const initState = {
   groups: {
@@ -44,227 +44,341 @@ const initState = {
   },
 };
 
-const createGroupStart = (state) => {
-  return { ...state, createGroup: { ...state.createGroup, loading: true } };
-};
+const createGroupStart = (state) => ({
+  ...state,
+  createGroup: {
+    ...state.createGroup,
+    loading: true,
+  },
+});
 
-const createGroupEnd = (state) => {
-  return { ...state, createGroup: { ...state.createGroup, loading: false } };
-};
+const createGroupEnd = (state) => ({
+  ...state,
+  createGroup: {
+    ...state.createGroup,
+    loading: false,
+  },
+});
 
-const createGroupFailed = (state, payload) => {
-  return { ...state, createGroup: { ...state.createGroup, error: payload } };
-};
+const createGroupFailed = (state, payload) => ({
+  ...state,
+  createGroup: {
+    ...state.createGroup,
+    error: payload,
+  },
+});
 
-const createGroupSuccess = (state) => {
-  return { ...state, createGroup: { ...state.createGroup, error: null } };
-};
+const createGroupSuccess = (state) => ({
+  ...state,
+  createGroup: {
+    ...state.createGroup,
+    error: null,
+  },
+});
 
-const getGroupsMeStart = (state) => {
-  return { ...state, groups: { ...state.groups, loading: true } };
-};
+const getGroupsMeStart = (state) => ({
+  ...state,
+  groups: {
+    ...state.groups,
+    loading: true,
+  },
+});
 
-const getGroupsMeEnd = (state) => {
-  return { ...state, groups: { ...state.groups, loading: false } };
-};
+const getGroupsMeEnd = (state) => ({
+  ...state,
+  groups: {
+    ...state.groups,
+    loading: false,
+  },
+});
 
-const getGroupsMeFailed = (state, payload) => {
-  return { ...state, groups: { ...state.groups, error: payload } };
-};
+const getGroupsMeFailed = (state, payload) => ({
+  ...state,
+  groups: {
+    ...state.groups,
+    error: payload,
+  },
+});
 
-const getGroupsMeSuccess = (state) => {
-  return { ...state, groups: { ...state.groups, error: null } };
-};
+const getGroupsMeSuccess = (state) => ({
+  ...state,
+  groups: {
+    ...state.groups,
+    error: null,
+  },
+});
 
-const getGroupsMe = (state, payload) => {
-  return { ...state, groups: { ...state.groups, groups: payload } };
-};
+const getGroupsMe = (state, payload) => ({
+  ...state,
+  groups: {
+    ...state.groups,
+    groups: payload,
+  },
+});
 
-const getGroupStart = (state) => {
-  return { ...state, group: { ...state.group, loading: true } };
-};
+const getGroupStart = (state) => ({
+  ...state,
+  group: {
+    ...state.group,
+    loading: true,
+  },
+});
 
-const getGroupEnd = (state) => {
-  return { ...state, group: { ...state.group, loading: false } };
-};
+const getGroupEnd = (state) => ({
+  ...state,
+  group: {
+    ...state.group,
+    loading: false,
+  },
+});
 
-const getGroupFailed = (state, payload) => {
-  return { ...state, group: { ...state.group, error: payload } };
-};
+const getGroupFailed = (state, payload) => ({
+  ...state,
+  group: {
+    ...state.group,
+    error: payload,
+  },
+});
 
-const getGroupSuccess = (state) => {
-  return { ...state, group: { ...state.group, error: null } };
-};
+const getGroupSuccess = (state) => ({
+  ...state,
+  group: {
+    ...state.group,
+    error: null,
+  },
+});
 
-const getGroup = (state, payload) => {
-  return { ...state, group: { ...state.group, member: payload } };
-};
+const getGroup = (state, payload) => ({
+  ...state,
+  group: {
+    ...state.group,
+    member: payload,
+  },
+});
 
-const getGroupMembersStart = (state) => {
-  return { ...state, groupMembers: { ...state.groupMembers, loading: true } };
-};
+const getGroupMembersStart = (state) => ({
+  ...state,
+  groupMembers: {
+    ...state.groupMembers,
+    loading: true,
+  },
+});
 
-const getGroupMembersEnd = (state) => {
-  return { ...state, groupMembers: { ...state.groupMembers, loading: false } };
-};
+const getGroupMembersEnd = (state) => ({
+  ...state,
+  groupMembers: {
+    ...state.groupMembers,
+    loading: false,
+  },
+});
 
-const getGroupMembersFailed = (state, payload) => {
-  return { ...state, groupMembers: { ...state.groupMembers, error: payload } };
-};
+const getGroupMembersFailed = (state, payload) => ({
+  ...state,
+  groupMembers: {
+    ...state.groupMembers,
+    error: payload,
+  },
+});
 
-const getGroupMembersSuccess = (state) => {
-  return { ...state, groupMembers: { ...state.groupMembers, error: null } };
-};
+const getGroupMembersSuccess = (state) => ({
+  ...state,
+  groupMembers: {
+    ...state.groupMembers,
+    error: null,
+  },
+});
 
-const getGroupMembers = (state, payload) => {
-  return {
-    ...state,
-    groupMembers: { ...state.groupMembers, members: payload },
-  };
-};
+const getGroupMembers = (state, payload) => ({
+  ...state,
+  groupMembers: {
+    ...state.groupMembers,
+    members: payload,
+  },
+});
 
-const getGroupMessagesStart = (state) => {
-  return { ...state, groupMessages: { ...state.groupMessages, loading: true } };
-};
+const getGroupMessagesStart = (state) => ({
+  ...state,
+  groupMessages: {
+    ...state.groupMessages,
+    loading: true,
+  },
+});
 
-const getGroupMessagesEnd = (state) => {
-  return {
-    ...state,
-    groupMessages: { ...state.groupMessages, loading: false },
-  };
-};
+const getGroupMessagesEnd = (state) => ({
+  ...state,
+  groupMessages: {
+    ...state.groupMessages,
+    loading: false,
+  },
+});
 
-const getGroupMessagesFailed = (state, payload) => {
-  return {
-    ...state,
-    groupMessages: { ...state.groupMessages, error: payload },
-  };
-};
+const getGroupMessagesFailed = (state, payload) => ({
+  ...state,
+  groupMessages: {
+    ...state.groupMessages,
+    error: payload,
+  },
+});
 
-const getGroupMessagesSuccess = (state) => {
-  return { ...state, groupMessages: { ...state.groupMessages, error: null } };
-};
+const getGroupMessagesSuccess = (state) => ({
+  ...state,
+  groupMessages: {
+    ...state.groupMessages,
+    error: null,
+  },
+});
 
-const getGroupMessages = (state, payload) => {
-  return {
-    ...state,
-    groupMessages: { ...state.groupMessages, messages: payload },
-  };
-};
+const getGroupMessages = (state, payload) => ({
+  ...state,
+  groupMessages: {
+    ...state.groupMessages,
+    messages: payload,
+  },
+});
 
-const sendGroupMessageStart = (state) => {
-  return {
-    ...state,
-    sendGroupMessage: { ...state.sendGroupMessage, sending: true },
-  };
-};
+const sendGroupMessageStart = (state) => ({
+  ...state,
+  sendGroupMessage: {
+    ...state.sendGroupMessage,
+    sending: true,
+  },
+});
 
-const sendGroupMessageEnd = (state) => {
-  return {
-    ...state,
-    sendGroupMessage: { ...state.sendGroupMessage, sending: false },
-  };
-};
+const sendGroupMessageEnd = (state) => ({
+  ...state,
+  sendGroupMessage: {
+    ...state.sendGroupMessage,
+    sending: false,
+  },
+});
 
-const sendGroupMessageFailed = (state, payload) => {
-  return {
-    ...state,
-    sendGroupMessage: { ...state.sendGroupMessage, error: payload },
-  };
-};
+const sendGroupMessageFailed = (state, payload) => ({
+  ...state,
+  sendGroupMessage: {
+    ...state.sendGroupMessage,
+    error: payload,
+  },
+});
 
-const sendGroupMessageSuccess = (state) => {
-  return {
-    ...state,
-    sendGroupMessage: { ...state.sendGroupMessage, error: null },
-  };
-};
+const sendGroupMessageSuccess = (state) => ({
+  ...state,
+  sendGroupMessage: {
+    ...state.sendGroupMessage,
+    error: null,
+  },
+});
 
-const streamGroupMessage = (state, payload) => {
-  return {
-    ...state,
-    groupMessages: {
-      ...state.groupMessages,
-      messages: [...state.groupMessages.messages, payload],
-    },
-  };
-};
+const streamGroupMessage = (state, payload) => ({
+  ...state,
+  groupMessages: {
+    ...state.groupMessages,
+    messages: [...state.groupMessages.messages, payload],
+  },
+});
 
-const inviteMemberStart = (state) => {
-  return { ...state, inviteMember: { ...state.inviteMember, loading: true } };
-};
+const inviteMemberStart = (state) => ({
+  ...state,
+  inviteMember: {
+    ...state.inviteMember,
+    loading: true,
+  },
+});
 
-const inviteMemberEnd = (state) => {
-  return { ...state, inviteMember: { ...state.inviteMember, loading: false } };
-};
+const inviteMemberEnd = (state) => ({
+  ...state,
+  inviteMember: {
+    ...state.inviteMember,
+    loading: false,
+  },
+});
 
-const inviteMemberFailed = (state, payload) => {
-  return { ...state, inviteMember: { ...state.inviteMember, error: payload } };
-};
+const inviteMemberFailed = (state, payload) => ({
+  ...state,
+  inviteMember: {
+    ...state.inviteMember,
+    error: payload,
+  },
+});
 
-const inviteMemberSuccess = (state) => {
-  return { ...state, inviteMember: { ...state.inviteMember, error: null } };
-};
+const inviteMemberSuccess = (state) => ({
+  ...state,
+  inviteMember: {
+    ...state.inviteMember,
+    error: null,
+  },
+});
 
-const getGroupsRequestsStart = (state) => {
-  return {
-    ...state,
-    groupsRequests: { ...state.groupsRequests, loading: true },
-  };
-};
+const getGroupsRequestsStart = (state) => ({
+  ...state,
+  groupsRequests: {
+    ...state.groupsRequests,
+    loading: true,
+  },
+});
 
-const getGroupsRequestsEnd = (state) => {
-  return {
-    ...state,
-    groupsRequests: { ...state.groupsRequests, loading: false },
-  };
-};
+const getGroupsRequestsEnd = (state) => ({
+  ...state,
+  groupsRequests: {
+    ...state.groupsRequests,
+    loading: false,
+  },
+});
 
-const getGroupsRequestsFailed = (state, payload) => {
-  return {
-    ...state,
-    groupsRequests: { ...state.groupsRequests, error: payload },
-  };
-};
+const getGroupsRequestsFailed = (state, payload) => ({
+  ...state,
+  groupsRequests: {
+    ...state.groupsRequests,
+    error: payload,
+  },
+});
 
-const getGroupsRequestsSuccess = (state) => {
-  return { ...state, groupsRequests: { ...state.groupsRequests, error: null } };
-};
+const getGroupsRequestsSuccess = (state) => ({
+  ...state,
+  groupsRequests: {
+    ...state.groupsRequests,
+    error: null,
+  },
+});
 
-const getGroupsRequests = (state, payload) => {
-  return {
-    ...state,
-    groupsRequests: { ...state.groupsRequests, groups: payload },
-  };
-};
+const getGroupsRequests = (state, payload) => ({
+  ...state,
+  groupsRequests: {
+    ...state.groupsRequests,
+    groups: payload,
+  },
+});
 
-const changeGroupStateStart = (state) => {
-  return {
-    ...state,
-    changeGroupState: { ...state.changeGroupState, loading: true },
-  };
-};
+const changeGroupStateStart = (state) => ({
+  ...state,
+  changeGroupState: {
+    ...state.changeGroupState,
+    loading: true,
+  },
+});
 
-const changeGroupStateEnd = (state) => {
-  return {
-    ...state,
-    changeGroupState: { ...state.changeGroupState, loading: false },
-  };
-};
+const changeGroupStateEnd = (state) => ({
+  ...state,
+  changeGroupState: {
+    ...state.changeGroupState,
+    loading: false,
+  },
+});
 
-const changeGroupStateFailed = (state, payload) => {
-  return {
-    ...state,
-    changeGroupState: { ...state.changeGroupState, error: payload },
-  };
-};
+const changeGroupStateFailed = (state, payload) => ({
+  ...state,
+  changeGroupState: {
+    ...state.changeGroupState,
+    error: payload,
+  },
+});
 
-const changeGroupStateSuccess = (state) => {
-  return {
-    ...state,
-    changeGroupState: { ...state.changeGroupState, error: null },
-  };
-};
+const changeGroupStateSuccess = (state) => ({
+  ...state,
+  changeGroupState: {
+    ...state.changeGroupState,
+    error: null,
+  },
+});
 
 const groupsReducer = (state = initState, action) => {
   switch (action.type) {

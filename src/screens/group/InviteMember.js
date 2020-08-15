@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Form, Modal } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Form, Modal } from 'semantic-ui-react';
 
-import { inviteMember } from "../../store/actions/mentorspaceActions";
+import { inviteMember } from '../../store/actions/mentorspaceActions';
 
 export class InviteMember extends Component {
   state = {
-    email: "",
+    email: '',
   };
 
   handleOnChangeInput = (e) => {
@@ -39,7 +39,12 @@ export class InviteMember extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                {error ? <div>Error.. {JSON.stringify(error)}</div> : null}
+                {error ? (
+                  <div>
+                    Error..
+                    {JSON.stringify(error)}
+                  </div>
+                ) : null}
               </Form.Field>
 
               <div className="row end">

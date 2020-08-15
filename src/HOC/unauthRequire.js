@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import * as utils from "../util/utils";
+import * as utils from '../util/utils';
 
 export default function (ComposedComponent) {
   class Unauthentication extends Component {
     componentWillMount() {
-      if (utils.getWithExpiry("token")) {
-        this.props.history.push("/");
+      if (utils.getWithExpiry('token')) {
+        this.props.history.push('/');
       }
     }
 

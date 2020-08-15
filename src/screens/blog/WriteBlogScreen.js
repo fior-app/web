@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { writeBlog, clearWritePost } from "../../store/actions/blogActions";
+import { writeBlog, clearWritePost } from '../../store/actions/blogActions';
 
 export class WriteBlogScreen extends Component {
   state = {
-    title: "",
-    text: "",
+    title: '',
+    text: '',
     skills: [],
   };
 
@@ -43,8 +43,8 @@ export class WriteBlogScreen extends Component {
           value={this.state.text}
           onChange={this.handleOnChangeInput}
         />
-        {loading ? "Posting" : null}
-        {success ? "Post added successfully" : null}
+        {loading ? 'Posting' : null}
+        {success ? 'Post added successfully' : null}
         <button onClick={this.handlePost}>submit</button>
         {error ? JSON.stringify(error) : null}
       </div>

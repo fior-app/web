@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import CreateMentorspace from "./create/CreateMentorspace";
-import { Modal } from "semantic-ui-react";
+import { Modal } from 'semantic-ui-react';
+import CreateMentorspace from './create/create_mentorspace';
 
-import MyMentorspaces from "./MyMentorspaces";
-import MentorspaceRequests from "./MentorspaceRequests";
+import MyMentorspaces from './MyMentorspaces';
+import MentorspaceRequests from './MentorspaceRequests';
 
 export class MentorspacesScreen extends Component {
   state = {
@@ -18,16 +18,16 @@ export class MentorspacesScreen extends Component {
   render() {
     return (
       <div className="container">
-        <div className="v-spacer-2" style={{ marginTop: "50px" }} />
+        <div className="v-spacer-2" style={{ marginTop: '50px' }} />
         <Modal
-          trigger={
+          trigger={(
             <div
               className="btn-primary"
               onClick={() => this.setState({ showModal: true })}
             >
               Create Mentorspace
             </div>
-          }
+          )}
           closeIcon
           onClose={this.closeModal}
           open={this.state.showModal}

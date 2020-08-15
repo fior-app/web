@@ -1,12 +1,23 @@
-import React, { Component } from "react";
-import { Form, Modal } from "semantic-ui-react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Form, Modal } from 'semantic-ui-react';
+import Group from '../../../store/models/group';
 
-export class MentorspaceDetails extends Component {
-  state = {
-    name: "",
-    description: "",
-    icon: "",
-  };
+class MentorspaceDetails extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      description: '',
+      icon: '',
+    };
+  }
+
+  componentDidMount() {
+    const { group } = this.props;
+    this.setState((state) => ({ ...state, ...group }));
+  }
 
   handleOnChangeInput = (e) => {
     this.setState({
@@ -14,15 +25,14 @@ export class MentorspaceDetails extends Component {
     });
   };
 
-  handleNext = (e) => {
-    this.props.handleNext("group", this.state);
+  handleNext = () => {
+    const { handleNext } = this.props;
+    handleNext('group', this.state);
   };
 
-  componentDidMount() {
-    this.setState({ ...this.state, ...this.props.group });
-  }
-
   render() {
+    const { name, description, icon } = this.state;
+
     return (
       <div className="modal">
         <div className="card-header">Mentorspace Details</div>
@@ -34,7 +44,7 @@ export class MentorspaceDetails extends Component {
                   type="text"
                   id="name"
                   placeholder="Name"
-                  value={this.state.name}
+                  value={name}
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
@@ -43,7 +53,7 @@ export class MentorspaceDetails extends Component {
                   type="text"
                   id="description"
                   placeholder="Description"
-                  value={this.state.description}
+                  value={description}
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
@@ -53,15 +63,15 @@ export class MentorspaceDetails extends Component {
                   type="text"
                   id="icon"
                   placeholder="Icon"
-                  value={this.state.icon}
+                  value={icon}
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
 
               <div className="row end">
-                <div className="btn-alternate" onClick={this.handleNext}>
+                <button type="button" className="btn-alternate" onClick={this.handleNext}>
                   Next
-                </div>
+                </button>
               </div>
             </Form>
           </Modal.Description>
@@ -70,5 +80,10 @@ export class MentorspaceDetails extends Component {
     );
   }
 }
+
+MentorspaceDetails.propTypes = {
+  group: PropTypes.instanceOf(Group).isRequired,
+  handleNext: PropTypes.func.isRequired,
+};
 
 export default MentorspaceDetails;

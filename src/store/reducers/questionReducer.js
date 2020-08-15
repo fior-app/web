@@ -1,4 +1,4 @@
-import * as actions from "../actions/types";
+import * as actions from '../actions/types';
 
 const initState = {
   questions: null,
@@ -6,29 +6,37 @@ const initState = {
   error: null,
 };
 
-const getQuestionsStart = (state) => {
-  return { ...state, isLoading: true };
-};
+const getQuestionsStart = (state) => ({
+  ...state,
+  isLoading: true,
+});
 
-const getQuestionsSuccess = (state, questions) => {
-  return { ...state, isLoading: true, questions };
-};
+const getQuestionsSuccess = (state, questions) => ({
+  ...state,
+  isLoading: true,
+  questions,
+});
 
-const getQuestionsFailure = (state, error) => {
-  return { ...state, isLoading: true, error };
-};
+const getQuestionsFailure = (state, error) => ({
+  ...state,
+  isLoading: true,
+  error,
+});
 
-const createQuestionStart = (state) => {
-  return { ...state, isLoading: true };
-};
+const createQuestionStart = (state) => ({
+  ...state,
+  isLoading: true,
+});
 
-const createQuestionSuccess = (state) => {
-  return { ...state, isLoading: false };
-};
+const createQuestionSuccess = (state) => ({
+  ...state,
+  isLoading: false,
+});
 
-const createQuestionFailure = (state) => {
-  return { ...state, isLoading: false };
-};
+const createQuestionFailure = (state) => ({
+  ...state,
+  isLoading: false,
+});
 
 const questionReducer = (state = initState, action) => {
   switch (action.type) {

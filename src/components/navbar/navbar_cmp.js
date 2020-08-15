@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { signOut } from "../../store/actions/authActions";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { signOut } from '../../store/actions/authActions';
 
 // const options = ["Profile", "Sign Out"];
 
 class Navbar extends Component {
   state = {
-    avatarUrl: "https://i.ytimg.com/vi/9K46DNoE3Ko/maxresdefault.jpg",
+    avatarUrl: 'https://i.ytimg.com/vi/9K46DNoE3Ko/maxresdefault.jpg',
   };
+
   render() {
     const { user } = this.props;
 
@@ -30,7 +31,7 @@ class Navbar extends Component {
     // );
 
     return (
-      <React.Fragment>
+      <>
         {user ? this.renderSignedInNavbar() : this.renderSignedOutNavbar()}
 
         {/* only for private nav */}
@@ -43,28 +44,28 @@ class Navbar extends Component {
         {/* if mentor only profile private_nav_btn1 style={display: none; visibility: hidden;} */}
         {/* if mentee only profile private_nav_btn1 style={left: 67.19vw;} */}
         {/* for unregustered users private_nav_btn1, private_nav_btn2 style={display: none; visibility: hidden;} */}
-      </React.Fragment>
+      </>
     );
   }
 
   renderSignedInNavbar() {
     return (
       <div
-        className='row navbar 
-    nav_home 
-    nav_public 
-    nav_private 
-    v-align'
+        className="row navbar
+    nav_home
+    nav_public
+    nav_private
+    v-align"
       >
-        <button className='private_nav_btn1 btn-primary'>Find Mentees</button>
-        <button className='private_nav_btn2 btn-primary'>Find Mentors</button>
+        <button className="private_nav_btn1 btn-primary">Find Mentees</button>
+        <button className="private_nav_btn2 btn-primary">Find Mentors</button>
         <img
-          src='../../assets/img/avatar.png'
-          alt='profile'
-          className='profile_icon 
-          profile_icon_home 
-          profile_icon_public 
-          profile_icon_private'
+          src="../../assets/img/avatar.png"
+          alt="profile"
+          className="profile_icon
+          profile_icon_home
+          profile_icon_public
+          profile_icon_private"
           onClick={this.handleProfileClick}
         />
       </div>
@@ -73,18 +74,18 @@ class Navbar extends Component {
 
   renderSignedOutNavbar() {
     return (
-      <div className='row navbar nav_private v-align'>
+      <div className="row navbar nav_private v-align">
         <input
-          type='text'
-          placeholder='Search'
-          className='search_bar 
-          search_bar_home 
-          search_bar_public 
-          search_bar_private'
+          type="text"
+          placeholder="Search"
+          className="search_bar
+          search_bar_home
+          search_bar_public
+          search_bar_private"
         />
 
         <button
-          className='nav_signin_btn nav_signin_btn_public btn-primary'
+          className="nav_signin_btn nav_signin_btn_public btn-primary"
           onClick={this.handleSignInClick}
         >
           Sign In
@@ -98,11 +99,11 @@ class Navbar extends Component {
   }
 
   handleSignInClick = () => {
-    this.props.history.push("/login");
+    this.props.history.push('/login');
   };
 
   handleProfileClick = () => {
-    this.props.history.push("/profile");
+    this.props.history.push('/profile');
   };
 
   handleAvatarMenuClick = (e, { value }) => {
@@ -112,12 +113,12 @@ class Navbar extends Component {
 
     switch (value) {
       case 0:
-        history.push("/profile");
+        history.push('/profile');
         break;
 
       case 1:
         signOut();
-        history.push("/");
+        history.push('/');
         break;
 
       default:
@@ -130,10 +131,8 @@ const mapStateToProps = (state) => ({
   user: state.auth.currentUser,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signOut: () => dispatch(signOut()),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  signOut: () => dispatch(signOut()),
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));

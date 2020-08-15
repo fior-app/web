@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Grid } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Grid } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
-import { getGroupsMe } from "../../store/actions/mentorspaceActions";
+import { getGroupsMe } from '../../store/actions/mentorspaceActions';
 
 export class MyMentorspaces extends Component {
   componentDidMount() {
@@ -13,42 +13,41 @@ export class MyMentorspaces extends Component {
   render() {
     const { loading, mentorspaces, error } = this.props;
 
-    if (loading)
+    if (loading) {
       return (
         <Grid>
           <Grid.Row>
             <div className="group-item">
               <div className="group-header">Loading</div>
               <div className="v-spacer" />
-              <div></div>
+              <div />
             </div>
           </Grid.Row>
         </Grid>
       );
+    }
 
     return (
       <Grid>
         <Grid.Row>
-          {mentorspaces.map((mentorspaceItem) => {
-            return (
-              <Link
-                to={`/mentorspaces/${mentorspaceItem.group.id}`}
-                key={mentorspaceItem.id}
-              >
-                <div className="group-item">
-                  <div className="group-header">
-                    {mentorspaceItem.group.name}
-                  </div>
-                  <div className="v-spacer" />
-                  <div>
-                    Created by &nbsp;
-                    <span>{mentorspaceItem.group.createdBy.name}</span>
-                  </div>
+          {mentorspaces.map((mentorspaceItem) => (
+            <Link
+              to={`/mentorspaces/${mentorspaceItem.group.id}`}
+              key={mentorspaceItem.id}
+            >
+              <div className="group-item">
+                <div className="group-header">
+                  {mentorspaceItem.group.name}
                 </div>
-              </Link>
-            );
-          })}
-          {error ? "error: " + JSON.stringify(error) : null}
+                <div className="v-spacer" />
+                <div>
+                  Created by &nbsp;
+                  <span>{mentorspaceItem.group.createdBy.name}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+          {error ? `error: ${JSON.stringify(error)}` : null}
         </Grid.Row>
       </Grid>
     );

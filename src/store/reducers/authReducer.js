@@ -1,4 +1,4 @@
-import * as actions from "../actions/types";
+import * as actions from '../actions/types';
 
 const initState = {
   authState: {
@@ -9,41 +9,75 @@ const initState = {
   isRegisterSuccess: false,
   initialSignIn: false,
 };
-const signInEmailStart = (state) => {
-  return { ...state, authState: { ...state.authState, signingIn: true } };
-};
 
-const signInEmailEnd = (state) => {
-  return { ...state, authState: { ...state.authState, signingIn: false } };
-};
+const signInEmailStart = (state) => ({
+  ...state,
+  authState: {
+    ...state.authState,
+    signingIn: true,
+  },
+});
 
-const signInEmailFailed = (state, payload) => {
-  return { ...state, authState: { ...state.authState, error: payload } };
-};
+const signInEmailEnd = (state) => ({
+  ...state,
+  authState: {
+    ...state.authState,
+    signingIn: false,
+  },
+});
 
-const signInEmailSuccess = (state) => {
-  return { ...state, authState: { ...state.authState, error: null } };
-};
+const signInEmailFailed = (state, payload) => ({
+  ...state,
+  authState: {
+    ...state.authState,
+    error: payload,
+  },
+});
 
-const googleSignInStart = (state) => {
-  return { ...state, authState: { ...state.authState, signingIn: true } };
-};
+const signInEmailSuccess = (state) => ({
+  ...state,
+  authState: {
+    ...state.authState,
+    error: null,
+  },
+});
 
-const googleSignInSuccess = (state) => {
-  return { ...state, authState: { ...state.authState, signingIn: false } };
-};
+const googleSignInStart = (state) => ({
+  ...state,
+  authState: {
+    ...state.authState,
+    signingIn: true,
+  },
+});
 
-const initialSignIn = (state) => {
-  return { ...state, initialSignIn: true };
-};
+const googleSignInSuccess = (state) => ({
+  ...state,
+  authState: {
+    ...state.authState,
+    signingIn: false,
+  },
+});
 
-const linkedinSignInStart = (state) => {
-  return { ...state, authState: { ...state.authState, signingIn: true } };
-};
+const initialSignIn = (state) => ({
+  ...state,
+  initialSignIn: true,
+});
 
-const linkedinSignInSuccess = (state) => {
-  return { ...state, authState: { ...state.authState, signingIn: false } };
-};
+const linkedinSignInStart = (state) => ({
+  ...state,
+  authState: {
+    ...state.authState,
+    signingIn: true,
+  },
+});
+
+const linkedinSignInSuccess = (state) => ({
+  ...state,
+  authState: {
+    ...state.authState,
+    signingIn: false,
+  },
+});
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
@@ -65,7 +99,7 @@ const authReducer = (state = initState, action) => {
     case actions.GOOGLE_SIGN_IN_SUCCESS:
       return googleSignInSuccess(state);
 
-    case "INITIAL_SIGNIN":
+    case 'INITIAL_SIGNIN':
       return initialSignIn(state);
 
     case actions.LINKEDIN_SIGN_IN_START:
@@ -74,31 +108,31 @@ const authReducer = (state = initState, action) => {
     case actions.LINKEDIN_SIGN_IN_SUCCESS:
       return linkedinSignInSuccess(state);
 
-    case "REGISTER_SUCCESS":
+    case 'REGISTER_SUCCESS':
       return {
         ...state,
         authError: null,
         isRegisterSuccess: true,
       };
-    case "REGISTER_ERROR":
+    case 'REGISTER_ERROR':
       return {
         ...state,
-        authError: "Register failed!",
+        authError: 'Register failed!',
         isRegisterSuccess: false,
       };
-    case "CURRENT_USER":
+    case 'CURRENT_USER':
       return {
         ...state,
         currentUser: action.payload,
         initialSignIn: false,
       };
-    case "CURRENT_USER_ERROR":
+    case 'CURRENT_USER_ERROR':
       return {
         ...state,
         currentUser: null,
         initialSignIn: false,
       };
-    case "SIGN_OUT":
+    case 'SIGN_OUT':
       return {
         ...state,
         currentUser: null,

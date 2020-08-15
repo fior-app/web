@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { changeGroupState } from "../../store/actions/mentorspaceActions";
+import { changeGroupState } from '../../store/actions/mentorspaceActions';
 
 export class GroupConfirm extends Component {
   handleChangeState = (state) => {
@@ -14,8 +14,8 @@ export class GroupConfirm extends Component {
     return (
       <div>
         Accept group invitation
-        <button onClick={() => this.handleChangeState("OK")}>confirm</button>
-        <button onClick={() => this.handleChangeState("DECLINED")}>
+        <button onClick={() => this.handleChangeState('OK')}>confirm</button>
+        <button onClick={() => this.handleChangeState('DECLINED')}>
           decline
         </button>
       </div>
@@ -29,8 +29,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeGroupState: (groupId, state) =>
-    dispatch(changeGroupState(groupId, state)),
+  changeGroupState: (groupId, state) => dispatch(changeGroupState(groupId, state)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupConfirm);

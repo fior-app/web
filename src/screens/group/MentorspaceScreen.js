@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Modal } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Modal } from 'semantic-ui-react';
 
-import { getGroup } from "../../store/actions/mentorspaceActions";
-import MentorspaceMembers from "./MentorspaceMembers";
-import GroupChat from "./GroupChat";
-import InviteMember from "./InviteMember";
-import GroupConfirm from "./GroupConfirm";
+import { getGroup } from '../../store/actions/mentorspaceActions';
+import MentorspaceMembers from './MentorspaceMembers';
+import GroupChat from './GroupChat';
+import InviteMember from './InviteMember';
+import GroupConfirm from './GroupConfirm';
 
 export class MentorspaceScreen extends Component {
   state = {
-    message: "",
+    message: '',
     messages: [],
   };
 
@@ -32,29 +32,29 @@ export class MentorspaceScreen extends Component {
       <div className="container">
         <div className="v-spacer-2" />
         <h2>{member && member.group.name}</h2>
-        {member && member.state === "CONFIRM" ? (
+        {member && member.state === 'CONFIRM' ? (
           <GroupConfirm groupId={this.props.match.params.mentorspaceId} />
         ) : null}
         <MentorspaceMembers groupId={member && member.group.id} />
-        {member && member.state === "OK" ? (
+        {member && member.state === 'OK' ? (
           <Modal
-            trigger={
+            trigger={(
               <button
                 className="btn-primary"
                 disabled={
-                  member && !member.permissions.includes("SEND_MEMBER_REQUESTS")
+                  member && !member.permissions.includes('SEND_MEMBER_REQUESTS')
                 }
               >
                 Invite member
               </button>
-            }
+            )}
             modal
           >
             <InviteMember groupId={this.props.match.params.mentorspaceId} />
           </Modal>
         ) : null}
         <div className="v-spacer-10" />
-        {member && member.state === "OK" ? (
+        {member && member.state === 'OK' ? (
           <GroupChat
             groupId={member && member.group.id}
             roomId={member && member.group.chatroom.id}

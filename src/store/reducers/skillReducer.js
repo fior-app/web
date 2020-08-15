@@ -1,4 +1,4 @@
-import * as actions from "../actions/types";
+import * as actions from '../actions/types';
 
 const initState = {
   userSkills: [],
@@ -6,41 +6,52 @@ const initState = {
   error: null,
 };
 
-const getUserSkillsStart = (state) => {
-  return { ...state, isLoading: true };
-};
+const getUserSkillsStart = (state) => ({
+  ...state,
+  isLoading: true,
+});
 
-const getUserSkillsSuccess = (state, userSkills) => {
-  return { ...state, isLoading: true, userSkills };
-};
+const getUserSkillsSuccess = (state, userSkills) => ({
+  ...state,
+  isLoading: true,
+  userSkills,
+});
 
-const getUserSkillsFailure = (state, error) => {
-  return { ...state, isLoading: true, error };
-};
+const getUserSkillsFailure = (state, error) => ({
+  ...state,
+  isLoading: true,
+  error,
+});
 
-const addUserSkillsStart = (state) => {
-  return { ...state, isLoading: true };
-};
+const addUserSkillsStart = (state) => ({
+  ...state,
+  isLoading: true,
+});
 
-const addUserSkillsSuccess = (state) => {
-  return { ...state, isLoading: false };
-};
+const addUserSkillsSuccess = (state) => ({
+  ...state,
+  isLoading: false,
+});
 
-const addUserSkillsFailure = (state) => {
-  return { ...state, isLoading: false };
-};
+const addUserSkillsFailure = (state) => ({
+  ...state,
+  isLoading: false,
+});
 
-const deleteUserSkillsStart = (state) => {
-  return { ...state, isLoading: true };
-};
+const deleteUserSkillsStart = (state) => ({
+  ...state,
+  isLoading: true,
+});
 
-const deleteUserSkillsSuccess = (state) => {
-  return { ...state, isLoading: false };
-};
+const deleteUserSkillsSuccess = (state) => ({
+  ...state,
+  isLoading: false,
+});
 
-const deleteUserSkillsFailure = (state) => {
-  return { ...state, isLoading: false };
-};
+const deleteUserSkillsFailure = (state) => ({
+  ...state,
+  isLoading: false,
+});
 
 const skillReducer = (state = initState, action) => {
   switch (action.type) {

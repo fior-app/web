@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
+import { Form, Input } from 'semantic-ui-react';
 import {
   getGroupMessages,
   sendGroupMessage,
   getGroupMessagesStream,
-} from "../../store/actions/mentorspaceActions";
-import Message from "./Message";
-import { Form, Input } from "semantic-ui-react";
+} from '../../store/actions/mentorspaceActions';
+import Message from './Message';
 
 export class GroupChat extends Component {
   state = {
-    message: "",
+    message: '',
   };
 
   componentDidMount() {
@@ -26,10 +26,9 @@ export class GroupChat extends Component {
   };
 
   handleSendMessage = (e) => {
-    if (this.state.message !== "")
-      this.props.sendGroupMessage(this.props.roomId, this.state);
+    if (this.state.message !== '') this.props.sendGroupMessage(this.props.roomId, this.state);
 
-    this.setState({ message: "" });
+    this.setState({ message: '' });
   };
 
   render() {
@@ -48,13 +47,11 @@ export class GroupChat extends Component {
         {error ? JSON.stringify(error) : null}
 
         {messages ? (
-          messages.map((message) => {
-            return (
-              <div key={message.id}>
-                <Message message={message} />
-              </div>
-            );
-          })
+          messages.map((message) => (
+            <div key={message.id}>
+              <Message message={message} />
+            </div>
+          ))
         ) : (
           <li>no messages</li>
         )}
@@ -67,8 +64,8 @@ export class GroupChat extends Component {
               value={this.state.message}
               onChange={this.handleOnChangeInput}
               action={{
-                icon: "send",
-                color: "teal",
+                icon: 'send',
+                color: 'teal',
                 onClick: () => this.handleSendMessage(),
               }}
             />
@@ -90,8 +87,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getGroupMessages: (groupId) => dispatch(getGroupMessages(groupId)),
-  sendGroupMessage: (roomId, message) =>
-    dispatch(sendGroupMessage(roomId, message)),
+  sendGroupMessage: (roomId, message) => dispatch(sendGroupMessage(roomId, message)),
   getGroupMessagesStream: (roomId) => dispatch(getGroupMessagesStream(roomId)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(GroupChat);

@@ -1,24 +1,23 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { Redirect } from "react-router-dom";
-import { signInLinkedIn } from "../../store/actions/authActions";
+import { Redirect } from 'react-router-dom';
+import { signInLinkedIn } from '../../store/actions/authActions';
 
 class LinkedInCallbackScreen extends Component {
-
   componentDidMount() {
-    let code = new URLSearchParams(this.props.history.location.search).get('code')
+    const code = new URLSearchParams(this.props.history.location.search).get('code');
 
     if (!code) {
-      this.props.history.replace("/")
+      this.props.history.replace('/');
     } else {
-      let requestUri = 'http://localhost:3000/auth/linkedin/callback'
-      this.props.signInLinkedIn(code, requestUri)
+      const requestUri = 'http://localhost:3000/auth/linkedin/callback';
+      this.props.signInLinkedIn(code, requestUri);
     }
   }
 
   render() {
-    if (this.props.currentUser) return <Redirect to='/' />;
+    if (this.props.currentUser) return <Redirect to="/" />;
 
     return (
       <div>
@@ -32,10 +31,8 @@ const mapStateToProps = (state) => ({
   currentUser: state.auth.currentUser,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signInLinkedIn: (code, requestUri) => dispatch(signInLinkedIn(code, requestUri)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  signInLinkedIn: (code, requestUri) => dispatch(signInLinkedIn(code, requestUri)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(LinkedInCallbackScreen);

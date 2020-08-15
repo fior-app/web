@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { createQuestion } from "../../store/actions/questionActions";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createQuestion } from '../../store/actions/questionActions';
 
 class CreateQuestion extends Component {
   state = {
-    title: "",
-    description: "",
+    title: '',
+    description: '',
   };
 
   handleChange = (e) => {
@@ -16,24 +16,24 @@ class CreateQuestion extends Component {
 
   render() {
     return (
-      <div className='keep-margin'>
+      <div className="keep-margin">
         <h4>Create Question</h4>
         <form onSubmit={this.handleSubmit}>
           <input
-            id='title'
-            className='username'
-            type='text'
-            placeholder='Title'
+            id="title"
+            className="username"
+            type="text"
+            placeholder="Title"
             onChange={this.handleChange}
           />
           <input
-            id='description'
-            className='password'
-            type='text'
-            placeholder='Description'
+            id="description"
+            className="password"
+            type="text"
+            placeholder="Description"
             onChange={this.handleChange}
           />
-          <button type='submit' className='signin_btn secondary_btn'>
+          <button type="submit" className="signin_btn secondary_btn">
             Create
           </button>
         </form>
@@ -50,10 +50,8 @@ class CreateQuestion extends Component {
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createQuestion: (question) => dispatch(createQuestion(question)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  createQuestion: (question) => dispatch(createQuestion(question)),
+});
 
 export default connect(null, mapDispatchToProps)(CreateQuestion);

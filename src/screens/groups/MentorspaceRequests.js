@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Grid } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Grid } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
-import { getMentorspaceRequests } from "../../store/actions/mentorspaceActions";
+import { getMentorspaceRequests } from '../../store/actions/mentorspaceActions';
 
 export class MentorspaceRequests extends Component {
   componentDidMount() {
@@ -13,42 +13,41 @@ export class MentorspaceRequests extends Component {
   render() {
     const { loading, mentorspaces, error } = this.props;
 
-    if (loading)
+    if (loading) {
       return (
         <Grid>
           <Grid.Row>
             <div className="group-item">
               <div className="group-header">Loading</div>
               <div className="v-spacer" />
-              <div></div>
+              <div />
             </div>
           </Grid.Row>
         </Grid>
       );
+    }
 
     return (
       <Grid>
         <Grid.Row>
-          {mentorspaces.map((MentorspaceItem) => {
-            return (
-              <Link
-                to={`/mentorspaces/${MentorspaceItem.group.id}`}
-                key={MentorspaceItem.id}
-              >
-                <div className="group-item">
-                  <div className="group-header">
-                    {MentorspaceItem.group.name}
-                  </div>
-                  <div className="v-spacer" />
-                  <div>
-                    Created by &nbsp;
-                    <span>{MentorspaceItem.group.createdBy.name}</span>
-                  </div>
+          {mentorspaces.map((MentorspaceItem) => (
+            <Link
+              to={`/mentorspaces/${MentorspaceItem.group.id}`}
+              key={MentorspaceItem.id}
+            >
+              <div className="group-item">
+                <div className="group-header">
+                  {MentorspaceItem.group.name}
                 </div>
-              </Link>
-            );
-          })}
-          {error ? "error: " + JSON.stringify(error) : null}
+                <div className="v-spacer" />
+                <div>
+                  Created by &nbsp;
+                  <span>{MentorspaceItem.group.createdBy.name}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+          {error ? `error: ${JSON.stringify(error)}` : null}
         </Grid.Row>
       </Grid>
     );
@@ -67,5 +66,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MentorspaceRequests);

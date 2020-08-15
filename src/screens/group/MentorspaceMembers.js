@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { getGroupMembers } from "../../store/actions/mentorspaceActions";
+import { getGroupMembers } from '../../store/actions/mentorspaceActions';
 
 export class MentorspaceMembers extends Component {
   componentDidMount() {
@@ -22,15 +22,14 @@ export class MentorspaceMembers extends Component {
         <h3>Online</h3>
         <h3>Online</h3>
         <h3>Online</h3>
-        {members.map((member) => {
-          return (
-            <div className="row section v-align" key={member.id}>
-              <div key={member.id}>{member.member.name}</div>;
-              <div className="spacer-1" />
-              <div className="online" />
-            </div>
-          );
-        })}
+        {members.map((member) => (
+          <div className="row section v-align" key={member.id}>
+            <div key={member.id}>{member.member.name}</div>
+            ;
+            <div className="spacer-1" />
+            <div className="online" />
+          </div>
+        ))}
       </div>
     );
   }

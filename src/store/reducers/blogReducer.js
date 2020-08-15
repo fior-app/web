@@ -1,4 +1,4 @@
-import * as actions from "./../actions/types";
+import * as actions from '../actions/types';
 
 const initState = {
   writePost: {
@@ -13,56 +13,88 @@ const initState = {
   },
 };
 
-const writePostStart = (state) => {
-  return { ...state, writePost: { ...state.writePost, loading: true } };
-};
+const writePostStart = (state) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    loading: true,
+  },
+});
 
-const writePostEnd = (state) => {
-  return { ...state, writePost: { ...state.writePost, loading: false } };
-};
+const writePostEnd = (state) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    loading: false,
+  },
+});
 
-const writePostFailed = (state, payload) => {
-  return { ...state, writePost: { ...state.writePost, error: payload } };
-};
+const writePostFailed = (state, payload) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    error: payload,
+  },
+});
 
-const writePostSuccess = (state) => {
-  return {
-    ...state,
-    writePost: { ...state.writePost, error: null, success: true },
-  };
-};
+const writePostSuccess = (state) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    error: null,
+    success: true,
+  },
+});
 
-const getBlogPostsStart = (state) => {
-  return { ...state, posts: { ...state.posts, loading: true } };
-};
+const getBlogPostsStart = (state) => ({
+  ...state,
+  posts: {
+    ...state.posts,
+    loading: true,
+  },
+});
 
-const getBlogPostsEnd = (state) => {
-  return { ...state, posts: { ...state.posts, loading: false } };
-};
+const getBlogPostsEnd = (state) => ({
+  ...state,
+  posts: {
+    ...state.posts,
+    loading: false,
+  },
+});
 
-const getBlogPostsFailed = (state, payload) => {
-  return { ...state, posts: { ...state.posts, error: payload } };
-};
+const getBlogPostsFailed = (state, payload) => ({
+  ...state,
+  posts: {
+    ...state.posts,
+    error: payload,
+  },
+});
 
-const getBlogPostsSuccess = (state) => {
-  return { ...state, posts: { ...state.posts, error: null } };
-};
+const getBlogPostsSuccess = (state) => ({
+  ...state,
+  posts: {
+    ...state.posts,
+    error: null,
+  },
+});
 
-const getBlogPosts = (state, payload) => {
-  return { ...state, posts: { ...state.posts, posts: payload } };
-};
+const getBlogPosts = (state, payload) => ({
+  ...state,
+  posts: {
+    ...state.posts,
+    posts: payload,
+  },
+});
 
-const clearWritePost = (state) => {
-  return {
-    ...state,
-    writePost: {
-      ...state.writePost,
-      error: null,
-      success: false,
-      loading: false,
-    },
-  };
-};
+const clearWritePost = (state) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    error: null,
+    success: false,
+    loading: false,
+  },
+});
 
 const blogReducer = (state = initState, action) => {
   switch (action.type) {

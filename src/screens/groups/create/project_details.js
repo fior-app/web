@@ -1,13 +1,24 @@
-import React, { Component } from "react";
-import { Form, Modal } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { Form, Modal } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import Project from '../../../store/models/project';
 
-export class ProjectDetails extends Component {
-  state = {
-    title: "",
-    description: "",
-    github: [],
-    githubLinks: 1,
-  };
+class ProjectDetails extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      title: '',
+      description: '',
+      github: [],
+      githubLinks: 1,
+    };
+  }
+
+  componentDidMount() {
+    const { project } = this.props;
+    this.setState((state) => ({ ...state, ...project }));
+  }
 
   handleOnChangeInput = (e) => {
     this.setState({
@@ -15,20 +26,19 @@ export class ProjectDetails extends Component {
     });
   };
 
-  handleCreateMentorspace = (e) => {
-    this.props.handleCreateMentorspace("project", this.state);
+  handleCreateMentorspace = () => {
+    const { handleCreateMentorspace } = this.props;
+    handleCreateMentorspace('project', this.state);
   };
 
-  handleBack = (e) => {
-    this.props.handleBack("project", this.state);
+  handleBack = () => {
+    const { handleBack } = this.props;
+    handleBack('project', this.state);
   };
-
-  componentDidMount() {
-    this.setState({ ...this.state, ...this.props.project });
-  }
 
   render() {
     const { error, loading } = this.props;
+    const { title, description, icon } = this.state;
 
     return (
       <div className="modal">
@@ -42,7 +52,7 @@ export class ProjectDetails extends Component {
                   id="title"
                   required
                   placeholder="Title"
-                  value={this.state.title}
+                  value={title}
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
@@ -52,7 +62,7 @@ export class ProjectDetails extends Component {
                   id="description"
                   required
                   placeholder="Description"
-                  value={this.state.description}
+                  value={description}
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
@@ -62,12 +72,17 @@ export class ProjectDetails extends Component {
                   type="text"
                   id="icon"
                   placeholder="Icon"
-                  value={this.state.icon}
+                  value={icon}
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
               <Form.Field>
-                {error ? <div>Error.. {JSON.stringify(error)}</div> : null}
+                {error ? (
+                  <div>
+                    Error..
+                    {JSON.stringify(error)}
+                  </div>
+                ) : null}
               </Form.Field>
               <Form.Field>
                 {loading ? (
@@ -75,16 +90,17 @@ export class ProjectDetails extends Component {
                 ) : null}
               </Form.Field>
               <div className="row end">
-                <div className="btn-alternate" onClick={this.handleBack}>
+                <button type="button" className="btn-alternate" onClick={this.handleBack}>
                   Back
-                </div>
-                <div
+                </button>
+                <button
+                  type="button"
                   className="btn-alternate"
                   disabled={loading}
                   onClick={this.handleCreateMentorspace}
                 >
                   Create
-                </div>
+                </button>
               </div>
             </Form>
           </Modal.Description>
@@ -93,5 +109,18 @@ export class ProjectDetails extends Component {
     );
   }
 }
+
+ProjectDetails.defaultProps = {
+  error: null,
+  loading: false,
+};
+
+ProjectDetails.propTypes = {
+  project: PropTypes.instanceOf(Project).isRequired,
+  handleCreateMentorspace: PropTypes.func.isRequired,
+  handleBack: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  loading: PropTypes.string,
+};
 
 export default ProjectDetails;

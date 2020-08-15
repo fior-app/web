@@ -1,32 +1,33 @@
-import React, { Component } from "react";
-import { Grid, Form, Icon, Modal, Label } from "semantic-ui-react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import React, { Component } from 'react';
+import {
+  Grid, Form, Icon, Modal, Label,
+} from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import { updateMe } from "../../store/actions/userActions";
+import { updateMe } from '../../store/actions/userActions';
 
 class ProfileSettings extends Component {
-
   state = {
-    name: "",
-    bio: "",
+    name: '',
+    bio: '',
   };
 
   componentDidMount() {
     const { user } = this.props;
 
     if (user) {
-      this.setState({ name: user.name, bio: user.bio })
+      this.setState({ name: user.name, bio: user.bio });
     }
   }
 
   componentDidUpdate(oldProps) {
-    const newProps = this.props
+    const newProps = this.props;
     if (oldProps.user !== newProps.user) {
       this.setState({
         name: newProps.user.name,
         bio: newProps.user.bio,
-      })
+      });
     }
   }
 
@@ -39,13 +40,13 @@ class ProfileSettings extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.updateMe(this.state.name, this.state.bio)
+    this.props.updateMe(this.state.name, this.state.bio);
   };
 
   render() {
     const { user, updateState } = this.props;
 
-    if (!user) return <Redirect to='/' />;
+    if (!user) return <Redirect to="/" />;
 
     return (
       <div>
@@ -56,29 +57,36 @@ class ProfileSettings extends Component {
                 <h2>Settings</h2>
               </div>
             </Grid.Row>
-            <div className='v-spacer-2' />
-            <Grid.Row stretched={true}>
+            <div className="v-spacer-2" />
+            <Grid.Row stretched>
               <Form className="spacer" onSubmit={this.handleSubmit}>
                 <Form.Field>
                   <label>Name</label>
-                  <input type='text'
+                  <input
+                    type="text"
                     name="name"
-                    value={this.state.name ? this.state.name : ""}
-                    onChange={this.handleChange} />
+                    value={this.state.name ? this.state.name : ''}
+                    onChange={this.handleChange}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Bio</label>
                   <textarea
                     name="bio"
-                    value={this.state.bio ? this.state.bio : ""}
-                    onChange={this.handleChange} >
-                  </textarea>
+                    value={this.state.bio ? this.state.bio : ''}
+                    onChange={this.handleChange}
+                  />
                 </Form.Field>
-                <div>Loading: {`${updateState.isLoading}`}</div>
+                <div>
+                  Loading:
+                  {`${updateState.isLoading}`}
+                </div>
                 <button
-                  type='submit'
-                  className='secondary_btn'>
-                  Save</button>
+                  type="submit"
+                  className="secondary_btn"
+                >
+                  Save
+                </button>
               </Form>
             </Grid.Row>
           </Grid.Column>
@@ -90,13 +98,11 @@ class ProfileSettings extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.auth.currentUser,
-  updateState: state.user.updateState
+  updateState: state.user.updateState,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateMe: (name, bio) => dispatch(updateMe(name, bio))
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  updateMe: (name, bio) => dispatch(updateMe(name, bio)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileSettings);
