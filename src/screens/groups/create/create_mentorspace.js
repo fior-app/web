@@ -6,7 +6,7 @@ import { createGroup } from '../../../store/actions/mentorspaceActions';
 import MentorspaceDetails from './mentorspace_details';
 import ProjectDetails from './project_details';
 
-export class CreateMentorspace extends Component {
+class CreateMentorspace extends Component {
   constructor(props) {
     super(props);
 

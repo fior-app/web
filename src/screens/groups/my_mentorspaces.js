@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { getGroupsMe } from '../../store/actions/mentorspaceActions';
+import Group from '../../store/models/group';
 
-export class MyMentorspaces extends Component {
+class MyMentorspaces extends Component {
   componentDidMount() {
-    this.props.getGroupsMe();
+    const { getMyGroups } = this.props;
+    getMyGroups();
   }
 
   render() {
@@ -54,6 +57,13 @@ export class MyMentorspaces extends Component {
   }
 }
 
+MyMentorspaces.propTypes = {
+  getMyGroups: PropTypes.func.isRequired,
+  mentorspaces: PropTypes.arrayOf(Group).isRequired,
+  error: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   loading: state.groups.groups.loading,
   mentorspaces: state.groups.groups.groups,
@@ -61,7 +71,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getGroupsMe: () => dispatch(getGroupsMe()),
+  getMyGroups: () => dispatch(getGroupsMe()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyMentorspaces);

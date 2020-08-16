@@ -3,34 +3,41 @@ import React, { Component } from 'react';
 import { Modal } from 'semantic-ui-react';
 import CreateMentorspace from './create/create_mentorspace';
 
-import MyMentorspaces from './MyMentorspaces';
-import MentorspaceRequests from './MentorspaceRequests';
+import MyMentorspaces from './my_mentorspaces';
+import MentorspaceRequests from './mentorspace_requests';
 
-export class MentorspacesScreen extends Component {
-  state = {
-    showModal: false,
-  };
+class MentorspaceScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showModal: false,
+    };
+  }
 
   closeModal = () => {
     this.setState({ showModal: false });
   };
 
   render() {
+    const { showModal } = this.state;
+
     return (
       <div className="container">
         <div className="v-spacer-2" style={{ marginTop: '50px' }} />
         <Modal
           trigger={(
-            <div
+            <button
+              type="button"
               className="btn-primary"
               onClick={() => this.setState({ showModal: true })}
             >
               Create Mentorspace
-            </div>
+            </button>
           )}
           closeIcon
           onClose={this.closeModal}
-          open={this.state.showModal}
+          open={showModal}
         >
           <CreateMentorspace closeModal={this.closeModal} />
         </Modal>
@@ -50,4 +57,4 @@ export class MentorspacesScreen extends Component {
   }
 }
 
-export default MentorspacesScreen;
+export default MentorspaceScreen;

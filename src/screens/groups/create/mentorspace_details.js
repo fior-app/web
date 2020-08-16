@@ -57,7 +57,6 @@ class MentorspaceDetails extends Component {
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
-              {/* since any storage bucket not installed in system. lets continue with a link */}
               <Form.Field>
                 <input
                   type="text"
@@ -69,7 +68,11 @@ class MentorspaceDetails extends Component {
               </Form.Field>
 
               <div className="row end">
-                <button type="button" className="btn-alternate" onClick={this.handleNext}>
+                <button
+                  type="button"
+                  className="btn-alternate"
+                  onClick={this.handleNext}
+                >
                   Next
                 </button>
               </div>
