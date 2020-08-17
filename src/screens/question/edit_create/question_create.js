@@ -52,6 +52,12 @@ class CreateQuestion extends Component {
                 onChange={this.handleChange}
               />
               </Form.Field>
+              { successMsg ? 
+          <Message
+            success
+            header="Success"
+            content="Question uploaded successfully!"
+          /> : null}
               <Form.Field>
                 <Button secondary type='submit' disabled={loading}
                 loading={loading}>
