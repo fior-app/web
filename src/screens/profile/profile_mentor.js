@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Grid, Card, Icon, Modal, Label,
+  Grid, Card, Icon, Modal,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -10,10 +10,14 @@ import { getUserSkills, addUserSkills, deleteUserSkill } from '../../store/actio
 import { AddSkills } from './skills/AddSkills';
 
 class ProfileMentor extends Component {
-  state = {
-    avatarUrl: 'https://i.ytimg.com/vi/9K46DNoE3Ko/maxresdefault.jpg',
-    showModal: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      avatarUrl: 'https://i.ytimg.com/vi/9K46DNoE3Ko/maxresdefault.jpg',
+      showModal: false,
+    };
+  }
 
   componentDidMount() {
     this.props.getUserSkills();
@@ -24,13 +28,15 @@ class ProfileMentor extends Component {
   };
 
   onSubmit = (skills) => {
-    console.log(skills);
     this.props.addUserSkills(skills.map((skill) => skill.id));
+  };
+
+  handleSignOut = () => {
+    this.props.signOut();
   };
 
   render() {
     const { avatarUrl } = this.state;
-
     const { user, userSkills } = this.props;
 
     if (!user) return <Redirect to="/" />;
@@ -52,7 +58,7 @@ class ProfileMentor extends Component {
                 <div className="card-content">
                   <div className="card-header">Activity</div>
                   <Card.Description>
-                    You don't have any activity yet
+                    You dont have any activity yet
                   </Card.Description>
                 </div>
               </div>
@@ -99,14 +105,17 @@ class ProfileMentor extends Component {
                 <div className="v-spacer-2" />
                 <div className="row">
                   {
-                  userSkills.length > 0
-                    ? userSkills.map((userSkill) => (
-                      <label className="label-primary" key={userSkill.id}>
-                        <span>{userSkill.skill.name}</span>
-                        <Icon name="delete" onClick={() => this.props.deleteUserSkill(userSkill.id)} />
-                      </label>
-                    )) : <div>You don't have added any skills yet</div>
-                }
+                    userSkills.length > 0
+                      ? userSkills.map((userSkill) => (
+                        <label className="label-primary" key={userSkill.id}>
+                          <span>{userSkill.skill.name}</span>
+                          <Icon
+                            name="delete"
+                            onClick={() => this.props.deleteUserSkill(userSkill.id)}
+                          />
+                        </label>
+                      )) : <div>You don't have added any skills yet</div>
+                  }
                 </div>
                 <div className="v-spacer-2" />
               </div>
@@ -147,10 +156,6 @@ class ProfileMentor extends Component {
       </div>
     );
   }
-
-  handleSignOut = () => {
-    this.props.signOut();
-  };
 }
 
 const mapStateToProps = (state) => ({

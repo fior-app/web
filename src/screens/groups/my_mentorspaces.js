@@ -9,8 +9,7 @@ import Group from '../../store/models/group';
 
 class MyMentorspaces extends Component {
   componentDidMount() {
-    const { getMyGroups } = this.props;
-    getMyGroups();
+    this.props.getGroupsMe();
   }
 
   render() {
@@ -58,7 +57,7 @@ class MyMentorspaces extends Component {
 }
 
 MyMentorspaces.propTypes = {
-  getMyGroups: PropTypes.func.isRequired,
+  getGroupsMe: PropTypes.func.isRequired,
   mentorspaces: PropTypes.arrayOf(Group).isRequired,
   error: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -70,8 +69,6 @@ const mapStateToProps = (state) => ({
   error: state.groups.groups.error,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getMyGroups: () => dispatch(getGroupsMe()),
-});
+const mapDispatchToProps = { getGroupsMe };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyMentorspaces);

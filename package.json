@@ -29,7 +29,7 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build",
     "lint": "eslint src/**.js",
-    "lint:fix": "eslint --fix src/**.js"
+    "lint:fix": "eslint --fix src/**/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,9 +50,11 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.7.0",
     "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.6",
-    "eslint-plugin-react-hooks": "^4.1.0"
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "eslint-plugin-react-redux": "^3.2.0"
   }
 }

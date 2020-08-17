@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { createGroup } from '../../../store/actions/mentorspaceActions';
 import MentorspaceDetails from './mentorspace_details';
@@ -66,25 +65,15 @@ class CreateMentorspace extends Component {
   }
 }
 
-CreateMentorspace.defaultProps = {
-  error: null,
-  loading: false,
-};
-
-CreateMentorspace.propTypes = {
-  createMentorspace: PropTypes.func.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  error: PropTypes.string,
-  loading: PropTypes.string,
-};
-
 const mapStateToProps = (state) => ({
   loading: state.groups.createGroup.loading,
   error: state.groups.createGroup.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createMentorspace: (mentorspace, cb) => dispatch(createGroup(mentorspace, cb)),
+  createMentorspace: (mentorspace, cb) => dispatch(
+    createGroup(mentorspace, cb),
+  ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateMentorspace);

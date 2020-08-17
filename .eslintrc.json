@@ -1,24 +1,31 @@
 {
-    "env": {
-        "browser": true,
-        "es2020": true
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react-redux/recommended",
+    "airbnb"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
-    },
-    "parser": "babel-eslint"
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "react-redux"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/destructuring-assignment": "off",
+    "require-jsdoc": "off",
+    "no-invalid-this": "off",
+    "react-redux/prefer-separate-component-file": "off",
+    "react/prop-types": "off"
+  },
+  "parser": "babel-eslint"
 }

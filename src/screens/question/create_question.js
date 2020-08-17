@@ -3,14 +3,28 @@ import { connect } from 'react-redux';
 import { createQuestion } from '../../store/actions/questionActions';
 
 class CreateQuestion extends Component {
-  state = {
-    title: '',
-    description: '',
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      title: '',
+      description: '',
+    };
+  }
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    const { title, description } = this.state;
+
+    e.preventDefault();
+    this.props.createQuestion({
+      title,
+      description,
     });
   };
 
@@ -40,18 +54,8 @@ class CreateQuestion extends Component {
       </div>
     );
   }
-
-  handleSubmit = (e) => {
-    const { title, description } = this.state;
-
-    e.preventDefault();
-    console.log(this.state.title, this.state.description);
-    this.props.createQuestion({ title, description });
-  };
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  createQuestion: (question) => dispatch(createQuestion(question)),
-});
+const mapDispatchToProps = { createQuestion };
 
 export default connect(null, mapDispatchToProps)(CreateQuestion);
