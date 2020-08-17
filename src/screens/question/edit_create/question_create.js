@@ -12,6 +12,18 @@ class CreateQuestion extends Component {
         [e.target.id]: e.target.value,
       });
     };
+
+    onSuccessCallback = () => {
+        this.setState({
+          title: "",
+          description: "",
+        })
+      }
+    
+      componentWillUnmount(){
+    this.props.clearState();
+      }
+
     render() {
 
         const { title, description } = this.state;
