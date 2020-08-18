@@ -1,29 +1,37 @@
 import React, { Component } from 'react';
-import {
-  Grid, Form, Icon, Modal, Label,
-} from 'semantic-ui-react';
+import { Grid, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { updateMe } from '../../store/actions/userActions';
 
 class ProfileSettings extends Component {
-  state = {
-    name: '',
-    bio: '',
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      bio: '',
+    };
+  }
 
   componentDidMount() {
     const { user } = this.props;
 
     if (user) {
-      this.setState({ name: user.name, bio: user.bio });
+      this.setState({
+        name: user.name,
+        bio: user.bio,
+      });
     }
   }
 
-  componentDidUpdate(oldProps) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    super.componentDidUpdate(prevProps, prevState, snapshot);
+
     const newProps = this.props;
-    if (oldProps.user !== newProps.user) {
+    if (prevProps.user !== newProps.user) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         name: newProps.user.name,
         bio: newProps.user.bio,
@@ -61,21 +69,25 @@ class ProfileSettings extends Component {
             <Grid.Row stretched>
               <Form className="spacer" onSubmit={this.handleSubmit}>
                 <Form.Field>
-                  <label>Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={this.state.name ? this.state.name : ''}
-                    onChange={this.handleChange}
-                  />
+                  <label htmlFor="name">
+                    Name
+                    <input
+                      type="text"
+                      name="name"
+                      value={this.state.name ? this.state.name : ''}
+                      onChange={this.handleChange}
+                    />
+                  </label>
                 </Form.Field>
                 <Form.Field>
-                  <label>Bio</label>
-                  <textarea
-                    name="bio"
-                    value={this.state.bio ? this.state.bio : ''}
-                    onChange={this.handleChange}
-                  />
+                  <label htmlFor="bio">
+                    Bio
+                    <textarea
+                      name="bio"
+                      value={this.state.bio ? this.state.bio : ''}
+                      onChange={this.handleChange}
+                    />
+                  </label>
                 </Form.Field>
                 <div>
                   Loading:
@@ -101,8 +113,6 @@ const mapStateToProps = (state) => ({
   updateState: state.user.updateState,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  updateMe: (name, bio) => dispatch(updateMe(name, bio)),
-});
+const mapDispatchToProps = { updateMe };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileSettings);

@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 
 import { signOut } from '../../store/actions/authActions';
 import { getUserSkills, addUserSkills, deleteUserSkill } from '../../store/actions/skillActions';
-import { AddSkills } from './skills/AddSkills';
+import AddSkills from './skills/AddSkills';
 
 class ProfileMentor extends Component {
   constructor(props) {
@@ -70,14 +70,14 @@ class ProfileMentor extends Component {
               <div>
                 <h2>Groups</h2>
                 <div className="v-spacer-2" />
-                <div>You haven't joined to any group yet</div>
+                <div>You havent joined to any group yet</div>
                 <div className="v-spacer-2" />
               </div>
               <div className="v-spacer-4" />
               <div>
                 <h2>Organizations</h2>
                 <div className="v-spacer-2" />
-                <div>You haven't joined to any organization yet</div>
+                <div>You havent joined to any organization yet</div>
                 <div className="v-spacer-2" />
               </div>
             </Grid.Column>
@@ -107,14 +107,14 @@ class ProfileMentor extends Component {
                   {
                     userSkills.length > 0
                       ? userSkills.map((userSkill) => (
-                        <label className="label-primary" key={userSkill.id}>
+                        <div className="label-primary" key={userSkill.id}>
                           <span>{userSkill.skill.name}</span>
                           <Icon
                             name="delete"
                             onClick={() => this.props.deleteUserSkill(userSkill.id)}
                           />
-                        </label>
-                      )) : <div>You don't have added any skills yet</div>
+                        </div>
+                      )) : <div>You dont have added any skills yet</div>
                   }
                 </div>
                 <div className="v-spacer-2" />
@@ -124,7 +124,7 @@ class ProfileMentor extends Component {
                 <h2>Medals</h2>
                 <div className="divider-color" />
                 <div className="v-spacer-2" />
-                <div>You don't have added any medals yet</div>
+                <div>You dont have added any medals yet</div>
                 <div className="v-spacer-2" />
               </div>
               <div className="v-spacer-4" />
@@ -132,7 +132,7 @@ class ProfileMentor extends Component {
                 <h2>Active Points</h2>
                 <div className="divider-color" />
                 <div className="v-spacer-2" />
-                <div>You don't have added any active points yet</div>
+                <div>You dont have added any active points yet</div>
                 <div className="v-spacer-2" />
               </div>
               <div className="v-spacer-4" />
@@ -140,7 +140,7 @@ class ProfileMentor extends Component {
                 <h2>Feedbacks</h2>
                 <div className="divider-color" />
                 <div className="v-spacer-2" />
-                <div>You haven't recieved any feedback yet</div>
+                <div>You havent recieved any feedback yet</div>
                 <div className="v-spacer-2" />
               </div>
               <div className="v-spacer-4" />
@@ -149,7 +149,7 @@ class ProfileMentor extends Component {
         </Grid>
         <div className="v-spacer-2" />
         <div className="row end">
-          <button className="btn-primary" onClick={this.handleSignOut}>
+          <button type="button" className="btn-primary" onClick={this.handleSignOut}>
             Sign Out
           </button>
         </div>
@@ -163,6 +163,7 @@ const mapStateToProps = (state) => ({
   userSkills: state.skills.userSkills,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   signOut: () => dispatch(signOut()),
   getUserSkills: () => dispatch(getUserSkills()),
