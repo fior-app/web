@@ -16,7 +16,7 @@ const PricingScreen = () => (
 
           <div className="landing_pricing_content1">
             <div className="landing_pricing_description1 row">
-              <img src="../../assets/img/check.svg" alt="Check Mark" />
+              <img src="../../img/check.svg" alt="Check Mark" />
               <p className="landing_pricing_point">Create 2 groups</p>
             </div>
             <div className="landing_pricing_description row">
@@ -51,7 +51,7 @@ const PricingScreen = () => (
             </div>
           </div>
 
-          <button className="secondary_btn">Choose Plan</button>
+          <button type="button" className="secondary_btn">Choose Plan</button>
         </div>
         {/* End of Standard Package */}
 
@@ -88,7 +88,7 @@ const PricingScreen = () => (
             </div>
           </div>
 
-          <button className="btn-primary">Choose Plan</button>
+          <button type="button" className="btn-primary">Choose Plan</button>
         </div>
       </div>
       {/* End of Pricing Plan Packages */}
@@ -99,7 +99,7 @@ const PricingScreen = () => (
           <p className="landing_package4_description">
             Request a custom Organization plan and pay as you go
           </p>
-          <button className="secondary_btn">Start a plan</button>
+          <button type="button" className="secondary_btn">Start a plan</button>
         </div>
       </div>
     </div>
