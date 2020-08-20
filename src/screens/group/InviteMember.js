@@ -4,10 +4,14 @@ import { Form, Modal } from 'semantic-ui-react';
 
 import { inviteMember } from '../../store/actions/mentorspaceActions';
 
-export class InviteMember extends Component {
-  state = {
-    email: '',
-  };
+class InviteMember extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+    };
+  }
 
   handleOnChangeInput = (e) => {
     this.setState({
@@ -15,7 +19,7 @@ export class InviteMember extends Component {
     });
   };
 
-  handleInviteMember = (e) => {
+  handleInviteMember = () => {
     this.props.inviteMember(this.props.groupId, this.state);
   };
 
@@ -48,13 +52,14 @@ export class InviteMember extends Component {
               </Form.Field>
 
               <div className="row end">
-                <div
+                <button
+                  type="button"
                   className="btn-alternate"
                   disabled={loading}
                   onClick={this.handleInviteMember}
                 >
                   Invite
-                </div>
+                </button>
               </div>
             </Form>
           </Modal.Description>
@@ -69,6 +74,7 @@ const mapStateToProps = (state) => ({
   error: state.groups.inviteMember.error,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   inviteMember: (groupId, email) => dispatch(inviteMember(groupId, email)),
 });

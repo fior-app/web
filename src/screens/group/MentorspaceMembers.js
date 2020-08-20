@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getGroupMembers } from '../../store/actions/mentorspaceActions';
 
-export class MentorspaceMembers extends Component {
+class MentorspaceMembers extends Component {
   componentDidMount() {
     this.props.getGroupMembers(this.props.groupId);
   }
@@ -41,8 +41,6 @@ const mapStateToProps = (state) => ({
   error: state.groups.groupMembers.error,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getGroupMembers: (groupId) => dispatch(getGroupMembers(groupId)),
-});
+const mapDispatchToProps = { getGroupMembers };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MentorspaceMembers);

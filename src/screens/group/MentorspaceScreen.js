@@ -9,17 +9,6 @@ import InviteMember from './InviteMember';
 import GroupConfirm from './GroupConfirm';
 
 export class MentorspaceScreen extends Component {
-  state = {
-    message: '',
-    messages: [],
-  };
-
-  handleOnChangeInput = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value,
-    });
-  };
-
   componentDidMount() {
     this.props.getGroup(this.props.match.params.mentorspaceId);
   }
@@ -40,6 +29,7 @@ export class MentorspaceScreen extends Component {
           <Modal
             trigger={(
               <button
+                type="button"
                 className="btn-primary"
                 disabled={
                   member && !member.permissions.includes('SEND_MEMBER_REQUESTS')
@@ -71,6 +61,7 @@ const mapStateToProps = (state) => ({
   error: state.groups.group.error,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   getGroup: (groupId) => dispatch(getGroup(groupId)),
 });

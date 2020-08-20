@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { changeGroupState } from '../../store/actions/mentorspaceActions';
 
-export class GroupConfirm extends Component {
+class GroupConfirm extends Component {
   handleChangeState = (state) => {
     this.props.changeGroupState(this.props.groupId, {
       state,
@@ -14,8 +14,8 @@ export class GroupConfirm extends Component {
     return (
       <div>
         Accept group invitation
-        <button onClick={() => this.handleChangeState('OK')}>confirm</button>
-        <button onClick={() => this.handleChangeState('DECLINED')}>
+        <button type="button" onClick={() => this.handleChangeState('OK')}>confirm</button>
+        <button type="button" onClick={() => this.handleChangeState('DECLINED')}>
           decline
         </button>
       </div>
@@ -28,6 +28,7 @@ const mapStateToProps = (state) => ({
   error: state.groups.changeGroupState.error,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   changeGroupState: (groupId, state) => dispatch(changeGroupState(groupId, state)),
 });

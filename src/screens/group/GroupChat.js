@@ -9,10 +9,14 @@ import {
 } from '../../store/actions/mentorspaceActions';
 import Message from './Message';
 
-export class GroupChat extends Component {
-  state = {
-    message: '',
-  };
+class GroupChat extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      message: '',
+    };
+  }
 
   componentDidMount() {
     this.props.getGroupMessages(this.props.groupId);
@@ -25,7 +29,7 @@ export class GroupChat extends Component {
     });
   };
 
-  handleSendMessage = (e) => {
+  handleSendMessage = () => {
     if (this.state.message !== '') this.props.sendGroupMessage(this.props.roomId, this.state);
 
     this.setState({ message: '' });
@@ -85,6 +89,7 @@ const mapStateToProps = (state) => ({
   msgError: state.groups.sendGroupMessage.error,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   getGroupMessages: (groupId) => dispatch(getGroupMessages(groupId)),
   sendGroupMessage: (roomId, message) => dispatch(sendGroupMessage(roomId, message)),
