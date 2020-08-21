@@ -57,6 +57,19 @@ class QuestionScreen extends Component {
     this.props.history.push("/question-forum/create");
   };
 
+  handleQuestionClick = (id) => {
+    this.props.history.push(`/question-forum/${id}`);
+  }
+
+  handleAnswerCreate = (id) => {
+    this.props.history.push(`/question-forum/${id}`);
+  }
+}
+
+const mapStateToProps = (state) => ({
+  questions: state.question.questions,
+});
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getQuestions: () => dispatch(getQuestions()),
