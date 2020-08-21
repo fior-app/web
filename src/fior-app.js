@@ -9,7 +9,7 @@ import AuthScreen from './screens/auth/auth_screen';
 import LinkedInCallbackScreen from './screens/auth/linkedin_callback_screen';
 import MentorspaceScreen from './screens/groups/mentorspace_screen';
 import ProfileScreen from './screens/profile/profile_screen';
-import BlogScreen from './screens/blog/BlogScreen';
+import BlogScreen from './screens/blog/blog_screen';
 import NotFound from './screens/notfound/NotFound';
 
 import Footer from './components/footer/footer';
@@ -27,6 +27,14 @@ class FiorApp extends Component {
     this.props.userMeInitial();
   }
 
+  renderFullLoading = () => (
+    <div className="row center">
+      <div className="full-loading">
+        <Image src="assets/svg/loading-full.svg" size="small" />
+      </div>
+    </div>
+  );
+
   render() {
     return this.props.initialSignIn ? (
       this.renderFullLoading()
@@ -38,7 +46,11 @@ class FiorApp extends Component {
             <SideNav />
             <Switch>
               <Route exact path="/" component={LandingScreen} />
-              <Route exact path="/auth/linkedin/callback" component={UnauthRequire(LinkedInCallbackScreen)} />
+              <Route
+                exact
+                path="/auth/linkedin/callback"
+                component={UnauthRequire(LinkedInCallbackScreen)}
+              />
               <Route
                 exact
                 path="/login"
@@ -76,20 +88,13 @@ class FiorApp extends Component {
       </BrowserRouter>
     );
   }
-
-  renderFullLoading = () => (
-    <div className="row center">
-      <div className="full-loading">
-        <Image src="assets/svg/loading-full.svg" size="small" />
-      </div>
-    </div>
-  );
 }
 
 const mapStateToProps = (state) => ({
   initialSignIn: state.auth.initialSignIn,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   userMeInitial: () => dispatch(userMeInitial()),
 });

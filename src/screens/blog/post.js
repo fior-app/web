@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 import { getPosts } from '../../store/actions/blogActions';
 
-export class Posts extends Component {
+class Posts extends Component {
   componentDidMount() {
     this.props.getPosts();
   }
 
   render() {
-    const { loading, posts, error } = this.props;
+    const { loading, posts } = this.props;
 
     if (loading) return <div>loading..</div>;
     return (
@@ -23,6 +23,7 @@ export class Posts extends Component {
                 <img
                   className="blog_image"
                   src="../../assets/vectors/blogimage.svg"
+                  alt=""
                 />
                 <div className="blog_card_catergory">
                   <p>Catergory</p>
@@ -43,6 +44,7 @@ const mapStateToProps = (state) => ({
   error: state.blog.posts.error,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   getPosts: (post) => dispatch(getPosts(post)),
 });

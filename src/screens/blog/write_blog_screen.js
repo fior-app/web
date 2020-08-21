@@ -3,22 +3,26 @@ import { connect } from 'react-redux';
 
 import { writeBlog, clearWritePost } from '../../store/actions/blogActions';
 
-export class WriteBlogScreen extends Component {
-  state = {
-    title: '',
-    text: '',
-    skills: [],
-  };
+class WriteBlogScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      title: '',
+      text: '',
+      skills: [],
+    };
+  }
+
+  componentWillUnmount() {
+    this.props.clearWritePost();
+  }
 
   handleOnChangeInput = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
     });
   };
-
-  componentWillUnmount() {
-    this.props.clearWritePost();
-  }
 
   handlePost = () => {
     this.props.writeBlog(this.state);
@@ -45,7 +49,7 @@ export class WriteBlogScreen extends Component {
         />
         {loading ? 'Posting' : null}
         {success ? 'Post added successfully' : null}
-        <button onClick={this.handlePost}>submit</button>
+        <button type="button" onClick={this.handlePost}>submit</button>
         {error ? JSON.stringify(error) : null}
       </div>
     );
@@ -58,6 +62,7 @@ const mapStateToProps = (state) => ({
   error: state.blog.writePost.error,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   writeBlog: (post) => dispatch(writeBlog(post)),
   clearWritePost: () => dispatch(clearWritePost()),
