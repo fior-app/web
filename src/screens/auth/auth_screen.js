@@ -7,9 +7,21 @@ import Register from '../../components/auth/register/register_cmp';
 import Login from '../../components/auth/login/login_cmp';
 
 class AuthScreen extends Component {
-  state = {
-    loginComponent: true,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loginComponent: true,
+    };
+  }
+
+  changeComponent = (e) => (e.target.id === 'login'
+    ? this.setState({
+      loginComponent: true,
+    })
+    : this.setState({
+      loginComponent: false,
+    }));
 
   render() {
     const { loginComponent } = this.state;
@@ -60,20 +72,22 @@ class AuthScreen extends Component {
               src="../../assets/vectors/form_tab_right.svg"
               className="form_tab_right form_tab_left"
             />
-            <p
+            <button
+              type="button"
               className="signin_text"
               onClick={this.changeComponent}
               id="login"
             >
               Login
-            </p>
-            <p
+            </button>
+            <button
+              type="button"
               className="register_text"
               onClick={this.changeComponent}
               id="register"
             >
               Register
-            </p>
+            </button>
             {/* Enf of Tabs */}
             {loginComponent ? <Login /> : <Register />}
           </div>
@@ -82,16 +96,6 @@ class AuthScreen extends Component {
       </>
     );
   }
-
-  changeComponent = (e) => {
-    e.target.id === 'login'
-      ? this.setState({
-        loginComponent: true,
-      })
-      : this.setState({
-        loginComponent: false,
-      });
-  };
 }
 
 const mapStateToProps = (state) => ({
