@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 
 import * as utils from '../util/utils';
 
-export default function (ComposedComponent) {
+const UnauthRequire = (ComposedComponent) => {
   class Unauthentication extends Component {
-    componentWillMount() {
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillMount() {
       if (utils.getWithExpiry('token')) {
         this.props.history.push('/');
       }
     }
 
     render() {
+      // eslint-disable-next-line react/jsx-props-no-spreading
       return <ComposedComponent {...this.props} />;
     }
   }
+
   return Unauthentication;
-}
+};
+
+export default UnauthRequire;
