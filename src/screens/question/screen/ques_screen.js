@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import {
   Container, Grid, Button, Pagination,Card,Feed, Header, 
 } from 'semantic-ui-react';
@@ -45,6 +47,20 @@ class QuestionScreen extends Component {
           <Button onClick={this.handleQuestionCreate} primary>
             Add Question
           </Button> <br/> <br/>
+        </Grid.Row>
+        <Grid.Row>   
+          <Card>
+            <Card.Content>
+              <Card.Header>Categories</Card.Header>
+            </Card.Content>
+            <Card.Content>
+            {/* {categories.map((category) => (
+              <Label key={category.id}>
+                {category.name}
+              </Label>
+            ))} */}
+            </Card.Content>
+          </Card>
         </Grid.Row>
       </Grid.Column> 
       </div> 
