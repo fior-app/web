@@ -7,10 +7,14 @@ import { signInEmail, signInGoogle } from '../../../store/actions/authActions';
 import { REACT_APP_GOOGLE_CLIENT_ID } from '../../../config/config';
 
 class Login extends Component {
-  state = {
-    email: '',
-    password: '',
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -21,6 +25,13 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.signInEmail(this.state);
+  };
+
+  handleGSignFailure = () => {
+  };
+
+  handleGSignSuccess = (response) => {
+    this.props.signInGoogle(response.tokenId);
   };
 
   render() {
@@ -66,10 +77,11 @@ class Login extends Component {
           buttonText="Login with Google"
           clientId={REACT_APP_GOOGLE_CLIENT_ID}
           onFailure={this.handleGSignFailure}
-          onSuccess={this.handleGSginSuccess}
+          onSuccess={this.handleGSignSuccess}
           cookiePolicy="single_host_origin"
           render={(renderProps) => (
             <button
+              type="button"
               className="google_signin_btn google_signin"
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
@@ -84,7 +96,10 @@ class Login extends Component {
         >
           Puka deepan rukshan
         </GoogleLogin>
-        <a className="linkedin_signin_btn linkedin_signin" href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78imnw0jx3qczv&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fauth%2Flinkedin%2Fcallback&state=fooobar&scope=r_liteprofile%20r_emailaddress">
+        <a
+          className="linkedin_signin_btn linkedin_signin"
+          href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78imnw0jx3qczv&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fauth%2Flinkedin%2Fcallback&state=fooobar&scope=r_liteprofile%20r_emailaddress"
+        >
           <Image
             src="../../assets/icons/linkedin.svg"
             className="linkedin_icon"
@@ -94,18 +109,13 @@ class Login extends Component {
       </div>
     );
   }
-
-  handleGSignFailure = (response) => { };
-
-  handleGSginSuccess = (response) => {
-    this.props.signInGoogle(response.tokenId);
-  };
 }
 
 const mapStateToProps = (state) => ({
   authState: state.auth.authState,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   signInEmail: (credentials) => dispatch(signInEmail(credentials)),
   signInGoogle: (idToken) => dispatch(signInGoogle(idToken)),
