@@ -61,6 +61,7 @@ class QuestionScreen extends Component {
             ))} */}
             </Card.Content>
           </Card>
+
         </Grid.Row>
       </Grid.Column> 
       </div> 
