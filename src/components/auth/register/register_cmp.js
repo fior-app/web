@@ -4,14 +4,18 @@ import { connect } from 'react-redux';
 import { registerWithEmailAndPassword } from '../../../store/actions/authActions';
 
 class Register extends Component {
-  state = {
-    email: '',
-    firstname: '',
-    lastname: '',
-    password: '',
-    passwordVerify: '',
-    isMatching: true,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      firstname: '',
+      lastname: '',
+      password: '',
+      passwordVerify: '',
+      isMatching: true,
+    };
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -33,7 +37,9 @@ class Register extends Component {
         name: `${firstname} ${lastname}`,
         password,
       });
-    } else this.setState({ isMatching: false });
+    } else {
+      this.setState({ isMatching: false });
+    }
   };
 
   render() {
@@ -83,7 +89,6 @@ class Register extends Component {
               type="password"
               placeholder="Verify Password"
               className="password_register"
-              error={!isMatching ? 'Passwords not matching' : null}
               required
               onChange={this.handleChange}
             />
@@ -96,9 +101,9 @@ class Register extends Component {
               />
               {/* add checked="checked" on checked */}
               <span className="checkmark" />
-              <label htmlFor="TnC" className="tnc_label">
+              <p className="tnc_label">
                 Agree to Terms and Conditions
-              </label>
+              </p>
             </div>
 
             <button type="submit" className="register_btn secondary_btn">
@@ -106,14 +111,14 @@ class Register extends Component {
             </button>
           </div>
         </form>
-        <button className="google_signin_btn google_register">
+        <button type="button" className="google_signin_btn google_register">
           <Image
             src="../../assets/icons/flat-color-icons_google.svg"
             className="google_icon"
           />
           <p>Register with Google</p>
         </button>
-        <button className="linkedin_signin_btn linkedin_register">
+        <button type="button" className="linkedin_signin_btn linkedin_register">
           <Image
             src="../../assets/icons/linkedin.svg"
             className="linkedin_icon"
@@ -129,8 +134,11 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
+// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
-  registerWithEmailAndPassword: (credentials) => dispatch(registerWithEmailAndPassword(credentials)),
+  registerWithEmailAndPassword: (credentials) => dispatch(
+    registerWithEmailAndPassword(credentials),
+  ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
