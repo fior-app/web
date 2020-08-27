@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import {
-  Grid, Icon, Label, Modal,
+  Confirm,
+  Grid, Icon, Label, LabelDetail, Modal,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+
 import CreateMentorspace from '../mentorspaces/create/create_mentorspace';
 import { getUserSkills, addUserSkills, deleteUserSkill } from '../../store/actions/skillActions';
 import SelectCategories from '../../components/categories/select_categories';
 import styles from '../../styles/profile.module.css';
+import VerifySkill from './verify/verify_skill';
 
 class ProfileMentor extends Component {
   constructor(props) {
@@ -16,6 +19,7 @@ class ProfileMentor extends Component {
     this.state = {
       showSkillsModal: false,
       showMentorspacesModal: false,
+      showSkillDeleteOf: null,
     };
   }
 
@@ -29,6 +33,10 @@ class ProfileMentor extends Component {
 
   closeMentorspacesModal = () => {
     this.setState({ showMentorspacesModal: false });
+  };
+
+  closeSkillDeleteModal = () => {
+    this.setState({ showSkillDeleteOf: null });
   };
 
   onSubmit = (skills) => {
@@ -49,9 +57,13 @@ class ProfileMentor extends Component {
                 <div className={styles.section_title}>
                   <h3>Skills</h3>
                   <Modal
-                    trigger={
-                      <Icon className={styles.add_icon} name="add" onClick={() => this.setState({ showSkillsModal: true })} />
-                    }
+                    trigger={(
+                      <Icon
+                        className={styles.add_icon}
+                        name="add"
+                        onClick={() => this.setState({ showSkillsModal: true })}
+                      />
+                    )}
                     size="mini"
                     onClose={this.closeSkillsModal}
                     open={this.state.showSkillsModal}
@@ -67,12 +79,23 @@ class ProfileMentor extends Component {
                 {
                   userSkills.length > 0
                     ? userSkills.map((userSkill) => (
-                      <Label key={userSkill.id}>
+                      <Label key={userSkill.id} image>
                         {userSkill.skill.name}
                         <Icon
-                          name="delete"
-                          onClick={() => this.props.deleteUserSkill(userSkill.id)}
+                          name="close"
+                          onClick={() => this.setState({ showSkillDeleteOf: userSkill.id })}
                         />
+                        <Confirm
+                          open={this.state.showSkillDeleteOf === userSkill.id}
+                          onCancel={() => this.closeSkillDeleteModal()}
+                          onConfirm={() => {
+                            this.props.deleteUserSkill(userSkill.id)
+                            this.closeSkillDeleteModal()
+                          }}
+                        />
+                        {userSkill.isVerified
+                          ? <LabelDetail>Verified</LabelDetail>
+                          : <VerifySkill userskillId={userSkill.id} skill={userSkill.skill} />}
                       </Label>
                     )) : <div>You dont have added any skills yet</div>
                 }
@@ -91,9 +114,13 @@ class ProfileMentor extends Component {
                 <div className={styles.section_title}>
                   <h3>Mentorspaces</h3>
                   <Modal
-                    trigger={
-                      <Icon className={styles.add_icon} name="add" onClick={() => this.setState({ showMentorspacesModal: true })} />
-                    }
+                    trigger={(
+                      <Icon
+                        className={styles.add_icon}
+                        name="add"
+                        onClick={() => this.setState({ showMentorspacesModal: true })}
+                      />
+                    )}
                     size="mini"
                     onClose={this.closeMentorspacesModal}
                     open={this.state.showMentorspacesModal}

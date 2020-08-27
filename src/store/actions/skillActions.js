@@ -76,3 +76,42 @@ export const deleteUserSkill = (userSkillId) => (dispatch) => {
       });
     });
 };
+
+export const getSkillQuestions = (skillId) => (dispatch) => {
+  dispatch({ type: actions.GET_SKILL_QUESTIONS_START });
+  axios
+    .get(`/skills/${skillId}/questions`)
+    .then((res) => {
+      dispatch({
+        type: actions.GET_SKILL_QUESTIONS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.GET_SKILL_QUESTIONS_FAILED,
+        payload: error,
+      });
+    });
+};
+
+export const verifyUserSkill = (userskillId, data) => (dispatch) => {
+  console.log(data);
+  dispatch({ type: actions.VERIFY_USER_SKILL_START });
+  axios
+    .post(`/userskills/${userskillId}/verify`, data)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: actions.VERIFY_USER_SKILL_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({
+        type: actions.VERIFY_USER_SKILL_FAILED,
+        payload: error,
+      });
+    });
+};
