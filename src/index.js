@@ -8,6 +8,7 @@ import FiorApp from './fior-app';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './store/reducers/rootReducer';
 import AxiosConfig from './config/axios-config';
+import 'semantic-ui-css/semantic.min.css';
 
 import './styles.css';
 
