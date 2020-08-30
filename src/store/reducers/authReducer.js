@@ -7,6 +7,7 @@ const initState = {
   },
   currentUser: null,
   isRegisterSuccess: false,
+  isRegistering: false,
   initialSignIn: false,
 };
 
@@ -108,16 +109,25 @@ const authReducer = (state = initState, action) => {
     case actions.LINKEDIN_SIGN_IN_SUCCESS:
       return linkedinSignInSuccess(state);
 
+    case 'REGISTER_START':
+      return {
+        ...state,
+        authError: null,
+        isRegistering: true,
+        isRegisterSuccess: true,
+      };
     case 'REGISTER_SUCCESS':
       return {
         ...state,
         authError: null,
+        isRegistering: false,
         isRegisterSuccess: true,
       };
     case 'REGISTER_ERROR':
       return {
         ...state,
         authError: 'Register failed!',
+        isRegistering: false,
         isRegisterSuccess: false,
       };
     case 'CURRENT_USER':

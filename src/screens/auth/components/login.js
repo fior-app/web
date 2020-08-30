@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 import { connect } from 'react-redux';
 import {
-  Button, Form, Icon, Image, Input, Divider,
+  Button, Form, Icon, Input, Divider, Message,
 } from 'semantic-ui-react';
 import { REACT_APP_GOOGLE_CLIENT_ID } from '../../../config/config';
 import { signInEmail, signInGoogle } from '../../../store/actions/authActions';
@@ -42,9 +42,12 @@ class Login extends Component {
     return (
       <div className="auth_container">
         <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <div>{authState.error && authState.error.data.message}</div>
-          </Form.Field>
+          {authState.error && (
+          <Message negative>
+            <Message.Header>Oops...</Message.Header>
+            <p>{authState.error.data.message}</p>
+          </Message>
+          )}
           <Form.Field>
             <Input
               type="email"
@@ -70,17 +73,11 @@ class Login extends Component {
               type="submit"
               className="signin_btn secondary_btn"
               disabled={authState.signingIn}
+              loading={authState.signingIn}
             >
               Login
             </Button>
           </Form.Field>
-          <div>
-            {authState.signingIn && (
-              <div className="auth-loading">
-                <Image src="assets/svg/loading.svg" size="tiny" />
-              </div>
-            )}
-          </div>
         </Form>
         <div className="v-spacer-2" />
         <Divider horizontal>Or</Divider>
@@ -94,7 +91,12 @@ class Login extends Component {
               onSuccess={this.handleGSignSuccess}
               cookiePolicy="single_host_origin"
               render={(renderProps) => (
-                <Button color="google plus" onClick={renderProps.onClick} disabled={renderProps.disabled} fluid>
+                <Button
+                  color="google plus"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  fluid
+                >
                   <Icon name="google" />
                   Sign in with Google
                 </Button>
@@ -102,7 +104,10 @@ class Login extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <a className="linkedin_signin_btn linkedin_signin" href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78imnw0jx3qczv&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fauth%2Flinkedin%2Fcallback&state=fooobar&scope=r_liteprofile%20r_emailaddress">
+            <a
+              className="linkedin_signin_btn linkedin_signin"
+              href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78imnw0jx3qczv&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fauth%2Flinkedin%2Fcallback&state=fooobar&scope=r_liteprofile%20r_emailaddress"
+            >
               <Button color="linkedin" fluid>
                 <Icon name="linkedin" />
                 Sign in with Linkedin

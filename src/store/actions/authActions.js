@@ -33,6 +33,7 @@ export const signInEmail = (credentials) => (dispatch) => {
 
 // Register action
 export const registerWithEmailAndPassword = (user) => (dispatch) => {
+  dispatch({ type: 'REGISTER_START' });
   axios
     .post('/auth/signup', user)
     .then((res) => {

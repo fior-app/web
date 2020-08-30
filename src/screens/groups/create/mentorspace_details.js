@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Modal } from 'semantic-ui-react';
-import Group from '../../../store/models/group';
 
 class MentorspaceDetails extends Component {
   constructor(props) {
@@ -83,10 +81,5 @@ class MentorspaceDetails extends Component {
     );
   }
 }
-
-MentorspaceDetails.propTypes = {
-  group: PropTypes.instanceOf(Group).isRequired,
-  handleNext: PropTypes.func.isRequired,
-};
 
 export default MentorspaceDetails;

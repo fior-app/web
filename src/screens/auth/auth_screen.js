@@ -5,8 +5,8 @@ import {
 import { connect } from 'react-redux';
 
 import { Redirect } from 'react-router-dom';
-import Register from '../../components/auth/register/register_cmp';
-import Login from '../../components/auth/login/login_cmp';
+import Register from './components/register';
+import Login from './components/login';
 
 const panes = [
   {
@@ -23,20 +23,18 @@ const AuthScreen = ({ currentUser }) => {
   if (currentUser) return <Redirect to="/" />;
 
   return (
-    <fragment>
-      <Container>
-        <Grid>
-          <Grid.Column width={10}>
-            <Image
-              src="https://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg"
-            />
-          </Grid.Column>
-          <Grid.Column width={6}>
-            <Tab panes={panes} />
-          </Grid.Column>
-        </Grid>
-      </Container>
-    </fragment>
+    <Container>
+      <Grid>
+        <Grid.Column width={10}>
+          <Image
+            src="https://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg"
+          />
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <Tab panes={panes} />
+        </Grid.Column>
+      </Grid>
+    </Container>
   );
 };
 

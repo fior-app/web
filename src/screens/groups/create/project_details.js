@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Modal } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import Project from '../../../store/models/project';
 
 class ProjectDetails extends Component {
   constructor(props) {
@@ -109,18 +107,5 @@ class ProjectDetails extends Component {
     );
   }
 }
-
-ProjectDetails.defaultProps = {
-  error: null,
-  loading: false,
-};
-
-ProjectDetails.propTypes = {
-  project: PropTypes.instanceOf(Project).isRequired,
-  handleCreateMentorspace: PropTypes.func.isRequired,
-  handleBack: PropTypes.func.isRequired,
-  error: PropTypes.string,
-  loading: PropTypes.string,
-};
 
 export default ProjectDetails;
