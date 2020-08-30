@@ -1,0 +1,28 @@
+.footer_container {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: linear-gradient(111.19deg, #028090 0%, #02c39a 100%);
+  border-radius: 20px 20px 0px 0px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0vw;
+}
+
+.footer_item_heading {
+  color: white;
+}
+
+.footer_column_item {
+  color: white;
+  margin-top: 1rem;
+}
+
+.social_container {
+  margin: 0rem 1rem;
+}
+
+.social_icon {
+  color: white;
+}
