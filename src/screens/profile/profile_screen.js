@@ -1,5 +1,7 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import React, { Component } from 'react';
+import {
+  Container, Grid, Image, Menu,
+} from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import {
   Switch, Route, NavLink, Redirect,
@@ -7,36 +9,64 @@ import {
 
 import ProfileMentor from './profile_mentor';
 import ProfileSettings from './profile_settings';
+import styles from '../../styles/profile.module.css';
 
-const ProfileScreen = () => (
-  <div className="container">
-    <div className="keep-margin spacer">
-      <Grid columns="equal">
-        <Grid.Row>
-          <Grid.Column>
-            <NavLink to="/profile/mentor" activeClassName="active">
-              <button type="button" className="btn-primary">Mentor</button>
-            </NavLink>
-          </Grid.Column>
-          <Grid.Column>
-            <button type="button" className="btn-primary">Mentee</button>
-          </Grid.Column>
-          <Grid.Column>
-            <NavLink to="/profile/settings" activeClassName="active">
-              <button type="button" className="btn-primary">Settings</button>
-            </NavLink>
-          </Grid.Column>
-          <Grid.Column width={10} />
-        </Grid.Row>
-        <div className="v-spacer-4" />
-      </Grid>
-      <Switch>
-        <Route exact path="/profile/mentor" component={ProfileMentor} />
-        <Route exact path="/profile/settings" component={ProfileSettings} />
-        <Redirect exact path="/profile" to="/profile/mentor" />
-      </Switch>
-    </div>
-  </div>
-);
+class ProfileScreen extends Component {
+  constructor(props) {
+    super(props);
 
-export default connect()(ProfileScreen);
+    this.state = {
+      avatarUrl: 'https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg',
+    };
+  }
+
+  render() {
+    const { avatarUrl } = this.state;
+    const { user } = this.props;
+
+    return (
+      <Container>
+        <Grid columns="equal">
+          <Grid.Column width={4}>
+            <Image src={avatarUrl} alt="avatar" circular />
+
+            <h2>{user && user.name}</h2>
+            <p>{user && user.bio ? user.bio : 'Something interesting'}</p>
+
+            <Grid.Row className={styles.section_wrapper}>
+              <h3>Organizations</h3>
+              <div>You havent joined to any organization yet</div>
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column>
+            <Grid.Row>
+              <Menu tabular>
+                <Menu.Item as={NavLink} name="mentor" to="/profile/mentor">
+                  Mentor
+                </Menu.Item>
+                <Menu.Item as={NavLink} name="settings" to="/profile/settings">
+                  Settings
+                </Menu.Item>
+              </Menu>
+            </Grid.Row>
+            <Grid.Row>
+              <Switch>
+                <Route exact path="/profile/mentor" component={ProfileMentor} />
+                <Route exact path="/profile/settings" component={ProfileSettings} />
+                <Redirect exact path="/profile" to="/profile/mentor" />
+              </Switch>
+            </Grid.Row>
+          </Grid.Column>
+        </Grid>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  user: state.auth.currentUser,
+});
+
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

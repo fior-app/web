@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import {
-  Search, Modal, Label, Icon,
+  Search, Modal, Label, Icon, Header,
 } from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -78,7 +78,7 @@ const AddSkills = ({
 
   return (
     <div className="modal">
-      <div className="card-header">Add Skills</div>
+      <Header className="card-header">Add Skills</Header>
       <Modal.Content>
         <Modal.Description>
           <Search

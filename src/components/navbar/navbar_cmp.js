@@ -48,7 +48,7 @@ class Navbar extends Component {
               <Dropdown.Menu>
                 <Dropdown.Item
                   onClick={this.handleProfileClick}
-                  text="Proflie"
+                  text="Profile"
                 />
                 <Dropdown.Item
                   onClick={this.handleSignOutClick}

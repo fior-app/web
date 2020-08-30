@@ -1,0 +1,11 @@
+.section_wrapper {
+  margin-top: 2rem;
+}
+
+.section_title {
+  display: flex;
+}
+
+.section_title > h3 {
+  margin-right: 1rem;
+}

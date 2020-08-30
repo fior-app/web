@@ -16,7 +16,6 @@ import Footer from './components/footer/footer';
 
 import AuthRequire from './HOC/authRequire';
 import UnauthRequire from './HOC/unauthRequire';
-import SideNav from './components/sidenav/sidenav_cmp';
 import { userMeInitial } from './store/actions/authActions';
 import PricingScreen from './screens/pricing/pricing_screen';
 import QuestionScreen from './screens/question/question_screen';
@@ -43,7 +42,6 @@ class FiorApp extends Component {
         <div className="App">
           <Navbar />
           <div className="row">
-            <SideNav />
             <Switch>
               <Route exact path="/" component={LandingScreen} />
               <Route

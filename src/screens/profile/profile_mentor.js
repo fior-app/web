@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import {
-  Grid, Card, Icon, Modal,
+  Grid, Icon, Label, Modal,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { signOut } from '../../store/actions/authActions';
 import { getUserSkills, addUserSkills, deleteUserSkill } from '../../store/actions/skillActions';
-import AddSkills from './skills/AddSkills';
+import AddSkills from './skills/add_skills';
+import styles from '../../styles/profile.module.css';
 
 class ProfileMentor extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      avatarUrl: 'https://i.ytimg.com/vi/9K46DNoE3Ko/maxresdefault.jpg',
       showModal: false,
     };
   }
@@ -31,12 +30,7 @@ class ProfileMentor extends Component {
     this.props.addUserSkills(skills.map((skill) => skill.id));
   };
 
-  handleSignOut = () => {
-    this.props.signOut();
-  };
-
   render() {
-    const { avatarUrl } = this.state;
     const { user, userSkills } = this.props;
 
     if (!user) return <Redirect to="/" />;
@@ -45,46 +39,10 @@ class ProfileMentor extends Component {
       <div>
         <Grid columns="equal">
           <Grid.Row>
-            <Grid.Column>
-              {/* <Image src={avatarUrl} size='small' circular /> */}
-              <img src={avatarUrl} alt="avatar" className="avatar" />
-            </Grid.Column>
             <Grid.Column width={8}>
-              <h2>{user && user.name}</h2>
-              <h4>{user && user.bio ? user.bio : 'Something interesting'}</h4>
-            </Grid.Column>
-            <Grid.Column>
-              <div className="card-primary">
-                <div className="card-content">
-                  <div className="card-header">Activity</div>
-                  <Card.Description>
-                    You dont have any activity yet
-                  </Card.Description>
-                </div>
-              </div>
-            </Grid.Column>
-          </Grid.Row>
-          <div className="v-spacer-2" />
-          <Grid.Row>
-            <Grid.Column width={8}>
-              <div>
-                <h2>Groups</h2>
-                <div className="v-spacer-2" />
-                <div>You havent joined to any group yet</div>
-                <div className="v-spacer-2" />
-              </div>
-              <div className="v-spacer-4" />
-              <div>
-                <h2>Organizations</h2>
-                <div className="v-spacer-2" />
-                <div>You havent joined to any organization yet</div>
-                <div className="v-spacer-2" />
-              </div>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <div>
-                <div className="row j-between">
-                  <h2>Skills</h2>
+              <Grid.Row className={styles.section_wrapper}>
+                <div className={styles.section_title}>
+                  <h3>Skills</h3>
                   <Modal
                     trigger={
                       <Icon name="add" onClick={() => this.setState({ showModal: true })} />
@@ -101,58 +59,40 @@ class ProfileMentor extends Component {
                     />
                   </Modal>
                 </div>
-                <div className="divider-color" />
-                <div className="v-spacer-2" />
-                <div className="row">
-                  {
-                    userSkills.length > 0
-                      ? userSkills.map((userSkill) => (
-                        <div className="label-primary" key={userSkill.id}>
-                          <span>{userSkill.skill.name}</span>
-                          <Icon
-                            name="delete"
-                            onClick={() => this.props.deleteUserSkill(userSkill.id)}
-                          />
-                        </div>
-                      )) : <div>You dont have added any skills yet</div>
-                  }
-                </div>
-                <div className="v-spacer-2" />
-              </div>
-              <div className="v-spacer-4" />
-              <div>
-                <h2>Medals</h2>
-                <div className="divider-color" />
-                <div className="v-spacer-2" />
+                {
+                  userSkills.length > 0
+                    ? userSkills.map((userSkill) => (
+                      <Label key={userSkill.id}>
+                        {userSkill.skill.name}
+                        <Icon
+                          name="delete"
+                          onClick={() => this.props.deleteUserSkill(userSkill.id)}
+                        />
+                      </Label>
+                    )) : <div>You dont have added any skills yet</div>
+                }
+              </Grid.Row>
+              <Grid.Row className={styles.section_wrapper}>
+                <h3>Medals</h3>
                 <div>You dont have added any medals yet</div>
-                <div className="v-spacer-2" />
-              </div>
-              <div className="v-spacer-4" />
-              <div>
-                <h2>Active Points</h2>
-                <div className="divider-color" />
-                <div className="v-spacer-2" />
+              </Grid.Row>
+              <Grid.Row className={styles.section_wrapper}>
+                <h3>Active Points</h3>
                 <div>You dont have added any active points yet</div>
-                <div className="v-spacer-2" />
-              </div>
-              <div className="v-spacer-4" />
-              <div>
-                <h2>Feedbacks</h2>
-                <div className="divider-color" />
-                <div className="v-spacer-2" />
+              </Grid.Row>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <Grid.Row className={styles.section_wrapper}>
+                <h3>Groups</h3>
+                <div>You havent joined to any group yet</div>
+              </Grid.Row>
+              <Grid.Row className={styles.section_wrapper}>
+                <h3>Feedbacks</h3>
                 <div>You havent recieved any feedback yet</div>
-                <div className="v-spacer-2" />
-              </div>
-              <div className="v-spacer-4" />
+              </Grid.Row>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <div className="v-spacer-2" />
-        <div className="row end">
-          <button type="button" className="btn-primary" onClick={this.handleSignOut}>
-            Sign Out
-          </button>
-        </div>
       </div>
     );
   }
@@ -164,7 +104,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  signOut: () => dispatch(signOut()),
   getUserSkills: () => dispatch(getUserSkills()),
   addUserSkills: (skillIds) => dispatch(addUserSkills(skillIds)),
   deleteUserSkill: (userSkillId) => dispatch(deleteUserSkill(userSkillId)),

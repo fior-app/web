@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Grid, Form } from 'semantic-ui-react';
+import {
+  Grid, Form, Button,
+} from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { updateMe } from '../../store/actions/userActions';
+import styles from '../../styles/profile.module.css';
 
 class ProfileSettings extends Component {
   constructor(props) {
@@ -26,9 +29,7 @@ class ProfileSettings extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    super.componentDidUpdate(prevProps, prevState, snapshot);
-
+  componentDidUpdate(prevProps) {
     const newProps = this.props;
     if (prevProps.user !== newProps.user) {
       // eslint-disable-next-line react/no-did-update-set-state
@@ -60,45 +61,36 @@ class ProfileSettings extends Component {
       <div>
         <Grid>
           <Grid.Column>
-            <Grid.Row>
-              <div>
-                <h2>Settings</h2>
-              </div>
-            </Grid.Row>
-            <div className="v-spacer-2" />
-            <Grid.Row stretched>
+            <Grid.Row stretched className={styles.section_wrapper}>
+              <h3>Edit Profile</h3>
               <Form className="spacer" onSubmit={this.handleSubmit}>
                 <Form.Field>
-                  <label htmlFor="name">
-                    Name
-                    <input
-                      type="text"
-                      name="name"
-                      value={this.state.name ? this.state.name : ''}
-                      onChange={this.handleChange}
-                    />
-                  </label>
+                  <Form.Input
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    value={this.state.name ? this.state.name : ''}
+                    onChange={this.handleChange}
+                  />
                 </Form.Field>
                 <Form.Field>
-                  <label htmlFor="bio">
-                    Bio
-                    <textarea
-                      name="bio"
-                      value={this.state.bio ? this.state.bio : ''}
-                      onChange={this.handleChange}
-                    />
-                  </label>
+                  <Form.TextArea
+                    label="About"
+                    name="bio"
+                    placeholder="Tell more about you..."
+                    value={this.state.bio ? this.state.bio : ''}
+                    onChange={this.handleChange}
+                  />
                 </Form.Field>
-                <div>
-                  Loading:
-                  {`${updateState.isLoading}`}
-                </div>
-                <button
-                  type="submit"
-                  className="secondary_btn"
-                >
-                  Save
-                </button>
+                <Form.Field>
+                  <Button
+                    type="submit"
+                    disabled={updateState.isLoading}
+                    loading={updateState.isLoading}
+                  >
+                    Save
+                  </Button>
+                </Form.Field>
               </Form>
             </Grid.Row>
           </Grid.Column>
