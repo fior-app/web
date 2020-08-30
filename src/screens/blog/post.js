@@ -44,7 +44,6 @@ const mapStateToProps = (state) => ({
   error: state.blog.posts.error,
 });
 
-// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   getPosts: (post) => dispatch(getPosts(post)),
 });

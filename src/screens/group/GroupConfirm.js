@@ -28,7 +28,6 @@ const mapStateToProps = (state) => ({
   error: state.groups.changeGroupState.error,
 });
 
-// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   changeGroupState: (groupId, state) => dispatch(changeGroupState(groupId, state)),
 });

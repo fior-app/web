@@ -134,7 +134,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   registerWithEmailAndPassword: (credentials) => dispatch(
     registerWithEmailAndPassword(credentials),

@@ -62,7 +62,6 @@ const mapStateToProps = (state) => ({
   error: state.blog.writePost.error,
 });
 
-// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   writeBlog: (post) => dispatch(writeBlog(post)),
   clearWritePost: () => dispatch(clearWritePost()),

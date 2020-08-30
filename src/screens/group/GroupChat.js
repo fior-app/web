@@ -89,7 +89,6 @@ const mapStateToProps = (state) => ({
   msgError: state.groups.sendGroupMessage.error,
 });
 
-// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   getGroupMessages: (groupId) => dispatch(getGroupMessages(groupId)),
   sendGroupMessage: (roomId, message) => dispatch(sendGroupMessage(roomId, message)),

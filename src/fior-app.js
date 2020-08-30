@@ -94,7 +94,6 @@ const mapStateToProps = (state) => ({
   initialSignIn: state.auth.initialSignIn,
 });
 
-// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   userMeInitial: () => dispatch(userMeInitial()),
 });

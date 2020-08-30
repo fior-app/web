@@ -74,7 +74,6 @@ const mapStateToProps = (state) => ({
   error: state.groups.inviteMember.error,
 });
 
-// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   inviteMember: (groupId, email) => dispatch(inviteMember(groupId, email)),
 });

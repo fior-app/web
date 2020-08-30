@@ -163,7 +163,6 @@ const mapStateToProps = (state) => ({
   userSkills: state.skills.userSkills,
 });
 
-// eslint-disable-next-line react-redux/mapDispatchToProps-prefer-shorthand
 const mapDispatchToProps = (dispatch) => ({
   signOut: () => dispatch(signOut()),
   getUserSkills: () => dispatch(getUserSkills()),
