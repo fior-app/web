@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Container, Grid, Image, Menu,
+  Container, Grid, Image, Menu, Icon, Loader,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import {
@@ -16,19 +16,29 @@ class ProfileScreen extends Component {
     super(props);
 
     this.state = {
-      avatarUrl: 'https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg',
+      defAvatarUrl: 'https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg',
+      isLoading: true,
     };
   }
 
   render() {
-    const { avatarUrl } = this.state;
+    const { defAvatarUrl, isLoading } = this.state;
     const { user } = this.props;
 
     return (
       <Container>
         <Grid columns="equal">
           <Grid.Column width={4}>
-            <Image src={avatarUrl} alt="avatar" circular />
+
+            <div className={styles.avatar_container}>
+              <Image className={styles.avatar} src={user && user.profilePicture ? user.profilePicture : defAvatarUrl} alt="avatar" circular />
+              <div className={styles.avatar_mid}>
+                <label htmlFor="upload">
+                  <Icon className={styles.avatar_upload_icon} name="upload" size="big" />
+                  <input id="upload" className={styles.avatar_input} type="file" accept="image/x-png, image/gif, image/jpeg" />
+                </label>
+              </div>
+            </div>
 
             <h2>{user && user.name}</h2>
             <p>{user && user.bio ? user.bio : 'Something interesting'}</p>
