@@ -13,14 +13,6 @@ class Navbar extends Component {
     this.state = {};
   }
 
-  handleSignInClick = () => {
-    this.props.history.push('/login');
-  };
-
-  handleProfileClick = () => {
-    this.props.history.push('/profile');
-  };
-
   handleSignOutClick = () => {
     // eslint-disable-next-line no-shadow
     const { history, signOut } = this.props;
@@ -28,68 +20,44 @@ class Navbar extends Component {
     history.push('/');
   };
 
-  renderSignedInNavbar() {
-    return (
-      <Menu secondary>
-        <NavLink to="/">
-          <div className={styles.fior_logo}>
-            <Image
-              src="../../assets/logo/logo.svg"
-              alt="Fior Logo"
-              size="small"
-            />
-          </div>
-        </NavLink>
-        <Menu.Menu position="right">
-          <Menu.Item>Find Mentees</Menu.Item>
-          <Menu.Item>Find Mentors</Menu.Item>
-          <div className={styles.avatar}>
-            <Dropdown simple icon="user">
-              <Dropdown.Menu>
-                <Dropdown.Item
-                  onClick={this.handleProfileClick}
-                  text="Profile"
-                />
-                <Dropdown.Item
-                  onClick={this.handleSignOutClick}
-                  text="Sign Out"
-                />
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-        </Menu.Menu>
-      </Menu>
-    );
-  }
-
-  renderSignedOutNavbar() {
-    return (
-      <Menu secondary>
-        <NavLink to="/">
-          <div className={styles.fior_logo}>
-            <Image
-              src="../../assets/logo/logo.svg"
-              alt="Fior Logo"
-              size="small"
-            />
-          </div>
-        </NavLink>
-        <Menu.Menu position="right">
-          <Menu.Item onClick={this.handleSignInClick}>Sign In</Menu.Item>
-        </Menu.Menu>
-      </Menu>
-    );
-  }
-
   render() {
     const { user } = this.props;
 
     return (
-      <>
-        <div className={styles.keep_margin}>
-          {user ? this.renderSignedInNavbar() : this.renderSignedOutNavbar()}
-        </div>
-      </>
+      <Menu secondary>
+        <NavLink to="/">
+          <div className={styles.fior_logo}>
+            <Image
+              src="../../assets/logo/logo.svg"
+              alt="Fior Logo"
+              size="small"
+            />
+          </div>
+        </NavLink>
+        <Menu.Menu position="left">
+          <Menu.Item as={NavLink} name="blog" to="/blog">Blog</Menu.Item>
+          <Menu.Item as={NavLink} name="forum" to="/forum">Forum</Menu.Item>
+        </Menu.Menu>
+        <Menu.Menu position="right">
+          {user ? (
+            <>
+              <Menu.Item>Find Mentees</Menu.Item>
+              <Menu.Item>Find Mentors</Menu.Item>
+              <div className={styles.avatar}>
+                <Dropdown simple icon="user">
+                  <Dropdown.Menu>
+                    <Dropdown.Item as={NavLink} text="Profile" to="/profile" />
+                    <Dropdown.Item
+                      onClick={this.handleSignOutClick}
+                      text="Sign Out"
+                    />
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            </>
+          ) : <Menu.Item as={NavLink} text="Login" to="/login">Sign In</Menu.Item>}
+        </Menu.Menu>
+      </Menu>
     );
   }
 }

@@ -65,10 +65,10 @@ class FiorApp extends Component {
                 component={AuthRequire(MentorspaceScreen)}
               />
               <Route exact path="/orgs" component={LandingScreen} />
-              <Route exact path="/question-forum" component={QuestionScreen} />
+              <Route exact path="/forum" component={QuestionScreen} />
               <Route
                 exact
-                path="/question-forum/create"
+                path="/forum/create"
                 component={CreateQuestion}
               />
               <Route exact path="/blog" component={BlogScreen} />
