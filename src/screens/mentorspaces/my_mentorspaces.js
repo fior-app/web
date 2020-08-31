@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Card, Grid, } from 'semantic-ui-react';
-import { Link, } from 'react-router-dom';
-import styles from '../../styles/mentorspaces.module.css';
-import { getGroupsMe } from '../../store/actions/mentorspaceActions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Card, Grid } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import styles from "../../styles/mentorspaces.module.css";
+import { getGroupsMe } from "../../store/actions/mentorspaceActions";
 
 class MyMentorspaces extends Component {
   componentDidMount() {
@@ -13,16 +13,14 @@ class MyMentorspaces extends Component {
   render() {
     const { loading, mentorspaces, error } = this.props;
 
-    console.log(mentorspaces);
-
     if (loading) {
       return (
         <Grid>
           <Grid.Row>
             <div className="group-item">
               <div className="group-header">Loading</div>
-              <div className="v-spacer"/>
-              <div/>
+              <div className="v-spacer" />
+              <div />
             </div>
           </Grid.Row>
         </Grid>
@@ -36,7 +34,8 @@ class MyMentorspaces extends Component {
             <Card
               as={Link}
               to={`/mentorspaces/${mentorspaceItem.group.id}`}
-              key={mentorspaceItem.id}>
+              key={mentorspaceItem.id}
+            >
               <Card.Content>
                 <Card.Header>{mentorspaceItem.group.name}</Card.Header>
                 <Card.Meta>

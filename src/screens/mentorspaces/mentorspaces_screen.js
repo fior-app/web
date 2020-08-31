@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import {
-  Modal, Button, Icon, Container,
-} from 'semantic-ui-react';
-import CreateMentorspace from './create/create_mentorspace';
+import { Modal, Button, Icon, Container } from "semantic-ui-react";
+import CreateMentorspace from "./create/create_mentorspace";
 
-import MyMentorspaces from './my_mentorspaces';
-import MentorspaceRequests from './mentorspace_requests';
+import MyMentorspaces from "./my_mentorspaces";
+// import MentorspaceRequests from './mentorspace_requests';
 
 class MentorspacesScreen extends Component {
   constructor(props) {
@@ -27,7 +25,7 @@ class MentorspacesScreen extends Component {
     return (
       <Container>
         <Modal
-          trigger={(
+          trigger={
             <Button
               icon
               className="btn-primary"
@@ -36,7 +34,7 @@ class MentorspacesScreen extends Component {
               <Icon name="add" />
               &nbsp; Create Mentorspace
             </Button>
-          )}
+          }
           size="mini"
           closeIcon
           onClose={this.closeModal}
@@ -45,9 +43,7 @@ class MentorspacesScreen extends Component {
           <CreateMentorspace closeModal={this.closeModal} />
         </Modal>
 
-        <h2>
-          Mentorspaces
-        </h2>
+        <h2>Mentorspaces</h2>
         <MyMentorspaces />
       </Container>
     );
