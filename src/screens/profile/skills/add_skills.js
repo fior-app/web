@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import {
-  Search, Modal, Label, Icon, Header,
+  Search, Label, Icon, Button,
 } from 'semantic-ui-react';
 import axios from 'axios';
+import styles from '../../../styles/profile.module.css';
 
 const AddSkills = ({
   existingSkills = [],
@@ -76,56 +77,59 @@ const AddSkills = ({
     closeModal();
   };
 
+  // Custom css has used as model attributes doesn't work
   return (
-    <div className="modal">
-      <Header className="card-header">Add Skills</Header>
-      <Modal.Content>
-        <Modal.Description>
-          <Search
-            loading={skillsState.isLoading}
-            onResultSelect={selectSkill}
-            onSearchChange={_.debounce(fetchSkills, 500, {
-              leading: true,
-            })}
-            results={skillsState.results}
-            value={skillsState.value}
-          />
-          <h4>Selected Skills</h4>
-          {skillsState.selected.length > 0 ? (
-            <div>
-              {skillsState.selected.map((selected) => (
-                <Label as="a" key={selected.id}>
-                  {selected.title}
-                  <Icon name="delete" onClick={() => removeSkill(selected)} />
-                </Label>
-              ))}
-            </div>
-          ) : <div>No skills selected yet.</div>}
-          {existingSkills.length > 0 ? (
-            <div>
-              <div className="v-spacer-1" />
-              <h4>Existing Skills</h4>
-              <div>
-                {existingSkills.map((skill) => (
-                  <Label as="a" key={skill.id}>
-                    {skill.name}
-                  </Label>
-                ))}
-              </div>
-            </div>
-          ) : null}
-          <div className="row end">
-            <button
-              type="button"
-              className="btn-alternate"
-              onClick={handleOnSet}
-              disabled={skillsState.selected.length === 0}
-            >
-              Set
-            </button>
+    <div className={styles.add_skill_container}>
+      <h3>
+        Add Skills
+      </h3>
+
+      <div className={styles.row}>
+        <Search
+          loading={skillsState.isLoading}
+          onResultSelect={selectSkill}
+          onSearchChange={_.debounce(fetchSkills, 500, {
+            leading: true,
+          })}
+          results={skillsState.results}
+          value={skillsState.value}
+          fluid
+        />
+      </div>
+
+      <h4>Selected Skills</h4>
+      {skillsState.selected.length > 0 ? (
+        <div>
+          {skillsState.selected.map((selected) => (
+            <Label as="a" key={selected.id}>
+              {selected.title}
+              <Icon name="delete" onClick={() => removeSkill(selected)} />
+            </Label>
+          ))}
+        </div>
+      ) : <div>No skills selected yet.</div>}
+      {existingSkills.length > 0 ? (
+        <div>
+          <div className="v-spacer-1" />
+          <h4>Existing Skills</h4>
+          <div>
+            {existingSkills.map((skill) => (
+              <Label as="a" key={skill.id}>
+                {skill.name}
+              </Label>
+            ))}
           </div>
-        </Modal.Description>
-      </Modal.Content>
+        </div>
+      ) : null}
+
+      <div className={styles.actions}>
+        <Button
+          onClick={handleOnSet}
+          disabled={skillsState.selected.length === 0}
+        >
+          Set
+        </Button>
+      </div>
     </div>
   );
 };

@@ -45,12 +45,12 @@ class ProfileMentor extends Component {
                   <h3>Skills</h3>
                   <Modal
                     trigger={
-                      <Icon name="add" onClick={() => this.setState({ showModal: true })} />
+                      <Icon className={styles.add_icon} name="add" onClick={() => this.setState({ showModal: true })} />
                     }
                     size="mini"
-                    closeIcon
                     onClose={this.closeModal}
                     open={this.state.showModal}
+                    closeIcon
                   >
                     <AddSkills
                       existingSkills={userSkills.map((userSkill) => userSkill.skill)}
