@@ -22,24 +22,22 @@ export const getPosts = () => (dispatch) => {
     });
 };
 
-export const writeBlog = (post) => (dispatch) => {
-  dispatch({ type: actions.WRITE_POST_START });
+export const initiateCreatingBlogPost = () => (dispatch) => {
+  dispatch({ type: actions.CREATE_BLOG_POST_INITIATING });
+};
+
+export const createBlogPost = (post) => (dispatch) => {
+  dispatch({ type: actions.CREATE_BLOG_POST_START });
   axios
     .post('/posts/', post)
     .then(() => {
-      dispatch({ type: actions.WRITE_POST_SUCCESS });
-      dispatch({ type: actions.WRITE_POST_END });
+      dispatch({ type: actions.CREATE_BLOG_POST_SUCCESS });
       getPosts()(dispatch);
     })
     .catch((error) => {
       dispatch({
-        type: actions.WRITE_POST_FAILED,
+        type: actions.CREATE_BLOG_POST_FAILED,
         payload: error,
       });
-      dispatch({ type: actions.WRITE_POST_END });
     });
-};
-
-export const clearWritePost = () => (dispatch) => {
-  dispatch({ type: actions.CLEAR_WRITE_POST });
 };

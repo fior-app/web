@@ -1,188 +1,87 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import './blog.css';
+import { NavLink } from 'react-router-dom';
+import {
+  Container, Grid, Button, Pagination,
+} from 'semantic-ui-react';
+import RecentPosts from './recent_posts';
+import Categories from './categories';
+import Post from './post';
+import { getPosts } from '../../store/actions/blogActions';
 
-const BlogScreen = () => (
-  <div className="container">
-    {/* <SideNav /> */}
+const BlogScreen = ({
+  posts,
+  dispatchGetPosts,
+}) => {
+  const initialState = {
+    activePage: 1,
+    limit: 5,
+  };
 
-    <div className="blog_container_right">
-      {/* Blog Header */}
-      <div className="blog_header">
-        <img
-          className="blogicon"
-          src="../../assets/vectors/blogicon.svg"
-          alt="design"
-        />
-        <img
-          className="blogicon7"
-          src="../../assets/vectors/blogicon7.svg"
-          alt="design"
-        />
-        <img
-          className="blogicon2"
-          src="../../assets/vectors/blogicon2.svg"
-          alt="design"
-        />
-        <img
-          className="blogicon5"
-          src="../../assets/vectors/blogicon5.svg"
-          alt="design"
-        />
-        <img
-          className="blogicon6"
-          src="../../assets/vectors/blogicon6.svg"
-          alt="design"
-        />
-        <img
-          className="blogicon4"
-          src="../../assets/vectors/blogicon4.svg"
-          alt="design"
-        />
-        <img
-          className="blogicon3"
-          src="../../assets/vectors/blogicon3.svg"
-          alt="design"
-        />
-      </div>
-      {/* End of Blog Header */}
+  const [blogState, setBlogState] = useState(initialState);
 
-      {/* <div style={{ marginTop: "550px", position: "absolute" }}>
-          <WriteBlogScreen />
-        </div>
+  const recentPosts = [{
+    id: '0',
+    title: 'Test',
+    date: '20 Aug 2020',
+  }];
 
-        <Posts /> */}
+  const categories = [{
+    id: '0',
+    name: 'Android',
+    posts: 255,
+  }];
 
-      {/* Blog Content */}
-      <div className="blog_content">
-        {/* Mid Col Blog Items */}
-        <div className="blog_items_col">
-          {/* Blog Item Row */}
-          <div className="blog_item">
-            {/* Blog Date */}
-            <div className="blog_date_bg">
-              <p className="blog_date">date of post</p>
-            </div>
-            {/* End of Blog Date */}
+  useEffect(() => {
+    dispatchGetPosts();
+  }, []);
 
-            {/* Blog Card */}
-            <div className="blog_card">
-              <img
-                className="blog_image"
-                src="../../assets/vectors/blogimage.svg"
-                alt="desgin"
-              />
-              <div className="blog_card_catergory">
-                <p>Catergory</p>
-                <p className="post_title">Post title</p>
-                <p className="post_meta">Here is the content of the blog</p>
-                <p className="post_author">Author</p>
-              </div>
-            </div>
-            {/* End of Blog Card */}
-          </div>
-          {/* End of Blog Item Row */}
+  const handlePaginationChange = (e, { activePage }) => setBlogState((state) => ({
+    ...state,
+    activePage,
+  }));
 
-          {/* Blog Item Row */}
-          <div className="blog_item">
-            {/* Blog Date */}
-            <div className="blog_date_bg">
-              <p className="blog_date">date of post</p>
-            </div>
-            {/* End of Blog Date */}
+  const getPageStart = () => blogState.limit * (blogState.activePage - 1);
+  const getPageEnd = () => getPageStart() + blogState.limit;
 
-            {/* Blog Card */}
-            <div className="blog_card">
-              <img
-                className="blog_image"
-                src="../../assets/vectors/blogimage.svg"
-                alt="desgin"
-              />
-              <div className="blog_card_catergory">
-                <p>Catergory</p>
-                <p className="post_title">Post title</p>
-                <p className="post_meta">Here is the content of the blog</p>
-                <p className="post_author">Author</p>
-              </div>
-            </div>
-            {/* End of Blog Card */}
-          </div>
-          {/* End of Blog Item Row */}
+  return (
+    <Container>
+      <Grid columns="equal">
+        <Grid.Column>
+          <Grid.Row>
+            {posts.slice(getPageStart(), getPageEnd())
+              .map((post) => (
+                <Post key={post.id} post={post} />
+              ))}
+          </Grid.Row>
+          <Grid.Row>
+            <Pagination
+              activePage={blogState.activePage}
+              firstItem={null}
+              lastItem={null}
+              onPageChange={handlePaginationChange}
+              totalPages={posts.length / 5}
+            />
+          </Grid.Row>
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <Button as={NavLink} to="/blog/create" primary>Create Post</Button>
+          <Categories categories={categories} />
+          <RecentPosts posts={recentPosts} />
+        </Grid.Column>
+      </Grid>
+    </Container>
+  );
+};
 
-          {/* Blog Item Row */}
-          <div className="blog_item">
-            {/* Blog Date */}
-            <div className="blog_date_bg">
-              <p className="blog_date">date of post</p>
-            </div>
-            {/* End of Blog Date */}
+const mapStateToProps = (state) => ({
+  loading: state.blog.posts.loading,
+  error: state.blog.posts.error,
+  posts: state.blog.posts.posts,
+});
 
-            {/* Blog Card */}
-            <div className="blog_card">
-              <img
-                className="blog_image"
-                src="../../assets/vectors/blogimage.svg"
-                alt="desgin"
-              />
-              <div className="blog_card_catergory">
-                <p>Catergory</p>
-                <p className="post_title">Post title</p>
-                <p className="post_meta">Here is the content of the blog</p>
-                <p className="post_author">Author</p>
-              </div>
-            </div>
-            {/* End of Blog Card */}
-          </div>
-          {/* End of Blog Item Row */}
-        </div>
-        {/* End of Mid Col Blog Items */}
-
-        {/* Right Nav */}
-        <div className="blog_right_row">
-          <button type="button" className="icon_btn secondary_btn">
-            <img src="../../assets/icons/add.svg" alt="desgin" />
-            Create new post
-          </button>
-
-          <div className="blog_catergory">
-            <p className="catergory_title1">Catergory</p>
-
-            <div className="catergory_types">
-              <div className="catergory_name">
-                <p>Catergory type</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="blog_recent_posts">
-            <p className="recent_blog_title1">Recent Posts</p>
-
-            <div className="recent_posts_types">
-              <div className="recent_post_title1">
-                <p>post title</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* End of Right Nav */}
-      </div>
-      {/* End of Blog Content */}
-
-      {/* Pagination */}
-      <div className="pagination">
-        <div className="pagination_content">
-          <button type="button">Prev</button>
-          <input type="number" />
-          <button type="button">Next</button>
-        </div>
-      </div>
-      {/* End of Pagination */}
-    </div>
-  </div>
-);
-
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+  dispatchGetPosts: () => dispatch(getPosts()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogScreen);

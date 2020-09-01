@@ -13,7 +13,15 @@ const initState = {
   },
 };
 
-const writePostStart = (state) => ({
+const createBlogPostInitiating = (state) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    ...initState.writePost,
+  },
+});
+
+const createBlogPostStart = (state) => ({
   ...state,
   writePost: {
     ...state.writePost,
@@ -21,26 +29,21 @@ const writePostStart = (state) => ({
   },
 });
 
-const writePostEnd = (state) => ({
+const createBlogPostFailed = (state, payload) => ({
   ...state,
   writePost: {
     ...state.writePost,
     loading: false,
-  },
-});
-
-const writePostFailed = (state, payload) => ({
-  ...state,
-  writePost: {
-    ...state.writePost,
     error: payload,
+    success: false,
   },
 });
 
-const writePostSuccess = (state) => ({
+const createBlogPostSuccess = (state) => ({
   ...state,
   writePost: {
     ...state.writePost,
+    loading: false,
     error: null,
     success: true,
   },
@@ -86,32 +89,19 @@ const getBlogPosts = (state, payload) => ({
   },
 });
 
-const clearWritePost = (state) => ({
-  ...state,
-  writePost: {
-    ...state.writePost,
-    error: null,
-    success: false,
-    loading: false,
-  },
-});
-
 const blogReducer = (state = initState, action) => {
   switch (action.type) {
-    case actions.WRITE_POST_START:
-      return writePostStart(state);
+    case actions.CREATE_BLOG_POST_INITIATING:
+      return createBlogPostInitiating(state);
 
-    case actions.WRITE_POST_END:
-      return writePostEnd(state);
+    case actions.CREATE_BLOG_POST_START:
+      return createBlogPostStart(state);
 
-    case actions.WRITE_POST_SUCCESS:
-      return writePostSuccess(state);
+    case actions.CREATE_BLOG_POST_FAILED:
+      return createBlogPostFailed(state, action.payload);
 
-    case actions.WRITE_POST_FAILED:
-      return writePostFailed(state, action.payload);
-
-    case actions.CLEAR_WRITE_POST:
-      return clearWritePost(state);
+    case actions.CREATE_BLOG_POST_SUCCESS:
+      return createBlogPostSuccess(state);
 
     case actions.GET_POSTS_START:
       return getBlogPostsStart(state);

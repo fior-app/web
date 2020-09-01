@@ -20,6 +20,7 @@ import { userMeInitial } from './store/actions/authActions';
 import PricingScreen from './screens/pricing/pricing_screen';
 import QuestionScreen from './screens/question/question_screen';
 import CreateQuestion from './screens/question/create_question';
+import CreateBlogPost from './screens/blog/create/create_blog_post';
 
 class FiorApp extends Component {
   componentDidMount() {
@@ -72,6 +73,7 @@ class FiorApp extends Component {
                 component={CreateQuestion}
               />
               <Route exact path="/blog" component={BlogScreen} />
+              <Route exact path="/blog/create" component={CreateBlogPost} />
               <Route exact path="/users" component={LandingScreen} />
               <Route exact path="/notifications" component={LandingScreen} />
               <Route exact path="/settings" component={LandingScreen} />
