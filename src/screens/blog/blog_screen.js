@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {
   Container, Grid, Button, Pagination,
 } from 'semantic-ui-react';
@@ -51,7 +51,9 @@ const BlogScreen = ({
           <Grid.Row>
             {posts.slice(getPageStart(), getPageEnd())
               .map((post) => (
-                <Post key={post.id} post={post} />
+                <Link to={`/blog/${post.id}`}>
+                  <Post key={post.id} post={post} />
+                </Link>
               ))}
           </Grid.Row>
           <Grid.Row>
