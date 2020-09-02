@@ -11,6 +11,11 @@ const initState = {
     loading: false,
     posts: [],
   },
+  post: {
+    error: null,
+    loading: false,
+    post: null,
+  },
 };
 
 const createBlogPostInitiating = (state) => ({
@@ -89,6 +94,37 @@ const getBlogPosts = (state, payload) => ({
   },
 });
 
+
+const getBlogPostStart = (state) => ({
+  ...state,
+  post: {
+    ...state.post,
+    loading: true,
+    post: null,
+  },
+});
+
+const getBlogPostFailed = (state, payload) => ({
+  ...state,
+  post: {
+    ...state.posts,
+    loading: false,
+    post: null,
+    error: payload
+  },
+});
+
+
+const getBlogPostSuccess = (state, payload) => ({
+  ...state,
+  post: {
+    ...state.posts,
+    loading: false,
+    error: null,
+    post: payload
+  },
+});
+
 const blogReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.CREATE_BLOG_POST_INITIATING:
@@ -117,6 +153,15 @@ const blogReducer = (state = initState, action) => {
 
     case actions.GET_POSTS:
       return getBlogPosts(state, action.payload);
+
+    case actions.GET_POST_START:
+      return getBlogPostStart(state);
+
+    case actions.GET_POST_SUCCESS:
+      return getBlogPostSuccess(state, action.payload);
+
+    case actions.GET_POST_FAILED:
+      return getBlogPostFailed(state, action.payload);
 
     default:
       return state;

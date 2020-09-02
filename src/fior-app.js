@@ -75,7 +75,7 @@ class FiorApp extends Component {
               />
               <Route exact path="/blog" component={BlogScreen} />
               <Route exact path="/blog/create" component={CreateBlogPost} />
-              <Route exact path="/blog/:blogId" component={BlogDetail} />
+              <Route exact path="/blog/:postId" component={BlogDetail} />
               <Route exact path="/users" component={LandingScreen} />
               <Route exact path="/notifications" component={LandingScreen} />
               <Route exact path="/settings" component={LandingScreen} />

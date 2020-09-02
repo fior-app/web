@@ -1,62 +1,61 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
-  Container, Grid, Header, Image,
+  Container, Grid, Header, Image, Label,
 } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { getPost } from '../../../store/actions/blogActions';
+import {connect} from 'react-redux';
+import {useParams} from 'react-router-dom';
+
+import {getPost} from '../../../store/actions/blogActions';
 
 // import styles from '../../../styles/blog.module.css';
 
-const BlogDetail = ({
-  loading,
-  error,
-  post,
-}) => (
-  <Container>
-    <Grid columns="equal">
-      <Grid.Column>
-        <Header as="h2">Post title</Header>
-        <Image src="../../assets/vectors/blogviewicon.svg" alt="" />
-        <p />
-        <div className="post_categories">
-          <div className="post_category_label">
-            <p>Catergory type</p>
-          </div>
-        </div>
-        <div className="comments_section">
-          <button type="button">Add Comment</button>
-          <button type="button">View Comments</button>
-        </div>
-      </Grid.Column>
-      <Grid.Column width={4}>
-        <div className="blog_post_catergory">
-          <p className="catergory_title2">Related Catergory</p>
+const BlogDetail = (
+  {
+    loading,
+    post,
+    dispatchGetPost,
+  }
+) => {
+  const {postId} = useParams();
 
-          <div className="catergory_types">
-            <div className="catergory_name">
-              <p>Catergory type</p>
+  useEffect(() => {
+    dispatchGetPost(postId)
+  }, [postId, dispatchGetPost])
+
+  console.log(post)
+
+  return (
+    <Container>
+      {!loading && post ?
+        <Grid columns="equal">
+          <Grid.Column>
+            <Header as="h2">{post.title}</Header>
+            <Image src="../../assets/vectors/blogviewicon.svg" alt=""/>
+            <p>{post.text}</p>
+            <div className="comments_section">
+              <Header as="h4">Comments</Header>
+              <button type="button">Add Comment</button>
             </div>
-          </div>
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <Header as="h4">Categories</Header>
 
-        </div>
-
-        <div className="blog_post_recent_posts">
-          <p className="recent_blog_title2">Recent Posts</p>
-          <div className="recent_posts_types">
-            <div className="recent_post_title2">
-              <p>post title</p>
-            </div>
-          </div>
-        </div>
-      </Grid.Column>
-    </Grid>
-  </Container>
-);
+            {post.skills.map((skill) => (
+              <Label key={skill.id}>
+                {skill.name}
+              </Label>
+            ))}
+          </Grid.Column>
+        </Grid>
+        : <div>Loading</div>}
+    </Container>
+  );
+}
 
 const mapStateToProps = (state) => ({
   loading: state.blog.post.loading,
   error: state.blog.post.error,
-  post-: state.blog.post.post,
+  post: state.blog.post.post,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -51,8 +51,8 @@ const BlogScreen = ({
           <Grid.Row>
             {posts.slice(getPageStart(), getPageEnd())
               .map((post) => (
-                <Link to={`/blog/${post.id}`}>
-                  <Post key={post.id} post={post} />
+                <Link to={`/blog/${post.id}`} key={post.id} >
+                  <Post post={post} />
                 </Link>
               ))}
           </Grid.Row>

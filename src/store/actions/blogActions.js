@@ -22,6 +22,24 @@ export const getPosts = () => (dispatch) => {
     });
 };
 
+export const getPost = (postId) => (dispatch) => {
+  dispatch({ type: actions.GET_POST_START });
+  axios
+    .get('/posts/' + postId)
+    .then((res) => {
+      dispatch({
+          type: actions.GET_POST_SUCCESS,
+          payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.GET_POST_FAILED,
+        payload: error,
+      });
+    });
+};
+
 export const initiateCreatingBlogPost = () => (dispatch) => {
   dispatch({ type: actions.CREATE_BLOG_POST_INITIATING });
 };
