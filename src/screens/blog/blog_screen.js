@@ -34,7 +34,7 @@ const BlogScreen = ({
 
   useEffect(() => {
     dispatchGetPosts();
-  }, []);
+  }, [dispatchGetPosts]);
 
   const handlePaginationChange = (e, { activePage }) => setBlogState((state) => ({
     ...state,

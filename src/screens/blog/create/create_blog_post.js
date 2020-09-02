@@ -23,7 +23,7 @@ const CreateBlogPost = ({
 
   useEffect(() => {
     dispatchInitiateCreating();
-  }, []);
+  }, [dispatchInitiateCreating]);
 
   const handleOnChangeInput = (e, { name, value }) => {
     setPostState((state) => ({
