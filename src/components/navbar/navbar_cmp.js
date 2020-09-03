@@ -20,8 +20,43 @@ class Navbar extends Component {
     history.push('/');
   };
 
-  render() {
-    const { user } = this.props;
+  renderSignedInNavbar() {
+    return (
+      <Menu secondary>
+        <NavLink to="/">
+          <div className={styles.fior_logo}>
+            <Image
+              src="../../assets/logo/logo.svg"
+              alt="Fior Logo"
+              size="small"
+            />
+          </div>
+        </NavLink>
+        <Menu.Menu position="right">
+          <Menu.Item>Find Mentees</Menu.Item>
+          <Menu.Item>Find Mentors</Menu.Item>
+          <div className={styles.avatar}>
+            <Dropdown icon="user">
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  onClick={() => this.props.history.push('/profile')}
+                  text="Profile"
+                />
+                <Dropdown.Item
+                  onClick={() => this.props.history.push('/mentorspaces')}
+                  text="Mentorspaces"
+                />
+                <Dropdown.Item
+                  onClick={this.handleSignOutClick}
+                  text="Sign Out"
+                />
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        </Menu.Menu>
+      </Menu>
+    );
+  }
 
     return (
       <Menu secondary>
@@ -39,23 +74,7 @@ class Navbar extends Component {
           <Menu.Item as={NavLink} name="forum" to="/forum">Forum</Menu.Item>
         </Menu.Menu>
         <Menu.Menu position="right">
-          {user ? (
-            <>
-              <Menu.Item>Find Mentees</Menu.Item>
-              <Menu.Item>Find Mentors</Menu.Item>
-              <div className={styles.avatar}>
-                <Dropdown simple icon="user">
-                  <Dropdown.Menu>
-                    <Dropdown.Item as={NavLink} text="Profile" to="/profile" />
-                    <Dropdown.Item
-                      onClick={this.handleSignOutClick}
-                      text="Sign Out"
-                    />
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
-            </>
-          ) : <Menu.Item as={NavLink} text="Login" to="/login">Sign In</Menu.Item>}
+          <Menu.Item onClick={() => this.props.history.push('/login')}>Sign In</Menu.Item>
         </Menu.Menu>
       </Menu>
     );
