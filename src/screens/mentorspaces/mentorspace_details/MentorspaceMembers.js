@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Icon } from 'semantic-ui-react';
+import { getGroupMembers } from '../../../store/actions/mentorspaceActions';
 
-import { getGroupMembers } from '../../store/actions/mentorspaceActions';
+import styles from '../../../styles/mentorspace.module.css';
 
 class MentorspaceMembers extends Component {
   componentDidMount() {
@@ -16,18 +18,11 @@ class MentorspaceMembers extends Component {
 
     return (
       <div>
-        <h3>Online</h3>
-        <h3>Online</h3>
-        <h3>Online</h3>
-        <h3>Online</h3>
-        <h3>Online</h3>
-        <h3>Online</h3>
         {members.map((member) => (
-          <div className="row section v-align" key={member.id}>
+          <div className={styles.row} key={member.id}>
             <div key={member.id}>{member.member.name}</div>
-            ;
-            <div className="spacer-1" />
-            <div className="online" />
+            <div className={styles.spacer_1} />
+            <Icon color="green" name="circle" />
           </div>
         ))}
       </div>

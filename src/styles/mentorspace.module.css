@@ -1,0 +1,20 @@
+.center_container {
+}
+
+.v_spacer_1 {
+  height: 1rem;
+}
+
+.v_spacer_12 {
+  height: 12rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.spacer_1 {
+  width: 1rem;
+}

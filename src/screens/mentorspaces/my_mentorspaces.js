@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
+import styles from '../../styles/mentorspaces.module.css';
 import { getGroupsMe } from '../../store/actions/mentorspaceActions';
 
 class MyMentorspaces extends Component {
@@ -12,6 +12,8 @@ class MyMentorspaces extends Component {
 
   render() {
     const { loading, mentorspaces, error } = this.props;
+
+    console.log(mentorspaces);
 
     if (loading) {
       return (
@@ -28,28 +30,40 @@ class MyMentorspaces extends Component {
     }
 
     return (
-      <Grid>
-        <Grid.Row>
-          {mentorspaces.map((mentorspaceItem) => (
+      <div className={styles.section_wrapper}>
+        <Grid>
+          {mentorspaces.reverse().map((mentorspaceItem) => (
             <Link
               to={`/mentorspaces/${mentorspaceItem.group.id}`}
               key={mentorspaceItem.id}
             >
-              <div className="group-item">
-                <div className="group-header">
-                  {mentorspaceItem.group.name}
-                </div>
-                <div className="v-spacer" />
+              <div className={styles.mentorspace_item_container}>
                 <div>
-                  Created by &nbsp;
-                  <span>{mentorspaceItem.group.createdBy.name}</span>
+                  <h3>
+                    {mentorspaceItem.group.name}
+                  </h3>
+                  {mentorspaceItem.group.description}
+                </div>
+                <div>
+                  {mentorspaceItem.group.createdBy.name}
                 </div>
               </div>
             </Link>
+
+          //   <div className="group-item">
+          //     <div className="group-header">
+          //       {mentorspaceItem.group.name}
+          //     </div>
+          //     <div className="v-spacer" />
+          //     <div>
+          //       Created by &nbsp;
+          //       <span>{mentorspaceItem.group.createdBy.name}</span>
+          //     </div>
+          //   </div>
           ))}
           {error ? `error: ${JSON.stringify(error)}` : null}
-        </Grid.Row>
-      </Grid>
+        </Grid>
+      </div>
     );
   }
 }
