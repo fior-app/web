@@ -6,8 +6,9 @@ import {
   getGroupMessages,
   sendGroupMessage,
   getGroupMessagesStream,
-} from '../../store/actions/mentorspaceActions';
+} from '../../../store/actions/mentorspaceActions';
 import Message from './Message';
+import styles from '../../../styles/mentorspace.module.css';
 
 class GroupChat extends Component {
   constructor(props) {
@@ -42,12 +43,6 @@ class GroupChat extends Component {
 
     return (
       <div>
-        <h1>messages</h1>
-        <h1>messages</h1>
-        <h1>messages</h1>
-        <h1>messages</h1>
-        <h1>messages</h1>
-        <h1>messages</h1>
         {error ? JSON.stringify(error) : null}
 
         {messages ? (
@@ -59,7 +54,7 @@ class GroupChat extends Component {
         ) : (
           <li>no messages</li>
         )}
-        <div className="v-spacer-2" />
+        <div className={styles.v_spacer_12} />
         <Form>
           <Form.Field>
             <Input

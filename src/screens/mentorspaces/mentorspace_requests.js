@@ -27,6 +27,8 @@ class MentorspaceRequests extends Component {
       );
     }
 
+    return (<div>Move to notifications</div>);
+
     return (
       <Grid>
         <Grid.Row>

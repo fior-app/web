@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
-import { Modal } from 'semantic-ui-react';
+import {
+  Modal, Button, Icon, Container,
+} from 'semantic-ui-react';
 import CreateMentorspace from './create/create_mentorspace';
 
 import MyMentorspaces from './my_mentorspaces';
 import MentorspaceRequests from './mentorspace_requests';
 
-class MentorspaceScreen extends Component {
+class MentorspacesScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -23,38 +25,39 @@ class MentorspaceScreen extends Component {
     const { showModal } = this.state;
 
     return (
-      <div className="container">
-        <div className="v-spacer-2" style={{ marginTop: '50px' }} />
+      <Container>
         <Modal
           trigger={(
-            <button
-              type="button"
+            <Button
+              icon
               className="btn-primary"
               onClick={() => this.setState({ showModal: true })}
             >
-              Create Mentorspace
-            </button>
+              <Icon name="add" />
+              &nbsp; Create Mentorspace
+            </Button>
           )}
+          size="mini"
           closeIcon
           onClose={this.closeModal}
           open={showModal}
         >
           <CreateMentorspace closeModal={this.closeModal} />
         </Modal>
-        <div className="v-spacer-2" />
+
         <h2>
-          <div className="margin-to-align">Mentorspaces</div>
+          Mentorspaces
         </h2>
-        <div className="v-spacer-2" />
         <MyMentorspaces />
+
         <h2>
-          <div className="margin-to-align">mentorspace Requests</div>
+          Mentorspace Requests
         </h2>
         <div className="v-spacer-2" />
         <MentorspaceRequests />
-      </div>
+      </Container>
     );
   }
 }
 
-export default MentorspaceScreen;
+export default MentorspacesScreen;
