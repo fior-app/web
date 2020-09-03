@@ -7,7 +7,8 @@ import LandingScreen from './screens/landing/landing_screen';
 import Navbar from './components/navbar/navbar_cmp';
 import AuthScreen from './screens/auth/auth_screen';
 import LinkedInCallbackScreen from './screens/auth/linkedin_callback_screen';
-import MentorspaceScreen from './screens/groups/mentorspace_screen';
+import MentorspacesScreen from './screens/mentorspaces/mentorspaces_screen';
+import MentorspaceScreen from './screens/mentorspaces/mentorspace_details/mentorspace_screen';
 import ProfileScreen from './screens/profile/profile_screen';
 import BlogScreen from './screens/blog/blog_screen';
 import NotFound from './screens/notfound/NotFound';
@@ -59,7 +60,7 @@ class FiorApp extends Component {
               <Route
                 exact
                 path="/mentorspaces"
-                component={AuthRequire(MentorspaceScreen)}
+                component={AuthRequire(MentorspacesScreen)}
               />
               <Route
                 exact
