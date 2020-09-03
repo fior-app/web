@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useParams, Route, NavLink } from 'react-router-dom';
+import { useParams, Route, Redirect, NavLink } from 'react-router-dom';
 import {
   Container, Grid, Menu, Header, Label, Button, Icon,
 } from 'semantic-ui-react';
@@ -15,13 +15,9 @@ import Meetings from './meetings/meetings';
 import Files from './files/files';
 import MeetingDetail from './meetings/meeting_detail';
 import Calendar from './calendar/calendar';
+import Project from './project/Project';
 
-const MentorspaceScreen = ({
-  loading,
-  member,
-  error,
-  dispatchGetGroup,
-}) => {
+const MentorspaceScreen = ({ loading, member, error, dispatchGetGroup }) => {
   const { mentorspaceId } = useParams();
 
   useEffect(() => {
@@ -80,6 +76,13 @@ const MentorspaceScreen = ({
                 >
                   Files
                 </Menu.Item>
+                <Menu.Item
+                  as={NavLink}
+                  to={`/mentorspaces/${mentorspaceId}/project`}
+                  name="project"
+                >
+                  Project
+                </Menu.Item>
               </Menu>
             </Grid.Column>
             <Grid.Column width={9}>
@@ -89,6 +92,10 @@ const MentorspaceScreen = ({
               <Route path="/mentorspaces/:mentorspaceId/meetings" component={Meetings} exact />
               <Route path="/mentorspaces/:mentorspaceId/meetings/:meetingId" component={MeetingDetail} />
               <Route path="/mentorspaces/:mentorspaceId/files" component={Files} />
+              <Route
+                path="/mentorspaces/:mentorspaceId/project"
+                component={Project}
+              />
               {/* {member && member.group && ( */}
               {/*  <Redirect */}
               {/*    exact */}
@@ -98,16 +105,15 @@ const MentorspaceScreen = ({
             </Grid.Column>
             <Grid.Column width={4}>
               <MentorspaceMembers groupId={mentorspaceId} />
-              {member.permissions.includes('SEND_MEMBER_REQUESTS')
-                ? (
-                  <>
-                    <InviteMember groupId={mentorspaceId} />
-                    <Button as={NavLink} to="/mentors" primary>
-                      <Icon name="add" />
-                      &nbsp; Mentor
-                    </Button>
-                  </>
-                ) : null}
+              {member.permissions.includes('SEND_MEMBER_REQUESTS') ? (
+                <>
+                  <InviteMember groupId={mentorspaceId} />
+                  <Button as={NavLink} to="/mentors" primary>
+                    <Icon name="add" />
+                    &nbsp; Mentor
+                  </Button>
+                </>
+              ) : null}
             </Grid.Column>
           </Grid>
         </Container>
