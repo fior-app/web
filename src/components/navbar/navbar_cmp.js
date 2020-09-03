@@ -43,7 +43,7 @@ class Navbar extends Component {
             {user ? (
               <>
                 <Menu.Item>Find Mentees</Menu.Item>
-                <Menu.Item>Find Mentors</Menu.Item>
+                <Menu.Item as={NavLink} to="/mentors">Find Mentors</Menu.Item>
                 <div className={styles.avatar}>
                   <Dropdown simple icon="user">
                     <Dropdown.Menu>
