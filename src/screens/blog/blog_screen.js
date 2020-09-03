@@ -11,6 +11,7 @@ import { getPosts } from '../../store/actions/blogActions';
 
 const BlogScreen = ({
   posts,
+  skills,
   dispatchGetPosts,
 }) => {
   const initialState = {
@@ -24,12 +25,6 @@ const BlogScreen = ({
     id: '0',
     title: 'Test',
     date: '20 Aug 2020',
-  }];
-
-  const categories = [{
-    id: '0',
-    name: 'Android',
-    posts: 255,
   }];
 
   useEffect(() => {
@@ -68,7 +63,7 @@ const BlogScreen = ({
         </Grid.Column>
         <Grid.Column width={4}>
           <Button as={NavLink} to="/blog/edit" primary>Create Post</Button>
-          <Categories categories={categories} />
+          <Categories categories={skills} />
           <RecentPosts posts={recentPosts} />
         </Grid.Column>
       </Grid>
@@ -80,6 +75,7 @@ const mapStateToProps = (state) => ({
   loading: state.blog.posts.loading,
   error: state.blog.posts.error,
   posts: state.blog.posts.posts,
+  skills: state.skills.skills.items,
 });
 
 const mapDispatchToProps = (dispatch) => ({

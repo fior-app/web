@@ -129,7 +129,7 @@ class ProfileMentor extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.auth.currentUser,
-  userSkills: state.skills.userSkills,
+  userSkills: state.skills.userSkills.items,
 });
 
 const mapDispatchToProps = (dispatch) => ({

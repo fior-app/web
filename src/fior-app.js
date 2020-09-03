@@ -18,6 +18,7 @@ import Footer from './components/footer/footer';
 import AuthRequire from './HOC/authRequire';
 import UnauthRequire from './HOC/unauthRequire';
 import { userMeInitial } from './store/actions/authActions';
+import { getSkills } from './store/actions/skillActions';
 import PricingScreen from './screens/pricing/pricing_screen';
 import QuestionScreen from './screens/question/question_screen';
 import CreateQuestion from './screens/question/create_question';
@@ -28,6 +29,7 @@ import EditBlogPost from './screens/blog/edit/edit_blog_post';
 class FiorApp extends Component {
   componentDidMount() {
     this.props.userMeInitial();
+    this.props.getSkills();
   }
 
   renderFullLoading = () => (
@@ -102,6 +104,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   userMeInitial: () => dispatch(userMeInitial()),
+  getSkills: () => dispatch(getSkills()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FiorApp);

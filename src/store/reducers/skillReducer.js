@@ -1,60 +1,129 @@
 import * as actions from '../actions/types';
 
 const initState = {
-  userSkills: [],
-  isLoading: false,
-  error: null,
+  skills: {
+    loading: false,
+    error: null,
+    items: [],
+  },
+  userSkills: {
+    loading: false,
+    error: null,
+    items: [],
+  },
 };
+
+const getSkillsStart = (state) => ({
+  ...state,
+  skills: {
+    ...state.skills,
+    loading: true,
+  },
+});
+
+const getSkillsSuccess = (state, skills) => ({
+  ...state,
+  skills: {
+    ...state.skills,
+    loading: false,
+    items: skills,
+  },
+});
+
+const getSkillsFailure = (state, error) => ({
+  ...state,
+  skills: {
+    ...state.skills,
+    loading: false,
+    error,
+  },
+});
 
 const getUserSkillsStart = (state) => ({
   ...state,
-  isLoading: true,
+  userSkills: {
+    ...state.userSkills,
+    loading: true,
+  },
 });
 
 const getUserSkillsSuccess = (state, userSkills) => ({
   ...state,
-  isLoading: true,
-  userSkills,
+  userSkills: {
+    ...state.userSkills,
+    loading: false,
+    items: userSkills,
+  },
 });
 
 const getUserSkillsFailure = (state, error) => ({
   ...state,
-  isLoading: true,
-  error,
+  userSkills: {
+    ...state.userSkills,
+    loading: false,
+    error,
+  },
 });
 
 const addUserSkillsStart = (state) => ({
   ...state,
-  isLoading: true,
+  userSkills: {
+    ...state.userSkills,
+    loading: true,
+  },
 });
 
 const addUserSkillsSuccess = (state) => ({
   ...state,
-  isLoading: false,
+  userSkills: {
+    ...state.userSkills,
+    loading: false,
+  },
 });
 
 const addUserSkillsFailure = (state) => ({
   ...state,
-  isLoading: false,
+  userSkills: {
+    ...state.userSkills,
+    loading: false,
+  },
 });
 
 const deleteUserSkillsStart = (state) => ({
   ...state,
-  isLoading: true,
+  userSkills: {
+    ...state.userSkills,
+    loading: true,
+  },
 });
 
 const deleteUserSkillsSuccess = (state) => ({
   ...state,
-  isLoading: false,
+  userSkills: {
+    ...state.userSkills,
+    loading: false,
+  },
 });
 
 const deleteUserSkillsFailure = (state) => ({
   ...state,
-  isLoading: false,
+  userSkills: {
+    ...state.userSkills,
+    loading: false,
+  },
 });
 
 const skillReducer = (state = initState, action) => {
   switch (action.type) {
+    case actions.GET_SKILLS_START:
+      return getSkillsStart(state);
+
+    case actions.GET_SKILLS_SUCCESS:
+      return getSkillsSuccess(state, action.payload);
+
+    case actions.GET_SKILLS_FAILED:
+      return getSkillsFailure(state, action.payload);
+
     case actions.GET_USER_SKILLS_START:
       return getUserSkillsStart(state);
 

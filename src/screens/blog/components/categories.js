@@ -12,7 +12,6 @@ const Categories = ({ categories = [] }) => (
       {categories.map((category) => (
         <Label key={category.id}>
           {category.name}
-          <Label.Detail>{category.posts}</Label.Detail>
         </Label>
       ))}
     </Card.Content>

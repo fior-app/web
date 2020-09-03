@@ -1,6 +1,24 @@
 import axios from 'axios';
 import * as actions from './types';
 
+export const getSkills = () => (dispatch) => {
+  dispatch({ type: actions.GET_SKILLS_START });
+  axios
+    .get('/skills')
+    .then((res) => {
+      dispatch({
+        type: actions.GET_SKILLS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.GET_SKILLS_FAILED,
+        payload: error,
+      });
+    });
+};
+
 const fetchUserSkills = (dispatch) => {
   dispatch({ type: actions.GET_USER_SKILLS_START });
   axios
