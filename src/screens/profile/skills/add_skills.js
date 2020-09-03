@@ -1,9 +1,9 @@
+import axios from 'axios';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import {
-  Search, Label, Icon, Button,
+  Button, Icon, Label, Search,
 } from 'semantic-ui-react';
-import axios from 'axios';
 import styles from '../../../styles/profile.module.css';
 
 const AddSkills = ({
