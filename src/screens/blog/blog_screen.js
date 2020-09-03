@@ -4,9 +4,9 @@ import { Link, NavLink } from 'react-router-dom';
 import {
   Container, Grid, Button, Pagination,
 } from 'semantic-ui-react';
-import RecentPosts from './recent_posts';
-import Categories from './categories';
-import Post from './post';
+import RecentPosts from './components/recent_posts';
+import Categories from './components/categories';
+import Post from './components/post';
 import { getPosts } from '../../store/actions/blogActions';
 
 const BlogScreen = ({

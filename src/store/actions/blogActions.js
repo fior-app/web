@@ -7,18 +7,33 @@ export const getPosts = () => (dispatch) => {
     .get('/posts/')
     .then((res) => {
       dispatch({
-        type: actions.GET_POSTS,
-        payload: res.data,
+        type: actions.GET_POSTS_SUCCESS,
+        payload: res.data
       });
-      dispatch({ type: actions.GET_POSTS_SUCCESS });
-      dispatch({ type: actions.GET_POSTS_END });
     })
     .catch((error) => {
       dispatch({
         type: actions.GET_POSTS_FAILED,
         payload: error,
       });
-      dispatch({ type: actions.GET_POSTS_END });
+    });
+};
+
+export const getMyPosts = () => (dispatch) => {
+  dispatch({ type: actions.GET_MY_POSTS_START });
+  axios
+    .get('/posts/me')
+    .then((res) => {
+      dispatch({
+        type: actions.GET_MY_POSTS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.GET_MY_POSTS_FAILED,
+        payload: error,
+      });
     });
 };
 

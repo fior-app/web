@@ -49,6 +49,7 @@ class Navbar extends Component {
                     <Dropdown.Menu>
                       <Dropdown.Item as={NavLink} text="Profile" to="/profile"/>
                       <Dropdown.Item as={NavLink} text="Mentorspaces" to="/mentorspaces"/>
+                      <Dropdown.Item as={NavLink} text="My Posts" to="/myposts"/>
                       <Dropdown.Item
                         onClick={this.handleSignOutClick}
                         text="Sign Out"

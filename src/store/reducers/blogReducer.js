@@ -11,6 +11,11 @@ const initState = {
     loading: false,
     posts: [],
   },
+  myPosts: {
+    error: null,
+    loading: false,
+    posts: [],
+  },
   post: {
     error: null,
     loading: false,
@@ -62,38 +67,51 @@ const getBlogPostsStart = (state) => ({
   },
 });
 
-const getBlogPostsEnd = (state) => ({
-  ...state,
-  posts: {
-    ...state.posts,
-    loading: false,
-  },
-});
-
 const getBlogPostsFailed = (state, payload) => ({
   ...state,
   posts: {
     ...state.posts,
     error: payload,
+    loading: false,
   },
 });
 
-const getBlogPostsSuccess = (state) => ({
+const getBlogPostsSuccess = (state, payload) => ({
   ...state,
   posts: {
     ...state.posts,
     error: null,
-  },
-});
-
-const getBlogPosts = (state, payload) => ({
-  ...state,
-  posts: {
-    ...state.posts,
     posts: payload,
+    loading: false,
   },
 });
 
+const getMyPostsStart = (state) => ({
+  ...state,
+  myPosts: {
+    ...state.posts,
+    loading: true,
+  },
+});
+
+const getMyPostsFailed = (state, payload) => ({
+  ...state,
+  myPosts: {
+    ...state.posts,
+    error: payload,
+    loading: false,
+  },
+});
+
+const getMyPostsSuccess = (state, payload) => ({
+  ...state,
+  myPosts: {
+    ...state.posts,
+    error: null,
+    posts: payload,
+    loading: false,
+  },
+});
 
 const getBlogPostStart = (state) => ({
   ...state,
@@ -142,17 +160,20 @@ const blogReducer = (state = initState, action) => {
     case actions.GET_POSTS_START:
       return getBlogPostsStart(state);
 
-    case actions.GET_POSTS_END:
-      return getBlogPostsEnd(state);
-
-    case actions.GET_POSTS_SUCCESS:
-      return getBlogPostsSuccess(state);
-
     case actions.GET_POSTS_FAILED:
       return getBlogPostsFailed(state, action.payload);
 
-    case actions.GET_POSTS:
-      return getBlogPosts(state, action.payload);
+    case actions.GET_POSTS_SUCCESS:
+      return getBlogPostsSuccess(state, action.payload);
+
+    case actions.GET_MY_POSTS_START:
+      return getMyPostsStart(state);
+
+    case actions.GET_MY_POSTS_FAILED:
+      return getMyPostsFailed(state, action.payload);
+
+    case actions.GET_MY_POSTS_SUCCESS:
+      return getMyPostsSuccess(state, action.payload);
 
     case actions.GET_POST_START:
       return getBlogPostStart(state);
