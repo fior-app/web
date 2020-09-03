@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.header > div {
+  margin-left: 10px;
+  flex-grow: 1;
+}
+
+.header .description {
+  color: gray;
+  font-size: 18px;
+}
+
+.no_project {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
