@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Container, Grid, Image, Menu, Icon, Loader,
+  Container, Grid, Image, Menu, Icon,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import {
@@ -17,12 +17,11 @@ class ProfileScreen extends Component {
 
     this.state = {
       defAvatarUrl: 'https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg',
-      isLoading: true,
     };
   }
 
   render() {
-    const { defAvatarUrl, isLoading } = this.state;
+    const { defAvatarUrl } = this.state;
     const { user } = this.props;
 
     return (

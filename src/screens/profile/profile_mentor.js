@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import CreateMentorspace from '../mentorspaces/create/create_mentorspace';
 import { getUserSkills, addUserSkills, deleteUserSkill } from '../../store/actions/skillActions';
-import AddSkills from './skills/add_skills';
+import SelectCategories from '../../components/categories/select_categories';
 import styles from '../../styles/profile.module.css';
 
 class ProfileMentor extends Component {
@@ -38,8 +38,6 @@ class ProfileMentor extends Component {
   render() {
     const { user, userSkills } = this.props;
 
-    console.log(userSkills);
-
     if (!user) return <Redirect to="/" />;
 
     return (
@@ -59,7 +57,7 @@ class ProfileMentor extends Component {
                     open={this.state.showSkillsModal}
                     closeIcon
                   >
-                    <AddSkills
+                    <SelectCategories
                       existingSkills={userSkills.map((userSkill) => userSkill.skill)}
                       closeModal={this.closeSkillsModal}
                       onSubmit={this.onSubmit}

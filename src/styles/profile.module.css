@@ -25,7 +25,7 @@
   margin-top: 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .add_icon {

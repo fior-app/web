@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {
-  Button, Form, Container, Message,
+  Button, Form, Container, Message, Modal, Icon, Header, Label,
 } from 'semantic-ui-react';
 import {
   initiateCreatingBlogPost,
@@ -11,6 +11,8 @@ import {
   createBlogPost,
   updateBlogPost,
 } from '../../../store/actions/blogActions';
+import styles from '../../../styles/profile.module.css';
+import SelectCategories from '../../../components/categories/select_categories';
 
 const EditBlogPost = ({
   loading,
@@ -31,6 +33,7 @@ const EditBlogPost = ({
   const { postId } = useParams('postId');
 
   const [postState, setPostState] = useState(initialState);
+  const [categoriesModelState, setCategoriesModelState] = useState(false);
 
   useEffect(() => {
     if (postId) {
@@ -42,7 +45,9 @@ const EditBlogPost = ({
 
   useEffect(() => {
     if (post != null) {
-      setPostState((state) => ({ ...state, title: post.title, text: post.text }));
+      setPostState((state) => ({
+        ...state, title: post.title, text: post.text, skills: post.skills,
+      }));
     } else {
       setPostState(initialState);
     }
@@ -55,11 +60,29 @@ const EditBlogPost = ({
     }));
   };
 
+  const closeCategoriesModal = () => {
+    setCategoriesModelState(false);
+  };
+
+  const handleCategoriesSubmit = (skills) => {
+    setPostState((state) => ({ ...state, skills: state.skills.concat(skills) }));
+  };
+
+  const handleCategoriesRemove = (skill) => {
+    setPostState((state) => ({ ...state, skills: state.skills.filter((item) => item !== skill) }));
+  };
+
   const handleSubmit = () => {
     if (postId) {
-      handleUpdateBlogPost(postId, postState);
+      handleUpdateBlogPost(postId, {
+        ...postState,
+        skills: postState.skills.map((skill) => skill.id),
+      });
     } else {
-      handleCreateBlogPost(postState);
+      handleCreateBlogPost({
+        ...postState,
+        skills: postState.skills.map((skill) => skill.id),
+      });
     }
   };
 
@@ -91,6 +114,33 @@ const EditBlogPost = ({
             onChange={handleOnChangeInput}
           />
         </Form.Field>
+        <div>
+          <Header as="h5">Skills</Header>
+          <Modal
+            trigger={
+              <Icon className={styles.add_icon} name="add" onClick={() => setCategoriesModelState(true)} />
+            }
+            size="mini"
+            onClose={closeCategoriesModal}
+            open={categoriesModelState}
+            closeIcon
+          >
+            <SelectCategories
+              existingSkills={postState.skills}
+              closeModal={closeCategoriesModal}
+              onSubmit={handleCategoriesSubmit}
+            />
+          </Modal>
+          {postState.skills.map((category) => (
+            <Label key={category.id}>
+              {category.name}
+              <Icon
+                name="delete"
+                onClick={() => handleCategoriesRemove(category)}
+              />
+            </Label>
+          ))}
+        </div>
         <Message
           error
           header="Hmm... Something went wrong"

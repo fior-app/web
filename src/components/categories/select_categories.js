@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import {
   Button, Icon, Label, Search,
 } from 'semantic-ui-react';
-import styles from '../../../styles/profile.module.css';
+import styles from '../../styles/profile.module.css';
 
-const AddSkills = ({
+const SelectCategories = ({
   existingSkills = [],
   closeModal,
   onSubmit,
@@ -73,7 +73,10 @@ const AddSkills = ({
   };
 
   const handleOnSet = () => {
-    onSubmit(skillsState.selected);
+    onSubmit(skillsState.selected.map((item) => ({
+      name: item.title,
+      id: item.id,
+    })));
     closeModal();
   };
 
@@ -134,4 +137,4 @@ const AddSkills = ({
   );
 };
 
-export default AddSkills;
+export default SelectCategories;
