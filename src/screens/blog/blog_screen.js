@@ -51,7 +51,7 @@ const BlogScreen = ({
           <Grid.Row>
             {posts.slice(getPageStart(), getPageEnd())
               .map((post) => (
-                <Link to={`/blog/${post.id}`} key={post.id} >
+                <Link to={`/blog/${post.id}`} key={post.id}>
                   <Post post={post} />
                 </Link>
               ))}
@@ -67,7 +67,7 @@ const BlogScreen = ({
           </Grid.Row>
         </Grid.Column>
         <Grid.Column width={4}>
-          <Button as={NavLink} to="/blog/create" primary>Create Post</Button>
+          <Button as={NavLink} to="/blog/edit" primary>Create Post</Button>
           <Categories categories={categories} />
           <RecentPosts posts={recentPosts} />
         </Grid.Column>

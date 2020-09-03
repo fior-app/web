@@ -5,6 +5,12 @@ const initState = {
     loading: false,
     error: null,
     success: false,
+    post: null,
+  },
+  deletePost: {
+    loading: false,
+    error: null,
+    success: false,
   },
   posts: {
     error: null,
@@ -53,6 +59,95 @@ const createBlogPostSuccess = (state) => ({
   ...state,
   writePost: {
     ...state.writePost,
+    loading: false,
+    error: null,
+    success: true,
+  },
+});
+
+const updateBlogPostInitiatingStart = (state) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    ...initState.writePost,
+  },
+});
+
+const updateBlogPostInitiatingFailed = (state, payload) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    ...initState.writePost,
+    error: payload,
+  },
+});
+
+const updateBlogPostInitiatingSuccess = (state, payload) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    post: payload,
+  },
+});
+
+const updateBlogPostStart = (state) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    loading: true,
+  },
+});
+
+const updateBlogPostFailed = (state, payload) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    loading: false,
+    error: payload,
+    success: false,
+  },
+});
+
+const updateBlogPostSuccess = (state) => ({
+  ...state,
+  writePost: {
+    ...state.writePost,
+    loading: false,
+    error: null,
+    success: true,
+  },
+});
+
+const deleteBlogPostInitiating = (state) => ({
+  ...state,
+  deletePost: {
+    ...state.deletePost,
+    ...initState.deletePost,
+  },
+});
+
+const deleteBlogPostStart = (state) => ({
+  ...state,
+  deletePost: {
+    ...state.deletePost,
+    loading: true,
+  },
+});
+
+const deleteBlogPostFailed = (state, payload) => ({
+  ...state,
+  deletePost: {
+    ...state.deletePost,
+    loading: false,
+    error: payload,
+    success: false,
+  },
+});
+
+const deleteBlogPostSuccess = (state) => ({
+  ...state,
+  deletePost: {
+    ...state.deletePost,
     loading: false,
     error: null,
     success: true,
@@ -128,10 +223,9 @@ const getBlogPostFailed = (state, payload) => ({
     ...state.posts,
     loading: false,
     post: null,
-    error: payload
+    error: payload,
   },
 });
-
 
 const getBlogPostSuccess = (state, payload) => ({
   ...state,
@@ -139,7 +233,7 @@ const getBlogPostSuccess = (state, payload) => ({
     ...state.posts,
     loading: false,
     error: null,
-    post: payload
+    post: payload,
   },
 });
 
@@ -156,6 +250,36 @@ const blogReducer = (state = initState, action) => {
 
     case actions.CREATE_BLOG_POST_SUCCESS:
       return createBlogPostSuccess(state);
+
+    case actions.UPDATE_BLOG_POST_INITIATING_START:
+      return updateBlogPostInitiatingStart(state);
+
+    case actions.UPDATE_BLOG_POST_INITIATING_FAILED:
+      return updateBlogPostInitiatingFailed(state, action.payload);
+
+    case actions.UPDATE_BLOG_POST_INITIATING_SUCCESS:
+      return updateBlogPostInitiatingSuccess(state, action.payload);
+
+    case actions.UPDATE_BLOG_POST_START:
+      return updateBlogPostStart(state);
+
+    case actions.UPDATE_BLOG_POST_FAILED:
+      return updateBlogPostFailed(state, action.payload);
+
+    case actions.UPDATE_BLOG_POST_SUCCESS:
+      return updateBlogPostSuccess(state);
+
+    case actions.DELETE_BLOG_POST_INITIATING:
+      return deleteBlogPostInitiating(state);
+
+    case actions.DELETE_BLOG_POST_START:
+      return deleteBlogPostStart(state);
+
+    case actions.DELETE_BLOG_POST_FAILED:
+      return deleteBlogPostFailed(state, action.payload);
+
+    case actions.DELETE_BLOG_POST_SUCCESS:
+      return deleteBlogPostSuccess(state);
 
     case actions.GET_POSTS_START:
       return getBlogPostsStart(state);

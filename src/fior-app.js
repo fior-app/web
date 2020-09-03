@@ -21,9 +21,9 @@ import { userMeInitial } from './store/actions/authActions';
 import PricingScreen from './screens/pricing/pricing_screen';
 import QuestionScreen from './screens/question/question_screen';
 import CreateQuestion from './screens/question/create_question';
-import CreateBlogPost from './screens/blog/create/create_blog_post';
 import BlogDetail from './screens/blog/detail/blog_detail';
-import MyPostsScreen from "./screens/blog/my_posts/my_posts_screen";
+import MyPostsScreen from './screens/blog/my_posts/my_posts_screen';
+import EditBlogPost from './screens/blog/edit/edit_blog_post';
 
 class FiorApp extends Component {
   componentDidMount() {
@@ -76,7 +76,8 @@ class FiorApp extends Component {
                 component={CreateQuestion}
               />
               <Route exact path="/blog" component={BlogScreen} />
-              <Route exact path="/blog/create" component={CreateBlogPost} />
+              <Route exact path="/blog/edit" component={EditBlogPost} />
+              <Route exact path="/blog/edit/:postId" component={EditBlogPost} />
               <Route exact path="/blog/:postId" component={BlogDetail} />
               <Route exact path="/myposts" component={MyPostsScreen} />
               <Route exact path="/users" component={LandingScreen} />

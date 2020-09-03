@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {
   Button, Form, Container, Message,
 } from 'semantic-ui-react';
-import { initiateCreatingBlogPost, createBlogPost } from '../../../store/actions/blogActions';
+import {
+  initiateCreatingBlogPost,
+  initiateUpdatingBlogPost,
+  createBlogPost,
+  updateBlogPost,
+} from '../../../store/actions/blogActions';
 
-const CreateBlogPost = ({
+const EditBlogPost = ({
   loading,
   error,
   success,
+  post,
   handleCreateBlogPost,
+  handleUpdateBlogPost,
   dispatchInitiateCreating,
+  dispatchInitiateUpdating,
 }) => {
   const initialState = {
     title: '',
@@ -19,11 +28,25 @@ const CreateBlogPost = ({
     skills: [],
   };
 
+  const { postId } = useParams('postId');
+
   const [postState, setPostState] = useState(initialState);
 
   useEffect(() => {
-    dispatchInitiateCreating();
-  }, [dispatchInitiateCreating]);
+    if (postId) {
+      dispatchInitiateUpdating(postId);
+    } else {
+      dispatchInitiateCreating();
+    }
+  }, [postId, dispatchInitiateCreating, dispatchInitiateUpdating]);
+
+  useEffect(() => {
+    if (post != null) {
+      setPostState((state) => ({ ...state, title: post.title, text: post.text }));
+    } else {
+      setPostState(initialState);
+    }
+  }, [post]);
 
   const handleOnChangeInput = (e, { name, value }) => {
     setPostState((state) => ({
@@ -32,12 +55,20 @@ const CreateBlogPost = ({
     }));
   };
 
+  const handleSubmit = () => {
+    if (postId) {
+      handleUpdateBlogPost(postId, postState);
+    } else {
+      handleCreateBlogPost(postState);
+    }
+  };
+
   return (
     <Container>
-      <h3>Create Post</h3>
+      <h3>{!postId ? 'Create Post' : 'Edit Post'}</h3>
       <Form
         className="spacer"
-        onSubmit={() => handleCreateBlogPost(postState)}
+        onSubmit={handleSubmit}
         success={success}
         error={error}
       >
@@ -88,11 +119,14 @@ const mapStateToProps = (state) => ({
   loading: state.blog.writePost.loading,
   success: state.blog.writePost.success,
   error: state.blog.writePost.error,
+  post: state.blog.writePost.post,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   handleCreateBlogPost: (post) => dispatch(createBlogPost(post)),
+  handleUpdateBlogPost: (postId, post) => dispatch(updateBlogPost(postId, post)),
   dispatchInitiateCreating: () => dispatch(initiateCreatingBlogPost()),
+  dispatchInitiateUpdating: (postId) => dispatch(initiateUpdatingBlogPost(postId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateBlogPost);
+export default connect(mapStateToProps, mapDispatchToProps)(EditBlogPost);
