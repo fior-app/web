@@ -38,7 +38,7 @@ const Project = ({ project }) => {
       <Header as="h2">Project Details</Header>
       <Divider />
       {project ? <ProjectComponent /> : <NoProject />}
-      <CreateUpdateProject mentorspaceId />
+      <CreateUpdateProject mentorspaceId={mentorspaceId} />
     </Container>
   );
 };

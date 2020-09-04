@@ -1,99 +1,112 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Button, Icon, Modal, Form } from 'semantic-ui-react';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 import { updateProjectDetails } from '../../../../store/actions/mentorspaceActions';
 import * as styles from '../../../../styles/mentorspace-project.module.css';
 
-const CreateUpdateProject = (props) => {
-  const initialState = {
-    title: '',
-    description: '',
+export class CreateUpdateProject extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isModelOpen: false,
+      title: '',
+      description: '',
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.projects) {
+      const project = nextProps.projects[this.props.mentorspaceId];
+      this.setState({ title: project.title, description: project.description });
+    }
+  }
+
+  openModal = () => {
+    this.setState({ isModelOpen: true });
   };
 
-  const [state, setState] = useState(initialState);
-
-  const [isModelOpen, setModelOpen] = useState(false);
-
-  const openModal = () => {
-    setState({ title: '', description: '' });
-    setModelOpen(true);
+  closeModal = () => {
+    this.setState({ isModelOpen: false });
   };
 
-  const closeModal = () => {
-    setModelOpen(false);
-  };
-
-  const handleOnChangeInput = (e) => {
-    setState({
-      ...state,
+  handleOnChangeInput = (e) => {
+    this.setState({
       [e.target.name]: e.target.value,
     });
   };
 
-  return (
-    <Modal
-      trigger={
-        <Button onClick={openModal}>
-          <Icon name="edit" />
-          Update Project details
-        </Button>
-      }
-      size="small"
-      onClose={closeModal}
-      open={isModelOpen}
-      closeIcon
-    >
-      <Modal.Header>Update project details</Modal.Header>
-      <Modal.Content>
-        <Form onSubmit={() => {}}>
-          <Form.Field>
-            <Form.Input
-              label="Title"
-              type="text"
-              name="title"
-              value={state.title}
-              onChange={handleOnChangeInput}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Form.Input
-              label="Description"
-              type="text"
-              name="description"
-              value={state.description}
-              onChange={handleOnChangeInput}
-            />
-          </Form.Field>
-          <Button loading={false} type="submit">
-            Submit
-          </Button>
-        </Form>
-      </Modal.Content>
-    </Modal>
-  );
-};
+  onUpdateProject = () => {
+    this.props.updateProjectDetails(
+      this.props.mentorspaceId,
+      this.state,
+      this.closeModal
+    );
+  };
 
-const mapStateToProps = (state) => ({
-  project: state.firestore.data.project,
+  render() {
+    const { isModelOpen, title, description } = this.state;
+    return (
+      <Modal
+        trigger={
+          <Button onClick={this.openModal}>
+            <Icon name="edit" />
+            Update Project details
+          </Button>
+        }
+        size="small"
+        onClose={this.closeModal}
+        open={isModelOpen}
+        closeIcon
+      >
+        <Modal.Header>Update project details</Modal.Header>
+        <Modal.Content>
+          <Form onSubmit={this.onUpdateProject}>
+            <Form.Field>
+              <Form.Input
+                label="Title"
+                type="text"
+                name="title"
+                value={title}
+                onChange={this.handleOnChangeInput}
+              />
+            </Form.Field>
+            <Form.Field>
+              <Form.Input
+                label="Description"
+                type="text"
+                name="description"
+                value={description}
+                onChange={this.handleOnChangeInput}
+              />
+            </Form.Field>
+            <Button loading={false} type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Modal.Content>
+      </Modal>
+    );
+  }
+}
+
+const mapStateToProps = (state, props) => ({
+  projects: state.firestore.data.projects,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateProjectDetails: (projectId, project) =>
-    dispatch(updateProjectDetails(projectId, project)),
+  updateProjectDetails: (projectId, project, cb) =>
+    dispatch(updateProjectDetails(projectId, project, cb)),
 });
 
 export default compose(
-  firestoreConnect((props) => {
-    return [
-      {
-        collection: 'projects',
-        where: ['projectId', '==', props.mentorspaceId],
-      },
-    ];
-  }),
+  firestoreConnect((props) => [
+    {
+      collection: 'projects',
+      where: ['projectId', '==', props.mentorspaceId],
+    },
+  ]),
   connect(mapStateToProps, mapDispatchToProps)
 )(CreateUpdateProject);

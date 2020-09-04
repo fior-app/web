@@ -446,7 +446,7 @@ export const addMeetingToFirebase = (groupId, data, closeModal) => (
     });
 };
 
-export const updateProjectDetails = (projectId, project) => (
+export const updateProjectDetails = (projectId, project, cb) => (
   dispatch,
   getState,
   { getFirestore }
@@ -455,18 +455,20 @@ export const updateProjectDetails = (projectId, project) => (
   dispatch({ type: actions.UPDATE_PROJECT_DETAILS_START });
 
   firestore
-    .collection('milestones')
-    .where('projectId', '==', projectId)
-    .get()
-    // .add({
-    //   ...project,
-    //   projectId,
-    //   createdAt: firestore.FieldValue.serverTimestamp(),
-    //   createdBy: getState().auth.currentUser,
-    // })
-    .then((qs) => {
-      console.log(qs);
+    .collection('projects')
+    .doc(projectId)
+    .set(
+      {
+        ...project,
+        projectId,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+        createdBy: getState().auth.currentUser,
+      },
+      { merge: true }
+    )
+    .then(() => {
       dispatch({ type: actions.UPDATE_PROJECT_DETAILS_SUCCESS });
+      cb();
     })
     .catch((error) => {
       dispatch({
