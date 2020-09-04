@@ -24,3 +24,36 @@ export const createQuestion = (question,cb) => (dispatch) => {
       });
   };
   
+  export const getQuestions = () => (dispatch) => {
+    dispatch({ type: actions.GET_QUESTIONS_START });
+    axios
+      .get('/questions')
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: actions.GET_QUESTIONS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        // console.log(error)
+        dispatch({
+          type: actions.GET_QUESTIONS_FAILED,
+          payload: error,
+        });
+      });
+  };
+
+  export const getQuestion = (questionId) => {
+    return (dispatch) => {
+      dispatch({ type: actions.GET_SINGLE_QUESTION_START });
+      axios 
+        .get("/questions/" + questionId)
+        .then((res) => {
+          dispatch({ type: actions.GET_SINGLE_QUESTION_SUCCESS, payload: res.data });
+        })
+        .catch((error) => {
+          dispatch({ type: actions.GET_SINGLE_QUESTION_FAILED, payload: error });
+        });
+    };
+  };
