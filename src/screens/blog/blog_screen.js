@@ -5,7 +5,7 @@ import {
   Container, Grid, Button, Pagination,
 } from 'semantic-ui-react';
 import RecentPosts from './components/recent_posts';
-import Categories from './components/categories';
+import Categories from '../../components/categories/categories';
 import Post from './components/post';
 import { getPosts } from '../../store/actions/blogActions';
 
