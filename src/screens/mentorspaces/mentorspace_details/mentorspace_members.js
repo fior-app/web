@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Feed, Header } from 'semantic-ui-react';
+import { Feed, Card, Divider } from 'semantic-ui-react';
 import { getGroupMembers } from '../../../store/actions/mentorspaceActions';
 
 import styles from '../../../styles/mentorspace.module.css';
@@ -17,22 +17,30 @@ class MentorspaceMembers extends Component {
     if (error) return <div>{JSON.stringify(error)}</div>;
 
     return (
-      <>
-        <Header as={"h4"}>Members</Header>
-        <Feed>
-          {members.map((member) => (
-            <Feed.Event key={member.id}>
-              <Feed.Label>
-                <img src='https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg' alt="person"/>
-              </Feed.Label>
-              <Feed.Content>
-                {member.member.name}
-                {member.permissions.includes('MENTOR') && (<span className={styles.mentor}>Mentor</span>)}
-              </Feed.Content>
-            </Feed.Event>
-          ))}
-        </Feed>
-      </>
+      <Card>
+        <Card.Content>
+          <Card.Header>Members</Card.Header>
+          <Divider />
+          <Feed>
+            {members.map((member) => (
+              <Feed.Event key={member.id}>
+                <Feed.Label>
+                  <img
+                    src="https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg"
+                    alt="person"
+                  />
+                </Feed.Label>
+                <Feed.Content>
+                  {member.member.name}
+                  {member.permissions.includes('MENTOR') && (
+                    <span className={styles.mentor}>Mentor</span>
+                  )}
+                </Feed.Content>
+              </Feed.Event>
+            ))}
+          </Feed>
+        </Card.Content>
+      </Card>
     );
   }
 }

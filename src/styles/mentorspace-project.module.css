@@ -24,6 +24,9 @@
 }
 
 .github_card {
-  width: 100%;
-  background-color: greenyellow;
+  width: 98%;
+  margin: 50px auto;
+  padding: 20px 10px;
+  border-radius: 5px;
+  border: #ddd 1px solid;
 }
