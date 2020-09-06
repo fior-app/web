@@ -44,7 +44,7 @@ const Project = ({ projects }) => {
         </Grid.Row>
       </Grid>
       <Divider />
-      {projects ? (
+      {projects && projects[mentorspaceId] ? (
         <ProjectComponent project={projects[mentorspaceId]} />
       ) : (
         <NoProject />
