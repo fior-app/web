@@ -6,11 +6,7 @@ import * as styles from './../../../../styles/mentorspace-project.module.css';
 
 export class GithubLinks extends Component {
   render() {
-    return (
-      <Card className={styles.github_card}>
-        <Card.Content>dddd</Card.Content>
-      </Card>
-    );
+    return <div className={styles.github_card}>dsdfd</div>;
   }
 }
 
