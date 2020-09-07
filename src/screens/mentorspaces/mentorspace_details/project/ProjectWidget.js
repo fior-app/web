@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import * as styles from '../../../../styles/mentorspace-project.module.css';
-import { Card, Divider, Button } from 'semantic-ui-react';
+import { Card, Divider, Button, Header } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 
 export class ProjectWidget extends Component {
@@ -32,7 +32,9 @@ export class ProjectWidget extends Component {
           <Divider />
           {title ? (
             <>
-              <Card.Description>{title}</Card.Description>
+              <Card.Description>
+                <Header as="h3">{title}</Header>
+              </Card.Description>
               <Card.Meta>{description}</Card.Meta>
             </>
           ) : (
