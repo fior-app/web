@@ -36,3 +36,21 @@ export const updateMe = (name, bio) => (dispatch) => {
       });
     });
 };
+
+export const setMentor = (isMentor) => (dispatch) => {
+  dispatch({ type: actions.SET_MENTOR_START });
+  axios
+    .post('/users/me/setMentor', {
+      isMentor
+    })
+    .then(() => {
+      dispatch({ type: actions.SET_MENTOR_SUCCESS });
+      userMeFetch(dispatch);
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.SET_MENTOR_FAILED,
+        payload: error,
+      });
+    });
+};

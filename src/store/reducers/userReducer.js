@@ -5,6 +5,10 @@ const initState = {
     isLoading: false,
     error: null,
   },
+  setMentorState: {
+    isLoading: false,
+    error: null,
+  },
 };
 
 const updateMeStart = (state) => ({
@@ -33,6 +37,33 @@ const updateMeFailed = (state, payload) => ({
   },
 });
 
+const setMentorStart = (state) => ({
+  ...state,
+  setMentorState: {
+    ...state.setMentorState,
+    isLoading: true,
+    error: null,
+  },
+});
+
+const setMentorSuccess = (state) => ({
+  ...state,
+  setMentorState: {
+    ...state.setMentorState,
+    isLoading: false,
+  },
+});
+
+const setMentorFailed = (state, payload) => ({
+  ...state,
+  setMentorState: {
+    ...state.setMentorState,
+    isLoading: false,
+    error: payload,
+  },
+});
+
+
 const userReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.UPDATE_ME_START:
@@ -43,6 +74,15 @@ const userReducer = (state = initState, action) => {
 
     case actions.UPDATE_ME_FAILED:
       return updateMeFailed(state, action.payload);
+
+    case actions.SET_MENTOR_START:
+      return setMentorStart(state);
+
+    case actions.SET_MENTOR_SUCCESS:
+      return setMentorSuccess(state);
+
+    case actions.SET_MENTOR_FAILED:
+      return setMentorFailed(state, action.payload);
 
     default:
       return state;

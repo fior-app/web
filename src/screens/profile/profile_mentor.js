@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Button,
   Confirm,
   Grid, Icon, Label, LabelDetail, Modal,
 } from 'semantic-ui-react';
@@ -8,6 +9,7 @@ import { Redirect } from 'react-router-dom';
 
 import CreateMentorspace from '../mentorspaces/create/create_mentorspace';
 import { getUserSkills, addUserSkills, deleteUserSkill } from '../../store/actions/skillActions';
+import { setMentor } from '../../store/actions/userActions';
 import SelectCategories from '../../components/categories/select_categories';
 import styles from '../../styles/profile.module.css';
 import VerifySkill from './verify/verify_skill';
@@ -44,15 +46,48 @@ class ProfileMentor extends Component {
   };
 
   render() {
-    const { user, userSkills } = this.props;
+    const { user, userSkills, setMentorState } = this.props;
 
-    if (!user) return <Redirect to="/" />;
+    if (!user) return <Redirect to="/"/>;
 
     return (
       <div>
         <Grid columns="equal">
           <Grid.Row>
             <Grid.Column width={8}>
+              <Grid.Row className={styles.section_wrapper}>
+                <h3>Status</h3>
+                {!user.isMentor ?
+                  (
+                    <>
+                      <div>You are not a mentor yet</div>
+                      <Button
+                        primary
+                        onClick={() => {
+                          this.props.dispatchSetMentor(true)
+                        }}
+                        disabled={setMentorState.isLoading}
+                        loading={setMentorState.isLoading}
+                      >
+                        Become a mentor
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <div>You are a active mentor</div>
+                      <Button
+                        onClick={() => {
+                          this.props.dispatchSetMentor(false)
+                        }}
+                        disabled={setMentorState.isLoading}
+                        loading={setMentorState.isLoading}
+                      >
+                        Stop mentoring
+                      </Button>
+                    </>
+                  )
+                }
+              </Grid.Row>
               <Grid.Row className={styles.section_wrapper}>
                 <div className={styles.section_title}>
                   <h3>Skills</h3>
@@ -95,14 +130,10 @@ class ProfileMentor extends Component {
                         />
                         {userSkill.isVerified
                           ? <LabelDetail>Verified</LabelDetail>
-                          : <VerifySkill userskillId={userSkill.id} skill={userSkill.skill} />}
+                          : <VerifySkill userskillId={userSkill.id} skill={userSkill.skill}/>}
                       </Label>
                     )) : <div>You dont have added any skills yet</div>
                 }
-              </Grid.Row>
-              <Grid.Row className={styles.section_wrapper}>
-                <h3>Medals</h3>
-                <div>You dont have added any medals yet</div>
               </Grid.Row>
               <Grid.Row className={styles.section_wrapper}>
                 <h3>Active Points</h3>
@@ -126,21 +157,21 @@ class ProfileMentor extends Component {
                     open={this.state.showMentorspacesModal}
                     closeIcon
                   >
-                    <CreateMentorspace closeModal={this.closeMentorspacesModal} />
+                    <CreateMentorspace closeModal={this.closeMentorspacesModal}/>
                   </Modal>
                 </div>
                 {/* {
                   userSkills.length > 0
-                    ? userSkills.map((userSkill) => (
-                      <Label key={userSkill.id}>
-                        {userSkill.skill.name}
-                        <Icon
-                          name="delete"
-                          onClick={() => this.props.deleteUserSkill(userSkill.id)}
-                        />
-                      </Label>
-                    )) : <div>You dont have added any skills yet</div>
-                } */}
+                  ? userSkills.map((userSkill) => (
+                  <Label key={userSkill.id}>
+                  {userSkill.skill.name}
+                  <Icon
+                  name="delete"
+                  onClick={() => this.props.deleteUserSkill(userSkill.id)}
+                  />
+                  </Label>
+                  )) : <div>You dont have added any skills yet</div>
+                  } */}
               </Grid.Row>
               <Grid.Row className={styles.section_wrapper}>
                 <h3>Feedbacks</h3>
@@ -157,12 +188,14 @@ class ProfileMentor extends Component {
 const mapStateToProps = (state) => ({
   user: state.auth.currentUser,
   userSkills: state.skills.userSkills.items,
+  setMentorState: state.user.setMentorState,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getUserSkills: () => dispatch(getUserSkills()),
   addUserSkills: (skillIds) => dispatch(addUserSkills(skillIds)),
   deleteUserSkill: (userSkillId) => dispatch(deleteUserSkill(userSkillId)),
+  dispatchSetMentor: (isMentor) => dispatch(setMentor(isMentor))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileMentor);
