@@ -4,9 +4,10 @@ import { Card } from 'semantic-ui-react';
 
 import * as styles from './../../../../styles/mentorspace-project.module.css';
 
-export class GithubLinks extends Component {
+export class GithubLink extends Component {
   render() {
-    return <div className={styles.github_card}>dsdfd</div>;
+    const { link } = this.props;
+    return <div className={styles.github_link_card}>{link}</div>;
   }
 }
 
@@ -14,4 +15,4 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(GithubLinks);
+export default connect(mapStateToProps, mapDispatchToProps)(GithubLink);

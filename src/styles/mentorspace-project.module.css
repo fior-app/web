@@ -30,3 +30,10 @@
   border-radius: 5px;
   border: #ddd 1px solid;
 }
+
+.github_card .header {
+  font-size: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
