@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Form, Icon, Modal } from 'semantic-ui-react';
 
 import * as styles from './../../../../styles/mentorspace-project.module.css';
+import { updateProjectGithubLinks } from '../../../../store/actions/mentorspaceActions';
 
 export class AddRepository extends Component {
   constructor(props) {
@@ -11,8 +12,18 @@ export class AddRepository extends Component {
     this.state = {
       link: '',
       isOpen: false,
+      inValid: false,
     };
   }
+
+  validate = async (link) => {
+    const regex = 'https:\\/\\/github\\.com(?:\\/[^\\/]+)(?:\\/[^\\/]+)';
+    if (!link.match(regex)) {
+      await this.setState({ inValid: true });
+      return false;
+    }
+    return true;
+  };
 
   handleOnChangeInput = (e) => {
     this.setState({
@@ -20,8 +31,20 @@ export class AddRepository extends Component {
     });
   };
 
-  handleInviteMember = () => {
-    // this.props.inviteMember(this.props.groupId, this.state.email);
+  handleLinkAdd = async () => {
+    if (!(await this.validate(this.state.link))) {
+      return;
+    }
+    this.props.updateProjectGithubLinks(
+      this.props.projectId,
+      this.state.link,
+      this.closeModelWithClearData
+    );
+  };
+
+  closeModelWithClearData = () => {
+    this.setState({ link: '' });
+    this.closeModal();
   };
 
   showModal = () => {
@@ -33,6 +56,7 @@ export class AddRepository extends Component {
   };
 
   render() {
+    const { loading, error } = this.props;
     return (
       <Modal
         trigger={
@@ -46,35 +70,36 @@ export class AddRepository extends Component {
         onClose={this.closeModal}
         open={this.state.isOpen}
       >
-        <Modal.Header>Invite member</Modal.Header>
+        <Modal.Header>Enter a valid github link to a repository</Modal.Header>
         <Modal.Content>
           <Modal.Description>
-            {/* {loading ? <div>creating..</div> : null} */}
+            {loading ? <div>updating...</div> : null}
+            {this.state.inValid ? <div>Invalid github Link</div> : null}
             <Form>
               <Form.Field>
                 <input
                   type="text"
                   id="link"
-                  placeholder="Email"
+                  placeholder="Github repository link"
                   value={this.state.link}
                   onChange={this.handleOnChangeInput}
                 />
               </Form.Field>
               <Form.Field>
-                {/* {error ? (
-                        <div>
-                          Error..
-                          {JSON.stringify(error)}
-                        </div>
-                      ) : null} */}
+                {error ? (
+                  <div>
+                    Error..
+                    {JSON.stringify(error)}
+                  </div>
+                ) : null}
               </Form.Field>
 
               <div className="row end">
                 <button
                   type="button"
                   className="btn-alternate"
-                  disabled={true}
-                  onClick={this.handleInviteMember}
+                  disabled={false}
+                  onClick={this.handleLinkAdd}
                 >
                   Add Repository
                 </button>
@@ -87,8 +112,13 @@ export class AddRepository extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  loading: state.groups.addingGithubLink.loading,
+  error: state.groups.addingGithubLink.error,
+});
 
-const mapDispatchToProps = {};
-
+const mapDispatchToProps = (dispatch) => ({
+  updateProjectGithubLinks: (projectId, link, cb) =>
+    dispatch(updateProjectGithubLinks(projectId, link, cb)),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(AddRepository);

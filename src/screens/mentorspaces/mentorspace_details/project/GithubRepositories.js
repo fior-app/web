@@ -12,7 +12,7 @@ export class GithubRepositories extends Component {
       <div className={styles.github_card}>
         <div className={styles.header}>
           <span>Github Repositories</span>
-          <AddRepository />
+          <AddRepository projectId={this.props.mentorspaceId} />
         </div>
         <Divider />
         <GithubLink link={'sexy'} />

@@ -49,7 +49,7 @@ const Project = ({ projects }) => {
         <>
           <ProjectComponent project={projects[mentorspaceId]} />
 
-          <GithubRepositories />
+          <GithubRepositories mentorspaceId={mentorspaceId} />
         </>
       ) : (
         <NoProject />
