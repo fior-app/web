@@ -37,3 +37,35 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.github_link_card {
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px 10px;
+  border-radius: 5px;
+  border: #ddd 1px solid;
+}
+
+.github_link_card .title {
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
+  align-items: center;
+}
+
+.github_link_card .description {
+  font-size: 15px;
+  flood-color: #ccc;
+}
+
+.github_link_card .image {
+  width: 40px;
+  height: 40px;
+  margin: 0px 5px;
+}
+
+.github_link_card .open_issues {
+  color: red;
+  margin: 4px 0px;
+}
