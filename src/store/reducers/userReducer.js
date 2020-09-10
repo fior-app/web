@@ -9,6 +9,13 @@ const initState = {
     isLoading: false,
     error: null,
   },
+  mentorSearch: {
+    isLoading: false,
+    mentors: null,
+    error: null,
+    results: null,
+    value: ''
+  },
 };
 
 const updateMeStart = (state) => ({
@@ -63,6 +70,34 @@ const setMentorFailed = (state, payload) => ({
   },
 });
 
+const searchMentorsStart = (state) => ({
+  ...state,
+  mentorSearch: {
+    ...state.mentorSearch,
+    isLoading: true,
+    error: null,
+  },
+});
+
+const searchMentorsSuccess = (state, payload) => ({
+  ...state,
+  mentorSearch: {
+    ...state.mentorSearch,
+    mentors: payload,
+    isLoading: false,
+  },
+});
+
+const searchMentorsFailed = (state, payload) => ({
+  ...state,
+  mentorSearch: {
+    ...state.mentorSearch,
+    isLoading: false,
+    mentors: null,
+    error: payload,
+  },
+});
+
 
 const userReducer = (state = initState, action) => {
   switch (action.type) {
@@ -83,6 +118,15 @@ const userReducer = (state = initState, action) => {
 
     case actions.SET_MENTOR_FAILED:
       return setMentorFailed(state, action.payload);
+
+    case actions.SEARCH_MENTORS_START:
+      return searchMentorsStart(state);
+
+    case actions.SEARCH_MENTORS_SUCCESS:
+      return searchMentorsSuccess(state, action.payload);
+
+    case actions.SEARCH_MENTORS_FAILED:
+      return searchMentorsFailed(state, action.payload);
 
     default:
       return state;

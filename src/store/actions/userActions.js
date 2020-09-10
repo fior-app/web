@@ -54,3 +54,27 @@ export const setMentor = (isMentor) => (dispatch) => {
       });
     });
 };
+
+export const searchMentors = (query, skip = 0, limit = 25) => (dispatch) => {
+  dispatch({ type: actions.SEARCH_MENTORS_START });
+  axios
+    .get('/users/mentors', {
+      params: {
+        query,
+        skip,
+        limit
+      }
+    })
+    .then((res) => {
+      dispatch({
+        type: actions.SEARCH_MENTORS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.SEARCH_MENTORS_FAILED,
+        payload: error,
+      });
+    });
+};
