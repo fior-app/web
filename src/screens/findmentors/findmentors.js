@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { Container, Header, Search, Card, Icon, Image, Grid, Button } from "semantic-ui-react";
-import _ from "lodash";
+import React, { useEffect, useState } from "react";
+import { Container, Header, Form, Card, Icon, Image, Grid, Loader } from "semantic-ui-react";
 import Categories from "../../components/categories/categories";
 import { searchMentors } from "../../store/actions/userActions";
 import { connect } from "react-redux";
@@ -11,19 +10,15 @@ const FindMentorsScreen = ({
   dispatchSearchMentors,
 }) => {
 
+  const [query, setQuery] = useState("")
+
   useEffect(() => {
     dispatchSearchMentors("")
   }, [])
 
-  const suggestionSelected = (e, { result }) => {
-    console.log(result);
+  const handleOnSearch = () => {
+    dispatchSearchMentors(query)
   }
-
-  const handleOnSearch = (e, { value }) => {
-    console.log(value);
-  }
-
-  console.log(mentorSearch)
 
   return (
     <Container>
@@ -32,16 +27,20 @@ const FindMentorsScreen = ({
           <Header as={'h1'}>Find Mentors</Header>
           <Header sub>“It’s been true in my life that when I’ve needed a mentor, the right person shows up.” – Ken
             Blanchard</Header>
-          <Search
-            loading={mentorSearch.searching}
-            onResultSelect={suggestionSelected}
-            onSearchChange={_.debounce(handleOnSearch, 500, {
-              leading: true,
-            })}
-            results={mentorSearch.results}
-            value={mentorSearch.value}
-            fluid
-          />
+          <Form onSubmit={handleOnSearch}>
+            <Form.Group>
+              <Form.Input
+                placeholder='Search'
+                name='search'
+                value={query}
+                onChange={(e, { value }) => {
+                  setQuery(value)
+                }}
+              />
+              <Form.Button content='Search'/>
+            </Form.Group>
+          </Form>
+          {mentorSearch.isLoading && (<Loader active inline='centered' />)}
           <Card.Group>
             {mentorSearch.mentors && mentorSearch.mentors.map((mentor) => (
               <Card key={mentor.id}>

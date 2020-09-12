@@ -13,8 +13,6 @@ const initState = {
     isLoading: false,
     mentors: null,
     error: null,
-    results: null,
-    value: ''
   },
 };
 
