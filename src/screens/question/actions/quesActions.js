@@ -57,3 +57,19 @@ export const createQuestion = (question,cb) => (dispatch) => {
         });
     };
   };
+
+  export const createAnswer =  (answer,questionId,cb) => {
+    return (dispatch) => {
+      dispatch({ type: actions.GET_CREATE_ANSWER_START });
+      axios
+      .post(`/questions/${questionId}/answers`,answer)
+      .then((res) => {
+        console.log(res)
+        getAnswer(questionId)(dispatch);
+        dispatch({ type: actions.GET_CREATE_ANSWER_SUCCESS, payload: res.data, });
+      })
+      .catch((error) => {
+          dispatch({ type: actions.GET_CREATE_ANSWER_FAILED, payload: error });
+        });
+    };
+  };
