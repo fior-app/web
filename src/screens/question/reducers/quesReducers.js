@@ -62,6 +62,36 @@ const createQuestionFailure = (state) => {
       }
     };
   };
+
+  const getSingleQuestionStart = (state) => {
+    return {
+      ...state, singleQuestion: {
+        ...state.singleQuestion,
+        loading: true,
+      },
+    };
+  };
+  
+  const getSingleQuestionSuccess = (state, question) => {
+    return {
+      ...state, singleQuestion: {
+        ...state.singleQuestion,
+        loading: false,
+        question: question,
+      },
+    };
+  };
+  
+  const getSingleQuestionFailure = (state, error) => {
+    return {
+      ...state, singleQuestion: {
+        ...state.singleQuestion,
+        loading: false,
+        error: error,
+      }
+    };
+  };
+  
   
 
   const questionReducer = (state = initState, action) => {
@@ -84,7 +114,7 @@ const createQuestionFailure = (state) => {
       
           case actions.GET_QUESTIONS_FAILED:
             return getQuestionsFailure(state, action.payload);
-            
+
             case actions.CREATE_ANSWER_START:
                 return getSingleQuestionStart(state);
           
@@ -93,6 +123,24 @@ const createQuestionFailure = (state) => {
           
               case actions.CREATE_ANSWER_FAILED:
                 return getSingleQuestionFailure(state, action.payload);
+
+                case actions.GET_SINGLE_QUESTION_START:
+                    return getSingleQuestionStart(state);
+              
+                  case actions.GET_SINGLE_QUESTION_SUCCESS:
+                    return getSingleQuestionSuccess(state, action.payload);
+              
+                  case actions.GET_SINGLE_QUESTION_FAILED:
+                    return getSingleQuestionFailure(state, action.payload);
+
+                    case actions.GET_CREATE_ANSWER_START:
+                        return getCreateAnswerStart(state);
+                  
+                      case actions.GET_CREATE_ANSWER_SUCCESS:
+                        return getCreateAnswerSuccess(state);
+                  
+                      case actions.GET_CREATE_ANSWER_FAILED:
+                        return getCreateAnswerFailure(state, action.payload);
 
       default:
         return state;
