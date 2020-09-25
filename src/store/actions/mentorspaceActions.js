@@ -1,13 +1,13 @@
-import axios from "axios";
-import { EventSourcePolyfill } from "event-source-polyfill";
-import * as actions from "./types";
-import * as utils from "../../util/utils";
-import firebase from "../../services/firebase";
+import axios from 'axios';
+import { EventSourcePolyfill } from 'event-source-polyfill';
+import * as actions from './types';
+import * as utils from '../../util/utils';
+// import firebase from "../../services/firebase";
 
 export const getGroupsMe = () => (dispatch) => {
   dispatch({ type: actions.GET_MY_GROUPS_START });
   axios
-    .get("/groups/me")
+    .get('/groups/me')
     .then((res) => {
       dispatch({
         type: actions.GET_MY_GROUPS,
@@ -95,9 +95,9 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
     `${process.env.REACT_APP_API_BASE_URL}/sse/chatroom/${roomId}`,
     {
       headers: {
-        Authorization: `Bearer ${utils.getWithExpiry("token")}`,
+        Authorization: `Bearer ${utils.getWithExpiry('token')}`,
       },
-    }
+    },
   );
 
   es.onmessage = (res) => {
@@ -120,26 +120,26 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
 export const createMentorspace = (mentorspace, cb) => (dispatch) => {
   dispatch({ type: actions.CREATE_GROUP_START });
 
-  firebase
-    .firestore()
-    .collection("mentorspaces")
-    .add({
-      ...mentorspace,
-      created: firebase.firestore.FieldValue.serverTimestamp(),
-    })
-    .then(() => {
-      dispatch({ type: actions.CREATE_GROUP_SUCCESS });
-      dispatch({ type: actions.CREATE_GROUP_END });
-      if (cb) cb();
-      getGroupsMe()(dispatch);
-    })
-    .catch((error) => {
-      dispatch({
-        type: actions.CREATE_GROUP_FAILED,
-        payload: error,
-      });
-      dispatch({ type: actions.CREATE_GROUP_END });
-    });
+  // firebase
+  //   .firestore()
+  //   .collection("mentorspaces")
+  //   .add({
+  //     ...mentorspace,
+  //     created: firebase.firestore.FieldValue.serverTimestamp(),
+  //   })
+  //   .then(() => {
+  //     dispatch({ type: actions.CREATE_GROUP_SUCCESS });
+  //     dispatch({ type: actions.CREATE_GROUP_END });
+  //     if (cb) cb();
+  //     getGroupsMe()(dispatch);
+  //   })
+  //   .catch((error) => {
+  //     dispatch({
+  //       type: actions.CREATE_GROUP_FAILED,
+  //       payload: error,
+  //     });
+  //     dispatch({ type: actions.CREATE_GROUP_END });
+  //   });
 
   // axios
   //   .post('/groups/', group)
@@ -195,7 +195,7 @@ export const inviteMember = (groupId, email) => (dispatch) => {
 export const getMentorspaceRequests = () => (dispatch) => {
   dispatch({ type: actions.GET_GROUPS_REQUESTS_START });
   axios
-    .get("/groups/me/requests")
+    .get('/groups/me/requests')
     .then((res) => {
       dispatch({
         type: actions.GET_GROUPS_REQUESTS,
