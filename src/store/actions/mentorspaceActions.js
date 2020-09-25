@@ -117,8 +117,26 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
   };
 };
 
-export const createMentorspace = (mentorspace, cb) => (dispatch) => {
+export const createMentorspace = (mentorspace, cb) => (dispatch, { getFirestore }) => {
+  const firestore = getFirestore();
+
   dispatch({ type: actions.CREATE_GROUP_START });
+
+  firestore.collection('mentorspaces').add({
+    ...mentorspace,
+    createdAt: Date.now(),
+  }).then(() => {
+    dispatch({ type: actions.CREATE_GROUP_SUCCESS });
+    dispatch({ type: actions.CREATE_GROUP_END });
+    if (cb) cb();
+    getGroupsMe()(dispatch);
+  }).catch((error) => {
+    dispatch({
+      type: actions.CREATE_GROUP_FAILED,
+      payload: error,
+    });
+    dispatch({ type: actions.CREATE_GROUP_END });
+  });
 
   // firebase
   //   .firestore()
