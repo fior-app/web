@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { getMentor } from "../../store/actions/userActions";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   Button, Confirm,
   Container,
@@ -35,8 +35,11 @@ const MentorProfile = ({
   return (
     <Container>
       <Grid columns="equal">
+        <Grid.Row>
+          <Link to="/mentors">← Back to Find Mentors</Link>
+        </Grid.Row>
         <Grid.Column width={4}>
-          <div className={profileStyles.avatar_container}>
+          <div>
             <Image className={profileStyles.avatar}
                    src={mentor && mentor.profilePicture ? mentor.profilePicture : defAvatarUrl}
                    alt="avatar" circular/>
@@ -61,16 +64,21 @@ const MentorProfile = ({
               <Grid.Row>
                 <Grid.Column width={8}>
                   <Grid.Row className={profileStyles.section_wrapper}>
-                    { mentor &&
-                      mentor.skills.length > 0
-                        ? mentor.skills.map((userSkill) => (
-                          <Label key={userSkill.id} image>
-                            {userSkill.skill.name}
-                            {userSkill.isVerified
-                              ? <LabelDetail>Verified</LabelDetail>
-                              : <VerifySkill userskillId={userSkill.id} skill={userSkill.skill}/>}
-                          </Label>
-                        )) : <div>Mentor dont have any skills yet</div>
+                    <h3>Contact</h3>
+                    <Button primary>Send a Email</Button>
+                  </Grid.Row>
+                  <Grid.Row className={profileStyles.section_wrapper}>
+                    <h3>Skills</h3>
+                    {mentor &&
+                    mentor.skills.length > 0
+                      ? mentor.skills.map((userSkill) => (
+                        <Label key={userSkill.id} image>
+                          {userSkill.skill.name}
+                          {userSkill.isVerified
+                            ? <LabelDetail>Verified</LabelDetail>
+                            : <VerifySkill userskillId={userSkill.id} skill={userSkill.skill}/>}
+                        </Label>
+                      )) : <div>Mentor dont have any skills yet</div>
                     }
                   </Grid.Row>
                   <Grid.Row className={profileStyles.section_wrapper}>

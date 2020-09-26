@@ -4,7 +4,7 @@ import {
   Container, Grid, Header, Image, Label,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 
 import { getPost, deleteBlogPost } from '../../../store/actions/blogActions';
 
@@ -31,12 +31,16 @@ const BlogDetail = (
 
   return (
     <Container>
-      {!loading && post
-        ? (
-          <Grid columns="equal">
+      <Grid columns="equal">
+        <Grid.Row>
+          <Link to="/blog">← Back to Blog Posts</Link>
+        </Grid.Row>
+
+        {!loading && post
+          ? (<>
             <Grid.Column>
               <Header as="h2">{post.title}</Header>
-              <Image src="../../assets/vectors/blogviewicon.svg" alt="" />
+              <Image src="../../assets/vectors/blogviewicon.svg" alt=""/>
               <p>{post.text}</p>
               <div className="comments_section">
                 <Header as="h4">Comments</Header>
@@ -58,9 +62,9 @@ const BlogDetail = (
                 </Label>
               ))}
             </Grid.Column>
-          </Grid>
-        )
-        : <div>Loading</div>}
+          </>)
+          : <div>Loading</div>}
+      </Grid>
     </Container>
   );
 };
