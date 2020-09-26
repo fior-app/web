@@ -1,9 +1,8 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Item, Label, Button } from 'semantic-ui-react';
+import { Item, } from 'semantic-ui-react';
 
 import { getMentorspaceRequests } from '../../store/actions/mentorspaceActions';
-import { getSkillQuestions, verifyUserSkill } from "../../store/actions/skillActions";
 import GroupConfirm from "./mentorspace_details/GroupConfirm";
 
 const MentorspaceRequests = ({

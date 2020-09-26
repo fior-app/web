@@ -18,7 +18,7 @@ const InviteMentor = ({
     selected: null
   }
 
-  const [inviteState, setInviteState] = useState('');
+  const [inviteState, setInviteState] = useState(initialState);
 
   const [isModelOpen, setModelOpen] = useState(false);
 

@@ -6,7 +6,6 @@ import {
 import CreateMentorspace from './create/create_mentorspace';
 
 import MyMentorspaces from './my_mentorspaces';
-import MentorspaceRequests from './mentorspace_requests';
 
 class MentorspacesScreen extends Component {
   constructor(props) {
