@@ -85,21 +85,6 @@ class MentorspaceScreen extends Component {
         </Grid>
       </Container>
     );
-
-    return (
-      <div className="container">
-        <div className="v-spacer-2" />
-        <h2>{member && member.group.name}</h2>
-
-        <div className="v-spacer-10" />
-        {member && member.state === 'OK' ? (
-          <GroupChat
-            groupId={member && member.group.id}
-            roomId={member && member.group.chatroom.id}
-          />
-        ) : null}
-      </div>
-    );
   }
 }
 

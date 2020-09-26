@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Grid, Image } from 'semantic-ui-react';
-import { Link, NavLink } from 'react-router-dom';
+import { Card, Grid, } from 'semantic-ui-react';
+import { Link, } from 'react-router-dom';
 import styles from '../../styles/mentorspaces.module.css';
 import { getGroupsMe } from '../../store/actions/mentorspaceActions';
 

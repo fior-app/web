@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 
 import { getMentorspaceRequests } from '../../store/actions/mentorspaceActions';
 
@@ -11,7 +10,7 @@ class MentorspaceRequests extends Component {
   }
 
   render() {
-    const { loading, mentorspaces, error } = this.props;
+    const { loading } = this.props;
 
     if (loading) {
       return (
@@ -29,30 +28,30 @@ class MentorspaceRequests extends Component {
 
     return (<div>Move to notifications</div>);
 
-    return (
-      <Grid>
-        <Grid.Row>
-          {mentorspaces.map((MentorspaceItem) => (
-            <Link
-              to={`/mentorspaces/${MentorspaceItem.group.id}`}
-              key={MentorspaceItem.id}
-            >
-              <div className="group-item">
-                <div className="group-header">
-                  {MentorspaceItem.group.name}
-                </div>
-                <div className="v-spacer" />
-                <div>
-                  Created by &nbsp;
-                  <span>{MentorspaceItem.group.createdBy.name}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
-          {error ? `error: ${JSON.stringify(error)}` : null}
-        </Grid.Row>
-      </Grid>
-    );
+    // return (
+    //   <Grid>
+    //     <Grid.Row>
+    //       {mentorspaces.map((MentorspaceItem) => (
+    //         <Link
+    //           to={`/mentorspaces/${MentorspaceItem.group.id}`}
+    //           key={MentorspaceItem.id}
+    //         >
+    //           <div className="group-item">
+    //             <div className="group-header">
+    //               {MentorspaceItem.group.name}
+    //             </div>
+    //             <div className="v-spacer" />
+    //             <div>
+    //               Created by &nbsp;
+    //               <span>{MentorspaceItem.group.createdBy.name}</span>
+    //             </div>
+    //           </div>
+    //         </Link>
+    //       ))}
+    //       {error ? `error: ${JSON.stringify(error)}` : null}
+    //     </Grid.Row>
+    //   </Grid>
+    // );
   }
 }
 

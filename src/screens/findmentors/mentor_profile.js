@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import profileStyles from '../../styles/profile.module.css';
 import VerifySkill from "../profile/verify/verify_skill";
+import InviteMentor from "./invite_mentor";
 
 const MentorProfile = ({
   mentor,
@@ -58,11 +59,13 @@ const MentorProfile = ({
             <Grid columns="equal">
               <Grid.Row>
                 <Grid.Column width={8}>
-                  <Grid.Row className={profileStyles.section_wrapper}>
-                    <h3>Contact</h3>
-                    <Button primary>Invite to a Mentorspace</Button>
-                    <Button>Send a Email</Button>
-                  </Grid.Row>
+                  {mentor && (
+                    <Grid.Row className={profileStyles.section_wrapper}>
+                      <h3>Contact</h3>
+                      <InviteMentor mentorEmail={mentor.user.email}/>
+                      <Button>Send a Email</Button>
+                    </Grid.Row>
+                  )}
                   <Grid.Row className={profileStyles.section_wrapper}>
                     <h3>Skills</h3>
                     {mentor &&
@@ -70,9 +73,7 @@ const MentorProfile = ({
                       ? mentor.skills.map((userSkill) => (
                         <Label key={userSkill.id} image>
                           {userSkill.skill.name}
-                          {userSkill.isVerified
-                            ? <LabelDetail>Verified</LabelDetail>
-                            : <VerifySkill userskillId={userSkill.id} skill={userSkill.skill}/>}
+                          {userSkill.isVerified && <LabelDetail>Verified</LabelDetail>}
                         </Label>
                       )) : <div>Mentor dont have any skills yet</div>
                     }

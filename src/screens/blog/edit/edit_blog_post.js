@@ -51,7 +51,7 @@ const EditBlogPost = ({
     } else {
       setPostState(initialState);
     }
-  }, [post]);
+  }, [post, initialState]);
 
   const handleOnChangeInput = (e, { name, value }) => {
     setPostState((state) => ({

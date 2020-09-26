@@ -20,7 +20,7 @@ class InviteMember extends Component {
   };
 
   handleInviteMember = () => {
-    this.props.inviteMember(this.props.groupId, this.state);
+    this.props.inviteMember(this.props.groupId, this.state.email);
   };
 
   render() {

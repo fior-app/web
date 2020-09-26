@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Header, Form, Card, Icon, Image, Grid, Loader } from "semantic-ui-react";
+import { Container, Header, Form, Card, Image, Grid, Loader } from "semantic-ui-react";
 import Categories from "../../components/categories/categories";
 import { searchMentors } from "../../store/actions/userActions";
 import { connect } from "react-redux";
@@ -15,7 +15,7 @@ const FindMentorsScreen = ({
 
   useEffect(() => {
     dispatchSearchMentors("")
-  }, [])
+  }, [dispatchSearchMentors])
 
   const handleOnSearch = () => {
     dispatchSearchMentors(query)

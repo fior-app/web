@@ -1,0 +1,9 @@
+.selected {
+    border: #02c39a;
+    color: #02c39a !important;
+    background-color: #EFEFEF !important;
+}
+
+.comment_form {
+    margin-top: 2rem;
+}

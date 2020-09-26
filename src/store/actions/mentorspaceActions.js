@@ -193,10 +193,11 @@ export const sendGroupMessage = (roomId, message) => (dispatch) => {
     });
 };
 
-export const inviteMember = (groupId, email) => (dispatch) => {
+export const inviteMember = (groupId, email, isMentor = false) => (dispatch) => {
   dispatch({ type: actions.INVITE_MEMBER_START });
+  console.log({email, isMentor})
   axios
-    .post(`/groups/${groupId}/member`, email)
+    .post(`/groups/${groupId}/member`, {email, isMentor})
     .then(() => {
       dispatch({ type: actions.INVITE_MEMBER_SUCCESS });
       dispatch({ type: actions.INVITE_MEMBER_END });
