@@ -16,10 +16,10 @@ class CreateMentorspace extends Component {
     };
   }
 
-  handleCreateMentorspace = (type, value) => {
+  handleCreateMentorspace = async (type, value) => {
     const { createSpace, closeModal } = this.props;
 
-    this.setState({ [type]: value });
+    await this.setState({ [type]: value });
     createSpace(this.state, closeModal);
   };
 

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-
+import { firestoreConnect } from 'react-redux-firebase';
 import { Form, Input } from 'semantic-ui-react';
-import {
-  getGroupMessages,
-  sendGroupMessage,
-  getGroupMessagesStream,
-} from '../../../store/actions/mentorspaceActions';
+
+import { sendGroupMessageToFirebase } from '../../../store/actions/mentorspaceActions';
 import Message from './Message';
 import styles from '../../../styles/mentorspace.module.css';
 
@@ -19,11 +17,6 @@ class GroupChat extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.getGroupMessages(this.props.groupId);
-    this.props.getGroupMessagesStream(this.props.roomId);
-  }
-
   handleOnChangeInput = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -31,30 +24,30 @@ class GroupChat extends Component {
   };
 
   handleSendMessage = () => {
-    if (this.state.message !== '') this.props.sendGroupMessage(this.props.roomId, this.state);
-
+    if (this.state.message !== '') {
+      this.props.sendGroupMessageToFirebase(this.props.roomId, this.state);
+    }
     this.setState({ message: '' });
   };
 
   render() {
-    const { messages, loading, error } = this.props;
-
-    if (loading) return <div>Loading groups</div>;
-
+    const { messages } = this.props;
     return (
       <div>
-        {error ? JSON.stringify(error) : null}
-
         {messages ? (
-          messages.map((message) => (
-            <div key={message.id}>
-              <Message message={message} />
-            </div>
-          ))
+          Object.values(messages).map((message, index) => {
+            return message ? (
+              <div key={index}>
+                <Message message={message} />
+              </div>
+            ) : (
+              <div key={index} />
+            );
+          })
         ) : (
           <li>no messages</li>
         )}
-        <div className={styles.v_spacer_12} />
+        <div className={styles.v_spacer_1} />
         <Form>
           <Form.Field>
             <Input
@@ -77,16 +70,23 @@ class GroupChat extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.groups.groupMessages.loading,
-  messages: state.groups.groupMessages.messages,
-  error: state.groups.groupMessages.error,
+  messages: state.firestore.data.messages,
   msgSending: state.groups.sendGroupMessage.seding,
   msgError: state.groups.sendGroupMessage.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getGroupMessages: (groupId) => dispatch(getGroupMessages(groupId)),
-  sendGroupMessage: (roomId, message) => dispatch(sendGroupMessage(roomId, message)),
-  getGroupMessagesStream: (roomId) => dispatch(getGroupMessagesStream(roomId)),
+  sendGroupMessageToFirebase: (roomId, message) =>
+    dispatch(sendGroupMessageToFirebase(roomId, message)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(GroupChat);
+export default compose(
+  firestoreConnect((props) => [
+    {
+      collection: 'messages',
+      orderBy: ['sentAt', 'desc'],
+      limit: 25,
+      where: ['roomId', '==', props.roomId],
+    },
+  ]),
+  connect(mapStateToProps, mapDispatchToProps)
+)(GroupChat);

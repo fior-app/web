@@ -97,7 +97,7 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
       headers: {
         Authorization: `Bearer ${utils.getWithExpiry('token')}`,
       },
-    },
+    }
   );
 
   es.onmessage = (res) => {
@@ -117,26 +117,26 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
   };
 };
 
-export const createMentorspace = (mentorspace, cb) => (dispatch, { getFirestore }) => {
-  const firestore = getFirestore();
+export const createMentorspace = (mentorspace, cb) => (dispatch) => {
+  // const firestore = getFirestore();
 
   dispatch({ type: actions.CREATE_GROUP_START });
 
-  firestore.collection('mentorspaces').add({
-    ...mentorspace,
-    createdAt: Date.now(),
-  }).then(() => {
-    dispatch({ type: actions.CREATE_GROUP_SUCCESS });
-    dispatch({ type: actions.CREATE_GROUP_END });
-    if (cb) cb();
-    getGroupsMe()(dispatch);
-  }).catch((error) => {
-    dispatch({
-      type: actions.CREATE_GROUP_FAILED,
-      payload: error,
-    });
-    dispatch({ type: actions.CREATE_GROUP_END });
-  });
+  // firestore.collection('mentorspaces').add({
+  //   ...mentorspace,
+  //   createdAt: Date.now(),
+  // }).then(() => {
+  //   dispatch({ type: actions.CREATE_GROUP_SUCCESS });
+  //   dispatch({ type: actions.CREATE_GROUP_END });
+  //   if (cb) cb();
+  //   getGroupsMe()(dispatch);
+  // }).catch((error) => {
+  //   dispatch({
+  //     type: actions.CREATE_GROUP_FAILED,
+  //     payload: error,
+  //   });
+  //   dispatch({ type: actions.CREATE_GROUP_END });
+  // });
 
   // firebase
   //   .firestore()
@@ -159,21 +159,21 @@ export const createMentorspace = (mentorspace, cb) => (dispatch, { getFirestore 
   //     dispatch({ type: actions.CREATE_GROUP_END });
   //   });
 
-  // axios
-  //   .post('/groups/', group)
-  //   .then(() => {
-  //     dispatch({ type: actions.CREATE_GROUP_SUCCESS });
-  //     dispatch({ type: actions.CREATE_GROUP_END });
-  //     if (cb) cb();
-  //     getGroupsMe()(dispatch);
-  //   })
-  //   .catch((error) => {
-  //     dispatch({
-  //       type: actions.CREATE_GROUP_FAILED,
-  //       payload: error,
-  //     });
-  //     dispatch({ type: actions.CREATE_GROUP_END });
-  //   });
+  axios
+    .post('/groups/', mentorspace)
+    .then(() => {
+      dispatch({ type: actions.CREATE_GROUP_SUCCESS });
+      dispatch({ type: actions.CREATE_GROUP_END });
+      if (cb) cb();
+      getGroupsMe()(dispatch);
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.CREATE_GROUP_FAILED,
+        payload: error,
+      });
+      dispatch({ type: actions.CREATE_GROUP_END });
+    });
 };
 
 export const sendGroupMessage = (roomId, message) => (dispatch) => {
@@ -193,11 +193,12 @@ export const sendGroupMessage = (roomId, message) => (dispatch) => {
     });
 };
 
-export const inviteMember = (groupId, email, isMentor = false) => (dispatch) => {
+export const inviteMember = (groupId, email, isMentor = false) => (
+  dispatch
+) => {
   dispatch({ type: actions.INVITE_MEMBER_START });
-  console.log({email, isMentor})
   axios
-    .post(`/groups/${groupId}/member`, {email, isMentor})
+    .post(`/groups/${groupId}/member`, { email, isMentor })
     .then(() => {
       dispatch({ type: actions.INVITE_MEMBER_SUCCESS });
       dispatch({ type: actions.INVITE_MEMBER_END });
@@ -247,5 +248,35 @@ export const changeGroupState = (groupId, state) => (dispatch) => {
         payload: error,
       });
       dispatch({ type: actions.CHANGE_GROUP_STATE_END });
+    });
+};
+
+export const sendGroupMessageToFirebase = (roomId, message) => (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.SEND_GROUP_MESSAGE_START });
+
+  firestore
+    .collection('messages')
+    .add({
+      ...message,
+      sentAt: firestore.FieldValue.serverTimestamp(),
+      roomId,
+      sender: getState().auth.currentUser,
+    })
+    .then(() => {
+      dispatch({ type: actions.SEND_GROUP_MESSAGE_SUCCESS });
+      dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.SEND_GROUP_MESSAGE_FAILED,
+        payload: error,
+      });
+      dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
     });
 };
