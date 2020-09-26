@@ -1,58 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Item, Label, Button } from 'semantic-ui-react';
 
 import { getMentorspaceRequests } from '../../store/actions/mentorspaceActions';
+import { getSkillQuestions, verifyUserSkill } from "../../store/actions/skillActions";
+import GroupConfirm from "./mentorspace_details/GroupConfirm";
 
-class MentorspaceRequests extends Component {
-  componentDidMount() {
-    this.props.getMentorspaceRequests();
-  }
+const MentorspaceRequests = ({
+  mentorspaces,
+  loading,
+  error,
+  dispatchGetMentorspaceRequests
+}) => {
 
-  render() {
-    const { loading } = this.props;
+  useEffect(() => {
+    dispatchGetMentorspaceRequests()
+  }, [dispatchGetMentorspaceRequests])
 
-    if (loading) {
-      return (
-        <Grid>
-          <Grid.Row>
-            <div className="group-item">
-              <div className="group-header">Loading</div>
-              <div className="v-spacer" />
-              <div />
-            </div>
-          </Grid.Row>
-        </Grid>
-      );
-    }
+  console.log(mentorspaces)
 
-    return (<div>Move to notifications</div>);
+  return (
+    <>
+      {loading ? (
+        <div>Loading</div>
+      ) : (
+        <Item.Group divided>
+          {mentorspaces.map((mentorspaceItem) => (
+            <Item key={mentorspaceItem.id}>
+              <Item.Content>
+                <Item.Header as='a'>{mentorspaceItem.group.name}</Item.Header>
 
-    // return (
-    //   <Grid>
-    //     <Grid.Row>
-    //       {mentorspaces.map((MentorspaceItem) => (
-    //         <Link
-    //           to={`/mentorspaces/${MentorspaceItem.group.id}`}
-    //           key={MentorspaceItem.id}
-    //         >
-    //           <div className="group-item">
-    //             <div className="group-header">
-    //               {MentorspaceItem.group.name}
-    //             </div>
-    //             <div className="v-spacer" />
-    //             <div>
-    //               Created by &nbsp;
-    //               <span>{MentorspaceItem.group.createdBy.name}</span>
-    //             </div>
-    //           </div>
-    //         </Link>
-    //       ))}
-    //       {error ? `error: ${JSON.stringify(error)}` : null}
-    //     </Grid.Row>
-    //   </Grid>
-    // );
-  }
+                <Item.Meta>
+                    <span>
+                      {mentorspaceItem.permissions.includes("MENTOR") ? 'Mentor' : 'Member'}
+                    </span>
+                </Item.Meta>
+                <Item.Description>{mentorspaceItem.group.description}</Item.Description>
+                <Item.Extra>
+                  <GroupConfirm groupId={mentorspaceItem.group.id}/>
+                </Item.Extra>
+              </Item.Content>
+            </Item>
+          ))}
+        </Item.Group>
+      )}
+    </>
+  );
 }
 
 const mapStateToProps = (state) => ({
@@ -61,9 +54,8 @@ const mapStateToProps = (state) => ({
   error: state.groups.groupsRequests.error,
 });
 
-const mapDispatchToProps = { getMentorspaceRequests };
+const mapDispatchToProps = (dispatch) => ({
+  dispatchGetMentorspaceRequests: () => dispatch(getMentorspaceRequests())
+});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MentorspaceRequests);
+export default connect(mapStateToProps, mapDispatchToProps,)(MentorspaceRequests);

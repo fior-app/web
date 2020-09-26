@@ -239,7 +239,7 @@ export const changeGroupState = (groupId, state) => (dispatch) => {
     .then(() => {
       dispatch({ type: actions.CHANGE_GROUP_STATE_SUCCESS });
       dispatch({ type: actions.CHANGE_GROUP_STATE_END });
-      getGroup(groupId)(dispatch);
+      getMentorspaceRequests()(dispatch);
     })
     .catch((error) => {
       dispatch({

@@ -49,12 +49,6 @@ class MentorspacesScreen extends Component {
           Mentorspaces
         </h2>
         <MyMentorspaces />
-
-        <h2>
-          Mentorspace Requests
-        </h2>
-        <div className="v-spacer-2" />
-        <MentorspaceRequests />
       </Container>
     );
   }

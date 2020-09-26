@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { changeGroupState } from '../../../store/actions/mentorspaceActions';
+import { Button, Loader } from "semantic-ui-react";
 
 class GroupConfirm extends Component {
   handleChangeState = (state) => {
@@ -11,14 +12,26 @@ class GroupConfirm extends Component {
   };
 
   render() {
+    const { loading } = this.props;
+
     return (
-      <div>
-        Accept group invitation
-        <button type="button" onClick={() => this.handleChangeState('OK')}>confirm</button>
-        <button type="button" onClick={() => this.handleChangeState('DECLINED')}>
-          decline
-        </button>
-      </div>
+      <>
+        {loading ? (
+          <Loader active inline/>
+        ) : (
+          <>
+            <Button
+              type="button"
+              positive
+              onClick={() => this.handleChangeState('OK')}>
+              ACCEPT
+            </Button>
+            <Button type="button" negative onClick={() => this.handleChangeState('DECLINED')}>
+              DECLINE
+            </Button>
+          </>
+        )}
+      </>
     );
   }
 }
