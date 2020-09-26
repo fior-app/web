@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {
-  Button,
+  Button, Card,
   Confirm,
   Grid, Icon, Label, LabelDetail, Modal,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import CreateMentorspace from '../mentorspaces/create/create_mentorspace';
 import { getUserSkills, addUserSkills, deleteUserSkill } from '../../store/actions/skillActions';
+import { getGroupsMe } from '../../store/actions/mentorspaceActions';
 import { setMentor } from '../../store/actions/userActions';
 import SelectCategories from '../../components/categories/select_categories';
 import styles from '../../styles/profile.module.css';
@@ -26,6 +27,7 @@ class ProfileMentor extends Component {
   }
 
   componentDidMount() {
+    this.props.getGroupsMe();
     this.props.getUserSkills();
   }
 
@@ -46,7 +48,9 @@ class ProfileMentor extends Component {
   };
 
   render() {
-    const { user, userSkills, setMentorState } = this.props;
+    const { user, groups, userSkills, setMentorState } = this.props;
+
+    console.log(groups)
 
     if (!user) return <Redirect to="/"/>;
 
@@ -76,6 +80,7 @@ class ProfileMentor extends Component {
                     <>
                       <div>You are a active mentor</div>
                       <Button
+                        negative
                         onClick={() => {
                           this.props.dispatchSetMentor(false)
                         }}
@@ -160,18 +165,23 @@ class ProfileMentor extends Component {
                     <CreateMentorspace closeModal={this.closeMentorspacesModal}/>
                   </Modal>
                 </div>
-                {/* {
-                  userSkills.length > 0
-                  ? userSkills.map((userSkill) => (
-                  <Label key={userSkill.id}>
-                  {userSkill.skill.name}
-                  <Icon
-                  name="delete"
-                  onClick={() => this.props.deleteUserSkill(userSkill.id)}
-                  />
-                  </Label>
-                  )) : <div>You dont have added any skills yet</div>
-                  } */}
+                <Card.Group>
+                  {groups.reverse().map((mentorspaceItem) => (
+                    <Card
+                      as={Link}
+                      to={`/mentorspaces/${mentorspaceItem.group.id}`}
+                      key={mentorspaceItem.id}>
+                      <Card.Content>
+                        <Card.Header>{mentorspaceItem.group.name}</Card.Header>
+                        {mentorspaceItem.group.description && (
+                          <Card.Description>
+                            {mentorspaceItem.group.description}
+                          </Card.Description>
+                        )}
+                      </Card.Content>
+                    </Card>
+                  ))}
+                </Card.Group>
               </Grid.Row>
               <Grid.Row className={styles.section_wrapper}>
                 <h3>Feedbacks</h3>
@@ -187,12 +197,14 @@ class ProfileMentor extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.auth.currentUser,
+  groups: state.groups.groups.groups,
   userSkills: state.skills.userSkills.items,
   setMentorState: state.user.setMentorState,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getUserSkills: () => dispatch(getUserSkills()),
+  getGroupsMe: () => dispatch(getGroupsMe()),
   addUserSkills: (skillIds) => dispatch(addUserSkills(skillIds)),
   deleteUserSkill: (userSkillId) => dispatch(deleteUserSkill(userSkillId)),
   dispatchSetMentor: (isMentor) => dispatch(setMentor(isMentor))

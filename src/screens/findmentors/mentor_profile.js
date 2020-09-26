@@ -3,17 +3,12 @@ import { getMentor } from "../../store/actions/userActions";
 import { connect } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import {
-  Button, Confirm,
-  Container,
+  Button, Container,
   Grid,
-  Header, Icon,
-  Image, Label, LabelDetail, Modal,
+  Header, Image, Label, LabelDetail,
 } from "semantic-ui-react";
 import profileStyles from '../../styles/profile.module.css';
-import styles from "../../styles/profile.module.css";
-import SelectCategories from "../../components/categories/select_categories";
 import VerifySkill from "../profile/verify/verify_skill";
-import CreateMentorspace from "../mentorspaces/create/create_mentorspace";
 
 const MentorProfile = ({
   mentor,
@@ -65,7 +60,8 @@ const MentorProfile = ({
                 <Grid.Column width={8}>
                   <Grid.Row className={profileStyles.section_wrapper}>
                     <h3>Contact</h3>
-                    <Button primary>Send a Email</Button>
+                    <Button primary>Invite to a Mentorspace</Button>
+                    <Button>Send a Email</Button>
                   </Grid.Row>
                   <Grid.Row className={profileStyles.section_wrapper}>
                     <h3>Skills</h3>

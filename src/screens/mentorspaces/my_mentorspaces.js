@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Card, Grid, Image } from 'semantic-ui-react';
+import { Link, NavLink } from 'react-router-dom';
 import styles from '../../styles/mentorspaces.module.css';
 import { getGroupsMe } from '../../store/actions/mentorspaceActions';
 
@@ -21,8 +21,8 @@ class MyMentorspaces extends Component {
           <Grid.Row>
             <div className="group-item">
               <div className="group-header">Loading</div>
-              <div className="v-spacer" />
-              <div />
+              <div className="v-spacer"/>
+              <div/>
             </div>
           </Grid.Row>
         </Grid>
@@ -31,38 +31,27 @@ class MyMentorspaces extends Component {
 
     return (
       <div className={styles.section_wrapper}>
-        <Grid>
+        <Card.Group>
           {mentorspaces.reverse().map((mentorspaceItem) => (
-            <Link
+            <Card
+              as={Link}
               to={`/mentorspaces/${mentorspaceItem.group.id}`}
-              key={mentorspaceItem.id}
-            >
-              <div className={styles.mentorspace_item_container}>
-                <div>
-                  <h3>
-                    {mentorspaceItem.group.name}
-                  </h3>
-                  {mentorspaceItem.group.description}
-                </div>
-                <div>
-                  {mentorspaceItem.group.createdBy.name}
-                </div>
-              </div>
-            </Link>
-
-          //   <div className="group-item">
-          //     <div className="group-header">
-          //       {mentorspaceItem.group.name}
-          //     </div>
-          //     <div className="v-spacer" />
-          //     <div>
-          //       Created by &nbsp;
-          //       <span>{mentorspaceItem.group.createdBy.name}</span>
-          //     </div>
-          //   </div>
+              key={mentorspaceItem.id}>
+              <Card.Content>
+                <Card.Header>{mentorspaceItem.group.name}</Card.Header>
+                <Card.Meta>
+                  <span>{mentorspaceItem.group.createdBy.name}</span>
+                </Card.Meta>
+                {mentorspaceItem.group.description && (
+                  <Card.Description>
+                    {mentorspaceItem.group.description}
+                  </Card.Description>
+                )}
+              </Card.Content>
+            </Card>
           ))}
           {error ? `error: ${JSON.stringify(error)}` : null}
-        </Grid>
+        </Card.Group>
       </div>
     );
   }
