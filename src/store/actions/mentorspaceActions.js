@@ -2,6 +2,7 @@ import axios from 'axios';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import * as actions from './types';
 import * as utils from '../../util/utils';
+// import firebase from "../../services/firebase";
 
 export const getGroupsMe = () => (dispatch) => {
   dispatch({ type: actions.GET_MY_GROUPS_START });
@@ -116,23 +117,63 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
   };
 };
 
-export const createGroup = (group, cb) => (dispatch) => {
+export const createMentorspace = (mentorspace, cb) => (dispatch, { getFirestore }) => {
+  const firestore = getFirestore();
+
   dispatch({ type: actions.CREATE_GROUP_START });
-  axios
-    .post('/groups/', group)
-    .then(() => {
-      dispatch({ type: actions.CREATE_GROUP_SUCCESS });
-      dispatch({ type: actions.CREATE_GROUP_END });
-      if (cb) cb();
-      getGroupsMe()(dispatch);
-    })
-    .catch((error) => {
-      dispatch({
-        type: actions.CREATE_GROUP_FAILED,
-        payload: error,
-      });
-      dispatch({ type: actions.CREATE_GROUP_END });
+
+  firestore.collection('mentorspaces').add({
+    ...mentorspace,
+    createdAt: Date.now(),
+  }).then(() => {
+    dispatch({ type: actions.CREATE_GROUP_SUCCESS });
+    dispatch({ type: actions.CREATE_GROUP_END });
+    if (cb) cb();
+    getGroupsMe()(dispatch);
+  }).catch((error) => {
+    dispatch({
+      type: actions.CREATE_GROUP_FAILED,
+      payload: error,
     });
+    dispatch({ type: actions.CREATE_GROUP_END });
+  });
+
+  // firebase
+  //   .firestore()
+  //   .collection("mentorspaces")
+  //   .add({
+  //     ...mentorspace,
+  //     created: firebase.firestore.FieldValue.serverTimestamp(),
+  //   })
+  //   .then(() => {
+  //     dispatch({ type: actions.CREATE_GROUP_SUCCESS });
+  //     dispatch({ type: actions.CREATE_GROUP_END });
+  //     if (cb) cb();
+  //     getGroupsMe()(dispatch);
+  //   })
+  //   .catch((error) => {
+  //     dispatch({
+  //       type: actions.CREATE_GROUP_FAILED,
+  //       payload: error,
+  //     });
+  //     dispatch({ type: actions.CREATE_GROUP_END });
+  //   });
+
+  // axios
+  //   .post('/groups/', group)
+  //   .then(() => {
+  //     dispatch({ type: actions.CREATE_GROUP_SUCCESS });
+  //     dispatch({ type: actions.CREATE_GROUP_END });
+  //     if (cb) cb();
+  //     getGroupsMe()(dispatch);
+  //   })
+  //   .catch((error) => {
+  //     dispatch({
+  //       type: actions.CREATE_GROUP_FAILED,
+  //       payload: error,
+  //     });
+  //     dispatch({ type: actions.CREATE_GROUP_END });
+  //   });
 };
 
 export const sendGroupMessage = (roomId, message) => (dispatch) => {

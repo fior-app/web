@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { createGroup } from '../../../store/actions/mentorspaceActions';
-import MentorspaceDetails from './mentorspace_details';
-import ProjectDetails from './project_details';
+import { createMentorspace } from "../../../store/actions/mentorspaceActions";
+import MentorspaceDetails from "./mentorspace_details";
+import ProjectDetails from "./project_details";
 
 class CreateMentorspace extends Component {
   constructor(props) {
@@ -17,10 +17,10 @@ class CreateMentorspace extends Component {
   }
 
   handleCreateMentorspace = (type, value) => {
-    const { createMentorspace, closeModal } = this.props;
+    const { createSpace, closeModal } = this.props;
 
     this.setState({ [type]: value });
-    createMentorspace(this.state, closeModal);
+    createSpace(this.state, closeModal);
   };
 
   handleNext = (type, value) => {
@@ -44,10 +44,7 @@ class CreateMentorspace extends Component {
     switch (active) {
       case 0:
         return (
-          <MentorspaceDetails
-            handleNext={this.handleNext}
-            group={group}
-          />
+          <MentorspaceDetails handleNext={this.handleNext} group={group} />
         );
       case 1:
         return (
@@ -71,9 +68,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createMentorspace: (mentorspace, cb) => dispatch(
-    createGroup(mentorspace, cb),
-  ),
+  createSpace: (mentorspace, cb) =>
+    dispatch(createMentorspace(mentorspace, cb)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateMentorspace);

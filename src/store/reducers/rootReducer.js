@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import { firestoreReducer } from 'redux-firestore';
 import authReducer from './authReducer';
 import userReducer from './userReducer';
 import groupsReducer from './groupsReducer';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   blog: blogReducer,
   question: questionReducer,
   skills: skillReducer,
+  firestore: firestoreReducer,
 });
 
 export default rootReducer;
