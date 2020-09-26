@@ -44,7 +44,6 @@ class Navbar extends Component {
               <>
                 <Menu.Item>Find Mentees</Menu.Item>
                 <Menu.Item as={NavLink} to="/mentors">Find Mentors</Menu.Item>
-                <Menu.Item as={NavLink} to="/mentors">Find Mentors</Menu.Item>
                 <Menu.Item
                   name='notifiations'
                   as={NavLink}

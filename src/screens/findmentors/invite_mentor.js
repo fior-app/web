@@ -18,7 +18,7 @@ const InviteMentor = ({
     selected: null
   }
 
-  const [inviteState, setInviteState] = useState('');
+  const [inviteState, setInviteState] = useState(initialState);
 
   const [isModelOpen, setModelOpen] = useState(false);
 
@@ -35,7 +35,7 @@ const InviteMentor = ({
   }, [fetchGroups])
 
   const handleInviteMentor = () => {
-    dispatchInviteMember(inviteState.selected, mentorEmail)
+    dispatchInviteMember(inviteState.selected, mentorEmail, inviteState.comment)
   }
 
   console.log(mentorEmail, inviteState.selected)
@@ -116,7 +116,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchGroups: () => dispatch(getGroupsMe()),
-  dispatchInviteMember: (groupId, email, comment) => dispatch(inviteMember(groupId, email, true)),
+  dispatchInviteMember: (groupId, email, comment) => dispatch(inviteMember(groupId, email, true, comment)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InviteMentor);
