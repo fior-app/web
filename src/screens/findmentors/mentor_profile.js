@@ -8,7 +8,6 @@ import {
   Header, Image, Label, LabelDetail,
 } from "semantic-ui-react";
 import profileStyles from '../../styles/profile.module.css';
-import VerifySkill from "../profile/verify/verify_skill";
 import InviteMentor from "./invite_mentor";
 
 const MentorProfile = ({
