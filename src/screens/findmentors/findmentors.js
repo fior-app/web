@@ -3,6 +3,7 @@ import { Container, Header, Form, Card, Icon, Image, Grid, Loader } from "semant
 import Categories from "../../components/categories/categories";
 import { searchMentors } from "../../store/actions/userActions";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 const FindMentorsScreen = ({
   mentorSearch,
@@ -40,10 +41,10 @@ const FindMentorsScreen = ({
               <Form.Button content='Search'/>
             </Form.Group>
           </Form>
-          {mentorSearch.isLoading && (<Loader active inline='centered' />)}
+          {mentorSearch.isLoading && (<Loader active inline='centered'/>)}
           <Card.Group>
-            {mentorSearch.mentors && mentorSearch.mentors.map((mentor) => (
-              <Card key={mentor.id}>
+            {mentorSearch.mentors && mentorSearch.mentors.slice(0, 20).map((mentor) => (
+              <Card key={mentor.id} as={NavLink} to={'/mentors/' + mentor.id}>
                 <Image src='/images/avatar/large/matthew.png' wrapped ui={false}/>
                 <Card.Content>
                   <Card.Header>{mentor.name}</Card.Header>
@@ -54,12 +55,6 @@ const FindMentorsScreen = ({
                     <Card.Description>
                     </Card.Description>
                   )}
-                </Card.Content>
-                <Card.Content extra>
-                  <a>
-                    <Icon name='user'/>
-                    22 Friends
-                  </a>
                 </Card.Content>
               </Card>
             ))}

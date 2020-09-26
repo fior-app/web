@@ -26,6 +26,7 @@ import BlogDetail from './screens/blog/detail/blog_detail';
 import MyPostsScreen from './screens/blog/my_posts/my_posts_screen';
 import EditBlogPost from './screens/blog/edit/edit_blog_post';
 import FindMentorsScreen from "./screens/findmentors/findmentors";
+import MentorProfile from "./screens/findmentors/mentor_profile";
 
 class FiorApp extends Component {
   componentDidMount() {
@@ -84,6 +85,7 @@ class FiorApp extends Component {
               <Route exact path="/blog/:postId" component={BlogDetail} />
               <Route exact path="/myposts" component={MyPostsScreen} />
               <Route exact path="/mentors" component={FindMentorsScreen} />
+              <Route exact path="/mentors/:userId" component={MentorProfile} />
               <Route exact path="/users" component={LandingScreen} />
               <Route exact path="/notifications" component={LandingScreen} />
               <Route exact path="/settings" component={LandingScreen} />

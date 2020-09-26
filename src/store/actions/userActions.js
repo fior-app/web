@@ -78,3 +78,21 @@ export const searchMentors = (query, skip = 0, limit = 25) => (dispatch) => {
       });
     });
 };
+
+export const getMentor = (userId) => (dispatch) => {
+  dispatch({ type: actions.GET_MENTOR_START });
+  axios
+    .get('/users/mentors/' + userId)
+    .then((res) => {
+      dispatch({
+        type: actions.GET_MENTOR_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.GET_MENTOR_FAILED,
+        payload: error,
+      });
+    });
+};
