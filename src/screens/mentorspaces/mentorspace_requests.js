@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Item, } from 'semantic-ui-react';
+import { Header, Item, } from 'semantic-ui-react';
 
 import { getMentorspaceRequests } from '../../store/actions/mentorspaceActions';
 import GroupConfirm from "./mentorspace_details/GroupConfirm";
@@ -35,6 +35,14 @@ const MentorspaceRequests = ({
                     </span>
                 </Item.Meta>
                 <Item.Description>{mentorspaceItem.group.description}</Item.Description>
+                {mentorspaceItem.comment && (
+                  <>
+                    <Header as='h4'>
+                      Additional Comments
+                    </Header>
+                    <Item.Description>{mentorspaceItem.comment}</Item.Description>
+                  </>
+                )}
                 <Item.Extra>
                   <GroupConfirm groupId={mentorspaceItem.group.id}/>
                 </Item.Extra>
