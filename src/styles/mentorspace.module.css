@@ -1,20 +1,8 @@
-.center_container {
+.mentorspace_wrapper {
+  padding: 0 2rem;
 }
 
-.v_spacer_1 {
-  height: 1rem;
-}
-
-.v_spacer_12 {
-  height: 12rem;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.spacer_1 {
-  width: 1rem;
+.mentor {
+  color: #02c39a;
+  margin-left: 1rem;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Modal } from 'semantic-ui-react';
+import { Button, Form, Icon, Modal, ModalHeader } from 'semantic-ui-react';
 
 import { inviteMember } from '../../../store/actions/mentorspaceActions';
 
@@ -10,6 +10,7 @@ class InviteMember extends Component {
 
     this.state = {
       email: '',
+      isOpen: false,
     };
   }
 
@@ -23,12 +24,35 @@ class InviteMember extends Component {
     this.props.inviteMember(this.props.groupId, this.state.email);
   };
 
+  showModal = () => {
+    this.setState((state) => ({...state, isOpen: true}))
+  }
+
+  closeModal = () => {
+    this.setState((state) => ({...state, isOpen: false}))
+  }
+
   render() {
     const { error, loading } = this.props;
 
     return (
-      <div className="modal">
-        <div className="card-header">Invite member</div>
+      <Modal
+        trigger={(
+          <Button
+            icon
+            className="btn-primary"
+            onClick={this.showModal}
+          >
+            <Icon name="add"/>
+            &nbsp; Invite
+          </Button>
+        )}
+        size="mini"
+        closeIcon
+        onClose={this.closeModal}
+        open={this.state.isOpen}
+      >
+        <Modal.Header>Invite member</Modal.Header>
         <Modal.Content>
           <Modal.Description>
             {loading ? <div>creating..</div> : null}
@@ -64,7 +88,7 @@ class InviteMember extends Component {
             </Form>
           </Modal.Description>
         </Modal.Content>
-      </div>
+      </Modal>
     );
   }
 }

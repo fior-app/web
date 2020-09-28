@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Header, Item, } from 'semantic-ui-react';
 
 import { getMentorspaceRequests } from '../../store/actions/mentorspaceActions';
-import GroupConfirm from "./mentorspace_details/GroupConfirm";
+import GroupConfirm from "./mentorspace_details/group_confrim";
 
 const MentorspaceRequests = ({
   mentorspaces,

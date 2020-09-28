@@ -1,91 +1,81 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import {
-  Modal, Container, Grid, Button, Icon,
+  Container, Grid, Menu, Header, Label
 } from 'semantic-ui-react';
 
 import { getGroup } from '../../../store/actions/mentorspaceActions';
-import MentorspaceMembers from './MentorspaceMembers';
-import GroupChat from './group_chat';
-import InviteMember from './InviteMember';
-import GroupConfirm from './GroupConfirm';
+import MentorspaceMembers from './mentorspace_members';
+import GroupChat from './chat/group_chat';
+import InviteMember from './invite_member';
+import GroupConfirm from './group_confrim';
 import styles from '../../../styles/mentorspace.module.css';
 
-class MentorspaceScreen extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showModal: false,
-    };
-  }
-
-  componentDidMount() {
-    this.props.getGroup(this.props.match.params.mentorspaceId);
-  }
-
-  closeModal = () => {
-    this.setState({ showModal: false });
+const MentorspaceScreen = ({
+  loading,
+  member,
+  error,
+  dispatchGetGroup
+}) => {
+  const initialState = {
+    showModal: false,
   };
 
-  render() {
-    const { showModal } = this.state;
-    const { member, loading } = this.props;
-    if (loading) return <div>Loading Mentorspace</div>;
+  const [state, setState] = useState(initialState);
 
-    return (
-      <Container>
-        <h2>{member && member.group.name}</h2>
-        <Grid>
-          <Grid.Column width={4}>
-            <h4>
-              Anything to think of
-            </h4>
-          </Grid.Column>
-          <Grid.Column width={8}>
-            <div className={styles.center_container}>
-              {member && member.state === 'OK' && (
-              <GroupChat
-                groupId={member && member.group.id}
-                roomId={member && member.group.chatroom.id}
-              />
-              )}
-            </div>
-          </Grid.Column>
-          <Grid.Column width={4}>
-            {member && member.state === 'OK' ? (
-              <Modal
-                trigger={(
-                  <Button
-                    icon
-                    className="btn-primary"
-                    disabled={
-                member && !member.permissions.includes('SEND_MEMBER_REQUESTS')
-              }
-                    onClick={() => this.setState({ showModal: true })}
-                  >
-                    <Icon name="add" />
-              &nbsp; Invite Members
-                  </Button>
-            )}
-                size="mini"
-                closeIcon
-                onClose={this.closeModal}
-                open={showModal}
-              >
-                <InviteMember groupId={this.props.match.params.mentorspaceId} />
-              </Modal>
+  const { mentorspaceId } = useParams()
+
+  console.log(member)
+
+  useEffect(() => {
+    if (mentorspaceId) {
+      dispatchGetGroup(mentorspaceId)
+    }
+  }, [mentorspaceId, dispatchGetGroup])
+
+  return (
+    <Container fluid className={styles.mentorspace_wrapper}>
+      <Header as={'h1'}>{member && member.group.name}</Header>
+      <Grid columns="equal">
+        <Grid.Column width={3}>
+          <Menu secondary vertical size='large'>
+            <Menu.Item name='thread'>
+              <Label color='teal'>1</Label>
+              Thread
+            </Menu.Item>
+
+            <Menu.Item name='milestones'>
+              Milestones
+            </Menu.Item>
+
+            <Menu.Item name='meetings'>
+              Meetings
+            </Menu.Item>
+
+            <Menu.Item name='meetings'>
+              Files
+            </Menu.Item>
+          </Menu>
+        </Grid.Column>
+        <Grid.Column>
+          {member && member.state === 'OK' && (
+            <GroupChat
+              groupId={member && member.group.id}
+              roomId={member && member.group.chatroom.id}
+            />
+          )}
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <MentorspaceMembers groupId={mentorspaceId}/>
+          {member && member.state === 'OK' && member.permissions.includes('SEND_MEMBER_REQUESTS')
+            ? (
+              <InviteMember groupId={mentorspaceId}/>
             ) : null}
-            {member && member.state === 'CONFIRM' && (
-              <GroupConfirm groupId={this.props.match.params.mentorspaceId} />
-            )}
-            <div className={styles.v_spacer_1} />
-            <MentorspaceMembers groupId={member && member.group.id} />
-          </Grid.Column>
-        </Grid>
-      </Container>
-    );
-  }
+        </Grid.Column>
+      </Grid>
+    </Container>
+  );
 }
 
 const mapStateToProps = (state) => ({
@@ -95,7 +85,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getGroup: (groupId) => dispatch(getGroup(groupId)),
+  dispatchGetGroup: (groupId) => dispatch(getGroup(groupId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MentorspaceScreen);

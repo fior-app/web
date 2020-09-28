@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { changeGroupState } from '../../../store/actions/mentorspaceActions';
 import { Button, Loader } from "semantic-ui-react";
 
-class GroupConfirm extends Component {
+class GroupConfrim extends Component {
   handleChangeState = (state) => {
     this.props.changeGroupState(this.props.groupId, {
       state,
@@ -45,4 +45,4 @@ const mapDispatchToProps = (dispatch) => ({
   changeGroupState: (groupId, state) => dispatch(changeGroupState(groupId, state)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupConfirm);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupConfrim);

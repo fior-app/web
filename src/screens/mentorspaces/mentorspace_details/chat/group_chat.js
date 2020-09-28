@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { Form, Input } from 'semantic-ui-react';
+import { Form, Header, Input, Feed, Divider } from 'semantic-ui-react';
 
-import { sendGroupMessageToFirebase } from '../../../store/actions/mentorspaceActions';
-import Message from './Message';
-import styles from '../../../styles/mentorspace.module.css';
+import { sendGroupMessageToFirebase } from '../../../../store/actions/mentorspaceActions';
+import Message from './message';
+import styles from '../../../../styles/mentorspace.module.css';
 
 class GroupChat extends Component {
   constructor(props) {
@@ -33,21 +33,22 @@ class GroupChat extends Component {
   render() {
     const { messages } = this.props;
     return (
-      <div>
-        {messages ? (
-          Object.values(messages).map((message, index) => {
-            return message ? (
-              <div key={index}>
-                <Message message={message} />
-              </div>
-            ) : (
-              <div key={index} />
-            );
-          })
-        ) : (
-          <li>no messages</li>
-        )}
-        <div className={styles.v_spacer_1} />
+      <>
+        <Header as={"h2"}>Thread</Header>
+        <Divider></Divider>
+        <Feed>
+          {messages ? (
+            Object.values(messages).map((message, index) => {
+              return message ? (
+                <Message message={message} key={index}/>
+              ) : (
+                <div key={index}/>
+              );
+            })
+          ) : (
+          <li>No messages</li>
+          )}
+        </Feed>
         <Form>
           <Form.Field>
             <Input
@@ -64,7 +65,7 @@ class GroupChat extends Component {
           </Form.Field>
         </Form>
         {/* <button onClick={this.handleSendMessage}>send</button> */}
-      </div>
+      </>
     );
   }
 }
