@@ -69,7 +69,6 @@ class FiorApp extends Component {
                 component={AuthRequire(MentorspacesScreen)}
               />
               <Route
-                exact
                 path="/mentorspaces/:mentorspaceId"
                 component={AuthRequire(MentorspaceScreen)}
               />

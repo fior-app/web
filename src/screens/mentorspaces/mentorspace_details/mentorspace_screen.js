@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Route, Redirect, NavLink } from 'react-router-dom';
 import {
   Container, Grid, Menu, Header, Label
 } from 'semantic-ui-react';
@@ -9,8 +9,10 @@ import { getGroup } from '../../../store/actions/mentorspaceActions';
 import MentorspaceMembers from './mentorspace_members';
 import GroupChat from './chat/group_chat';
 import InviteMember from './invite_member';
-import GroupConfirm from './group_confrim';
 import styles from '../../../styles/mentorspace.module.css';
+import Milestones from "./milestones/milestones";
+import Meetings from "./meetings/meetings";
+import Files from "./files/files";
 
 const MentorspaceScreen = ({
   loading,
@@ -35,46 +37,63 @@ const MentorspaceScreen = ({
   }, [mentorspaceId, dispatchGetGroup])
 
   return (
-    <Container fluid className={styles.mentorspace_wrapper}>
-      <Header as={'h1'}>{member && member.group.name}</Header>
-      <Grid columns="equal">
-        <Grid.Column width={3}>
-          <Menu secondary vertical size='large'>
-            <Menu.Item name='thread'>
-              <Label color='teal'>1</Label>
-              Thread
-            </Menu.Item>
+    <>
+      {member && member.state === 'OK' && (
+        <Container fluid className={styles.mentorspace_wrapper}>
+          <Header as={'h1'}>{member.group.name}</Header>
+          <Grid>
+            <Grid.Column width={3}>
+              <Menu secondary vertical size='large'>
+                <Menu.Item
+                  as={NavLink}
+                  to={'/mentorspaces/' + mentorspaceId + '/room/' + member.group.chatroom.id}
+                  name='thread'>
+                  <Label color='teal'>1</Label>
+                  Thread
+                </Menu.Item>
 
-            <Menu.Item name='milestones'>
-              Milestones
-            </Menu.Item>
+                <Menu.Item
+                  as={NavLink}
+                  to={'/mentorspaces/' + mentorspaceId + '/milestones'}
+                  name='milestones'>
+                  Milestones
+                </Menu.Item>
 
-            <Menu.Item name='meetings'>
-              Meetings
-            </Menu.Item>
+                <Menu.Item
+                  as={NavLink}
+                  to={'/mentorspaces/' + mentorspaceId + '/meetings'}
+                  name='meetings'>
+                  Meetings
+                </Menu.Item>
 
-            <Menu.Item name='meetings'>
-              Files
-            </Menu.Item>
-          </Menu>
-        </Grid.Column>
-        <Grid.Column>
-          {member && member.state === 'OK' && (
-            <GroupChat
-              groupId={member && member.group.id}
-              roomId={member && member.group.chatroom.id}
-            />
-          )}
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <MentorspaceMembers groupId={mentorspaceId}/>
-          {member && member.state === 'OK' && member.permissions.includes('SEND_MEMBER_REQUESTS')
-            ? (
-              <InviteMember groupId={mentorspaceId}/>
-            ) : null}
-        </Grid.Column>
-      </Grid>
-    </Container>
+                <Menu.Item
+                  as={NavLink}
+                  to={'/mentorspaces/' + mentorspaceId + '/files'}
+                  name='files'>
+                  Files
+                </Menu.Item>
+              </Menu>
+            </Grid.Column>
+            <Grid.Column width={9}>
+              <Route path="/mentorspaces/:mentorspaceId/room/:roomId" component={GroupChat}/>
+              <Route path="/mentorspaces/:mentorspaceId/milestones" component={Milestones}/>
+              <Route path="/mentorspaces/:mentorspaceId/meetings" component={Meetings}/>
+              <Route path="/mentorspaces/:mentorspaceId/files" component={Files}/>
+              <Redirect
+                path="/mentorspaces/:mentorspaceId"
+                to={'/mentorspaces/' + member.group.id + '/room/' + member.group.chatroom.id}/>
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <MentorspaceMembers groupId={mentorspaceId}/>
+              {member.permissions.includes('SEND_MEMBER_REQUESTS')
+                ? (
+                  <InviteMember groupId={mentorspaceId}/>
+                ) : null}
+            </Grid.Column>
+          </Grid>
+        </Container>
+      )}
+    </>
   );
 }
 

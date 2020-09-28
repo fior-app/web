@@ -1,39 +1,42 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { Form, Header, Input, Feed, Divider } from 'semantic-ui-react';
+import { useParams } from 'react-router-dom';
 
 import { sendGroupMessageToFirebase } from '../../../../store/actions/mentorspaceActions';
 import Message from './message';
 import styles from '../../../../styles/mentorspace.module.css';
-import { array } from "prop-types";
 
-class GroupChat extends Component {
-  constructor(props) {
-    super(props);
+const GroupChat = ({
+  messages,
+  sendGroupMessageToFirebase
+}) => {
+  const initialState = {
+    message: '',
+  };
 
-    this.state = {
-      message: '',
-    };
-  }
+  const [state, setState] = useState(initialState);
 
-  handleOnChangeInput = (e) => {
-    this.setState({
+  const { roomId } = useParams()
+
+  const handleOnChangeInput = (e) => {
+    setState({
       [e.target.id]: e.target.value,
     });
   };
 
-  handleSendMessage = () => {
-    if (this.state.message !== '') {
-      this.props.sendGroupMessageToFirebase(this.props.roomId, this.state);
+  const handleSendMessage = () => {
+    if (state.message !== '') {
+      sendGroupMessageToFirebase(roomId, state);
     }
-    this.setState({ message: '' });
+    setState({ message: '' });
   };
 
   /** Group consecutive messages by same users
    **/
-  getGroupedMessages = (messages) => {
+  const getGroupedMessages = (messages) => {
     const grouped = [];
     let lastSender = null
 
@@ -52,50 +55,46 @@ class GroupChat extends Component {
     return grouped;
   }
 
-  render() {
-    const { messages } = this.props;
-
-    let groupedMessages = null;
-    if (messages) {
-      groupedMessages = this.getGroupedMessages(Object.values(messages))
-    }
-
-    return (
-      <>
-        <Header as={"h2"}>Thread</Header>
-        <Divider/>
-        <Feed>
-          {groupedMessages ? (
-            groupedMessages.map((message, index) => {
-              return message ? (
-                <Message message={message} key={index}/>
-              ) : (
-                <div key={index}/>
-              );
-            })
-          ) : (
-            <li>No messages</li>
-          )}
-        </Feed>
-        <Form>
-          <Form.Field>
-            <Input
-              type="text"
-              id="message"
-              value={this.state.message}
-              onChange={this.handleOnChangeInput}
-              action={{
-                icon: 'send',
-                color: 'teal',
-                onClick: () => this.handleSendMessage(),
-              }}
-            />
-          </Form.Field>
-        </Form>
-        {/* <button onClick={this.handleSendMessage}>send</button> */}
-      </>
-    );
+  let groupedMessages = null;
+  if (messages) {
+    groupedMessages = getGroupedMessages(Object.values(messages))
   }
+
+  return (
+    <>
+      <Header as={"h2"}>Thread</Header>
+      <Divider/>
+      <Feed>
+        {groupedMessages ? (
+          groupedMessages.map((message, index) => {
+            return message ? (
+              <Message message={message} key={index}/>
+            ) : (
+              <div key={index}/>
+            );
+          })
+        ) : (
+          <li>No messages</li>
+        )}
+      </Feed>
+      <Form>
+        <Form.Field>
+          <Input
+            type="text"
+            id="message"
+            value={state.message}
+            onChange={handleOnChangeInput}
+            action={{
+              icon: 'send',
+              color: 'teal',
+              onClick: () => handleSendMessage(),
+            }}
+          />
+        </Form.Field>
+      </Form>
+      {/* <button onClick={this.handleSendMessage}>send</button> */}
+    </>
+  );
 }
 
 const mapStateToProps = (state) => ({
@@ -114,7 +113,7 @@ export default compose(
       collection: 'messages',
       orderBy: ['sentAt', 'desc'],
       limit: 25,
-      where: ['roomId', '==', props.roomId],
+      where: ['roomId', '==', props.match.params.roomId],
     },
   ]),
   connect(mapStateToProps, mapDispatchToProps)
