@@ -7,6 +7,7 @@ import { Form, Header, Input, Feed, Divider } from 'semantic-ui-react';
 import { sendGroupMessageToFirebase } from '../../../../store/actions/mentorspaceActions';
 import Message from './message';
 import styles from '../../../../styles/mentorspace.module.css';
+import { array } from "prop-types";
 
 class GroupChat extends Component {
   constructor(props) {
@@ -30,15 +31,42 @@ class GroupChat extends Component {
     this.setState({ message: '' });
   };
 
+  /** Group consecutive messages by same users
+   **/
+  getGroupedMessages = (messages) => {
+    const grouped = [];
+    let lastSender = null
+
+    messages.forEach((message) => {
+      if (message.sender.id === lastSender) {
+        grouped[grouped.length - 1].messages.push(message.message)
+      } else {
+        grouped.push({
+          ...message,
+          message: undefined,
+          messages: [message.message]
+        })
+        lastSender = message.sender.id
+      }
+    });
+    return grouped;
+  }
+
   render() {
     const { messages } = this.props;
+
+    let groupedMessages = null;
+    if (messages) {
+      groupedMessages = this.getGroupedMessages(Object.values(messages))
+    }
+
     return (
       <>
         <Header as={"h2"}>Thread</Header>
-        <Divider></Divider>
+        <Divider/>
         <Feed>
-          {messages ? (
-            Object.values(messages).map((message, index) => {
+          {groupedMessages ? (
+            groupedMessages.map((message, index) => {
               return message ? (
                 <Message message={message} key={index}/>
               ) : (
@@ -46,7 +74,7 @@ class GroupChat extends Component {
               );
             })
           ) : (
-          <li>No messages</li>
+            <li>No messages</li>
           )}
         </Feed>
         <Form>
