@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Icon } from "semantic-ui-react";
+import { Feed } from "semantic-ui-react";
 import moment from 'moment';
 
 const Message = ({ message }) => (
@@ -10,7 +10,7 @@ const Message = ({ message }) => (
     <Feed.Content>
       <Feed.Summary>
         <Feed.User>{message.sender.name}</Feed.User>
-        <Feed.Date>{moment(message.sentAt.toDate()).fromNow()}</Feed.Date>
+        <Feed.Date>{message.sentAt && moment(message.sentAt.toDate()).fromNow()}</Feed.Date>
       </Feed.Summary>
       <Feed.Extra text>
         {message.messages.map((message, index) => (
