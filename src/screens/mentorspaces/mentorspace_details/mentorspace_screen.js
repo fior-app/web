@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, Route, Redirect, NavLink } from 'react-router-dom';
 import {
@@ -20,15 +20,7 @@ const MentorspaceScreen = ({
   error,
   dispatchGetGroup
 }) => {
-  const initialState = {
-    showModal: false,
-  };
-
-  const [state, setState] = useState(initialState);
-
   const { mentorspaceId } = useParams()
-
-  console.log(member)
 
   useEffect(() => {
     if (mentorspaceId) {
@@ -79,9 +71,12 @@ const MentorspaceScreen = ({
               <Route path="/mentorspaces/:mentorspaceId/milestones" component={Milestones}/>
               <Route path="/mentorspaces/:mentorspaceId/meetings" component={Meetings}/>
               <Route path="/mentorspaces/:mentorspaceId/files" component={Files}/>
-              <Redirect
-                path="/mentorspaces/:mentorspaceId"
-                to={'/mentorspaces/' + member.group.id + '/room/' + member.group.chatroom.id}/>
+              {member && member.group && (
+                <Redirect
+                  exact
+                  path="/mentorspaces/:mentorspaceId"
+                  to={'/mentorspaces/' + mentorspaceId + '/room/' + member.group.chatroom.id}/>
+              )}
             </Grid.Column>
             <Grid.Column width={4}>
               <MentorspaceMembers groupId={mentorspaceId}/>

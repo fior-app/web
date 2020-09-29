@@ -16,8 +16,6 @@ class MentorspaceMembers extends Component {
     if (loading) return <div>Loading..</div>;
     if (error) return <div>{JSON.stringify(error)}</div>;
 
-    console.log(members)
-
     return (
       <>
         <Header as={"h4"}>Members</Header>

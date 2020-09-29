@@ -120,31 +120,28 @@ const getGroupStart = (state) => ({
   ...state,
   group: {
     ...state.group,
+    member: null,
     loading: true,
   },
 });
 
-const getGroupEnd = (state) => ({
-  ...state,
-  group: {
-    ...state.group,
-    loading: false,
-  },
-});
 
 const getGroupFailed = (state, payload) => ({
   ...state,
   group: {
     ...state.group,
     error: payload,
+    loading: false
   },
 });
 
-const getGroupSuccess = (state) => ({
+const getGroupSuccess = (state, payload) => ({
   ...state,
   group: {
     ...state.group,
+    member: payload,
     error: null,
+    loading: false
   },
 });
 
@@ -400,17 +397,11 @@ const groupsReducer = (state = initState, action) => {
     case actions.GET_GROUP_START:
       return getGroupStart(state);
 
-    case actions.GET_GROUP_END:
-      return getGroupEnd(state);
-
     case actions.GET_GROUP_SUCCESS:
-      return getGroupSuccess(state);
+      return getGroupSuccess(state, action.payload);
 
     case actions.GET_GROUP_FAILED:
       return getGroupFailed(state, action.payload);
-
-    case actions.GET_GROUP:
-      return getGroup(state, action.payload);
 
     case actions.GET_GROUP_MEMBERS_START:
       return getGroupMembersStart(state);

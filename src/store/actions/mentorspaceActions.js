@@ -31,18 +31,15 @@ export const getGroup = (groupId) => (dispatch) => {
     .get(`/groups/${groupId}`)
     .then((res) => {
       dispatch({
-        type: actions.GET_GROUP,
-        payload: res.data,
+        type: actions.GET_GROUP_SUCCESS,
+        payload: res.data
       });
-      dispatch({ type: actions.GET_GROUP_SUCCESS });
-      dispatch({ type: actions.GET_GROUP_END });
     })
     .catch((error) => {
       dispatch({
         type: actions.GET_GROUP_FAILED,
         payload: error,
       });
-      dispatch({ type: actions.GET_GROUP_END });
     });
 };
 
@@ -196,7 +193,7 @@ export const sendGroupMessage = (roomId, message) => (dispatch) => {
 export const inviteMember = (groupId, email, isMentor = false, comment = null) => (dispatch) => {
   dispatch({ type: actions.INVITE_MEMBER_START });
   axios
-    .post(`/groups/${groupId}/member`, {email, isMentor, comment})
+    .post(`/groups/${groupId}/member`, { email, isMentor, comment })
     .then(() => {
       dispatch({ type: actions.INVITE_MEMBER_SUCCESS });
       dispatch({ type: actions.INVITE_MEMBER_END });
