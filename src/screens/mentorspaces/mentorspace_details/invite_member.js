@@ -44,7 +44,7 @@ class InviteMember extends Component {
             onClick={this.showModal}
           >
             <Icon name="add"/>
-            &nbsp; Invite
+            &nbsp; Member
           </Button>
         )}
         size="mini"

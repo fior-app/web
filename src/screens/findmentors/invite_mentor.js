@@ -38,8 +38,6 @@ const InviteMentor = ({
     dispatchInviteMember(inviteState.selected, mentorEmail, inviteState.comment)
   }
 
-  console.log(mentorEmail, inviteState.selected)
-
   return (
     <Modal
       trigger={
@@ -55,23 +53,24 @@ const InviteMentor = ({
         <Modal.Description>
           {loading ? <div>Creating..</div> : null}
           <Card.Group>
-            {groups.map((mentorspaceItem) => (
-              <Card
-                key={mentorspaceItem.id}
-                className={mentorspaceItem.group.id === inviteState.selected ? styles.selected : ''}
-                onClick={() => {
-                  setInviteState((state) => ({ ...state, selected: mentorspaceItem.group.id }))
-                }}>
-                <Card.Content>
-                  <Card.Header>{mentorspaceItem.group.name}</Card.Header>
-                  {mentorspaceItem.group.description && (
-                    <Card.Description>
-                      {mentorspaceItem.group.description}
-                    </Card.Description>
-                  )}
-                </Card.Content>
-              </Card>
-            ))}
+            {groups.filter((mentorspaceItem) => mentorspaceItem.permissions.includes("SEND_MEMBER_REQUESTS"))
+              .map((mentorspaceItem) => (
+                <Card
+                  key={mentorspaceItem.id}
+                  className={mentorspaceItem.group.id === inviteState.selected ? styles.selected : ''}
+                  onClick={() => {
+                    setInviteState((state) => ({ ...state, selected: mentorspaceItem.group.id }))
+                  }}>
+                  <Card.Content>
+                    <Card.Header>{mentorspaceItem.group.name}</Card.Header>
+                    {mentorspaceItem.group.description && (
+                      <Card.Description>
+                        {mentorspaceItem.group.description}
+                      </Card.Description>
+                    )}
+                  </Card.Content>
+                </Card>
+              ))}
           </Card.Group>
           <Form className={styles.comment_form}>
             <Form.TextArea
@@ -105,7 +104,6 @@ const InviteMentor = ({
       </Modal.Content>
     </Modal>
   );
-
 }
 
 const mapStateToProps = (state) => ({

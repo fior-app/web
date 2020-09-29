@@ -38,6 +38,10 @@ const initState = {
     sending: false,
     error: null,
   },
+  addGroupMilestone: {
+    creating: false,
+    error: null,
+  },
   inviteMember: {
     loading: false,
     error: null,
@@ -265,6 +269,33 @@ const sendGroupMessageSuccess = (state) => ({
   },
 });
 
+const addGroupMilestoneStart = (state) => ({
+  ...state,
+  addGroupMilestone: {
+    ...state.addGroupMilestone,
+    creating: true,
+    error: null
+  },
+});
+
+const addGroupMilestoneFailed = (state, payload) => ({
+  ...state,
+  addGroupMilestone: {
+    ...state.addGroupMilestone,
+    error: payload,
+    creating: false
+  },
+});
+
+const addGroupMilestoneSuccess = (state) => ({
+  ...state,
+  addGroupMilestone: {
+    ...state.addGroupMilestone,
+    error: null,
+    creating: false
+  },
+});
+
 const streamGroupMessage = (state, payload) => ({
   ...state,
   groupMessages: {
@@ -456,6 +487,15 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.SEND_GROUP_MESSAGE_FAILED:
       return sendGroupMessageFailed(state, action.payload);
+
+    case actions.ADD_GROUP_MILESTONE_START:
+      return addGroupMilestoneStart(state);
+
+    case actions.ADD_GROUP_MILESTONE_SUCCESS:
+      return addGroupMilestoneSuccess(state);
+
+    case actions.ADD_GROUP_MILESTONE_FAILED:
+      return addGroupMilestoneFailed(state, action.payload);
 
     case actions.GROUP_MESSAGES_STREAM:
       return streamGroupMessage(state, action.payload);

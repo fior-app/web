@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, Route, Redirect, NavLink } from 'react-router-dom';
 import {
-  Container, Grid, Menu, Header, Label
+  Container, Grid, Menu, Header, Label, Button, Icon
 } from 'semantic-ui-react';
 
 import { getGroup } from '../../../store/actions/mentorspaceActions';
@@ -71,18 +71,24 @@ const MentorspaceScreen = ({
               <Route path="/mentorspaces/:mentorspaceId/milestones" component={Milestones}/>
               <Route path="/mentorspaces/:mentorspaceId/meetings" component={Meetings}/>
               <Route path="/mentorspaces/:mentorspaceId/files" component={Files}/>
-              {member && member.group && (
-                <Redirect
-                  exact
-                  path="/mentorspaces/:mentorspaceId"
-                  to={'/mentorspaces/' + mentorspaceId + '/room/' + member.group.chatroom.id}/>
-              )}
+              {/*{member && member.group && (*/}
+              {/*  <Redirect*/}
+              {/*    exact*/}
+              {/*    path="/mentorspaces/:mentorspaceId"*/}
+              {/*    to={'/mentorspaces/' + mentorspaceId + '/room/' + member.group.chatroom.id}/>*/}
+              {/*)}*/}
             </Grid.Column>
             <Grid.Column width={4}>
               <MentorspaceMembers groupId={mentorspaceId}/>
               {member.permissions.includes('SEND_MEMBER_REQUESTS')
                 ? (
-                  <InviteMember groupId={mentorspaceId}/>
+                  <>
+                    <InviteMember groupId={mentorspaceId}/>
+                    <Button as={NavLink} to={"/mentors"} primary>
+                      <Icon name="add"/>
+                      &nbsp; Mentor
+                    </Button>
+                  </>
                 ) : null}
             </Grid.Column>
           </Grid>

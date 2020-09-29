@@ -275,3 +275,40 @@ export const sendGroupMessageToFirebase = (roomId, message) => (
       dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
     });
 };
+
+export const addMilestoneToFirebase = (groupId, title, due) => (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.ADD_GROUP_MILESTONE_START });
+
+  console.log({
+    title,
+    due,
+    createdAt: firestore.FieldValue.serverTimestamp(),
+    groupId,
+    createdBy: getState().auth.currentUser,
+  })
+
+  firestore
+    .collection('milestones')
+    .add({
+      title,
+      due,
+      createdAt: firestore.FieldValue.serverTimestamp(),
+      groupId,
+      createdBy: getState().auth.currentUser,
+    })
+    .then(() => {
+      dispatch({ type: actions.ADD_GROUP_MILESTONE_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.ADD_GROUP_MILESTONE_FAILED,
+        payload: error,
+      });
+    });
+};
