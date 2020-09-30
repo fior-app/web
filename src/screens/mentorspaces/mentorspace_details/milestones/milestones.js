@@ -1,45 +1,24 @@
 import React, { useState } from "react";
-import { Divider, List, Form, Header, Input, Button } from "semantic-ui-react";
-import { addMilestoneToFirebase } from "../../../../store/actions/mentorspaceActions";
+import { Divider, List, Form, Header, Segment } from "semantic-ui-react";
+
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
+import AddEditMilestone from "./add_edit_milestone";
+import styles from "../../../../styles/mentorspace-milestone.module.css";
 
 const Milestones = ({
-  milestones,
-  milestoneCreating,
-  milestoneCreateError,
-  dispatchAddGroupMilestone
+  milestones
 }) => {
-  const initialState = {
-    title: '',
-    due: ''
-  };
-
-  const [state, setState] = useState(initialState);
-
   const { mentorspaceId } = useParams()
-
-  const handleOnChangeInput = (e, { name, value }) => {
-    console.log(name, value)
-    setState((state) => ({
-      ...state,
-      [name]: value,
-    }));
-  };
-
-  const handleAddMilestone = () => {
-    if (state.title && state.title !== '') {
-      console.log(mentorspaceId, state.title, state.due)
-      dispatchAddGroupMilestone(mentorspaceId, state.title, state.due);
-    }
-    setState({ title: '', due: '' });
-  };
 
   return (
     <>
-      <Header as={"h2"}>Milestones</Header>
+      <div className={styles.milestone_header}>
+        <Header as={"h2"} floated='left'>Milestones</Header>
+        <AddEditMilestone mentorspaceId={mentorspaceId}/>
+      </div>
       <Divider/>
       <List>
         {milestones ? (
@@ -60,44 +39,16 @@ const Milestones = ({
           <li>No messages</li>
         )}
       </List>
-      <Form onSubmit={handleAddMilestone}>
-        <Form.Field>
-          <Form.Input
-            type="text"
-            name="title"
-            value={state.title}
-            onChange={handleOnChangeInput}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Form.Input
-            type="date"
-            name="due"
-            value={state.due}
-            onChange={handleOnChangeInput}
-          />
-        </Form.Field>
-        {milestoneCreateError && (<div>{JSON.stringify(milestoneCreateError)}</div>)}
-        <Button
-          loading={milestoneCreating}
-          type='submit'>
-          Submit
-        </Button>
-      </Form>
     </>
   );
 }
 
 const mapStateToProps = (state) => ({
-  milestones: state.firestore.data.milestones,
-  milestoneCreating: state.groups.addGroupMilestone.creating,
-  milestoneCreateError: state.groups.addGroupMilestone.error,
+  milestones: state.firestore.data.milestones
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatchAddGroupMilestone: (groupId, title, due) =>
-    dispatch(addMilestoneToFirebase(groupId, title, due)),
-});
+const mapDispatchToProps = (dispatch) => ({});
+
 export default compose(
   firestoreConnect((props) => [
     {

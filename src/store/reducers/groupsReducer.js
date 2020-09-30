@@ -38,8 +38,10 @@ const initState = {
     sending: false,
     error: null,
   },
-  addGroupMilestone: {
-    creating: false,
+  upsertGroupMilestone: {
+    milestone: null,
+    loading: false,
+    upserting: false,
     error: null,
   },
   inviteMember: {
@@ -269,30 +271,34 @@ const sendGroupMessageSuccess = (state) => ({
   },
 });
 
-const addGroupMilestoneStart = (state) => ({
+const upsertGroupMilestoneStart = (state) => ({
   ...state,
-  addGroupMilestone: {
-    ...state.addGroupMilestone,
-    creating: true,
+  upsertGroupMilestone: {
+    ...state.upsertGroupMilestone,
+    milestone: null,
+    loading: false,
+    upserting: true,
     error: null
   },
 });
 
-const addGroupMilestoneFailed = (state, payload) => ({
+const upsertGroupMilestoneFailed = (state, payload) => ({
   ...state,
-  addGroupMilestone: {
-    ...state.addGroupMilestone,
+  upsertGroupMilestone: {
+    ...state.upsertGroupMilestone,
     error: payload,
-    creating: false
+    loading: false,
+    upserting: false,
   },
 });
 
-const addGroupMilestoneSuccess = (state) => ({
+const upsertGroupMilestoneSuccess = (state) => ({
   ...state,
-  addGroupMilestone: {
-    ...state.addGroupMilestone,
+  upsertGroupMilestone: {
+    ...state.upsertGroupMilestone,
     error: null,
-    creating: false
+    loading: false,
+    upserting: false
   },
 });
 
@@ -488,14 +494,14 @@ const groupsReducer = (state = initState, action) => {
     case actions.SEND_GROUP_MESSAGE_FAILED:
       return sendGroupMessageFailed(state, action.payload);
 
-    case actions.ADD_GROUP_MILESTONE_START:
-      return addGroupMilestoneStart(state);
+    case actions.UPSERT_GROUP_MILESTONE_START:
+      return upsertGroupMilestoneStart(state);
 
-    case actions.ADD_GROUP_MILESTONE_SUCCESS:
-      return addGroupMilestoneSuccess(state);
+    case actions.UPSERT_GROUP_MILESTONE_SUCCESS:
+      return upsertGroupMilestoneSuccess(state);
 
-    case actions.ADD_GROUP_MILESTONE_FAILED:
-      return addGroupMilestoneFailed(state, action.payload);
+    case actions.UPSERT_GROUP_MILESTONE_FAILED:
+      return upsertGroupMilestoneFailed(state, action.payload);
 
     case actions.GROUP_MESSAGES_STREAM:
       return streamGroupMessage(state, action.payload);

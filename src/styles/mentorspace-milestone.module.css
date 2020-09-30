@@ -1,0 +1,4 @@
+.milestone_header {
+    display: flex;
+    justify-content: space-between;
+}

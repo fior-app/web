@@ -283,7 +283,7 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
 ) => {
   const firestore = getFirestore();
 
-  dispatch({ type: actions.ADD_GROUP_MILESTONE_START });
+  dispatch({ type: actions.UPSERT_GROUP_MILESTONE_START });
 
   console.log({
     title,
@@ -303,11 +303,11 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
       createdBy: getState().auth.currentUser,
     })
     .then(() => {
-      dispatch({ type: actions.ADD_GROUP_MILESTONE_SUCCESS });
+      dispatch({ type: actions.UPSERT_GROUP_MILESTONE_SUCCESS });
     })
     .catch((error) => {
       dispatch({
-        type: actions.ADD_GROUP_MILESTONE_FAILED,
+        type: actions.UPSERT_GROUP_MILESTONE_FAILED,
         payload: error,
       });
     });

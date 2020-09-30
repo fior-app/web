@@ -64,6 +64,7 @@ const GroupChat = ({
     <>
       <Header as={"h2"}>Thread</Header>
       <Divider/>
+      
       <Feed>
         {groupedMessages ? (
           groupedMessages.map((message, index) => {
