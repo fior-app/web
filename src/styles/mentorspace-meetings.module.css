@@ -1,6 +1,7 @@
 .row {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .milestone_header {
@@ -21,6 +22,10 @@
 .form_label {
     font-size: 14px;
     font-weight: bold;
+}
+
+.spacer_xsm {
+    width: 1rem;
 }
 
 .spacer_sm {
