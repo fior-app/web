@@ -44,7 +44,7 @@ const initState = {
     error: null,
   },
   updateTasksMilestone: {
-    loading: false,
+    loading: null,
     error: null,
   },
   upsertGroupMeeting: {
@@ -301,11 +301,11 @@ const upsertGroupMilestoneSuccess = (state) => ({
   },
 });
 
-const updateTasksMilestoneStart = (state) => ({
+const updateTasksMilestoneStart = (state, payload) => ({
   ...state,
   updateTasksMilestone: {
     ...state.updateTasksMilestone,
-    loading: false,
+    loading: payload,
     error: null
   },
 });
@@ -315,7 +315,7 @@ const updateTasksMilestoneFailed = (state, payload) => ({
   updateTasksMilestone: {
     ...state.updateTasksMilestone,
     error: payload,
-    loading: false,
+    loading: null,
   },
 });
 
@@ -324,7 +324,7 @@ const updateTasksMilestoneSuccess = (state) => ({
   updateTasksMilestone: {
     ...state.updateTasksMilestone,
     error: null,
-    loading: false,
+    loading: null,
   },
 });
 
@@ -530,7 +530,7 @@ const groupsReducer = (state = initState, action) => {
       return upsertGroupMilestoneFailed(state, action.payload);
 
     case actions.UPDATE_TASKS_MILESTONE_START:
-      return updateTasksMilestoneStart(state);
+      return updateTasksMilestoneStart(state, action.payload);
 
     case actions.UPDATE_TASKS_MILESTONE_SUCCESS:
       return updateTasksMilestoneSuccess(state);
