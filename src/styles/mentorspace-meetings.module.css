@@ -26,3 +26,13 @@
 .spacer_sm {
     width: 4rem;
 }
+
+.meeting_time {
+    color: #02c39a;
+    margin-top: 1rem;
+    font-size: 16px;
+}
+
+.meeting_member_count {
+    font-weight: bold;
+}
