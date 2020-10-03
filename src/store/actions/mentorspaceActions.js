@@ -285,14 +285,6 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
 
   dispatch({ type: actions.UPSERT_GROUP_MILESTONE_START });
 
-  console.log({
-    title,
-    due,
-    createdAt: firestore.FieldValue.serverTimestamp(),
-    groupId,
-    createdBy: getState().auth.currentUser,
-  });
-
   firestore
     .collection('milestones')
     .add({
@@ -313,29 +305,28 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
     });
 };
 
-export const addMeetingToFirebase = (groupId, title) => (
+export const editMilestoneOnFirebase = (milestoneId, title, due) => (
   dispatch,
   getState,
-  { getFirestore },
+  { getFirestore }
 ) => {
   const firestore = getFirestore();
 
-  dispatch({ type: actions.UPSERT_GROUP_MEETING_START });
+  dispatch({ type: actions.UPSERT_GROUP_MILESTONE_START });
 
   firestore
-    .collection('meetings')
-    .add({
+    .collection('milestones')
+    .doc(milestoneId)
+    .update({
       title,
-      createdAt: firestore.FieldValue.serverTimestamp(),
-      groupId,
-      createdBy: getState().auth.currentUser,
+      due
     })
     .then(() => {
-      dispatch({ type: actions.UPSERT_GROUP_MEETING_SUCCESS });
+      dispatch({ type: actions.UPSERT_GROUP_MILESTONE_SUCCESS });
     })
     .catch((error) => {
       dispatch({
-        type: actions.UPSERT_GROUP_MEETING_FAILED,
+        type: actions.UPSERT_GROUP_MILESTONE_FAILED,
         payload: error,
       });
     });

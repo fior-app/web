@@ -5,7 +5,7 @@ import moment from 'moment';
 const Message = ({ message }) => (
   <Feed.Event>
     <Feed.Label>
-      <img src='https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg'/>
+      <img src='https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg' alt="person"/>
     </Feed.Label>
     <Feed.Content>
       <Feed.Summary>

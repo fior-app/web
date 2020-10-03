@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 
 import { sendGroupMessageToFirebase } from '../../../../store/actions/mentorspaceActions';
 import Message from './message';
-import styles from '../../../../styles/mentorspace.module.css';
 
 const GroupChat = ({
   messages,
@@ -64,7 +63,7 @@ const GroupChat = ({
     <>
       <Header as={"h2"}>Thread</Header>
       <Divider/>
-      
+
       <Feed>
         {groupedMessages ? (
           groupedMessages.map((message, index) => {
