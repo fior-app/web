@@ -47,6 +47,10 @@ const initState = {
     loading: null,
     error: null,
   },
+  setStateMilestone: {
+    loading: null,
+    error: null,
+  },
   upsertGroupMeeting: {
     meeting: null,
     loading: false,
@@ -328,6 +332,33 @@ const updateTasksMilestoneSuccess = (state) => ({
   },
 });
 
+const setStateMilestoneStart = (state, payload) => ({
+  ...state,
+  setStateMilestone: {
+    ...state.setStateMilestone,
+    loading: payload,
+    error: null
+  },
+});
+
+const setStateMilestoneFailed = (state, payload) => ({
+  ...state,
+  setStateMilestone: {
+    ...state.setStateMilestone,
+    error: payload,
+    loading: null,
+  },
+});
+
+const setStateMilestoneSuccess = (state) => ({
+  ...state,
+  setStateMilestone: {
+    ...state.setStateMilestone,
+    error: null,
+    loading: null,
+  },
+});
+
 const streamGroupMessage = (state, payload) => ({
   ...state,
   groupMessages: {
@@ -537,6 +568,15 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.UPDATE_TASKS_MILESTONE_FAILED:
       return updateTasksMilestoneFailed(state, action.payload);
+
+    case actions.SET_STATE_MILESTONE_START:
+      return setStateMilestoneStart(state, action.payload);
+
+    case actions.SET_STATE_MILESTONE_SUCCESS:
+      return setStateMilestoneSuccess(state);
+
+    case actions.SET_STATE_MILESTONE_FAILED:
+      return setStateMilestoneFailed(state, action.payload);
 
     case actions.GROUP_MESSAGES_STREAM:
       return streamGroupMessage(state, action.payload);

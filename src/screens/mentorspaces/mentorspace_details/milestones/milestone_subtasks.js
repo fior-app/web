@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Icon, Form, Loader, Confirm, Label } from "semantic-ui-react";
+import { Button, Icon, Form, Loader, Confirm } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateTasksMilestoneOnFirebase } from "../../../../store/actions/mentorspaceActions";
 import styles from "../../../../styles/mentorspace-milestone.module.css";
@@ -57,7 +57,7 @@ const MilestoneSubtasks = ({
   }
 
   const onOpenAddTask = () => {
-    setState((state) => ({ ...state, isAdding: true, editingTask: '' }))
+    setState((state) => ({ ...state, isAdding: true, editIndex: -1, editingTask: '' }))
   }
 
   const onCloseAddTask = () => {
@@ -65,7 +65,7 @@ const MilestoneSubtasks = ({
   }
 
   const onOpenEditTask = (index, task) => {
-    setState((state) => ({ ...state, editIndex: index, editingTask: task }))
+    setState((state) => ({ ...state, editIndex: index, isAdding: false, editingTask: task }))
   }
 
   const onCloseEditTask = () => {
