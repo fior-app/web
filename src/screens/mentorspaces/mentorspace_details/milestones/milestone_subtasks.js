@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Icon, Form, Loader } from "semantic-ui-react";
+import { Button, Icon, Form, Loader, Confirm, Label } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateTasksMilestoneOnFirebase } from "../../../../store/actions/mentorspaceActions";
+import styles from "../../../../styles/mentorspace-milestone.module.css";
 
 const MilestoneSubtasks = ({
   milestone,
@@ -11,6 +12,8 @@ const MilestoneSubtasks = ({
   const initialState = {
     isAdding: false,
     newTask: '',
+    deleteIndex: -1,
+    editIndex: -1,
   }
 
   const [state, setState] = useState(initialState);
@@ -32,19 +35,51 @@ const MilestoneSubtasks = ({
     setState((state) => ({ ...state, newTask: '' }))
   }
 
+  const handleTaskDelete = (index) => {
+    let tasks = milestone.tasks ? [...milestone.tasks] : [];
+
+    if (index > -1 && index < tasks.length) {
+      tasks.splice(index, 1);
+    }
+
+    dispatchUpdateTasksMilestone(milestone.id, tasks);
+    closeDeleteTaskModal();
+  }
+
+  const closeDeleteTaskModal = () => {
+    setState((state) => ({ ...state, deleteIndex: -1 }))
+  }
+
   return (
     <>
       <Form>
         {milestone.tasks && milestone.tasks.map((task, index) => (
-          <Form.Checkbox
-            key={index}
-            label={task.title}
-            checked={task.done}
-            onChange={(e, { checked }) => handleTaskChange(index, checked)}
-          />
+          <div key={index} className={styles.milestone_subtask}>
+            <Form.Checkbox
+              label={task.title}
+              checked={task.done}
+              onChange={(e, { checked }) => handleTaskChange(index, checked)}
+            />
+            <Icon
+              name="edit"
+              onClick={() => setState((state) => ({ ...state, editIndex: index }))}
+            />
+
+            <Icon
+              name="close"
+              onClick={() => setState((state) => ({ ...state, deleteIndex: index }))}
+            />
+            <Confirm
+              open={state.deleteIndex === index}
+              onCancel={closeDeleteTaskModal}
+              onConfirm={() => {
+                handleTaskDelete(index);
+              }}
+            />
+          </div>
         ))}
       </Form>
-      {loading === milestone.id && (<Loader active inline size={"mini"} />)}
+      {loading === milestone.id && (<Loader active inline size={"mini"}/>)}
       {!state.isAdding ? (
         <Button icon labelPosition='left' size={"mini"} onClick={() => {
           setState((state) => ({ ...state, isAdding: true, newTask: '' }))
