@@ -334,6 +334,32 @@ export const editMilestoneOnFirebase = (milestoneId, title, due) => (
     });
 };
 
+export const setMilestoneStateOnFirebase = (milestoneId, state) => (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.SET_STATE_MILESTONE_START });
+
+  firestore
+    .collection('milestones')
+    .doc(milestoneId)
+    .update({
+      isComplete: state
+    })
+    .then(() => {
+      dispatch({ type: actions.SET_STATE_MILESTONE_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.SET_STATE_MILESTONE_FAILED,
+        payload: error,
+      });
+    });
+};
+
 export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
   dispatch,
   getState,
