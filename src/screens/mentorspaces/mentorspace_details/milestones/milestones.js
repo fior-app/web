@@ -1,5 +1,6 @@
-import React from "react";
-import { Divider, List, Dropdown, Header, Button, Icon } from "semantic-ui-react";
+import React, { useState } from "react";
+import moment from 'moment';
+import { Divider, List, Dropdown, Header, Button, Icon, Confirm } from "semantic-ui-react";
 
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -7,8 +8,7 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import AddEditMilestone from "./add_edit_milestone";
 import MilestoneSubtasks from "./milestone_subtasks";
-import { setMilestoneStateOnFirebase } from "../../../../store/actions/mentorspaceActions";
-import moment from 'moment';
+import { setMilestoneStateOnFirebase, deleteMilestoneOnFirebase } from "../../../../store/actions/mentorspaceActions";
 import styles from "../../../../styles/mentorspace-milestone.module.css";
 
 const currentDate = new Date();
@@ -16,9 +16,25 @@ const currentDate = new Date();
 const Milestones = ({
   milestones,
   isStateSetting,
-  dispatchSetMilestoneState
+  dispatchSetMilestoneState,
+  dispatchDeleteMilestone
 }) => {
   const { mentorspaceId } = useParams();
+
+  const [deleteId, setDeleteId] = useState(null);
+
+  const handleDeleteMilestone = (milestoneId) => {
+    dispatchDeleteMilestone(milestoneId);
+    onCloseDeleteMilestone();
+  }
+
+  const onOpenDeleteMilestone = (milestoneId) => {
+    setDeleteId(milestoneId);
+  }
+
+  const onCloseDeleteMilestone = () => {
+    setDeleteId(null);
+  }
 
   return (
     <>
@@ -43,9 +59,7 @@ const Milestones = ({
                 <List.Content floated='right'>
                   {milestone.isComplete ? (
                     <Button
-                      basic
-                      icon
-                      size={"mini"}
+                      basic icon size={"mini"}
                       loading={isStateSetting}
                       disabled={isStateSetting}
                       onClick={() => dispatchSetMilestoneState(milestone.id, false)}
@@ -55,10 +69,7 @@ const Milestones = ({
                     </Button>
                   ) : (
                     <Button
-                      basic
-                      icon
-                      positive
-                      size={"mini"}
+                      basic icon positive size={"mini"}
                       loading={isStateSetting}
                       disabled={isStateSetting}
                       onClick={() => dispatchSetMilestoneState(milestone.id, true)}
@@ -75,6 +86,14 @@ const Milestones = ({
                         trigger={(open) => (
                           <Dropdown.Item text='Edit' onClick={open}/>
                         )}/>
+                      <Dropdown.Item text='Delete' onClick={() => onOpenDeleteMilestone(milestone.id)}/>
+                      <Confirm
+                        open={deleteId === milestone.id}
+                        onCancel={onCloseDeleteMilestone}
+                        onConfirm={() => {
+                          handleDeleteMilestone(milestone.id);
+                        }}
+                      />
                     </Dropdown.Menu>
                   </Dropdown>
                 </List.Content>
@@ -104,12 +123,16 @@ const Milestones = ({
 const mapStateToProps = (state) => ({
   milestones: state.firestore.data.milestones,
   isStateSetting: state.groups.setStateMilestone.loading,
-  isStateError: state.groups.setStateMilestone.error,
+  stateError: state.groups.setStateMilestone.error,
+  isDeleting: state.groups.deleteGroupMilestone.loading,
+  deleteError: state.groups.deleteGroupMilestone.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchSetMilestoneState:
     (milestoneId, state) => dispatch(setMilestoneStateOnFirebase(milestoneId, state)),
+  dispatchDeleteMilestone:
+    (milestoneId) => dispatch(deleteMilestoneOnFirebase(milestoneId)),
 });
 
 export default compose(

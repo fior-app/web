@@ -334,6 +334,30 @@ export const editMilestoneOnFirebase = (milestoneId, title, due) => (
     });
 };
 
+export const deleteMilestoneOnFirebase = (milestoneId) => (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.DELETE_GROUP_MILESTONE_START, milestoneId });
+
+  firestore
+    .collection('milestones')
+    .doc(milestoneId)
+    .delete()
+    .then(() => {
+      dispatch({ type: actions.DELETE_GROUP_MILESTONE_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.DELETE_GROUP_MILESTONE_FAILED,
+        payload: error,
+      });
+    });
+};
+
 export const setMilestoneStateOnFirebase = (milestoneId, state) => (
   dispatch,
   getState,
