@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Divider, List, Form, Header, Segment } from "semantic-ui-react";
+import React  from "react";
+import { Divider, List, Dropdown, Header, Button, Icon } from "semantic-ui-react";
 
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -17,14 +17,32 @@ const Milestones = ({
     <>
       <div className={styles.milestone_header}>
         <Header as={"h2"} floated='left'>Milestones</Header>
-        <AddEditMilestone mentorspaceId={mentorspaceId}/>
+        <AddEditMilestone mentorspaceId={mentorspaceId} trigger={(open) => (
+          <Button onClick={open}>
+            <Icon name={'plus'}/>
+            Milestone
+          </Button>
+        )}/>
       </div>
       <Divider/>
       <List>
         {milestones ? (
-          Object.values(milestones).map((milestone, index) => {
+          Object.keys(milestones).map((key) => {
+            const milestone = { ...milestones[key], id: key };
             return milestone ? (
-              <List.Item key={index}>
+              <List.Item key={key}>
+                <List.Content floated='right'>
+                  <Dropdown icon='ellipsis vertical'>
+                    <Dropdown.Menu direction={"left"}>
+                      <AddEditMilestone
+                        mentorspaceId={mentorspaceId}
+                        milestone={milestone}
+                        trigger={(open) => (
+                          <Dropdown.Item text='Edit' onClick={open}/>
+                        )}/>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </List.Content>
                 <List.Icon name='wait'/>
                 <List.Content>
                   <List.Header>{milestone.title}</List.Header>
@@ -32,7 +50,7 @@ const Milestones = ({
                 </List.Content>
               </List.Item>
             ) : (
-              <div key={index}/>
+              <div key={key}/>
             );
           })
         ) : (

@@ -39,7 +39,6 @@ const initState = {
     error: null,
   },
   upsertGroupMilestone: {
-    milestone: null,
     loading: false,
     upserting: false,
     error: null,
@@ -148,14 +147,6 @@ const getGroupSuccess = (state, payload) => ({
     member: payload,
     error: null,
     loading: false
-  },
-});
-
-const getGroup = (state, payload) => ({
-  ...state,
-  group: {
-    ...state.group,
-    member: payload,
   },
 });
 
@@ -275,7 +266,6 @@ const upsertGroupMilestoneStart = (state) => ({
   ...state,
   upsertGroupMilestone: {
     ...state.upsertGroupMilestone,
-    milestone: null,
     loading: false,
     upserting: true,
     error: null

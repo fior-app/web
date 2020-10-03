@@ -1,11 +1,14 @@
-import { addMilestoneToFirebase } from "../../../../store/actions/mentorspaceActions";
-import { connect } from "react-redux";
-import { Button, Form, Icon, Modal } from "semantic-ui-react";
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Button, Form, Modal } from "semantic-ui-react";
+import { addMilestoneToFirebase, editMilestoneOnFirebase } from "../../../../store/actions/mentorspaceActions";
 
 const AddEditMilestone = ({
   mentorspaceId,
+  milestone,
+  trigger,
   dispatchAddGroupMilestone,
+  dispatchEditGroupMilestone,
   loading,
   upserting,
   error,
@@ -20,8 +23,10 @@ const AddEditMilestone = ({
   const [isModelOpen, setModelOpen] = useState(false);
 
   const openModal = () => {
-    // TODO - Reset form
-    setState({ title: '', due: '' });
+    setState({
+      title: milestone ? milestone.title : '',
+      due: milestone ? milestone.due : ''
+    });
 
     setModelOpen(true);
   };
@@ -31,7 +36,6 @@ const AddEditMilestone = ({
   };
 
   const handleOnChangeInput = (e, { name, value }) => {
-    console.log(name, value)
     setState((state) => ({
       ...state,
       [name]: value,
@@ -40,25 +44,26 @@ const AddEditMilestone = ({
 
   const handleAddMilestone = () => {
     if (state.title && state.title !== '') {
-      console.log(mentorspaceId, state.title, state.due)
-      dispatchAddGroupMilestone(mentorspaceId, state.title, state.due);
+      if (milestone) {
+        dispatchEditGroupMilestone(milestone.id, state.title, state.due);
+      } else {
+        dispatchAddGroupMilestone(mentorspaceId, state.title, state.due);
+      }
     }
   };
 
   return (
     <Modal
-      trigger={
-        <Button onClick={openModal}>
-          <Icon name={'plus'} />
-          Milestone
-        </Button>
-      }
+      trigger={trigger(openModal)}
       size="small"
       onClose={closeModal}
       open={isModelOpen}
       closeIcon
     >
-      <Modal.Header>Add Milestone</Modal.Header>
+      <Modal.Header>
+        {milestone ? 'Edit' : 'Add'}
+        &nbsp;Milestone
+      </Modal.Header>
       <Modal.Content>
         <Form onSubmit={handleAddMilestone}>
           <Form.Field>
@@ -82,8 +87,9 @@ const AddEditMilestone = ({
           {error && (<div>{JSON.stringify(error)}</div>)}
           <Button
             loading={upserting}
+            primary
             type='submit'>
-            Submit
+            {milestone ? 'Edit' : 'Add'}
           </Button>
         </Form>
       </Modal.Content>
@@ -92,7 +98,6 @@ const AddEditMilestone = ({
 }
 
 const mapStateToProps = (state) => ({
-  milestone: state.groups.upsertGroupMilestone.milestone,
   loading: state.groups.upsertGroupMilestone.loading,
   upserting: state.groups.upsertGroupMilestone.upserting,
   error: state.groups.upsertGroupMilestone.error
@@ -101,5 +106,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchAddGroupMilestone: (groupId, title, due) =>
     dispatch(addMilestoneToFirebase(groupId, title, due)),
+  dispatchEditGroupMilestone: (milestoneId, title, due) =>
+    dispatch(editMilestoneOnFirebase(milestoneId, title, due)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditMilestone);

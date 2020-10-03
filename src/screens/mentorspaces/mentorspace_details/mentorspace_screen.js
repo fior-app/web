@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useParams, Route, Redirect, NavLink } from 'react-router-dom';
+import { useParams, Route, NavLink } from 'react-router-dom';
 import {
   Container, Grid, Menu, Header, Label, Button, Icon
 } from 'semantic-ui-react';
