@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Icon, Form, Progress } from "semantic-ui-react";
+import { Button, Icon, Form, Loader } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateTasksMilestoneOnFirebase } from "../../../../store/actions/mentorspaceActions";
 
@@ -32,8 +32,6 @@ const MilestoneSubtasks = ({
     setState((state) => ({ ...state, newTask: '' }))
   }
 
-  console.log(milestone.tasks);
-
   return (
     <>
       <Form>
@@ -46,7 +44,7 @@ const MilestoneSubtasks = ({
           />
         ))}
       </Form>
-      {loading && <Progress/>}
+      {loading === milestone.id && (<Loader active inline size={"mini"} />)}
       {!state.isAdding ? (
         <Button icon labelPosition='left' size={"mini"} onClick={() => {
           setState((state) => ({ ...state, isAdding: true, newTask: '' }))

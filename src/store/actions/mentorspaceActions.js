@@ -341,7 +341,7 @@ export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
 ) => {
   const firestore = getFirestore();
 
-  dispatch({ type: actions.UPDATE_TASKS_MILESTONE_START });
+  dispatch({ type: actions.UPDATE_TASKS_MILESTONE_START, payload: milestoneId });
 
   firestore
     .collection('milestones')
