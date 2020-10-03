@@ -11,7 +11,7 @@ const MilestoneSubtasks = ({
 }) => {
   const initialState = {
     isAdding: false,
-    newTask: '',
+    editingTask: '',
     deleteIndex: -1,
     editIndex: -1,
   }
@@ -29,10 +29,10 @@ const MilestoneSubtasks = ({
 
   const handleAddTask = () => {
     let tasks = milestone.tasks ? [...milestone.tasks] : [];
-    tasks.push({ done: false, title: state.newTask })
+    tasks.push({ done: false, title: state.editingTask })
 
     dispatchUpdateTasksMilestone(milestone.id, tasks)
-    setState((state) => ({ ...state, newTask: '' }))
+    setState((state) => ({ ...state, editingTask: '' }))
   }
 
   const handleTaskDelete = (index) => {
@@ -43,47 +43,94 @@ const MilestoneSubtasks = ({
     }
 
     dispatchUpdateTasksMilestone(milestone.id, tasks);
-    closeDeleteTaskModal();
+    onCloseDeleteTask();
   }
 
-  const closeDeleteTaskModal = () => {
+  const handleEditTask = (index) => {
+    let tasks = [...milestone.tasks];
+    let item = { ...tasks[index] };
+    item.title = state.editingTask;
+    tasks[index] = item;
+
+    dispatchUpdateTasksMilestone(milestone.id, tasks);
+    onCloseEditTask()
+  }
+
+  const onOpenAddTask = () => {
+    setState((state) => ({ ...state, isAdding: true, editingTask: '' }))
+  }
+
+  const onCloseAddTask = () => {
+    setState((state) => ({ ...state, isAdding: false }))
+  }
+
+  const onOpenEditTask = (index, task) => {
+    setState((state) => ({ ...state, editIndex: index, editingTask: task }))
+  }
+
+  const onCloseEditTask = () => {
+    setState((state) => ({ ...state, editIndex: -1 }))
+  }
+
+  const onOpenDeleteTask = (index) => {
+    setState((state) => ({ ...state, deleteIndex: index }))
+  }
+
+  const onCloseDeleteTask = () => {
     setState((state) => ({ ...state, deleteIndex: -1 }))
   }
 
   return (
     <>
-      <Form>
+      <div>
         {milestone.tasks && milestone.tasks.map((task, index) => (
           <div key={index} className={styles.milestone_subtask}>
-            <Form.Checkbox
-              label={task.title}
-              checked={task.done}
-              onChange={(e, { checked }) => handleTaskChange(index, checked)}
-            />
-            <Icon
-              name="edit"
-              onClick={() => setState((state) => ({ ...state, editIndex: index }))}
-            />
-
-            <Icon
-              name="close"
-              onClick={() => setState((state) => ({ ...state, deleteIndex: index }))}
-            />
+            {state.editIndex !== index && (
+              <>
+                <Form.Checkbox
+                  label={task.title}
+                  checked={task.done}
+                  onChange={(e, { checked }) => handleTaskChange(index, checked)}
+                />
+                <Icon
+                  name="edit"
+                  onClick={() => onOpenEditTask(index, task.title)}
+                />
+                <Icon
+                  name="close"
+                  onClick={() => onOpenDeleteTask(index)}
+                />
+              </>
+            )}
+            {state.editIndex === index && (
+              < Form onSubmit={() => {
+                handleEditTask(index)
+              }}>
+                <Form.Input
+                  type="text"
+                  label="Task"
+                  inline
+                  value={state.editingTask}
+                  onChange={(e, { value }) =>
+                    setState((state) => ({ ...state, editingTask: value }))
+                  }/>
+                <Button type='submit'>Update</Button>
+                <Button onClick={onCloseEditTask}>Cancel</Button>
+              </Form>
+            )}
             <Confirm
               open={state.deleteIndex === index}
-              onCancel={closeDeleteTaskModal}
+              onCancel={onCloseDeleteTask}
               onConfirm={() => {
                 handleTaskDelete(index);
               }}
             />
           </div>
         ))}
-      </Form>
+      </div>
       {loading === milestone.id && (<Loader active inline size={"mini"}/>)}
       {!state.isAdding ? (
-        <Button icon labelPosition='left' size={"mini"} onClick={() => {
-          setState((state) => ({ ...state, isAdding: true, newTask: '' }))
-        }}>
+        <Button icon labelPosition='left' size={"mini"} onClick={onOpenAddTask}>
           <Icon name='add'/>
           Task
         </Button>
@@ -93,14 +140,12 @@ const MilestoneSubtasks = ({
             type="text"
             label="Task"
             inline
-            value={state.newTask}
+            value={state.editingTask}
             onChange={(e, { value }) =>
-              setState((state) => ({ ...state, newTask: value }))
+              setState((state) => ({ ...state, editingTask: value }))
             }/>
           <Button type='submit'>Add</Button>
-          <Button onClick={() => {
-            setState((state) => ({ ...state, isAdding: false }))
-          }}>Cancel</Button>
+          <Button onClick={onCloseAddTask}>Cancel</Button>
         </Form>
       )}
     </>
