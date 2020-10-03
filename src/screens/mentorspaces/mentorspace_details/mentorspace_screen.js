@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, Route, NavLink } from 'react-router-dom';
 import {
-  Container, Grid, Menu, Header, Label, Button, Icon
+  Container, Grid, Menu, Header, Label, Button, Icon,
 } from 'semantic-ui-react';
 
 import { getGroup } from '../../../store/actions/mentorspaceActions';
@@ -13,6 +13,7 @@ import styles from '../../../styles/mentorspace.module.css';
 import Milestones from './milestones/milestones';
 import Meetings from './meetings/meetings';
 import Files from './files/files';
+import MeetingDetail from './meetings/meeting_detail';
 
 const MentorspaceScreen = ({
   loading,
@@ -75,7 +76,8 @@ const MentorspaceScreen = ({
             <Grid.Column width={9}>
               <Route path="/mentorspaces/:mentorspaceId/room/:roomId" component={GroupChat} />
               <Route path="/mentorspaces/:mentorspaceId/milestones" component={Milestones} />
-              <Route path="/mentorspaces/:mentorspaceId/meetings" component={Meetings} />
+              <Route path="/mentorspaces/:mentorspaceId/meetings" component={Meetings} exact />
+              <Route path="/mentorspaces/:mentorspaceId/meetings/:meetingId" component={MeetingDetail} />
               <Route path="/mentorspaces/:mentorspaceId/files" component={Files} />
               {/* {member && member.group && ( */}
               {/*  <Redirect */}
