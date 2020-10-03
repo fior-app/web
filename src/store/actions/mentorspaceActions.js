@@ -32,7 +32,7 @@ export const getGroup = (groupId) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: actions.GET_GROUP_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch((error) => {
@@ -94,7 +94,7 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
       headers: {
         Authorization: `Bearer ${utils.getWithExpiry('token')}`,
       },
-    }
+    },
   );
 
   es.onmessage = (res) => {
@@ -249,7 +249,7 @@ export const changeGroupState = (groupId, state) => (dispatch) => {
 export const sendGroupMessageToFirebase = (roomId, message) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -279,7 +279,7 @@ export const sendGroupMessageToFirebase = (roomId, message) => (
 export const addMilestoneToFirebase = (groupId, title, due) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -291,7 +291,7 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
     createdAt: firestore.FieldValue.serverTimestamp(),
     groupId,
     createdBy: getState().auth.currentUser,
-  })
+  });
 
   firestore
     .collection('milestones')
@@ -308,6 +308,34 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
     .catch((error) => {
       dispatch({
         type: actions.UPSERT_GROUP_MILESTONE_FAILED,
+        payload: error,
+      });
+    });
+};
+
+export const addMeetingToFirebase = (groupId, title) => (
+  dispatch,
+  getState,
+  { getFirestore },
+) => {
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.UPSERT_GROUP_MEETING_START });
+
+  firestore
+    .collection('meetings')
+    .add({
+      title,
+      createdAt: firestore.FieldValue.serverTimestamp(),
+      groupId,
+      createdBy: getState().auth.currentUser,
+    })
+    .then(() => {
+      dispatch({ type: actions.UPSERT_GROUP_MEETING_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.UPSERT_GROUP_MEETING_FAILED,
         payload: error,
       });
     });
