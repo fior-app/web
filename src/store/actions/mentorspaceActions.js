@@ -310,7 +310,7 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
 export const editMilestoneOnFirebase = (milestoneId, title, due) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -321,7 +321,7 @@ export const editMilestoneOnFirebase = (milestoneId, title, due) => (
     .doc(milestoneId)
     .update({
       title,
-      due
+      due,
     })
     .then(() => {
       dispatch({ type: actions.UPSERT_GROUP_MILESTONE_SUCCESS });
@@ -337,7 +337,7 @@ export const editMilestoneOnFirebase = (milestoneId, title, due) => (
 export const setMilestoneStateOnFirebase = (milestoneId, state) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -347,7 +347,7 @@ export const setMilestoneStateOnFirebase = (milestoneId, state) => (
     .collection('milestones')
     .doc(milestoneId)
     .update({
-      isComplete: state
+      isComplete: state,
     })
     .then(() => {
       dispatch({ type: actions.SET_STATE_MILESTONE_SUCCESS });
@@ -363,7 +363,7 @@ export const setMilestoneStateOnFirebase = (milestoneId, state) => (
 export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -373,7 +373,7 @@ export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
     .collection('milestones')
     .doc(milestoneId)
     .update({
-      tasks
+      tasks,
     })
     .then(() => {
       dispatch({ type: actions.UPDATE_TASKS_MILESTONE_SUCCESS });
@@ -386,7 +386,7 @@ export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
     });
 };
 
-export const addMeetingToFirebase = (groupId, title) => (
+export const addMeetingToFirebase = (groupId, data) => (
   dispatch,
   getState,
   { getFirestore },
