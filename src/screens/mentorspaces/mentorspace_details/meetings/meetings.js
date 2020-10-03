@@ -8,23 +8,22 @@ import { connect } from 'react-redux';
 import styles from '../../../../styles/mentorspace-meetings.module.css';
 import AddEditMeetings from './add_edit_meetings';
 
-const Meetings = (meetings) => {
+const Meetings = ({ meetings }) => {
   const { mentorspaceId } = useParams();
 
   console.log(meetings);
 
   return (
-    <fragment>
+    <>
       <div className={styles.milestone_header}>
         <Header as="h2" floated="left">Meetings</Header>
         <AddEditMeetings mentorspaceId={mentorspaceId} />
       </div>
       <Divider />
-      <List>
+      <List animated selection>
         {meetings ? (
           Object.values(meetings).map((meeting, index) => (meeting ? (
-            <List.Item key={index}>
-              <List.Icon name="wait" />
+            <List.Item key={index} className={styles.list_item}>
               <List.Content>
                 <List.Header>{meeting.title}</List.Header>
               </List.Content>
@@ -33,10 +32,10 @@ const Meetings = (meetings) => {
             <div key={index} />
           )))
         ) : (
-          <li>No messages</li>
+          <li>No meetings scheduled yet</li>
         )}
       </List>
-    </fragment>
+    </>
   );
 };
 

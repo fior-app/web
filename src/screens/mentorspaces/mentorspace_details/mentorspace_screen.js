@@ -28,6 +28,8 @@ const MentorspaceScreen = ({
     }
   }, [mentorspaceId, dispatchGetGroup]);
 
+  console.log(member);
+
   return (
     <>
       {member && member.state === 'OK' && (
