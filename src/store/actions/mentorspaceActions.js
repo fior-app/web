@@ -398,7 +398,7 @@ export const addMeetingToFirebase = (groupId, title) => (
   firestore
     .collection('meetings')
     .add({
-      title,
+      ...data,
       createdAt: firestore.FieldValue.serverTimestamp(),
       groupId,
       createdBy: getState().auth.currentUser,

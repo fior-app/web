@@ -1,4 +1,28 @@
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
 .milestone_header {
     display: flex;
     justify-content: space-between;
+}
+
+.list_item {
+    margin: 2rem 0;
+}
+
+.list_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form_label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.spacer_sm {
+    width: 4rem;
 }
