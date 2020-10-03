@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, Route, NavLink } from 'react-router-dom';
 import {
-  Container, Grid, Menu, Header, Label, Button, Icon,
+  Container, Grid, Menu, Header, Label, Button, Icon
 } from 'semantic-ui-react';
 
 import { getGroup } from '../../../store/actions/mentorspaceActions';
@@ -29,7 +29,7 @@ const MentorspaceScreen = ({
   }, [mentorspaceId, dispatchGetGroup]);
 
   return (
-    <fragment>
+    <>
       {member && member.state === 'OK' && (
         <Container fluid className={styles.mentorspace_wrapper}>
           <Header as="h1">{member.group.name}</Header>
@@ -98,7 +98,7 @@ const MentorspaceScreen = ({
           </Grid>
         </Container>
       )}
-    </fragment>
+    </>
   );
 };
 
