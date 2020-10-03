@@ -49,9 +49,13 @@ const EditBlogPost = ({
         ...state, title: post.title, text: post.text, skills: post.skills,
       }));
     } else {
-      setPostState(initialState);
+      setPostState({
+        title: '',
+        text: '',
+        skills: [],
+      });
     }
-  }, [post, initialState]);
+  }, [post]);
 
   const handleOnChangeInput = (e, { name, value }) => {
     setPostState((state) => ({
