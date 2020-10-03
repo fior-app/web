@@ -1,17 +1,17 @@
 import React  from "react";
 import { Divider, List, Dropdown, Header, Button, Icon } from "semantic-ui-react";
 
-import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import AddEditMilestone from "./add_edit_milestone";
-import styles from "../../../../styles/mentorspace-milestone.module.css";
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import AddEditMilestone from './add_edit_milestone';
+import styles from '../../../../styles/mentorspace-milestone.module.css';
 
 const Milestones = ({
-  milestones
+  milestones,
 }) => {
-  const { mentorspaceId } = useParams()
+  const { mentorspaceId } = useParams();
 
   return (
     <>
@@ -24,7 +24,7 @@ const Milestones = ({
           </Button>
         )}/>
       </div>
-      <Divider/>
+      <Divider />
       <List>
         {milestones ? (
           Object.keys(milestones).map((key) => {
@@ -59,10 +59,10 @@ const Milestones = ({
       </List>
     </>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
-  milestones: state.firestore.data.milestones
+  milestones: state.firestore.data.milestones,
 });
 
 const mapDispatchToProps = (dispatch) => ({});
@@ -76,5 +76,5 @@ export default compose(
       where: ['groupId', '==', props.match.params.mentorspaceId],
     },
   ]),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(Milestones);

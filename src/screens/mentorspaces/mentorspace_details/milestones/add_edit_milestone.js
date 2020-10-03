@@ -15,7 +15,7 @@ const AddEditMilestone = ({
 }) => {
   const initialState = {
     title: '',
-    due: ''
+    due: '',
   };
 
   const [state, setState] = useState(initialState);
@@ -95,12 +95,12 @@ const AddEditMilestone = ({
       </Modal.Content>
     </Modal>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   loading: state.groups.upsertGroupMilestone.loading,
   upserting: state.groups.upsertGroupMilestone.upserting,
-  error: state.groups.upsertGroupMilestone.error
+  error: state.groups.upsertGroupMilestone.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -109,4 +109,5 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchEditGroupMilestone: (milestoneId, title, due) =>
     dispatch(editMilestoneOnFirebase(milestoneId, title, due)),
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditMilestone);

@@ -32,7 +32,7 @@ export const getGroup = (groupId) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: actions.GET_GROUP_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch((error) => {
@@ -94,7 +94,7 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
       headers: {
         Authorization: `Bearer ${utils.getWithExpiry('token')}`,
       },
-    }
+    },
   );
 
   es.onmessage = (res) => {
@@ -249,7 +249,7 @@ export const changeGroupState = (groupId, state) => (dispatch) => {
 export const sendGroupMessageToFirebase = (roomId, message) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -279,7 +279,7 @@ export const sendGroupMessageToFirebase = (roomId, message) => (
 export const addMilestoneToFirebase = (groupId, title, due) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 

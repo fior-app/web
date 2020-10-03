@@ -43,6 +43,12 @@ const initState = {
     upserting: false,
     error: null,
   },
+  upsertGroupMeeting: {
+    meeting: null,
+    loading: false,
+    upserting: false,
+    error: null,
+  },
   inviteMember: {
     loading: false,
     error: null,
@@ -130,13 +136,12 @@ const getGroupStart = (state) => ({
   },
 });
 
-
 const getGroupFailed = (state, payload) => ({
   ...state,
   group: {
     ...state.group,
     error: payload,
-    loading: false
+    loading: false,
   },
 });
 
@@ -146,7 +151,7 @@ const getGroupSuccess = (state, payload) => ({
     ...state.group,
     member: payload,
     error: null,
-    loading: false
+    loading: false,
   },
 });
 
@@ -268,7 +273,7 @@ const upsertGroupMilestoneStart = (state) => ({
     ...state.upsertGroupMilestone,
     loading: false,
     upserting: true,
-    error: null
+    error: null,
   },
 });
 
@@ -288,7 +293,7 @@ const upsertGroupMilestoneSuccess = (state) => ({
     ...state.upsertGroupMilestone,
     error: null,
     loading: false,
-    upserting: false
+    upserting: false,
   },
 });
 
