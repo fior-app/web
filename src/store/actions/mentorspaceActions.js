@@ -276,7 +276,7 @@ export const sendGroupMessageToFirebase = (roomId, message) => (
     });
 };
 
-export const addMilestoneToFirebase = (groupId, title, due) => (
+export const addMilestoneToFirebase = (groupId, title, due, closeModal) => (
   dispatch,
   getState,
   { getFirestore },
@@ -298,6 +298,7 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
     })
     .then(() => {
       dispatch({ type: actions.UPSERT_GROUP_MILESTONE_SUCCESS });
+      closeModal();
     })
     .catch((error) => {
       dispatch({
@@ -307,7 +308,7 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
     });
 };
 
-export const editMilestoneOnFirebase = (milestoneId, title, due) => (
+export const editMilestoneOnFirebase = (milestoneId, title, due, closeModal) => (
   dispatch,
   getState,
   { getFirestore },
@@ -325,6 +326,7 @@ export const editMilestoneOnFirebase = (milestoneId, title, due) => (
     })
     .then(() => {
       dispatch({ type: actions.UPSERT_GROUP_MILESTONE_SUCCESS });
+      closeModal();
     })
     .catch((error) => {
       dispatch({

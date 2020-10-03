@@ -45,9 +45,9 @@ const AddEditMilestone = ({
   const handleAddMilestone = () => {
     if (state.title && state.title !== '') {
       if (milestone) {
-        dispatchEditGroupMilestone(milestone.id, state.title, state.due);
+        dispatchEditGroupMilestone(milestone.id, state.title, state.due, closeModal);
       } else {
-        dispatchAddGroupMilestone(mentorspaceId, state.title, state.due);
+        dispatchAddGroupMilestone(mentorspaceId, state.title, state.due, closeModal);
       }
     }
   };
@@ -104,10 +104,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchAddGroupMilestone: (groupId, title, due) =>
-    dispatch(addMilestoneToFirebase(groupId, title, due)),
-  dispatchEditGroupMilestone: (milestoneId, title, due) =>
-    dispatch(editMilestoneOnFirebase(milestoneId, title, due)),
+  dispatchAddGroupMilestone: (groupId, title, due, closeModel) =>
+    dispatch(addMilestoneToFirebase(groupId, title, due, closeModel)),
+  dispatchEditGroupMilestone: (milestoneId, title, due, closeModal) =>
+    dispatch(editMilestoneOnFirebase(milestoneId, title, due, closeModal)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditMilestone);
