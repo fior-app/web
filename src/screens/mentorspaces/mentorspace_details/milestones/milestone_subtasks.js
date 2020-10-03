@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Icon, Form, Loader, Confirm } from "semantic-ui-react";
+import { Button, Icon, Form, Loader, Confirm, Popup } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateTasksMilestoneOnFirebase } from "../../../../store/actions/mentorspaceActions";
 import styles from "../../../../styles/mentorspace-milestone.module.css";
@@ -87,19 +87,35 @@ const MilestoneSubtasks = ({
           <div key={index} className={styles.milestone_subtask}>
             {state.editIndex !== index && (
               <>
-                <Form.Checkbox
-                  label={task.title}
-                  checked={task.done}
-                  onChange={(e, { checked }) => handleTaskChange(index, checked)}
-                />
-                <Icon
-                  name="edit"
-                  onClick={() => onOpenEditTask(index, task.title)}
-                />
-                <Icon
-                  name="close"
-                  onClick={() => onOpenDeleteTask(index)}
-                />
+                <Popup
+                  trigger={
+                    <Form.Checkbox
+                      label={task.title}
+                      checked={task.done}
+                      onChange={(e, { checked }) => handleTaskChange(index, checked)}
+                    />
+                  }
+                  flowing
+                  hoverable
+                  position='right center'
+                >
+                  <Button
+                    icon labelPosition='left'
+                    size={"mini"}
+                    onClick={() => onOpenEditTask(index, task.title)}
+                  >
+                    <Icon name='edit'/>
+                    Edit
+                  </Button>
+                  <Button
+                    icon labelPosition='left'
+                    size={"mini"}
+                    onClick={() => onOpenDeleteTask(index)}
+                  >
+                    <Icon name='delete'/>
+                    Delete
+                  </Button>
+                </Popup>
               </>
             )}
             {state.editIndex === index && (

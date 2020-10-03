@@ -39,8 +39,11 @@ const initState = {
     error: null,
   },
   upsertGroupMilestone: {
-    loading: false,
     upserting: false,
+    error: null,
+  },
+  deleteGroupMilestone: {
+    loading: null,
     error: null,
   },
   updateTasksMilestone: {
@@ -359,6 +362,33 @@ const setStateMilestoneSuccess = (state) => ({
   },
 });
 
+const deleteGroupMilestoneStart = (state, payload) => ({
+  ...state,
+  deleteGroupMilestone: {
+    ...state.deleteGroupMilestone,
+    loading: payload,
+    error: null
+  },
+});
+
+const deleteGroupMilestoneFailed = (state, payload) => ({
+  ...state,
+  deleteGroupMilestone: {
+    ...state.deleteGroupMilestone,
+    error: payload,
+    loading: null,
+  },
+});
+
+const deleteGroupMilestoneSuccess = (state) => ({
+  ...state,
+  deleteGroupMilestone: {
+    ...state.deleteGroupMilestone,
+    error: null,
+    loading: null,
+  },
+});
+
 const streamGroupMessage = (state, payload) => ({
   ...state,
   groupMessages: {
@@ -577,6 +607,15 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.SET_STATE_MILESTONE_FAILED:
       return setStateMilestoneFailed(state, action.payload);
+
+    case actions.DELETE_GROUP_MILESTONE_START:
+      return deleteGroupMilestoneStart(state, action.payload);
+
+    case actions.DELETE_GROUP_MILESTONE_SUCCESS:
+      return deleteGroupMilestoneSuccess(state);
+
+    case actions.DELETE_GROUP_MILESTONE_FAILED:
+      return deleteGroupMilestoneFailed(state, action.payload);
 
     case actions.GROUP_MESSAGES_STREAM:
       return streamGroupMessage(state, action.payload);
