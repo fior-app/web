@@ -32,12 +32,39 @@
     width: 4rem;
 }
 
+.v_spacer_sm {
+    height: 4rem;
+}
+
+.spacer_full {
+    flex: 1 1 auto;
+}
+
 .meeting_time {
     color: #02c39a;
     margin-top: 1rem;
     font-size: 16px;
 }
 
+.meeting_time_header {
+    color: #02c39a;
+    font-size: 16px;
+    margin-bottom: 1rem;
+}
+
 .meeting_member_count {
     font-weight: bold;
+}
+
+.meeting_description {
+    margin: 1rem 0;
+    font-size: 18px;
+}
+
+.keep_top_margin {
+    margin-top: 1rem;
+}
+
+.keep_bot_margin {
+    margin-bottom: 1rem;
 }

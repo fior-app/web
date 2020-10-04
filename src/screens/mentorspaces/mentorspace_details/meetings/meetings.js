@@ -1,5 +1,7 @@
 import React from 'react';
-import { Divider, Header, List } from 'semantic-ui-react';
+import {
+  Divider, Header, Label, List,
+} from 'semantic-ui-react';
 
 import { NavLink, useParams } from 'react-router-dom';
 import { compose } from 'redux';
@@ -21,7 +23,7 @@ const Meetings = ({ meetings }) => {
         <AddEditMeetings mentorspaceId={mentorspaceId} />
       </div>
       <Divider />
-      <List animated selection>
+      <List animated selection divided>
         {meetings ? (
           Object.keys(meetings).map((key) => {
             const meeting = { ...meetings[key], id: key };
@@ -33,9 +35,20 @@ const Meetings = ({ meetings }) => {
                   <List.Description>{meeting.description}</List.Description>
                 </List.Content>
                 <List.Content>
-                  <div className={styles.meeting_time}>
-                    {moment(`${meeting.on} ${meeting.from}`, 'YYYY-MM-DD HH:mm').fromNow()}
-                  </div>
+                  {
+                      moment(`${meeting.on} ${meeting.from}`, 'YYYY-MM-DD HH:mm').isAfter(moment(new Date()))
+                        ? (
+                          <div className={styles.meeting_time}>
+                            {`Due ${moment(`${meeting.on} ${meeting.from}`, 'YYYY-MM-DD HH:mm').fromNow()}`}
+                          </div>
+                        ) : (
+                          <div className={styles.keep_top_margin}>
+                            <Label color="yellow">
+                              Overdue
+                            </Label>
+                          </div>
+                        )
+                    }
                 </List.Content>
               </List.Item>
             ) : (

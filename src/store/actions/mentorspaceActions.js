@@ -386,7 +386,7 @@ export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
     });
 };
 
-export const addMeetingToFirebase = (groupId, data) => (
+export const addMeetingToFirebase = (groupId, data, closeModal) => (
   dispatch,
   getState,
   { getFirestore },
@@ -405,6 +405,7 @@ export const addMeetingToFirebase = (groupId, data) => (
     })
     .then(() => {
       dispatch({ type: actions.UPSERT_GROUP_MEETING_SUCCESS });
+      closeModal();
     })
     .catch((error) => {
       dispatch({
