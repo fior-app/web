@@ -6,12 +6,14 @@ export const getQuestions = () => (dispatch) => {
   axios
     .get('/questions')
     .then((res) => {
+      // console.log(res)
       dispatch({
         type: actions.GET_QUESTIONS_SUCCESS,
         payload: res.data,
       });
     })
     .catch((error) => {
+      // console.log(error)
       dispatch({
         type: actions.GET_QUESTIONS_FAILED,
         payload: error,
@@ -40,3 +42,4 @@ export const createQuestion = (question) => (dispatch) => {
       });
     });
 };
+
