@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {
@@ -92,6 +92,7 @@ const EditBlogPost = ({
 
   return (
     <Container>
+      <Link to="/blog">← Back to Blog Posts</Link>
       <h3>{!postId ? 'Create Post' : 'Edit Post'}</h3>
       <Form
         className="spacer"

@@ -43,3 +43,45 @@ export const createQuestion = (question) => (dispatch) => {
     });
 };
 
+export const getQuestion = (questionId) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_SINGLE_QUESTION_START });
+    axios 
+      .get("/questions/" + questionId)
+      .then((res) => {
+        dispatch({ type: actions.GET_SINGLE_QUESTION_SUCCESS, payload: res.data });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_SINGLE_QUESTION_FAILED, payload: error });
+      });
+  };
+};
+
+export const createAnswer =  (answer,questionId) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_CREATE_ANSWER_START });
+    axios
+      .post(`/questions/${questionId}/answers`,answer)
+      .then((res) => {
+        getAnswer(questionId)(dispatch);
+        dispatch({ type: actions.GET_CREATE_ANSWER_SUCCESS });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_CREATE_ANSWER_FAILED, payload: error });
+      });
+  };
+};
+
+export const getAnswer = (questionId) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_ANSWER_START });
+    axios
+      .get(`/questions/${questionId}/answers`)
+      .then((res) => {
+        dispatch({ type: actions.GET_ANSWER_SUCCESS, payload: res.data });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_ANSWER_FAILED, payload: error });
+      });
+  };
+};
