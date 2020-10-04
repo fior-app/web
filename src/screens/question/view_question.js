@@ -1,11 +1,13 @@
+import { rangeRight } from 'lodash';
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {Link} from 'react-router-dom';
 
-import { Card, Container, Form, Button, Message, } from 'semantic-ui-react';
+import { Card, Container, Form, Button, Message, Label, Grid } from 'semantic-ui-react';
 
 import { getQuestion, createAnswer, getAnswer, clearState } from "../../store/actions/questionActions";
 import loading from "../blog/edit/edit_blog_post" ;
+import styles from '../../styles/question.module.css' ;
 
 class ViewQuestion extends Component {
     state = {
@@ -38,21 +40,33 @@ class ViewQuestion extends Component {
 
         return (
             <Container>
-            <div className="keep-margin">
-                <Card fluid color='green'>
-                    <Card.Content>
-                        <Card.Header>
-                            {question.question && question.question.title}
-                        </Card.Header>
-                        <Card.Description>
-                            {question.question && question.question.description}
-                        </Card.Description>
-                        <Card.Meta textAlign={"right"}>
-                            3rd Oct 2020
-                        </Card.Meta>
-                    </Card.Content>
-                </Card>
-
+            <Link to="/forum">← Back to Question Forum</Link> <br/><br/>
+            <div>
+                    <Card fluid color='green'>
+                        <Card.Content>
+                            <div className={styles.ques_label}>
+                            <Label as='a' color='red' tag>
+                                Question
+                            </Label></div>
+                            <div className={styles.ques_content_header}>
+                                <Card.Header>
+                                {question.question && question.question.title}
+                                </Card.Header>
+                            </div>
+                            <div className={styles.ques_content_description}>
+                            <Card.Description>
+                                {question.question && question.question.description}
+                            </Card.Description>
+                            </div>
+                            <div className={styles.answer_date}>
+                            <Card.Meta textAlign={"right"}>
+                                3rd Oct 2020
+                            </Card.Meta>
+                            </div>
+                        </Card.Content>
+                    </Card>
+    
+            
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Field>
                     <Form.TextArea
@@ -83,13 +97,14 @@ class ViewQuestion extends Component {
                                 <Card.Description>
                                     {answer.description}
                                 </Card.Description>
+                                <div className={styles.answer_date}>
                                 <Card.Meta textAlign={"right"}>3rd Oct 2020</Card.Meta>
+                                </div>
                             </Card.Content>
                         </Card> <br/>
                     </div>
                     );
                 })}
-                <Link to="/forum">← Back to Question Forum</Link>
                 <div>
                 {this.props.ansAnswer && this.props.ansAnswer.description}
                 </div>

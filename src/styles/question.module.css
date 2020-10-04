@@ -1,0 +1,18 @@
+.ques_content_header {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 14px;
+    /* margin-top: -10px; */
+}
+
+.ques_content_description{
+    font-size: 17px;
+}
+
+.answer_date{
+    font-style: italic;
+}
+
+.ques_label{
+    text-align: right;
+}
