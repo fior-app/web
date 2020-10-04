@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Button, Form, Modal } from "semantic-ui-react";
-import { addMilestoneToFirebase, editMilestoneOnFirebase } from "../../../../store/actions/mentorspaceActions";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Button, Form, Modal } from 'semantic-ui-react';
+import { addMilestoneToFirebase, editMilestoneOnFirebase } from '../../../../store/actions/mentorspaceActions';
 
 const AddEditMilestone = ({
   mentorspaceId,
@@ -9,13 +9,13 @@ const AddEditMilestone = ({
   trigger,
   dispatchAddGroupMilestone,
   dispatchEditGroupMilestone,
-  loading,
   upserting,
   error,
+  date,
 }) => {
   const initialState = {
     title: '',
-    due: '',
+    due: date || '',
   };
 
   const [state, setState] = useState(initialState);
@@ -25,7 +25,7 @@ const AddEditMilestone = ({
   const openModal = () => {
     setState({
       title: milestone ? milestone.title : '',
-      due: milestone ? milestone.due : ''
+      due: date || (milestone ? milestone.due : ''),
     });
 
     setModelOpen(true);
@@ -36,6 +36,7 @@ const AddEditMilestone = ({
   };
 
   const handleOnChangeInput = (e, { name, value }) => {
+    // eslint-disable-next-line no-shadow
     setState((state) => ({
       ...state,
       [name]: value,
@@ -88,7 +89,8 @@ const AddEditMilestone = ({
           <Button
             loading={upserting}
             primary
-            type='submit'>
+            type="submit"
+          >
             {milestone ? 'Edit' : 'Add'}
           </Button>
         </Form>
@@ -104,10 +106,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchAddGroupMilestone: (groupId, title, due, closeModel) =>
-    dispatch(addMilestoneToFirebase(groupId, title, due, closeModel)),
-  dispatchEditGroupMilestone: (milestoneId, title, due, closeModal) =>
-    dispatch(editMilestoneOnFirebase(milestoneId, title, due, closeModal)),
+  dispatchAddGroupMilestone:
+      (groupId, title, due, closeModel) => dispatch(addMilestoneToFirebase(groupId, title, due, closeModel)),
+  dispatchEditGroupMilestone:
+      (milestoneId, title, due, closeModal) => dispatch(editMilestoneOnFirebase(milestoneId, title, due, closeModal)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditMilestone);

@@ -14,6 +14,7 @@ import Milestones from './milestones/milestones';
 import Meetings from './meetings/meetings';
 import Files from './files/files';
 import MeetingDetail from './meetings/meeting_detail';
+import Calendar from './calendar/calendar';
 
 const MentorspaceScreen = ({
   loading,
@@ -39,6 +40,14 @@ const MentorspaceScreen = ({
           <Grid>
             <Grid.Column width={3}>
               <Menu secondary vertical size="large">
+                <Menu.Item
+                  as={NavLink}
+                  to={`/mentorspaces/${mentorspaceId}`}
+                  name="timeline"
+                >
+                  Timeline
+                </Menu.Item>
+
                 <Menu.Item
                   as={NavLink}
                   to={`/mentorspaces/${mentorspaceId}/room/${member.group.chatroom.id}`}
@@ -74,10 +83,11 @@ const MentorspaceScreen = ({
               </Menu>
             </Grid.Column>
             <Grid.Column width={9}>
+              <Route path="/mentorspaces/:mentorspaceId" component={Calendar} exact />
               <Route path="/mentorspaces/:mentorspaceId/room/:roomId" component={GroupChat} />
               <Route path="/mentorspaces/:mentorspaceId/milestones" component={Milestones} />
               <Route path="/mentorspaces/:mentorspaceId/meetings" component={Meetings} exact />
-              <Route path="/mentorspaces/:mentorspaceId/meetings/:meetingId" component={MeetingDetail} exact />
+              <Route path="/mentorspaces/:mentorspaceId/meetings/:meetingId" component={MeetingDetail} />
               <Route path="/mentorspaces/:mentorspaceId/files" component={Files} />
               {/* {member && member.group && ( */}
               {/*  <Redirect */}

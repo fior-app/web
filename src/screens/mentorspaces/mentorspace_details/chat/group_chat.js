@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { Form, Header, Input, Feed, Divider } from 'semantic-ui-react';
+import {
+  Form, Header, Input, Feed, Divider,
+} from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 
 import { sendGroupMessageToFirebase } from '../../../../store/actions/mentorspaceActions';
 import Message from './message';
+import styles from '../../../../styles/chat.module.css';
 
 const GroupChat = ({
   messages,
-  sendGroupMessageToFirebase
+  sendGroupMessageToFirebase,
 }) => {
   const initialState = {
     message: '',
@@ -18,7 +21,7 @@ const GroupChat = ({
 
   const [state, setState] = useState(initialState);
 
-  const { roomId } = useParams()
+  const { roomId } = useParams();
 
   const handleOnChangeInput = (e) => {
     setState({
@@ -34,49 +37,47 @@ const GroupChat = ({
   };
 
   /** Group consecutive messages by same users
-   **/
+   * */
   const getGroupedMessages = (messages) => {
     const grouped = [];
-    let lastSender = null
+    let lastSender = null;
 
     messages.forEach((message) => {
       if (message.sender.id === lastSender) {
-        grouped[grouped.length - 1].messages.push(message.message)
+        grouped[grouped.length - 1].messages.push(message.message);
       } else {
         grouped.push({
           ...message,
           message: undefined,
-          messages: [message.message]
-        })
-        lastSender = message.sender.id
+          messages: [message.message],
+        });
+        lastSender = message.sender.id;
       }
     });
     return grouped;
-  }
+  };
 
   let groupedMessages = null;
   if (messages) {
-    groupedMessages = getGroupedMessages(Object.values(messages))
+    groupedMessages = getGroupedMessages(Object.values(messages));
   }
 
   return (
     <>
-      <Header as={"h2"}>Thread</Header>
-      <Divider/>
-
+      <Header as="h2">Thread</Header>
+      <Divider />
       <Feed>
         {groupedMessages ? (
-          groupedMessages.map((message, index) => {
-            return message ? (
-              <Message message={message} key={index}/>
-            ) : (
-              <div key={index}/>
-            );
-          })
+          groupedMessages.reverse().map((message, index) => (message ? (
+            <Message message={message} key={index} />
+          ) : (
+            <div key={index} />
+          )))
         ) : (
           <li>No messages</li>
         )}
       </Feed>
+      <div className={styles.keep_chat_margin} />
       <Form>
         <Form.Field>
           <Input
@@ -95,7 +96,7 @@ const GroupChat = ({
       {/* <button onClick={this.handleSendMessage}>send</button> */}
     </>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   messages: state.firestore.data.messages,
@@ -104,8 +105,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sendGroupMessageToFirebase: (roomId, message) =>
-    dispatch(sendGroupMessageToFirebase(roomId, message)),
+  sendGroupMessageToFirebase: (roomId, message) => dispatch(sendGroupMessageToFirebase(roomId, message)),
 });
 export default compose(
   firestoreConnect((props) => [
@@ -116,5 +116,5 @@ export default compose(
       where: ['roomId', '==', props.match.params.roomId],
     },
   ]),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(GroupChat);
