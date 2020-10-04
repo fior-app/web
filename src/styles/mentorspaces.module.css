@@ -24,6 +24,12 @@
   justify-content: flex-end;
 }
 
+.information {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
 .actions {
   margin-top: 1rem;
   display: flex;

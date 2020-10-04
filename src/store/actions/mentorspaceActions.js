@@ -94,7 +94,7 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
       headers: {
         Authorization: `Bearer ${utils.getWithExpiry('token')}`,
       },
-    },
+    }
   );
 
   es.onmessage = (res) => {
@@ -190,7 +190,12 @@ export const sendGroupMessage = (roomId, message) => (dispatch) => {
     });
 };
 
-export const inviteMember = (groupId, email, isMentor = false, comment = null) => (dispatch) => {
+export const inviteMember = (
+  groupId,
+  email,
+  isMentor = false,
+  comment = null
+) => (dispatch) => {
   dispatch({ type: actions.INVITE_MEMBER_START });
   axios
     .post(`/groups/${groupId}/member`, { email, isMentor, comment })
@@ -249,7 +254,7 @@ export const changeGroupState = (groupId, state) => (dispatch) => {
 export const sendGroupMessageToFirebase = (roomId, message) => (
   dispatch,
   getState,
-  { getFirestore },
+  { getFirestore }
 ) => {
   const firestore = getFirestore();
 
@@ -276,34 +281,29 @@ export const sendGroupMessageToFirebase = (roomId, message) => (
     });
 };
 
-export const addMilestoneToFirebase = (groupId, title, due) => (
+export const addMilestoneToFirebase = (groupId, title, due, closeModal) => (
   dispatch,
   getState,
-  { getFirestore },
+  { getFirestore }
 ) => {
   const firestore = getFirestore();
 
   dispatch({ type: actions.UPSERT_GROUP_MILESTONE_START });
-
-  console.log({
-    title,
-    due,
-    createdAt: firestore.FieldValue.serverTimestamp(),
-    groupId,
-    createdBy: getState().auth.currentUser,
-  });
 
   firestore
     .collection('milestones')
     .add({
       title,
       due,
+      isComplete: false,
+      tasks: [],
       createdAt: firestore.FieldValue.serverTimestamp(),
       groupId,
       createdBy: getState().auth.currentUser,
     })
     .then(() => {
       dispatch({ type: actions.UPSERT_GROUP_MILESTONE_SUCCESS });
+      closeModal();
     })
     .catch((error) => {
       dispatch({
@@ -313,10 +313,114 @@ export const addMilestoneToFirebase = (groupId, title, due) => (
     });
 };
 
-export const addMeetingToFirebase = (groupId, title) => (
+export const editMilestoneOnFirebase = (milestoneId, title, due, closeModal) => (
   dispatch,
   getState,
   { getFirestore },
+) => {
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.UPSERT_GROUP_MILESTONE_START });
+
+  firestore
+    .collection('milestones')
+    .doc(milestoneId)
+    .update({
+      title,
+      due,
+    })
+    .then(() => {
+      dispatch({ type: actions.UPSERT_GROUP_MILESTONE_SUCCESS });
+      closeModal();
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.UPSERT_GROUP_MILESTONE_FAILED,
+        payload: error,
+      });
+    });
+};
+
+export const deleteMilestoneOnFirebase = (milestoneId) => (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.DELETE_GROUP_MILESTONE_START, milestoneId });
+
+  firestore
+    .collection('milestones')
+    .doc(milestoneId)
+    .delete()
+    .then(() => {
+      dispatch({ type: actions.DELETE_GROUP_MILESTONE_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.DELETE_GROUP_MILESTONE_FAILED,
+        payload: error,
+      });
+    });
+};
+
+export const setMilestoneStateOnFirebase = (milestoneId, state) => (
+  dispatch,
+  getState,
+  { getFirestore },
+) => {
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.SET_STATE_MILESTONE_START });
+
+  firestore
+    .collection('milestones')
+    .doc(milestoneId)
+    .update({
+      isComplete: state,
+    })
+    .then(() => {
+      dispatch({ type: actions.SET_STATE_MILESTONE_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.SET_STATE_MILESTONE_FAILED,
+        payload: error,
+      });
+    });
+};
+
+export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
+  dispatch,
+  getState,
+  { getFirestore },
+) => {
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.UPDATE_TASKS_MILESTONE_START, payload: milestoneId });
+
+  firestore
+    .collection('milestones')
+    .doc(milestoneId)
+    .update({
+      tasks,
+    })
+    .then(() => {
+      dispatch({ type: actions.UPDATE_TASKS_MILESTONE_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.UPDATE_TASKS_MILESTONE_FAILED,
+        payload: error,
+      });
+    });
+};
+
+export const addMeetingToFirebase = (groupId, data, closeModal) => (
+  dispatch,
+  getState,
+  { getFirestore }
 ) => {
   const firestore = getFirestore();
 
@@ -325,17 +429,50 @@ export const addMeetingToFirebase = (groupId, title) => (
   firestore
     .collection('meetings')
     .add({
-      title,
+      ...data,
       createdAt: firestore.FieldValue.serverTimestamp(),
       groupId,
       createdBy: getState().auth.currentUser,
     })
     .then(() => {
       dispatch({ type: actions.UPSERT_GROUP_MEETING_SUCCESS });
+      closeModal();
     })
     .catch((error) => {
       dispatch({
         type: actions.UPSERT_GROUP_MEETING_FAILED,
+        payload: error,
+      });
+    });
+};
+
+export const updateProjectDetails = (projectId, project, cb) => (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+  dispatch({ type: actions.UPDATE_PROJECT_DETAILS_START });
+
+  firestore
+    .collection('projects')
+    .doc(projectId)
+    .set(
+      {
+        ...project,
+        projectId,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+        createdBy: getState().auth.currentUser,
+      },
+      { merge: true }
+    )
+    .then(() => {
+      dispatch({ type: actions.UPDATE_PROJECT_DETAILS_SUCCESS });
+      cb();
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.UPDATE_PROJECT_DETAILS_FAILED,
         payload: error,
       });
     });

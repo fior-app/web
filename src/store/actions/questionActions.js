@@ -6,12 +6,14 @@ export const getQuestions = () => (dispatch) => {
   axios
     .get('/questions')
     .then((res) => {
+      // console.log(res)
       dispatch({
         type: actions.GET_QUESTIONS_SUCCESS,
         payload: res.data,
       });
     })
     .catch((error) => {
+      // console.log(error)
       dispatch({
         type: actions.GET_QUESTIONS_FAILED,
         payload: error,
@@ -19,7 +21,7 @@ export const getQuestions = () => (dispatch) => {
     });
 };
 
-export const createQuestion = (question) => (dispatch) => {
+export const createQuestion = (question,cb) => (dispatch) => {
   dispatch({ type: actions.CREATE_QUESTION_START });
   axios
     .post('/questions', {
@@ -32,6 +34,7 @@ export const createQuestion = (question) => (dispatch) => {
         type: actions.CREATE_QUESTION_SUCCESS,
         payload: res.data,
       });
+      cb();
     })
     .catch((error) => {
       dispatch({
@@ -39,4 +42,54 @@ export const createQuestion = (question) => (dispatch) => {
         payload: error,
       });
     });
+};
+
+export const clearState = () => {
+  return (dispatch) => {
+    dispatch({ type: actions.CLEAR_CEATE_QESTION_STATE});
+  }
+}
+
+export const getQuestion = (questionId) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_SINGLE_QUESTION_START });
+    axios 
+      .get("/questions/" + questionId)
+      .then((res) => {
+        dispatch({ type: actions.GET_SINGLE_QUESTION_SUCCESS, payload: res.data });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_SINGLE_QUESTION_FAILED, payload: error });
+      });
+  };
+};
+
+export const createAnswer =  (answer,questionId,cb) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_CREATE_ANSWER_START });
+    axios
+    .post(`/questions/${questionId}/answers`,answer)
+    .then((res) => {
+      console.log(res)
+      getAnswer(questionId)(dispatch);
+      dispatch({ type: actions.GET_CREATE_ANSWER_SUCCESS, payload: res.data, });
+    })
+    .catch((error) => {
+        dispatch({ type: actions.GET_CREATE_ANSWER_FAILED, payload: error });
+      });
+  };
+};
+
+export const getAnswer = (questionId) => {
+  return (dispatch) => {
+    dispatch({ type: actions.GET_ANSWER_START });
+    axios
+      .get(`/questions/${questionId}/answers`)
+      .then((res) => {
+        dispatch({ type: actions.GET_ANSWER_SUCCESS, payload: res.data });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.GET_ANSWER_FAILED, payload: error });
+      });
+  };
 };

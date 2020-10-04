@@ -23,7 +23,7 @@ class MentorspaceMembers extends Component {
           {members.map((member) => (
             <Feed.Event key={member.id}>
               <Feed.Label>
-                <img src='https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg'/>
+                <img src='https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg' alt="person"/>
               </Feed.Label>
               <Feed.Content>
                 {member.member.name}

@@ -22,6 +22,8 @@ import { getSkills } from './store/actions/skillActions';
 import PricingScreen from './screens/pricing/pricing_screen';
 import QuestionScreen from './screens/question/question_screen';
 import CreateQuestion from './screens/question/create_question';
+import ViewQuestion from "./screens/question/view_question";
+
 import BlogDetail from './screens/blog/detail/blog_detail';
 import MyPostsScreen from './screens/blog/my_posts/my_posts_screen';
 import EditBlogPost from './screens/blog/edit/edit_blog_post';
@@ -76,8 +78,13 @@ class FiorApp extends Component {
               <Route exact path="/forum" component={QuestionScreen} />
               <Route
                 exact
-                path="/forum/create"
+                path="/question-forum/create"
                 component={CreateQuestion}
+              />
+              <Route
+                exact
+                path='/question-forum/:questionId'
+                component={ViewQuestion}
               />
               <Route exact path="/blog" component={BlogScreen} />
               <Route exact path="/blog/edit" component={EditBlogPost} />

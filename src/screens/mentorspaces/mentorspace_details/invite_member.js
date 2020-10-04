@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Form, Icon, Modal, ModalHeader } from 'semantic-ui-react';
+import { Button, Form, Icon, Modal } from 'semantic-ui-react';
 
 import { inviteMember } from '../../../store/actions/mentorspaceActions';
 

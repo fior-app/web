@@ -39,9 +39,19 @@ const initState = {
     error: null,
   },
   upsertGroupMilestone: {
-    milestone: null,
-    loading: false,
     upserting: false,
+    error: null,
+  },
+  deleteGroupMilestone: {
+    loading: null,
+    error: null,
+  },
+  updateTasksMilestone: {
+    loading: null,
+    error: null,
+  },
+  setStateMilestone: {
+    loading: null,
     error: null,
   },
   upsertGroupMeeting: {
@@ -51,6 +61,10 @@ const initState = {
     error: null,
   },
   inviteMember: {
+    loading: false,
+    error: null,
+  },
+  upsertProject: {
     loading: false,
     error: null,
   },
@@ -153,14 +167,6 @@ const getGroupSuccess = (state, payload) => ({
     member: payload,
     error: null,
     loading: false,
-  },
-});
-
-const getGroup = (state, payload) => ({
-  ...state,
-  group: {
-    ...state.group,
-    member: payload,
   },
 });
 
@@ -280,7 +286,6 @@ const upsertGroupMilestoneStart = (state) => ({
   ...state,
   upsertGroupMilestone: {
     ...state.upsertGroupMilestone,
-    milestone: null,
     loading: false,
     upserting: true,
     error: null,
@@ -304,6 +309,87 @@ const upsertGroupMilestoneSuccess = (state) => ({
     error: null,
     loading: false,
     upserting: false,
+  },
+});
+
+const updateTasksMilestoneStart = (state, payload) => ({
+  ...state,
+  updateTasksMilestone: {
+    ...state.updateTasksMilestone,
+    loading: payload,
+    error: null
+  },
+});
+
+const updateTasksMilestoneFailed = (state, payload) => ({
+  ...state,
+  updateTasksMilestone: {
+    ...state.updateTasksMilestone,
+    error: payload,
+    loading: null,
+  },
+});
+
+const updateTasksMilestoneSuccess = (state) => ({
+  ...state,
+  updateTasksMilestone: {
+    ...state.updateTasksMilestone,
+    error: null,
+    loading: null,
+  },
+});
+
+const setStateMilestoneStart = (state, payload) => ({
+  ...state,
+  setStateMilestone: {
+    ...state.setStateMilestone,
+    loading: payload,
+    error: null
+  },
+});
+
+const setStateMilestoneFailed = (state, payload) => ({
+  ...state,
+  setStateMilestone: {
+    ...state.setStateMilestone,
+    error: payload,
+    loading: null,
+  },
+});
+
+const setStateMilestoneSuccess = (state) => ({
+  ...state,
+  setStateMilestone: {
+    ...state.setStateMilestone,
+    error: null,
+    loading: null,
+  },
+});
+
+const deleteGroupMilestoneStart = (state, payload) => ({
+  ...state,
+  deleteGroupMilestone: {
+    ...state.deleteGroupMilestone,
+    loading: payload,
+    error: null
+  },
+});
+
+const deleteGroupMilestoneFailed = (state, payload) => ({
+  ...state,
+  deleteGroupMilestone: {
+    ...state.deleteGroupMilestone,
+    error: payload,
+    loading: null,
+  },
+});
+
+const deleteGroupMilestoneSuccess = (state) => ({
+  ...state,
+  deleteGroupMilestone: {
+    ...state.deleteGroupMilestone,
+    error: null,
+    loading: null,
   },
 });
 
@@ -419,6 +505,31 @@ const changeGroupStateSuccess = (state) => ({
   },
 });
 
+const upsertProjectDetailsStart = (state) => ({
+  ...state,
+  upsertProject: {
+    ...state.upsertProject,
+    loading: true,
+  },
+});
+
+const upsertProjectDetailsSuccess = (state) => ({
+  ...state,
+  upsertProject: {
+    ...state.upsertProject,
+    loading: false,
+  },
+});
+
+const upsertProjectDetailsFailed = (state, payload) => ({
+  ...state,
+  upsertProject: {
+    ...state.upsertProject,
+    error: payload,
+    loading: false,
+  },
+});
+
 const groupsReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.GET_MY_GROUPS_START:
@@ -508,6 +619,33 @@ const groupsReducer = (state = initState, action) => {
     case actions.UPSERT_GROUP_MILESTONE_FAILED:
       return upsertGroupMilestoneFailed(state, action.payload);
 
+    case actions.UPDATE_TASKS_MILESTONE_START:
+      return updateTasksMilestoneStart(state, action.payload);
+
+    case actions.UPDATE_TASKS_MILESTONE_SUCCESS:
+      return updateTasksMilestoneSuccess(state);
+
+    case actions.UPDATE_TASKS_MILESTONE_FAILED:
+      return updateTasksMilestoneFailed(state, action.payload);
+
+    case actions.SET_STATE_MILESTONE_START:
+      return setStateMilestoneStart(state, action.payload);
+
+    case actions.SET_STATE_MILESTONE_SUCCESS:
+      return setStateMilestoneSuccess(state);
+
+    case actions.SET_STATE_MILESTONE_FAILED:
+      return setStateMilestoneFailed(state, action.payload);
+
+    case actions.DELETE_GROUP_MILESTONE_START:
+      return deleteGroupMilestoneStart(state, action.payload);
+
+    case actions.DELETE_GROUP_MILESTONE_SUCCESS:
+      return deleteGroupMilestoneSuccess(state);
+
+    case actions.DELETE_GROUP_MILESTONE_FAILED:
+      return deleteGroupMilestoneFailed(state, action.payload);
+
     case actions.GROUP_MESSAGES_STREAM:
       return streamGroupMessage(state, action.payload);
 
@@ -549,6 +687,15 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.CHANGE_GROUP_STATE_FAILED:
       return changeGroupStateFailed(state, action.payload);
+
+    case actions.UPDATE_PROJECT_DETAILS_START:
+      return upsertProjectDetailsStart(state);
+
+    case actions.UPDATE_PROJECT_DETAILS_SUCCESS:
+      return upsertProjectDetailsSuccess(state);
+
+    case actions.UPDATE_PROJECT_DETAILS_FAILED:
+      return upsertProjectDetailsFailed(state, action.payload);
 
     default:
       return state;
