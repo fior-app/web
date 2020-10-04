@@ -77,7 +77,7 @@ const MentorspaceScreen = ({
               <Route path="/mentorspaces/:mentorspaceId/room/:roomId" component={GroupChat} />
               <Route path="/mentorspaces/:mentorspaceId/milestones" component={Milestones} />
               <Route path="/mentorspaces/:mentorspaceId/meetings" component={Meetings} exact />
-              <Route path="/mentorspaces/:mentorspaceId/meetings/:meetingId" component={MeetingDetail} />
+              <Route path="/mentorspaces/:mentorspaceId/meetings/:meetingId" component={MeetingDetail} exact />
               <Route path="/mentorspaces/:mentorspaceId/files" component={Files} />
               {/* {member && member.group && ( */}
               {/*  <Redirect */}

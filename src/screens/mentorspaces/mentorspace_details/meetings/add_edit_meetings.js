@@ -8,7 +8,7 @@ import { addMeetingToFirebase } from '../../../../store/actions/mentorspaceActio
 import styles from '../../../../styles/mentorspace-meetings.module.css';
 
 const AddEditMeetings = ({
-  mentorspaceId, error, isBusy, dispatchAddGroupMeeting, members,
+  mentorspaceId, meetingId, error, isBusy, dispatchAddGroupMeeting, members,
 }) => {
   const initialState = {
     title: '',
@@ -82,10 +82,13 @@ const AddEditMeetings = ({
   return (
     <Modal
       trigger={(
-        <Button onClick={openModal}>
-          <Icon name="plus" />
-          Meeting
-        </Button>
+          meetingId ? <Icon name="edit" size="large" onClick={openModal} />
+            : (
+              <Button onClick={openModal}>
+                <Icon name="plus" />
+                Meeting
+              </Button>
+            )
             )}
       size="small"
       onClose={closeModal}
@@ -185,7 +188,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchAddGroupMeeting:
-      (groupId, data) => dispatch(addMeetingToFirebase(groupId, data)),
+      (groupId, data, closeModal) => dispatch(addMeetingToFirebase(groupId, data, closeModal)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditMeetings);
