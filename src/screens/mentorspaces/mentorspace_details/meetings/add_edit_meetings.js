@@ -8,12 +8,18 @@ import { addMeetingToFirebase } from '../../../../store/actions/mentorspaceActio
 import styles from '../../../../styles/mentorspace-meetings.module.css';
 
 const AddEditMeetings = ({
-  mentorspaceId, meetingId, error, isBusy, dispatchAddGroupMeeting, members,
+  mentorspaceId,
+  meetingId,
+  error,
+  isBusy,
+  dispatchAddGroupMeeting,
+  members,
+  date,
 }) => {
   const initialState = {
     title: '',
     description: '',
-    on: '',
+    on: date || '',
     from: '',
     to: '',
     attendees: [],
@@ -27,7 +33,7 @@ const AddEditMeetings = ({
     setState({
       title: '',
       description: '',
-      on: '',
+      on: date || '',
       from: '',
       to: '',
       attendees: [],

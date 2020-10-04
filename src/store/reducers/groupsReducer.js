@@ -64,6 +64,10 @@ const initState = {
     loading: false,
     error: null,
   },
+  upsertProject: {
+    loading: false,
+    error: null,
+  },
 };
 
 const createGroupStart = (state) => ({
@@ -501,6 +505,31 @@ const changeGroupStateSuccess = (state) => ({
   },
 });
 
+const upsertProjectDetailsStart = (state) => ({
+  ...state,
+  upsertProject: {
+    ...state.upsertProject,
+    loading: true,
+  },
+});
+
+const upsertProjectDetailsSuccess = (state) => ({
+  ...state,
+  upsertProject: {
+    ...state.upsertProject,
+    loading: false,
+  },
+});
+
+const upsertProjectDetailsFailed = (state, payload) => ({
+  ...state,
+  upsertProject: {
+    ...state.upsertProject,
+    error: payload,
+    loading: false,
+  },
+});
+
 const groupsReducer = (state = initState, action) => {
   switch (action.type) {
     case actions.GET_MY_GROUPS_START:
@@ -658,6 +687,15 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.CHANGE_GROUP_STATE_FAILED:
       return changeGroupStateFailed(state, action.payload);
+
+    case actions.UPDATE_PROJECT_DETAILS_START:
+      return upsertProjectDetailsStart(state);
+
+    case actions.UPDATE_PROJECT_DETAILS_SUCCESS:
+      return upsertProjectDetailsSuccess(state);
+
+    case actions.UPDATE_PROJECT_DETAILS_FAILED:
+      return upsertProjectDetailsFailed(state, action.payload);
 
     default:
       return state;

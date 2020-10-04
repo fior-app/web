@@ -1,0 +1,25 @@
+.legend {
+    margin: 1rem 0;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.spacer_sm {
+    width: 1rem;
+}
+
+.milestones_block {
+    height: 1rem;
+    width: 1rem;
+    background-color: #02c39a;
+}
+
+.meetings_block {
+    height: 1rem;
+    width: 1rem;
+    background-color: #2185d0;
+}
