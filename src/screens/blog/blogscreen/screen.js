@@ -26,20 +26,13 @@ const BlogScreen = ({
     activePage,
   }));
 
+  const getPageStart = () => blogState.limit * (blogState.activePage - 1);
+  const getPageEnd = () => getPageStart() + blogState.limit;
   
-
   return (
     <Container>
       <Grid columns="equal">
         <Grid.Column>
-          <Grid.Row>
-            {posts.slice(getPageStart(), getPageEnd())
-              .map((post) => (
-                <Link to={`/blog/${post.id}`} key={post.id}>
-                  <Post post={post} />
-                </Link>
-              ))}
-          </Grid.Row>
           <Grid.Row>
             <Pagination
               activePage={blogState.activePage}
@@ -60,7 +53,12 @@ const BlogScreen = ({
   );
 };
 
-
+const mapStateToProps = (state) => ({
+  loading: state.blog.posts.loading,
+  error: state.blog.posts.error,
+  posts: state.blog.posts.posts,
+  skills: state.skills.skills.items,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchGetPosts: () => dispatch(getPosts()),
