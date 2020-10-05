@@ -2,7 +2,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, Route, Redirect, NavLink } from 'react-router-dom';
 import {
-  Container, Grid, Menu, Header, Label, Button, Icon,
+  Container,
+  Grid,
+  Menu,
+  Header,
+  Label,
+  Button,
+  Icon,
 } from 'semantic-ui-react';
 
 import { getGroup } from '../../../store/actions/mentorspaceActions';
@@ -16,6 +22,7 @@ import Files from './files/files';
 import MeetingDetail from './meetings/meeting_detail';
 import Calendar from './calendar/calendar';
 import Project from './project/Project';
+import ProjectWidget from './project/ProjectWidget';
 
 const MentorspaceScreen = ({ loading, member, error, dispatchGetGroup }) => {
   const { mentorspaceId } = useParams();
@@ -25,8 +32,6 @@ const MentorspaceScreen = ({ loading, member, error, dispatchGetGroup }) => {
       dispatchGetGroup(mentorspaceId);
     }
   }, [mentorspaceId, dispatchGetGroup]);
-
-  console.log(member);
 
   return (
     <>
@@ -86,12 +91,32 @@ const MentorspaceScreen = ({ loading, member, error, dispatchGetGroup }) => {
               </Menu>
             </Grid.Column>
             <Grid.Column width={9}>
-              <Route path="/mentorspaces/:mentorspaceId" component={Calendar} exact />
-              <Route path="/mentorspaces/:mentorspaceId/room/:roomId" component={GroupChat} />
-              <Route path="/mentorspaces/:mentorspaceId/milestones" component={Milestones} />
-              <Route path="/mentorspaces/:mentorspaceId/meetings" component={Meetings} exact />
-              <Route path="/mentorspaces/:mentorspaceId/meetings/:meetingId" component={MeetingDetail} />
-              <Route path="/mentorspaces/:mentorspaceId/files" component={Files} />
+              <Route
+                path="/mentorspaces/:mentorspaceId"
+                component={Calendar}
+                exact
+              />
+              <Route
+                path="/mentorspaces/:mentorspaceId/room/:roomId"
+                component={GroupChat}
+              />
+              <Route
+                path="/mentorspaces/:mentorspaceId/milestones"
+                component={Milestones}
+              />
+              <Route
+                path="/mentorspaces/:mentorspaceId/meetings"
+                component={Meetings}
+                exact
+              />
+              <Route
+                path="/mentorspaces/:mentorspaceId/meetings/:meetingId"
+                component={MeetingDetail}
+              />
+              <Route
+                path="/mentorspaces/:mentorspaceId/files"
+                component={Files}
+              />
               <Route
                 path="/mentorspaces/:mentorspaceId/project"
                 component={Project}
@@ -104,6 +129,7 @@ const MentorspaceScreen = ({ loading, member, error, dispatchGetGroup }) => {
               {/* )} */}
             </Grid.Column>
             <Grid.Column width={4}>
+              <ProjectWidget mentorspaceId={mentorspaceId} />
               <MentorspaceMembers groupId={mentorspaceId} />
               {member.permissions.includes('SEND_MEMBER_REQUESTS') ? (
                 <>
