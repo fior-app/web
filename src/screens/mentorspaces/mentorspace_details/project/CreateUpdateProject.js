@@ -48,6 +48,7 @@ export class CreateUpdateProject extends Component {
 
   render() {
     const { isModelOpen, title, description } = this.state;
+
     return (
       <Modal
         trigger={
@@ -82,6 +83,7 @@ export class CreateUpdateProject extends Component {
                 onChange={this.handleOnChangeInput}
               />
             </Form.Field>
+            {this.props.loading ? <div>Updating project</div> : null}
             <Button loading={false} type="submit">
               Submit
             </Button>
@@ -94,6 +96,8 @@ export class CreateUpdateProject extends Component {
 
 const mapStateToProps = (state, props) => ({
   projects: state.firestore.data.projects,
+  loading: state.groups.upsertProject.loading,
+  error: state.groups.upsertProject.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
