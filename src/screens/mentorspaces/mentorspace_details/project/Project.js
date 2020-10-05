@@ -19,7 +19,7 @@ const NoProject = () => {
 const ProjectComponent = ({ project }) => {
   return (
     <div className={styles.header}>
-      <Image src="https://picsum.photos/120/120" />
+      <Image src="https://picsum.photos/120/120" circular />
       <div>
         <Header as="h1">{project.title}</Header>
         <div className={styles.description}>{project.description}</div>
