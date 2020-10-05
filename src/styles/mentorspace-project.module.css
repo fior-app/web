@@ -18,3 +18,7 @@
   justify-content: center;
   text-align: center;
 }
+
+.upsert_project {
+  text-align: end;
+}

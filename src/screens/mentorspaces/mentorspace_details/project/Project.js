@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Container, Header, Divider, Image } from 'semantic-ui-react';
+import { Container, Header, Divider, Image, Grid } from 'semantic-ui-react';
 import { firestoreConnect } from 'react-redux-firebase';
 import { useParams } from 'react-router-dom';
 
@@ -16,35 +16,45 @@ const NoProject = () => {
   );
 };
 
-const ProjectComponent = () => {
+const ProjectComponent = ({ project }) => {
   return (
     <div className={styles.header}>
       <Image src="https://picsum.photos/120/120" />
       <div>
-        <Header as="h1">Title</Header>
-        <div className={styles.description}>
-          Description flgd; s mf;dgm fg;dlgm dfgm; ldfgm
-        </div>
+        <Header as="h1">{project.title}</Header>
+        <div className={styles.description}>{project.description}</div>
       </div>
     </div>
   );
 };
 
-const Project = ({ project }) => {
+const Project = ({ projects }) => {
   const { mentorspaceId } = useParams();
 
   return (
     <Container>
-      <Header as="h2">Project Details</Header>
+      <Grid columns={2}>
+        <Grid.Row>
+          <Grid.Column>
+            <Header as="h2">Project Details</Header>
+          </Grid.Column>
+          <Grid.Column className={styles.upsert_project}>
+            <CreateUpdateProject mentorspaceId={mentorspaceId} />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
       <Divider />
-      {project ? <ProjectComponent /> : <NoProject />}
-      <CreateUpdateProject mentorspaceId={mentorspaceId} />
+      {projects ? (
+        <ProjectComponent project={projects[mentorspaceId]} />
+      ) : (
+        <NoProject />
+      )}
     </Container>
   );
 };
 
 const mapStateToProps = (state) => ({
-  project: state.firestore.data.project,
+  projects: state.firestore.data.projects,
 });
 
 const mapDispatchToProps = (dispatch) => ({});
