@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import {
+  Button,
   Divider, Header, Icon, Label, List,
 } from 'semantic-ui-react';
 import { compose } from 'redux';
@@ -43,7 +44,13 @@ const MeetingDetail = ({ meetings, history, members }) => {
           }
           <div className={styles.spacer_full} />
           <div className={styles.keep_bot_margin}>
-            <AddEditMeetings mentorspaceId={mentorspaceId} meetingId={meetingId} />
+            <AddEditMeetings
+              mentorspaceId={mentorspaceId}
+              meetingId={meetingId}
+              trigger={(open) => (
+                <Icon name="edit" size="large" onClick={open} />
+              )}
+            />
           </div>
         </div>
         <Divider />
