@@ -15,6 +15,7 @@ const AddEditMeetings = ({
   dispatchAddGroupMeeting,
   members,
   date,
+  trigger,
 }) => {
   const initialState = {
     title: '',
@@ -87,15 +88,7 @@ const AddEditMeetings = ({
 
   return (
     <Modal
-      trigger={(
-          meetingId ? <Icon name="edit" size="large" onClick={openModal} />
-            : (
-              <Button onClick={openModal}>
-                <Icon name="plus" />
-                Meeting
-              </Button>
-            )
-            )}
+      trigger={trigger(openModal)}
       size="small"
       onClose={closeModal}
       open={isModelOpen}
