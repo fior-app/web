@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Button,
-  Divider, Header, Icon, Modal,
+  Divider, Grid, Header, Icon, Message, Modal,
 } from 'semantic-ui-react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -83,19 +83,36 @@ const Calendar = ({ milestones, meetings }) => {
             What do you want to add on
             {' '}
             {state.selectedDate}
+            {'?'}
           </Modal.Header>
           <Modal.Content>
-            <AddEditMilestone
-              mentorspaceId={mentorspaceId}
-              date={state.selectedDate}
-              trigger={(open) => (
-                <Button onClick={open}>
-                  <Icon name="plus" />
-                  Milestone
-                </Button>
-              )}
-            />
-            <AddEditMeetings mentorspaceId={mentorspaceId} date={state.selectedDate} />
+            <div className={styles.modal_row}>
+              <div>
+                <AddEditMilestone
+                  mentorspaceId={mentorspaceId}
+                  date={state.selectedDate}
+                  trigger={(open) => (
+                    <Button inverted color="green" onClick={open} fluid>
+                      <Icon name="plus" />
+                      Milestone
+                    </Button>
+                  )}
+                />
+              </div>
+              <div className={styles.spacer_lg} />
+              <div>
+                <AddEditMeetings
+                  mentorspaceId={mentorspaceId}
+                  date={state.selectedDate}
+                  trigger={(open) => (
+                    <Button inverted color="blue" onClick={open} fluid>
+                      <Icon name="plus" />
+                      Meeting
+                    </Button>
+                  )}
+                />
+              </div>
+            </div>
           </Modal.Content>
         </Modal>
       </>

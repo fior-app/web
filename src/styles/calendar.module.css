@@ -8,8 +8,19 @@
     align-items: center;
 }
 
+.modal_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .spacer_sm {
     width: 1rem;
+}
+
+.spacer_lg {
+    width: 4rem;
 }
 
 .milestones_block {
