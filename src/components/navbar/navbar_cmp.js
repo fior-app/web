@@ -35,29 +35,30 @@ class Navbar extends Component {
               />
             </div>
           </NavLink>
-          <Menu.Menu position="left">
-            <Menu.Item as={NavLink} name="blog" to="/blog">
+          <Menu.Menu position="right" className={styles.menu_items}>
+            <Menu.Item as={NavLink} name="Blog" to="/blog">
               Blog
             </Menu.Item>
-            <Menu.Item as={NavLink} name="forum" to="/forum">
+            <Menu.Item as={NavLink} name="Forum" to="/forum">
               Forum
+            </Menu.Item>
+            <Menu.Item as={NavLink} name="Organizations" to="/forum">
+              Organizations
+            </Menu.Item>
+            <Menu.Item as={NavLink} name="Pricing Plan" to="/forum">
+              Pricing Plan
+            </Menu.Item>
+            <Menu.Item as={NavLink} name="About Us" to="/forum">
+              About Us
             </Menu.Item>
           </Menu.Menu>
           <Menu.Menu position="right">
             {user ? (
               <>
-                {/* <Menu.Item> */}
-                <button className={styles.btn_primary}>Find Mentees</button>
-                {/* </Menu.Item> */}
-                {/* <Menu.Item> */}
-                <button
-                  as={NavLink}
-                  to="/mentors"
-                  className={styles.btn_primary}
-                >
-                  Find Mentees
-                </button>
-                {/* </Menu.Item> */}
+                <Menu.Item>Find Mentees</Menu.Item>
+                <Menu.Item as={NavLink} to="/mentors">
+                  Find Mentors
+                </Menu.Item>
                 <Menu.Item name="notifiations" as={NavLink} to="/notifications">
                   <Icon name="bell" />
                 </Menu.Item>
@@ -89,16 +90,9 @@ class Navbar extends Component {
               </>
             ) : (
               <Menu.Item>
-                {/* <Button as={NavLink} to="/login" color="teal">
-                Sign In
-              </Button> */}
-                <button
-                  as={NavLink}
-                  to="/login"
-                  className={styles.secondary_btn}
-                >
+                <Button as={NavLink} to="/login" color="teal">
                   Sign In
-                </button>
+                </Button>
               </Menu.Item>
             )}
           </Menu.Menu>

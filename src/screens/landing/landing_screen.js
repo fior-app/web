@@ -1,5 +1,6 @@
 import React from "react";
 import "./landing_screen.css";
+import { Button } from "semantic-ui-react";
 
 const LandingScreen = () => (
   <>
@@ -24,9 +25,11 @@ const LandingScreen = () => (
                 <br />
                 Want to become a mentor?
               </pre>
-              <button type="button" className="secondary_btn">
-                Become a member
-              </button>
+              {/* <button type="button" className="secondary_btn"> */}
+              {/* Become a member */}
+              {/* </button> */}
+              {/* TODO */}
+              <button class="ui teal button">Become a member</button>
             </div>
             {/* End of Col Right */}
           </div>
@@ -271,9 +274,10 @@ const LandingScreen = () => (
                     </div>
                   </div>
 
-                  <button type="button" className="secondary_btn">
+                  {/* <button type="button" className="secondary_btn">
                     Choose Plan
-                  </button>
+                  </button> */}
+                  <button class="ui teal button">Choose Plan</button>
                 </div>
                 {/* End of Standard Package */}
 
@@ -312,12 +316,13 @@ const LandingScreen = () => (
                     </div>
                   </div>
 
-                  <button
+                  {/* <button
                     type="button"
                     className="btn-primary choose-plan-button"
                   >
                     Choose Plan
-                  </button>
+                  </button> */}
+                  <button class="ui white button">Choose Plan</button>
                 </div>
               </div>
               {/* End of Pricing Plan Packages */}
@@ -328,9 +333,10 @@ const LandingScreen = () => (
                   <p className="landing_package4_description">
                     Request a custom Organization plan and pay as you go
                   </p>
-                  <button type="button" className="secondary_btn">
-                    Start a plan
-                  </button>
+                  {/* <button type="button" className="secondary_btn"> */}
+                  {/* Start a plan */}
+                  {/* </button> */}
+                  <button class="ui teal button">Start a plan</button>
                 </div>
               </div>
             </div>
