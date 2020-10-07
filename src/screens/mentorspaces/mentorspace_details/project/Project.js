@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 
 import * as styles from '../../../../styles/mentorspace-project.module.css';
 import CreateUpdateProject from './CreateUpdateProject';
+import GithubRepositories from './GithubRepositories';
 
 const NoProject = () => {
   return (
@@ -19,7 +20,7 @@ const NoProject = () => {
 const ProjectComponent = ({ project }) => {
   return (
     <div className={styles.header}>
-      <Image src="https://picsum.photos/120/120" />
+      <Image src="https://picsum.photos/120/120" circular />
       <div>
         <Header as="h1">{project.title}</Header>
         <div className={styles.description}>{project.description}</div>
@@ -45,7 +46,11 @@ const Project = ({ projects }) => {
       </Grid>
       <Divider />
       {projects && projects[mentorspaceId] ? (
-        <ProjectComponent project={projects[mentorspaceId]} />
+        <>
+          <ProjectComponent project={projects[mentorspaceId]} />
+
+          <GithubRepositories mentorspaceId={mentorspaceId} />
+        </>
       ) : (
         <NoProject />
       )}
