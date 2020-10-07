@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import styles from '../../../../styles/calendar.module.css';
 import AddEditMilestone from '../milestones/add_edit_milestone';
 import AddEditMeetings from '../meetings/add_edit_meetings';
+import EmptyPlaceholder from '../../../../components/placeholder/empty_placeholder';
 
 const Calendar = ({ milestones, meetings }) => {
   const initialState = {
@@ -119,7 +120,7 @@ const Calendar = ({ milestones, meetings }) => {
     );
   }
 
-  return <div>loading</div>;
+  return <EmptyPlaceholder text="Add milestones or meetings to generate timeline" />;
 };
 
 const mapStateToProps = (state) => ({

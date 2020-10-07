@@ -11,6 +11,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import styles from '../../../../styles/mentorspace-meetings.module.css';
 import AddEditMeetings from './add_edit_meetings';
+import EmptyPlaceholder from '../../../../components/placeholder/empty_placeholder';
 
 const Meetings = ({ meetings }) => {
   const { mentorspaceId } = useParams();
@@ -65,7 +66,7 @@ const Meetings = ({ meetings }) => {
             );
           })
         ) : (
-          <li>No meetings scheduled yet</li>
+          <EmptyPlaceholder icon="users" text="Discuss what has done and what to do" />
         )}
       </List>
     </>

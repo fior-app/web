@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import moment from 'moment';
-import { Divider, List, Dropdown, Header, Button, Icon, Confirm } from "semantic-ui-react";
+import {
+  Divider, List, Dropdown, Header, Button, Icon, Confirm,
+} from 'semantic-ui-react';
 
-import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import AddEditMilestone from "./add_edit_milestone";
-import MilestoneSubtasks from "./milestone_subtasks";
-import { setMilestoneStateOnFirebase, deleteMilestoneOnFirebase } from "../../../../store/actions/mentorspaceActions";
-import styles from "../../../../styles/mentorspace-milestone.module.css";
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import AddEditMilestone from './add_edit_milestone';
+import MilestoneSubtasks from './milestone_subtasks';
+import { setMilestoneStateOnFirebase, deleteMilestoneOnFirebase } from '../../../../store/actions/mentorspaceActions';
+import styles from '../../../../styles/mentorspace-milestone.module.css';
+import EmptyPlaceholder from '../../../../components/placeholder/empty_placeholder';
 
 const currentDate = new Date();
 
@@ -17,7 +20,7 @@ const Milestones = ({
   milestones,
   isStateSetting,
   dispatchSetMilestoneState,
-  dispatchDeleteMilestone
+  dispatchDeleteMilestone,
 }) => {
   const { mentorspaceId } = useParams();
 
@@ -26,28 +29,31 @@ const Milestones = ({
   const handleDeleteMilestone = (milestoneId) => {
     dispatchDeleteMilestone(milestoneId);
     onCloseDeleteMilestone();
-  }
+  };
 
   const onOpenDeleteMilestone = (milestoneId) => {
     setDeleteId(milestoneId);
-  }
+  };
 
   const onCloseDeleteMilestone = () => {
     setDeleteId(null);
-  }
+  };
 
   return (
     <>
       <div className={styles.milestone_header}>
-        <Header as={"h2"} floated='left'>Milestones</Header>
-        <AddEditMilestone mentorspaceId={mentorspaceId} trigger={(open) => (
-          <Button onClick={open}>
-            <Icon name={'plus'}/>
-            Milestone
-          </Button>
-        )}/>
+        <Header as="h2" floated="left">Milestones</Header>
+        <AddEditMilestone
+          mentorspaceId={mentorspaceId}
+          trigger={(open) => (
+            <Button onClick={open}>
+              <Icon name="plus" />
+              Milestone
+            </Button>
+          )}
+        />
       </div>
-      <Divider/>
+      <Divider />
       <List>
         {milestones ? (
           Object.keys(milestones).map((key) => {
@@ -56,37 +62,43 @@ const Milestones = ({
 
             return milestone ? (
               <List.Item key={key} className={styles.milestone}>
-                <List.Content floated='right'>
+                <List.Content floated="right">
                   {milestone.isComplete ? (
                     <Button
-                      basic icon size={"mini"}
+                      basic
+                      icon
+                      size="mini"
                       loading={isStateSetting}
                       disabled={isStateSetting}
                       onClick={() => dispatchSetMilestoneState(milestone.id, false)}
                     >
-                      <Icon name='wait'/>
+                      <Icon name="wait" />
                       &nbsp;Set as Pending
                     </Button>
                   ) : (
                     <Button
-                      basic icon positive size={"mini"}
+                      basic
+                      icon
+                      positive
+                      size="mini"
                       loading={isStateSetting}
                       disabled={isStateSetting}
                       onClick={() => dispatchSetMilestoneState(milestone.id, true)}
                     >
-                      <Icon name='check'/>
+                      <Icon name="check" />
                       &nbsp;Complete
                     </Button>
                   )}
-                  <Dropdown icon='ellipsis vertical'>
-                    <Dropdown.Menu direction={"left"}>
+                  <Dropdown icon="ellipsis vertical">
+                    <Dropdown.Menu direction="left">
                       <AddEditMilestone
                         mentorspaceId={mentorspaceId}
                         milestone={milestone}
                         trigger={(open) => (
-                          <Dropdown.Item text='Edit' onClick={open}/>
-                        )}/>
-                      <Dropdown.Item text='Delete' onClick={() => onOpenDeleteMilestone(milestone.id)}/>
+                          <Dropdown.Item text="Edit" onClick={open} />
+                        )}
+                      />
+                      <Dropdown.Item text="Delete" onClick={() => onOpenDeleteMilestone(milestone.id)} />
                       <Confirm
                         open={deleteId === milestone.id}
                         onCancel={onCloseDeleteMilestone}
@@ -98,22 +110,28 @@ const Milestones = ({
                   </Dropdown>
                 </List.Content>
                 {!milestone.isComplete ? (
-                  <List.Icon name='wait' color={isOverdue ? "red" : "black"}/>
+                  <List.Icon name="wait" color={isOverdue ? 'red' : 'black'} />
                 ) : (
-                  <List.Icon name='check' color="green"/>
+                  <List.Icon name="check" color="green" />
                 )}
                 <List.Content>
                   <List.Header>{milestone.title}</List.Header>
-                  <List.Description>{isOverdue ? 'Overdue' : 'Due'} on {milestone.due}</List.Description>
-                  {!milestone.isComplete && <MilestoneSubtasks milestone={milestone}/>}
+                  <List.Description>
+                    {isOverdue ? 'Overdue' : 'Due'}
+                    {' '}
+                    on
+                    {' '}
+                    {milestone.due}
+                  </List.Description>
+                  {!milestone.isComplete && <MilestoneSubtasks milestone={milestone} />}
                 </List.Content>
               </List.Item>
             ) : (
-              <div key={key}/>
+              <div key={key} />
             );
           })
         ) : (
-          <li>No messages</li>
+          <EmptyPlaceholder icon="chart line" text="Add milestones and get to your target" />
         )}
       </List>
     </>
@@ -144,5 +162,5 @@ export default compose(
       where: ['groupId', '==', props.match.params.mentorspaceId],
     },
   ]),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(Milestones);

@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import { sendGroupMessageToFirebase } from '../../../../store/actions/mentorspaceActions';
 import Message from './message';
 import styles from '../../../../styles/chat.module.css';
+import EmptyPlaceholder from '../../../../components/placeholder/empty_placeholder';
 
 const GroupChat = ({
   messages,
@@ -74,7 +75,7 @@ const GroupChat = ({
             <div key={index} />
           )))
         ) : (
-          <li>No messages</li>
+          <EmptyPlaceholder icon="hand peace outline" text="Say hi to start a conversation" />
         )}
       </Feed>
       <div className={styles.keep_chat_margin} />
