@@ -69,14 +69,17 @@ class Login extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <Button
-              type="submit"
-              className="signin_btn secondary_btn"
-              disabled={authState.signingIn}
-              loading={authState.signingIn}
-            >
-              Login
-            </Button>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button
+                type="submit"
+                className="signin_btn secondary_btn"
+                disabled={authState.signingIn}
+                loading={authState.signingIn}
+                color="teal"
+              >
+                Login
+              </Button>
+            </div>
           </Form.Field>
         </Form>
         <div className="v-spacer-2" />

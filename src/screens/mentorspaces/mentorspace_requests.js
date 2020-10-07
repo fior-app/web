@@ -1,59 +1,62 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Header, Item, } from 'semantic-ui-react';
+import { Header, Item } from 'semantic-ui-react';
 
 import { getMentorspaceRequests } from '../../store/actions/mentorspaceActions';
-import GroupConfirm from "./mentorspace_details/group_confrim";
+import GroupConfirm from './mentorspace_details/group_confrim';
+import EmptyPlaceholder from '../../components/placeholder/empty_placeholder';
 
 const MentorspaceRequests = ({
   mentorspaces,
   loading,
   error,
-  dispatchGetMentorspaceRequests
+  dispatchGetMentorspaceRequests,
 }) => {
-
   useEffect(() => {
-    dispatchGetMentorspaceRequests()
-  }, [dispatchGetMentorspaceRequests])
+    dispatchGetMentorspaceRequests();
+  }, [dispatchGetMentorspaceRequests]);
 
-  console.log(mentorspaces)
+  console.log(mentorspaces);
 
   return (
     <>
       {loading ? (
         <div>Loading</div>
       ) : (
-        <Item.Group divided>
-          {mentorspaces.map((mentorspaceItem) => (
-            <Item key={mentorspaceItem.id}>
-              <Item.Content>
-                <Item.Header as='a'>{mentorspaceItem.group.name}</Item.Header>
+        mentorspaces.length > 0
 
-                <Item.Meta>
-                    <span>
-                      {mentorspaceItem.permissions.includes("MENTOR") ? 'Mentor' : 'Member'}
-                    </span>
-                </Item.Meta>
-                <Item.Description>{mentorspaceItem.group.description}</Item.Description>
-                {mentorspaceItem.comment && (
-                  <>
-                    <Header as='h4'>
-                      Additional Comments
-                    </Header>
-                    <Item.Description>{mentorspaceItem.comment}</Item.Description>
-                  </>
-                )}
-                <Item.Extra>
-                  <GroupConfirm groupId={mentorspaceItem.group.id}/>
-                </Item.Extra>
-              </Item.Content>
-            </Item>
-          ))}
-        </Item.Group>
+          ? (
+            <Item.Group divided>
+              {mentorspaces.map((mentorspaceItem) => (
+                <Item key={mentorspaceItem.id}>
+                  <Item.Content>
+                    <Item.Header as="a">{mentorspaceItem.group.name}</Item.Header>
+                    <Item.Meta>
+                      <span>
+                        {mentorspaceItem.permissions.includes('MENTOR') ? 'Mentor' : 'Member'}
+                      </span>
+                    </Item.Meta>
+                    <Item.Description>{mentorspaceItem.group.description}</Item.Description>
+                    {mentorspaceItem.comment && (
+                    <>
+                      <Header as="h4">
+                        Additional Comments
+                      </Header>
+                      <Item.Description>{mentorspaceItem.comment}</Item.Description>
+                    </>
+                    )}
+                    <Item.Extra>
+                      <GroupConfirm groupId={mentorspaceItem.group.id} />
+                    </Item.Extra>
+                  </Item.Content>
+                </Item>
+              ))}
+            </Item.Group>
+          ) : <EmptyPlaceholder text="No new notifications" />
       )}
     </>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   loading: state.groups.groupsRequests.loading,
@@ -62,7 +65,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchGetMentorspaceRequests: () => dispatch(getMentorspaceRequests())
+  dispatchGetMentorspaceRequests: () => dispatch(getMentorspaceRequests()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps,)(MentorspaceRequests);
+export default connect(mapStateToProps, mapDispatchToProps)(MentorspaceRequests);

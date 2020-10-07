@@ -28,3 +28,13 @@
 .ques_screen_header{
     margin-bottom: 50px;
 }
+
+.post_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.spacer_min {
+    height: 2rem;
+}

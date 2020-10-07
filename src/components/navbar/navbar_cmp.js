@@ -1,10 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { NavLink, withRouter } from "react-router-dom";
-import { Menu, Image, Dropdown, Icon, Button } from "semantic-ui-react";
-import { signOut } from "../../store/actions/authActions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
+import {
+  Menu, Image, Dropdown, Icon, Button,
+} from 'semantic-ui-react';
+import { signOut } from '../../store/actions/authActions';
 
-import styles from "../../styles/navbar.module.css";
+import styles from '../../styles/navbar.module.css';
 
 class Navbar extends Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class Navbar extends Component {
     // eslint-disable-next-line no-shadow
     const { history, signOut } = this.props;
     signOut();
-    history.push("/");
+    history.push('/');
   };
 
   render() {
@@ -35,26 +37,24 @@ class Navbar extends Component {
               />
             </div>
           </NavLink>
-          <Menu.Menu position="right" className={styles.menu_items}>
-            <Menu.Item as={NavLink} name="Blog" to="/blog">
-              Blog
-            </Menu.Item>
-            <Menu.Item as={NavLink} name="Forum" to="/forum">
-              Forum
-            </Menu.Item>
-            <Menu.Item as={NavLink} name="Organizations" to="/forum">
-              Organizations
-            </Menu.Item>
-            <Menu.Item as={NavLink} name="Pricing Plan" to="/forum">
-              Pricing Plan
-            </Menu.Item>
-            <Menu.Item as={NavLink} name="About Us" to="/forum">
-              About Us
-            </Menu.Item>
-          </Menu.Menu>
           <Menu.Menu position="right">
             {user ? (
               <>
+                <Menu.Item as={NavLink} name="Blog" to="/blog">
+                  Blog
+                </Menu.Item>
+                <Menu.Item as={NavLink} name="Forum" to="/forum">
+                  Forum
+                </Menu.Item>
+                <Menu.Item as={NavLink} name="Organizations" to="/organizations">
+                  Organizations
+                </Menu.Item>
+                <Menu.Item as={NavLink} name="Pricing Plan" to="/pricing">
+                  Pricing Plan
+                </Menu.Item>
+                <Menu.Item as={NavLink} name="About Us" to="/about-us">
+                  About Us
+                </Menu.Item>
                 <Menu.Item>Find Mentees</Menu.Item>
                 <Menu.Item as={NavLink} to="/mentors">
                   Find Mentors
@@ -89,11 +89,28 @@ class Navbar extends Component {
                 </div>
               </>
             ) : (
-              <Menu.Item>
-                <Button as={NavLink} to="/login" color="teal">
-                  Sign In
-                </Button>
-              </Menu.Item>
+              <>
+                <Menu.Item as={NavLink} name="Blog" to="/blog">
+                  Blog
+                </Menu.Item>
+                <Menu.Item as={NavLink} name="Forum" to="/forum">
+                  Forum
+                </Menu.Item>
+                <Menu.Item as={NavLink} name="Organizations" to="/organizations">
+                  Organizations
+                </Menu.Item>
+                <Menu.Item as={NavLink} name="Pricing Plan" to="/pricing">
+                  Pricing Plan
+                </Menu.Item>
+                <Menu.Item as={NavLink} name="About Us" to="/about-us">
+                  About Us
+                </Menu.Item>
+                <Menu.Item>
+                  <Button as={NavLink} to="/login" color="teal">
+                    Sign In
+                  </Button>
+                </Menu.Item>
+              </>
             )}
           </Menu.Menu>
         </Menu>

@@ -114,22 +114,28 @@ class Register extends Component {
               error={!isMatching && 'Passwords should match'}
             />
           </Form.Field>
-          <Form.Checkbox
-            id="tnc"
-            label="I agree to the Terms and Conditions"
-            error={tncDisabled && 'You must agree to the terms and conditions'}
-            onChange={this.toggleTnc}
-            checked={isTnc}
-          />
           <Form.Field>
-            <Button
-              type="submit"
-              className="signin_btn secondary_btn"
-              disabled={auth.isRegistering}
-              loading={auth.isRegistering}
-            >
-              Register
-            </Button>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Form.Checkbox
+                id="tnc"
+                label="I agree to the Terms and Conditions"
+                error={tncDisabled && 'You must agree to the terms and conditions'}
+                onChange={this.toggleTnc}
+                checked={isTnc}
+              />
+            </div>
+          </Form.Field>
+          <Form.Field>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button
+                type="submit"
+                disabled={auth.isRegistering}
+                loading={auth.isRegistering}
+                color="teal"
+              >
+                Register
+              </Button>
+            </div>
           </Form.Field>
         </Form>
         <div className="v-spacer-2" />

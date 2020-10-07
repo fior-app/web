@@ -31,6 +31,7 @@ import EditBlogPost from './screens/blog/edit/edit_blog_post';
 import FindMentorsScreen from './screens/findmentors/findmentors';
 import MentorProfile from './screens/findmentors/mentor_profile';
 import NotificationsScreen from './screens/notifications/notifications_screen';
+import AboutUs from './screens/about/about_us';
 
 class FiorApp extends Component {
   componentDidMount() {
@@ -59,7 +60,8 @@ class FiorApp extends Component {
             minHeight: '100vh',
           }}
         >
-          <Navbar/>
+          <Navbar />
+          <div style={{ height: '4rem' }} />
           <div className="row">
             <Switch>
               <Route exact path="/" component={LandingScreen}/>
@@ -107,12 +109,12 @@ class FiorApp extends Component {
                 path="/notifications"
                 component={NotificationsScreen}
               />
-              <Route exact path="/settings" component={LandingScreen}/>
-              <Route exact path="/pricing" component={PricingScreen}/>
-              <Route exact path="/about" component={LandingScreen}/>
-              <Route path="/profile" component={ProfileScreen}/>
+              <Route exact path="/settings" component={LandingScreen} />
+              <Route exact path="/pricing" component={PricingScreen} />
+              <Route exact path="/about-us" component={AboutUs} />
+              <Route path="/profile" component={ProfileScreen} />
+              <Route exact path="*" component={NotFound} />
               <Route exact path="/dashboard" render={() => (window.location = REACT_APP_ADMIN_URL)}/>
-              <Route exact path="*" component={NotFound}/>
             </Switch>
           </div>
           <Footer/>

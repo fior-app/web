@@ -1,64 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { Container, Header, Form, Card, Image, Grid, Loader } from "semantic-ui-react";
-import Categories from "../../components/categories/categories";
-import { searchMentors } from "../../store/actions/userActions";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import {
+  Container, Header, Form, Card, Image, Grid, Loader,
+} from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import Categories from '../../components/categories/categories';
+import { searchMentors } from '../../store/actions/userActions';
 
 const FindMentorsScreen = ({
   mentorSearch,
   skills,
   dispatchSearchMentors,
 }) => {
-
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
-    dispatchSearchMentors("")
-  }, [dispatchSearchMentors])
+    dispatchSearchMentors('');
+  }, [dispatchSearchMentors]);
 
   const handleOnSearch = () => {
-    dispatchSearchMentors(query)
-  }
+    dispatchSearchMentors(query);
+  };
 
   return (
     <Container>
       <Grid columns="equal">
         <Grid.Column>
-          <Header as={'h1'}>Find Mentors</Header>
-          <Header sub>“It’s been true in my life that when I’ve needed a mentor, the right person shows up.” – Ken
-            Blanchard</Header>
+          <Header as="h1">Find Mentors</Header>
           <Form onSubmit={handleOnSearch}>
             <Form.Group>
               <Form.Input
-                placeholder='Search'
-                name='search'
+                placeholder="Search"
+                name="search"
                 value={query}
                 onChange={(e, { value }) => {
-                  setQuery(value)
+                  setQuery(value);
                 }}
               />
-              <Form.Button content='Search'/>
+              <Form.Button content="Search" />
             </Form.Group>
           </Form>
-          {mentorSearch.isLoading && (<Loader active inline='centered'/>)}
+          {mentorSearch.isLoading && (<Loader active inline="centered" />)}
           <Card.Group>
             {mentorSearch.mentors && mentorSearch.mentors.slice(0, 20).map((mentor) => (
-              <Card key={mentor.id} as={NavLink} to={'/mentors/' + mentor.id}>
+              <Card key={mentor.id} as={NavLink} to={`/mentors/${mentor.id}`}>
                 <Image
                   src="https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg"
                   alt="person"
                   wrapped
                   ui={false}
+                  size="medium"
                 />
                 <Card.Content>
                   <Card.Header>{mentor.name}</Card.Header>
-                  {/*<Card.Meta>*/}
-                  {/*  <span className='date'>Joined in 2015</span>*/}
-                  {/*</Card.Meta>*/}
+                  {/* <Card.Meta> */}
+                  {/*  <span className='date'>Joined in 2015</span> */}
+                  {/* </Card.Meta> */}
                   {mentor.bio && (
-                    <Card.Description>
-                    </Card.Description>
+                    <Card.Description />
                   )}
                 </Card.Content>
               </Card>
@@ -66,12 +65,12 @@ const FindMentorsScreen = ({
           </Card.Group>
         </Grid.Column>
         <Grid.Column width={4}>
-          <Categories categories={skills}/>
+          <Categories categories={skills} />
         </Grid.Column>
       </Grid>
     </Container>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   skills: state.skills.skills.items,
@@ -83,4 +82,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindMentorsScreen);
-
