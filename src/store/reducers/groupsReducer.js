@@ -68,6 +68,10 @@ const initState = {
     loading: false,
     error: null,
   },
+  addingGithubLink: {
+    loading: false,
+    error: null,
+  },
 };
 
 const createGroupStart = (state) => ({
@@ -317,7 +321,7 @@ const updateTasksMilestoneStart = (state, payload) => ({
   updateTasksMilestone: {
     ...state.updateTasksMilestone,
     loading: payload,
-    error: null
+    error: null,
   },
 });
 
@@ -344,7 +348,7 @@ const setStateMilestoneStart = (state, payload) => ({
   setStateMilestone: {
     ...state.setStateMilestone,
     loading: payload,
-    error: null
+    error: null,
   },
 });
 
@@ -371,7 +375,7 @@ const deleteGroupMilestoneStart = (state, payload) => ({
   deleteGroupMilestone: {
     ...state.deleteGroupMilestone,
     loading: payload,
-    error: null
+    error: null,
   },
 });
 
@@ -525,6 +529,31 @@ const upsertProjectDetailsFailed = (state, payload) => ({
   ...state,
   upsertProject: {
     ...state.upsertProject,
+    error: payload,
+    loading: false,
+  },
+});
+
+const addingGithubLinkStart = (state) => ({
+  ...state,
+  addingGithubLink: {
+    ...state.addingGithubLink,
+    loading: true,
+  },
+});
+
+const addingGithubLinkSuccess = (state) => ({
+  ...state,
+  addingGithubLink: {
+    ...state.addingGithubLink,
+    loading: false,
+  },
+});
+
+const addingGithubLinkFailed = (state, payload) => ({
+  ...state,
+  addingGithubLink: {
+    ...state.addingGithubLink,
     error: payload,
     loading: false,
   },
@@ -696,6 +725,15 @@ const groupsReducer = (state = initState, action) => {
 
     case actions.UPDATE_PROJECT_DETAILS_FAILED:
       return upsertProjectDetailsFailed(state, action.payload);
+
+    case actions.UPDATE_PROJECT_GITHUB_LINKS_START:
+      return addingGithubLinkStart(state);
+
+    case actions.UPDATE_PROJECT_GITHUB_LINKS_SUCCESS:
+      return addingGithubLinkSuccess(state);
+
+    case actions.UPDATE_PROJECT_GITHUB_LINKS_FAILED:
+      return addingGithubLinkFailed(state, action.payload);
 
     default:
       return state;

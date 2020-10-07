@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 
 import * as styles from '../../../../styles/mentorspace-project.module.css';
 import CreateUpdateProject from './CreateUpdateProject';
+import GithubRepositories from './GithubRepositories';
 
 const NoProject = () => {
   return (
@@ -45,7 +46,11 @@ const Project = ({ projects }) => {
       </Grid>
       <Divider />
       {projects && projects[mentorspaceId] ? (
-        <ProjectComponent project={projects[mentorspaceId]} />
+        <>
+          <ProjectComponent project={projects[mentorspaceId]} />
+
+          <GithubRepositories mentorspaceId={mentorspaceId} />
+        </>
       ) : (
         <NoProject />
       )}

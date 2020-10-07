@@ -2,6 +2,7 @@ import axios from 'axios';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import * as actions from './types';
 import * as utils from '../../util/utils';
+import { get } from 'lodash';
 // import firebase from "../../services/firebase";
 
 export const getGroupsMe = () => (dispatch) => {
@@ -313,11 +314,12 @@ export const addMilestoneToFirebase = (groupId, title, due, closeModal) => (
     });
 };
 
-export const editMilestoneOnFirebase = (milestoneId, title, due, closeModal) => (
-  dispatch,
-  getState,
-  { getFirestore },
-) => {
+export const editMilestoneOnFirebase = (
+  milestoneId,
+  title,
+  due,
+  closeModal
+) => (dispatch, getState, { getFirestore }) => {
   const firestore = getFirestore();
 
   dispatch({ type: actions.UPSERT_GROUP_MILESTONE_START });
@@ -368,7 +370,7 @@ export const deleteMilestoneOnFirebase = (milestoneId) => (
 export const setMilestoneStateOnFirebase = (milestoneId, state) => (
   dispatch,
   getState,
-  { getFirestore },
+  { getFirestore }
 ) => {
   const firestore = getFirestore();
 
@@ -394,11 +396,14 @@ export const setMilestoneStateOnFirebase = (milestoneId, state) => (
 export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
   dispatch,
   getState,
-  { getFirestore },
+  { getFirestore }
 ) => {
   const firestore = getFirestore();
 
-  dispatch({ type: actions.UPDATE_TASKS_MILESTONE_START, payload: milestoneId });
+  dispatch({
+    type: actions.UPDATE_TASKS_MILESTONE_START,
+    payload: milestoneId,
+  });
 
   firestore
     .collection('milestones')
@@ -473,6 +478,38 @@ export const updateProjectDetails = (projectId, project, cb) => (
     .catch((error) => {
       dispatch({
         type: actions.UPDATE_PROJECT_DETAILS_FAILED,
+        payload: error,
+      });
+    });
+};
+
+export const updateProjectGithubLinks = (projectId, link, cb) => (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+  dispatch({ type: actions.UPDATE_PROJECT_GITHUB_LINKS_START });
+
+  const data = {
+    fullLink: link,
+    owner: link.split('/')[3],
+    repository: link.split('/')[4],
+  };
+
+  firestore
+    .collection('projects')
+    .doc(projectId)
+    .update({
+      githubLinks: firestore.FieldValue.arrayUnion(data),
+    })
+    .then(() => {
+      dispatch({ type: actions.UPDATE_PROJECT_GITHUB_LINKS_SUCCESS });
+      cb();
+    })
+    .catch((error) => {
+      dispatch({
+        type: actions.UPDATE_PROJECT_GITHUB_LINKS_FAILED,
         payload: error,
       });
     });
