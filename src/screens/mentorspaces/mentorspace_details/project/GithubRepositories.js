@@ -19,9 +19,10 @@ export class GithubRepositories extends Component {
           <AddRepository projectId={mentorspaceId} />
         </div>
         <Divider />
-        {this.props.projects[mentorspaceId].githubLinks.map((link, index) => (
-          <GithubLink link={link} key={index} />
-        ))}
+        {this.props.projects[mentorspaceId].githubLinks &&
+          this.props.projects[mentorspaceId].githubLinks.map((link, index) => (
+            <GithubLink link={link} key={index} />
+          ))}
       </div>
     );
   }
