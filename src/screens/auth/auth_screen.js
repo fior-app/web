@@ -1,21 +1,27 @@
-import React from 'react';
-import {
-  Image, Grid, Tab, Container,
-} from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import React from "react";
+import { Image, Grid, Tab, Container } from "semantic-ui-react";
+import { connect } from "react-redux";
 
-import { Redirect } from 'react-router-dom';
-import Register from './components/register';
-import Login from './components/login';
+import { Redirect } from "react-router-dom";
+import Register from "./components/register";
+import Login from "./components/login";
 
 const panes = [
   {
-    menuItem: 'Login',
-    render: () => <Tab.Pane><Login /></Tab.Pane>,
+    menuItem: "Login",
+    render: () => (
+      <Tab.Pane>
+        <Login />
+      </Tab.Pane>
+    ),
   },
   {
-    menuItem: 'Register',
-    render: () => <Tab.Pane><Register /></Tab.Pane>,
+    menuItem: "Register",
+    render: () => (
+      <Tab.Pane>
+        <Register />
+      </Tab.Pane>
+    ),
   },
 ];
 
@@ -26,9 +32,7 @@ const AuthScreen = ({ currentUser }) => {
     <Container>
       <Grid>
         <Grid.Column width={10}>
-          <Image
-            src="https://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg"
-          />
+          <Image src="https://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg" />
         </Grid.Column>
         <Grid.Column width={6}>
           <Tab panes={panes} />
