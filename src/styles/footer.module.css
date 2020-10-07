@@ -6,8 +6,8 @@
   width: 100%;
   left: 0;
   right: 0;
-  top: 0;
-  bottom: 0vw;
+  bottom: 0;
+  position: absolute;
 }
 
 .footer_item_heading {
