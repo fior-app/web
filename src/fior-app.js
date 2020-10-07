@@ -54,7 +54,6 @@ class FiorApp extends Component {
           className="App"
           style={{
             padding: '0 0 300px',
-            background: 'red',
             position: 'relative',
             minHeight: '100vh',
           }}
