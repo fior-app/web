@@ -281,6 +281,47 @@ export const sendGroupMessageToFirebase = (roomId, message) => (
     });
 };
 
+export const sendGroupImageMessageToFirebase = (roomId, files, closeModel, stopLoading) => (
+  dispatch,
+  getState,
+  { getFirestore, getFirebase },
+) => {
+  const firebase = getFirebase();
+
+  const firestore = getFirestore();
+
+  dispatch({ type: actions.SEND_GROUP_MESSAGE_START });
+
+  firebase.uploadFiles('chat', files, 'messages', {
+    metadataFactory: (uploadRes, firebase, metadata, downloadURL) => {
+      const {
+        metadata: { fullPath }
+      } = uploadRes;
+
+      return {
+        fullPath,
+        fileUrl: downloadURL,
+        roomId,
+        sentAt: firestore.FieldValue.serverTimestamp(),
+        sender: getState().auth.currentUser,
+      }
+    },
+  }).then(() => {
+    dispatch({ type: actions.SEND_GROUP_MESSAGE_SUCCESS });
+    dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
+    stopLoading();
+    closeModel();
+  }).catch((error) => {
+    console.log(error);
+    dispatch({
+      type: actions.SEND_GROUP_MESSAGE_FAILED,
+      payload: error,
+    });
+    dispatch({ type: actions.SEND_GROUP_MESSAGE_END });
+    stopLoading();
+  });
+};
+
 export const addMilestoneToFirebase = (groupId, title, due, closeModal) => (
   dispatch,
   getState,

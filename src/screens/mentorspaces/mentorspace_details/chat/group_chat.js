@@ -3,13 +3,15 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import {
-  Form, Header, Input, Feed, Divider,
+  Form, Header, Input, Feed, Divider, Button, Icon,
 } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 
 import { sendGroupMessageToFirebase } from '../../../../store/actions/mentorspaceActions';
 import Message from './message';
 import styles from '../../../../styles/chat.module.css';
+import moment from 'moment';
+import ChatImageUploader from "./chat_image_upload";
 import EmptyPlaceholder from '../../../../components/placeholder/empty_placeholder';
 
 const GroupChat = ({
@@ -41,18 +43,20 @@ const GroupChat = ({
    * */
   const getGroupedMessages = (messages) => {
     const grouped = [];
-    let lastSender = null;
+    let last = null;
 
-    messages.forEach((message) => {
-      if (message.sender.id === lastSender) {
-        grouped[grouped.length - 1].messages.push(message.message);
+    messages.reverse().forEach((message) => {
+      const isQuick = last && last.sentAt && message.sentAt && moment(last.sentAt.toDate()).isAfter(moment(message.sentAt.toDate()).subtract(1, 'minute'));
+
+      if (last && message.sender.id === last.sender.id && isQuick) {
+        grouped[grouped.length - 1].messages.push({ message: message.message, fileUrl: message.fileUrl });
       } else {
         grouped.push({
           ...message,
           message: undefined,
-          messages: [message.message],
+          messages: [{ message: message.message, fileUrl: message.fileUrl }],
         });
-        lastSender = message.sender.id;
+        last = message;
       }
     });
     return grouped;
@@ -66,21 +70,22 @@ const GroupChat = ({
   return (
     <>
       <Header as="h2">Thread</Header>
-      <Divider />
+      <Divider/>
       <Feed>
         {groupedMessages ? (
           groupedMessages.reverse().map((message, index) => (message ? (
-            <Message message={message} key={index} />
+            <Message message={message} key={index}/>
           ) : (
-            <div key={index} />
+            <div key={index}/>
           )))
         ) : (
           <EmptyPlaceholder icon="hand peace outline" text="Say hi to start a conversation" />
         )}
       </Feed>
-      <div className={styles.keep_chat_margin} />
+      <div className={styles.keep_chat_margin}/>
       <Form>
-        <Form.Field>
+        <Form.Field className={styles.sender}>
+          <ChatImageUploader roomId={roomId}/>
           <Input
             type="text"
             id="message"

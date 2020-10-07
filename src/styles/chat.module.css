@@ -1,3 +1,12 @@
 .keep_chat_margin {
     height: 30rem;
 }
+
+.sender {
+    display: flex;
+    flex-direction: row;
+}
+
+.image_upload_container {
+    margin: 0 auto;
+}

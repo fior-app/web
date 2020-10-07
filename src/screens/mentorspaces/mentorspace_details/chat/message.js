@@ -1,11 +1,11 @@
 import React from 'react';
-import { Feed } from 'semantic-ui-react';
+import { Feed, Image } from 'semantic-ui-react';
 import moment from 'moment';
 
 const Message = ({ message }) => (
   <Feed.Event>
     <Feed.Label>
-      <img src="https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg" alt="person" />
+      <img src="https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg" alt="person"/>
     </Feed.Label>
     <Feed.Content>
       <Feed.Summary>
@@ -13,9 +13,16 @@ const Message = ({ message }) => (
         <Feed.Date>{message.sentAt && moment(message.sentAt.toDate()).fromNow()}</Feed.Date>
       </Feed.Summary>
       <Feed.Extra text>
-        {message.messages.reverse().map((message, index) => (
-          <div key={index}>{message}</div>
-        ))}
+        {message.messages.reverse().map((message, index) => {
+            return message.message ? (
+              <div key={index}>{message.message}</div>
+            ) : (
+              <div key={index}>
+                <Image src={message.fileUrl} size='small' bordered rounded/>
+              </div>
+            )
+          }
+        )}
       </Feed.Extra>
       {/* <Feed.Meta> */}
       {/*  <Feed.Like> */}
