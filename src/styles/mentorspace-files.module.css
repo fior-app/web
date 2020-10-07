@@ -1,0 +1,9 @@
+.files {
+    margin-top: 3rem;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.file {
+    min-height: 128px !important;
+}

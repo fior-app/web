@@ -45,7 +45,12 @@ const FindMentorsScreen = ({
           <Card.Group>
             {mentorSearch.mentors && mentorSearch.mentors.slice(0, 20).map((mentor) => (
               <Card key={mentor.id} as={NavLink} to={'/mentors/' + mentor.id}>
-                <Image src='/images/avatar/large/matthew.png' wrapped ui={false}/>
+                <Image
+                  src="https://blog.ramboll.com/fehmarnbelt/wp-content/themes/ramboll2/images/profile-img.jpg"
+                  alt="person"
+                  wrapped
+                  ui={false}
+                />
                 <Card.Content>
                   <Card.Header>{mentor.name}</Card.Header>
                   {/*<Card.Meta>*/}

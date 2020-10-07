@@ -30,7 +30,9 @@ const store = createStore(
 
 const rrfProps = {
   firebase,
-  config: firebaseConfig,
+  config: {
+    useFirestoreForStorageMeta: true,
+  },
   dispatch: store.dispatch,
   createFirestoreInstance,
 };
@@ -38,7 +40,7 @@ const rrfProps = {
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <FiorApp />
+      <FiorApp/>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('root'),
