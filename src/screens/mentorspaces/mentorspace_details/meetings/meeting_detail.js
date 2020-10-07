@@ -8,6 +8,9 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import {
+  FacebookMessengerShareButton, WhatsappShareButton,
+} from 'react-share';
 import styles from '../../../../styles/mentorspace-meetings.module.css';
 import AddEditMeetings from './add_edit_meetings';
 import { updateMeetingLink } from '../../../../store/actions/mentorspaceActions';
@@ -84,7 +87,12 @@ const MeetingDetail = ({
                   <div className={styles.row} style={{ justifyContent: 'space-between' }}>
                     {meeting.meetingId}
                     <div>
-                      <Icon name="copy outline" color="teal" className={styles.icon_copy} />
+                      <FacebookMessengerShareButton appId="sntaoheusnth" redirectUrl="http://localhost:3000" url={meeting.meetingId}>
+                        <Icon name="facebook messenger" color="blue" size="large" />
+                      </FacebookMessengerShareButton>
+                      <WhatsappShareButton url={meeting.meetingId}>
+                        <Icon name="whatsapp" color="teal" size="large" />
+                      </WhatsappShareButton>
                     </div>
                   </div>
                 </Card.Description>
