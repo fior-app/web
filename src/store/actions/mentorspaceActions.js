@@ -3,6 +3,7 @@ import { EventSourcePolyfill } from 'event-source-polyfill';
 import { getFirestore } from 'redux-firestore';
 import * as actions from './types';
 import * as utils from '../../util/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 export const getGroupsMe = () => (dispatch) => {
   dispatch({ type: actions.GET_MY_GROUPS_START });
@@ -293,6 +294,7 @@ export const sendGroupImageMessageToFirebase = (roomId, files, closeModel, stopL
   dispatch({ type: actions.SEND_GROUP_MESSAGE_START });
 
   firebase.uploadFiles('chat', files, 'messages', {
+    name: uuidv4(),
     metadataFactory: (uploadRes, firebase, metadata, downloadURL) => {
       const {
         metadata: { fullPath }

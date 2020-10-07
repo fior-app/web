@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useFirebase } from 'react-redux-firebase'
 import Dropzone from 'react-dropzone'
 import { Button, Form, Header, Icon, Modal, Segment } from "semantic-ui-react";
+import { v4 as uuidv4 } from "uuid";
 
 const filesPath = 'uploadedFiles'
 const dbPath = 'files'
@@ -43,6 +44,7 @@ const Uploader = ({ mentorspaceId }) => {
     console.log(formState);
     setLoading(true);
     return firebase.uploadFiles(filesPath, files, dbPath, {
+      name: uuidv4(),
       metadataFactory: (uploadRes, firebase, metadata, downloadURL) => {
         const {
           metadata: { fullPath }
