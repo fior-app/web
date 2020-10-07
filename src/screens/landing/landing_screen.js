@@ -326,7 +326,7 @@ const LandingScreen = () => (
                   >
                     Choose Plan
                   </button> */}
-                  <button className="ui white button">Choose Plan</button>
+                  <Button>Choose Plan</Button>
                 </div>
               </div>
               {/* End of Pricing Plan Packages */}

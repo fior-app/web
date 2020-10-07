@@ -3,16 +3,13 @@ import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 const PricingScreen = () => {
-  const handlePayment = () => {
-    const win = window.open('https://sandbox.payhere.lk/pay/oe9d9f422', '_blank');
+  const handlePayment = (type) => {
+    const win = window.open(type === 'normal' ? 'https://sandbox.payhere.lk/pay/oe9d9f422' : 'https://sandbox.payhere.lk/pay/o891e7dc7', '_blank');
     win.focus();
   };
 
   return (
     <div className="landing_pricing_plan_bg">
-      <Button onClick={handlePayment}>
-        Select Plan
-      </Button>
       <div className="landing_pricing_plan">
         <h3 className="landing_pricing_main_h3">Pricing Plan</h3>
         <p className="landing_pricing_main_p">
@@ -61,8 +58,7 @@ const PricingScreen = () => {
                 </p>
               </div>
             </div>
-
-            <button type="button" className="secondary_btn">Choose Plan</button>
+            <Button type="button" color="teal" onClick={() => handlePayment('normal')}>Choose Plan</Button>
           </div>
           {/* End of Standard Package */}
 
@@ -98,8 +94,7 @@ const PricingScreen = () => {
                 </p>
               </div>
             </div>
-
-            <button type="button" className="btn-primary">Choose Plan</button>
+            <Button type="button" color="teal" onClick={() => handlePayment('enterprise')}>Choose Plan</Button>
           </div>
         </div>
         {/* End of Pricing Plan Packages */}
@@ -110,7 +105,7 @@ const PricingScreen = () => {
             <p className="landing_package4_description">
               Request a custom Organization plan and pay as you go
             </p>
-            <button type="button" className="secondary_btn">Start a plan</button>
+            <Button type="button" basic>Start a Plan</Button>
           </div>
         </div>
       </div>
