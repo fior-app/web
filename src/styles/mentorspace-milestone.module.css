@@ -3,7 +3,22 @@
     justify-content: space-between;
 }
 
+.milestone {
+    margin-top: 1rem;
+}
+
 .milestone_subtask {
     display: flex;
     flex-direction: row;
+    margin-top: 12px;
+}
+
+.milestone_subtask_loader {
+    padding-left: 8px;
+    display: inline;
+}
+
+.milestone_subtask_add {
+    padding-top: 16px;
+    display: inline-block;
 }

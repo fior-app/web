@@ -55,7 +55,7 @@ const Milestones = ({
             const isOverdue = moment(milestone.due).isBefore(moment(currentDate));
 
             return milestone ? (
-              <List.Item key={key}>
+              <List.Item key={key} className={styles.milestone}>
                 <List.Content floated='right'>
                   {milestone.isComplete ? (
                     <Button
