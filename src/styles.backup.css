@@ -61,7 +61,8 @@ body {
 }
 
 .spacer-1 {
-  width: 1rem; /* 16px */
+  width: 1rem;
+  /* 16px */
 }
 
 .v-spacer {
@@ -101,7 +102,8 @@ body {
 }
 
 .v-spacer-10 {
-  height: 10rem; /* 160px col-lg-1 */
+  height: 10rem;
+  /* 160px col-lg-1 */
 }
 
 .full-loading {
@@ -160,7 +162,7 @@ body {
   outline: 0;
 }
 
-.active > .btn-primary {
+.active>.btn-primary {
   background: linear-gradient(105.32deg, #028090 0%, #02c39a 100%);
 }
 
@@ -194,8 +196,7 @@ body {
 }
 
 .secondary_btn:active {
-  box-shadow: inset 6px 6px 6px #015d69,
-    inset -6px -6px 6px rgba(255, 255, 255, 0.25);
+  box-shadow: inset 6px 6px 6px #015d69, inset -6px -6px 6px rgba(255, 255, 255, 0.25);
 }
 
 .secondary_btn:focus {
@@ -222,8 +223,7 @@ body {
 
 .btn-alternate:hover {
   background: linear-gradient(108.12deg, #028090 0%, #02c39a 100%);
-  box-shadow: inset 6px 6px 12px #015d69,
-    inset -6px -6px 12px rgba(255, 255, 255, 0.25);
+  box-shadow: inset 6px 6px 12px #015d69, inset -6px -6px 12px rgba(255, 255, 255, 0.25);
   border-radius: 12px;
 }
 
@@ -238,7 +238,7 @@ body {
   border-radius: 12px;
 }
 
-.label-primary > span {
+.label-primary>span {
   margin-right: 8px;
 }
 
@@ -282,7 +282,9 @@ body {
 }
 
 /* Should update */
+
 /* Profile picture */
+
 .avatar {
   border-radius: 50%;
   width: 12rem;
@@ -295,7 +297,9 @@ body {
 }
 
 /* Should update */
+
 /* Profile icon */
+
 .avatar-mini {
   border-radius: 50%;
   width: 4rem;
@@ -347,8 +351,7 @@ body {
 
 /* 1920px public nav */
 
-.menu_btn,
-.menu_btn_home {
+.menu_btn, .menu_btn_home {
   position: absolute;
   width: 2.5vw;
   height: 1.5625vw;
@@ -363,8 +366,7 @@ body {
 
 /* 1600px public and private nav */
 
-.menu_btn_public,
-.menu_btn_private {
+.menu_btn_public, .menu_btn_private {
   display: none;
 }
 
@@ -382,8 +384,7 @@ body {
 
 /* 1920px public nav */
 
-.logo,
-.logo_home {
+.logo, .logo_home {
   position: relative;
   width: 9.375vw;
   height: 2.84vw;
@@ -395,8 +396,7 @@ body {
 
 /* 1600px public and private nav */
 
-.logo_private,
-.logo_public {
+.logo_private, .logo_public {
   left: 0;
   display: none;
   visibility: hidden;
@@ -433,8 +433,7 @@ body {
 
 /* 1600 public and private nav */
 
-.search_bar_public,
-.search_bar_private {
+.search_bar_public, .search_bar_private {
   left: 3.65vw;
 }
 
@@ -509,8 +508,7 @@ body {
 
 /* 1600px private nav */
 
-.profile_icon,
-.profile_icon_private {
+.profile_icon, .profile_icon_private {
   position: absolute;
   width: 2.6vw;
   height: 2.6vw;
@@ -529,6 +527,7 @@ body {
 /* } */
 
 /* Side Nav */
+
 .sidenav_container {
   position: sticky;
   width: 320px;
@@ -586,6 +585,7 @@ body {
 }
 
 /* when the navigated page in active */
+
 .sidenav_items a button:on_active {
   background: #becde2;
   box-shadow: -6px -6px 6px #ffffff, 6px 6px 6px #becde2;
@@ -793,8 +793,7 @@ body {
   /* transform: matrix(-1, 0, 0, 1, 0, 0); */
 }
 
-.signin_text,
-.register_text {
+.signin_text, .register_text {
   position: absolute;
   height: 1.04vw;
   top: 2.7vw;
@@ -820,8 +819,7 @@ body {
   left: 20.78vw;
 }
 
-.form_tab_right,
-.form_tab_left {
+.form_tab_right, .form_tab_left {
   position: relative;
   width: 16.82vw;
   height: 5.36vw;
@@ -855,8 +853,7 @@ body {
   left: calc(50% - 23.4vw / 2);
 }
 
-.username,
-.password {
+.username, .password {
   background: #f2f3f7;
   box-shadow: inset -6px -6px 6px #ffffff, inset 6px 6px 6px #becde2;
   border-radius: 8px;
@@ -888,10 +885,7 @@ body {
   justify-content: space-between;
 }
 
-.firstname,
-.lastname,
-.email,
-.password_register {
+.firstname, .lastname, .email, .password_register {
   height: 1.5625vw;
   background: #f2f3f7;
   /* btn inner shadow - light */
@@ -912,8 +906,7 @@ body {
   margin-bottom: 1vw;
 }
 
-.firstname,
-.lastname {
+.firstname, .lastname {
   width: 11.19vw;
 }
 
@@ -942,11 +935,10 @@ body {
   z-index: 0;
 }
 
-.allow_tnc input:checked ~ .checkmark {
+.allow_tnc input:checked~.checkmark {
   position: absolute;
   background: linear-gradient(135deg, #028090 0%, #02c39a 100%);
-  box-shadow: inset 6px 6px 6px #015d69,
-    inset -6px -6px 6px rgba(255, 255, 255, 0.25);
+  box-shadow: inset 6px 6px 6px #015d69, inset -6px -6px 6px rgba(255, 255, 255, 0.25);
 }
 
 .checkmark:after {
@@ -955,7 +947,7 @@ body {
   display: none;
 }
 
-.allow_tnc input:checked ~ .checkmark:after {
+.allow_tnc input:checked~.checkmark:after {
   position: absolute;
   display: block;
 }
@@ -993,19 +985,16 @@ body {
   margin: 1rem auto 0 auto;
 }
 
-.google_signin_btn p,
-.linkedin_signin_btn p {
+.google_signin_btn p, .linkedin_signin_btn p {
   margin-left: 2.5vw;
 }
 
-.google_signin_btn .google_icon,
-.linkedin_signin_btn .linkedin_icon {
+.google_signin_btn .google_icon, .linkedin_signin_btn .linkedin_icon {
   width: 1.35vw;
   height: 1.35vw;
 }
 
-.google_signin_btn,
-.linkedin_signin_btn {
+.google_signin_btn, .linkedin_signin_btn {
   display: flex;
   flex-direction: row;
   padding: 0.52vw 1.04vw;
@@ -1027,12 +1016,12 @@ body {
   margin: 1rem auto 0 auto;
 }
 
-.google_signin_btn:hover,
-.linkedin_signin_btn:hover {
+.google_signin_btn:hover, .linkedin_signin_btn:hover {
   box-shadow: inset -6px -6px 6px #ffffff, inset 6px 6px 6px #becde2;
 }
 
 /*blog view catergory title*/
+
 .blog_view_catergory_title {
   position: relative;
   width: 6;
@@ -1054,7 +1043,9 @@ body {
   align-self: flex-start;
   margin: 0px 1.8vw;
 }
+
 /*blog view catergory box*/
+
 .blg_view_catergory_type_box1 {
   position: absolute;
   width: 10vw;
@@ -1074,6 +1065,7 @@ body {
 }
 
 /*blog view catergory type*/
+
 .blog_view_catergory_type {
   position: absolute;
   width: 7.8vw;
@@ -1092,7 +1084,9 @@ body {
   /* font dark */
   color: #3b5266;
 }
+
 /*blog view catergory name*/
+
 .blog_view_catergory_name {
   position: absolute;
   width: 7.96vw;
@@ -1111,6 +1105,7 @@ body {
 }
 
 /*blog view resent posts box*/
+
 .blog_view_resent_posts {
   display: flex;
   flex-direction: column;
@@ -1147,6 +1142,7 @@ body {
   align-self: flex-start;
   margin: 0px 35px;
 }
+
 .blog_view_resent_box {
   display: flex;
   flex-direction: row;
@@ -1167,6 +1163,7 @@ body {
   align-self: flex-start;
   margin: 0px 35px;
 }
+
 .blog_view_resent_detail {
   position: static;
   width: 12.08vw;
@@ -1191,6 +1188,7 @@ body {
 }
 
 /*.... blog view....*/
+
 .blog_post_title {
   position: absolute;
   width: 54.68vw;
@@ -1213,7 +1211,9 @@ body {
   align-self: center;
   margin: 0px 60px;
 }
+
 /*blog image*/
+
 .blog_view_image {
   position: absolute;
   width: 54.68vw;
@@ -1228,6 +1228,7 @@ body {
 }
 
 /*blog content*/
+
 .blog_content_detail {
   position: absolute;
   width: 54.68vw;
@@ -1251,6 +1252,7 @@ body {
 }
 
 /*blog view resent catergory*/
+
 .blog_view {
   display: flex;
   flex-direction: column;
@@ -1265,7 +1267,9 @@ body {
   box-shadow: -6px -6px 6px #ffffff, 6px 6px 6px #becde2;
   border-radius: 2.08vw;
 }
+
 /*blog view catergory title*/
+
 .blog_view_catergory_title {
   position: relative;
   width: 6;
@@ -1287,7 +1291,9 @@ body {
   align-self: flex-start;
   margin: 0px 1.8vw;
 }
+
 /*blog view catergory box*/
+
 .blg_view_catergory_type_box1 {
   position: absolute;
   width: 10vw;
@@ -1307,6 +1313,7 @@ body {
 }
 
 /*blog view catergory type*/
+
 .blog_view_catergory_type {
   position: absolute;
   width: 7.8vw;
@@ -1325,7 +1332,9 @@ body {
   /* font dark */
   color: #3b5266;
 }
+
 /*blog view catergory name*/
+
 .blog_view_catergory_name {
   position: absolute;
   width: 7.96vw;
@@ -1344,6 +1353,7 @@ body {
 }
 
 /*blog view resent posts box*/
+
 .blog_view_resent_posts {
   display: flex;
   flex-direction: column;
@@ -1380,6 +1390,7 @@ body {
   align-self: flex-start;
   margin: 0px 35px;
 }
+
 .blog_view_resent_box {
   display: flex;
   flex-direction: row;
@@ -1400,6 +1411,7 @@ body {
   align-self: flex-start;
   margin: 0px 35px;
 }
+
 .blog_view_resent_detail {
   position: static;
   width: 12.08vw;
@@ -1435,6 +1447,7 @@ body {
 }
 
 /*bolg icons*/
+
 .forumicon {
   position: absolute;
   height: 10vw;
@@ -1442,7 +1455,9 @@ body {
   right: 78.43vw;
   top: 1.34vw;
 }
+
 /*small square*/
+
 .forumicon2 {
   position: absolute;
   height: 5.8vw;
@@ -1450,7 +1465,9 @@ body {
   right: 94.42vw;
   top: 24.02vw;
 }
+
 /*small circle*/
+
 .forumicon2 {
   position: absolute;
   height: 386px;
@@ -1458,7 +1475,9 @@ body {
   right: 479px;
   top: 267px;
 }
+
 /*blog text*/
+
 .forumicon5 {
   position: absolute;
   height: 17.97vw;
@@ -1466,7 +1485,9 @@ body {
   right: 74.01vw;
   top: 8.04vw;
 }
+
 /*large circle*/
+
 .forumicon6 {
   position: absolute;
   height: 9.01vw;
@@ -1474,7 +1495,9 @@ body {
   right: 20.57vw;
   top: -2vw;
 }
+
 /*note book*/
+
 .forumicon4 {
   position: absolute;
   height: 9.37vw;
@@ -1482,7 +1505,9 @@ body {
   right: 6.5vw;
   top: 12.17vw;
 }
+
 /*cross*/
+
 .forumicon3 {
   position: absolute;
   height: 5.57vw;
@@ -1523,6 +1548,7 @@ body {
   box-shadow: -6px -6px 6px #ffffff, 6px 6px 6px #becde2;
   border-radius: 2.08vw;
 }
+
 .forum_card2 {
   display: flex;
   flex-direction: column;
@@ -1538,6 +1564,7 @@ body {
   box-shadow: -6px -6px 6px #ffffff, 6px 6px 6px #becde2;
   border-radius: 2.08vw;
 }
+
 .forum_card3 {
   display: flex;
   flex-direction: column;
@@ -1553,6 +1580,7 @@ body {
   box-shadow: -6px -6px 6px #ffffff, 6px 6px 6px #becde2;
   border-radius: 2.08vw;
 }
+
 .forum_card4 {
   display: flex;
   flex-direction: column;
@@ -1614,22 +1642,16 @@ body {
   left: 37.8125vw;
   right: 1.822917vw;
   top: 8.90625vw;
-
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 0.833333vw;
   line-height: 0.989583vw;
   /* identical to box height */
-
   text-align: right;
-
   /* font dark */
-
   color: #3b5266;
-
   /* Inside Auto Layout */
-
   flex: none;
   order: 3;
   align-self: flex-end;
@@ -1674,6 +1696,7 @@ body {
 }
 
 /*resent post title*/
+
 .recent_question_title {
   display: flex;
   flex-direction: row;
@@ -1733,6 +1756,7 @@ body {
   align-self: flex-start;
   margin: 0px 1.8vw;
 }
+
 .recent_question_title4 {
   display: flex;
   flex-direction: row;
@@ -1764,6 +1788,7 @@ body {
   box-shadow: inset -6px -6px 6px #ffffff, inset 6px 6px 6px #becde2;
   border-radius: 20px;
 }
+
 .catergory_types3 {
   position: absolute;
   width: 10.05vw;
@@ -1775,6 +1800,7 @@ body {
   box-shadow: inset -6px -6px 6px #ffffff, inset 6px 6px 6px #becde2;
   border-radius: 20px;
 }
+
 .catergory_types4 {
   position: absolute;
   width: 10.05vw;
@@ -1788,6 +1814,7 @@ body {
 }
 
 /*Page switching buttons */
+
 .previous_page {
   width: 32px;
   height: 32px;
@@ -1795,7 +1822,6 @@ body {
   top: 32px;
   border-radius: 50px;
   /* bg medium white */
-
   background: #f2f3f7;
   transform: rotate(180deg);
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  Divider, Header, Label, List,
+  Button,
+  Divider, Header, Icon, Label, List,
 } from 'semantic-ui-react';
 
 import { NavLink, useParams } from 'react-router-dom';
@@ -20,7 +21,15 @@ const Meetings = ({ meetings }) => {
     <>
       <div className={styles.milestone_header}>
         <Header as="h2" floated="left">Meetings</Header>
-        <AddEditMeetings mentorspaceId={mentorspaceId} />
+        <AddEditMeetings
+          mentorspaceId={mentorspaceId}
+          trigger={(open) => (
+            <Button onClick={open}>
+              <Icon name="plus" />
+              Meeting
+            </Button>
+          )}
+        />
       </div>
       <Divider />
       <List animated selection divided>

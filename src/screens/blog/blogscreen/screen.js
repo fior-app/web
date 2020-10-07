@@ -8,29 +8,24 @@ const BlogScreen = ({
   skills,
   dispatchGetPosts,
 }) => {
-  const initialState = {
-    activePage: 1,
-    limit: 5,
-  };
+      const initialState={
+          activePage: 1,
+          limit: 5,
 
-  const [blogState, setBlogState] = useState(initialState);
+      };
+  }
 
+  const [blogState, setBlogState]= useState(initialState);
+  const [blogState, setBlogState]= useState(initialState);
   
 
-  useEffect(() => {
-    dispatchGetPosts();
-  }, [dispatchGetPosts]);
-
-  const handlePaginationChange = (e, { activePage }) => setBlogState((state) => ({
-    ...state,
-    activePage,
-  }));
-
+  
   const getPageStart = () => blogState.limit * (blogState.activePage - 1);
   const getPageEnd = () => getPageStart() + blogState.limit;
   
   return (
     <Container>
+
       <Grid columns="equal">
         <Grid.Column>
           <Grid.Row>
@@ -42,11 +37,6 @@ const BlogScreen = ({
               totalPages={posts.length / 5}
             />
           </Grid.Row>
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <Button as={NavLink} to="/blog/edit" primary>Create Post</Button>
-          <Categories categories={skills} />
-          <RecentPosts posts={recentPosts} />
         </Grid.Column>
       </Grid>
     </Container>
@@ -63,5 +53,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchGetPosts: () => dispatch(getPosts()),
 });
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogScreen);

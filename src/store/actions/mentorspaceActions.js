@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { EventSourcePolyfill } from 'event-source-polyfill';
+import { getFirestore } from 'redux-firestore';
 import * as actions from './types';
 import * as utils from '../../util/utils';
-import { get } from 'lodash';
-// import firebase from "../../services/firebase";
 
 export const getGroupsMe = () => (dispatch) => {
   dispatch({ type: actions.GET_MY_GROUPS_START });
@@ -95,7 +94,7 @@ export const getGroupMessagesStream = (roomId) => (dispatch) => {
       headers: {
         Authorization: `Bearer ${utils.getWithExpiry('token')}`,
       },
-    }
+    },
   );
 
   es.onmessage = (res) => {
@@ -195,7 +194,7 @@ export const inviteMember = (
   groupId,
   email,
   isMentor = false,
-  comment = null
+  comment = null,
 ) => (dispatch) => {
   dispatch({ type: actions.INVITE_MEMBER_START });
   axios
@@ -255,7 +254,7 @@ export const changeGroupState = (groupId, state) => (dispatch) => {
 export const sendGroupMessageToFirebase = (roomId, message) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -285,7 +284,7 @@ export const sendGroupMessageToFirebase = (roomId, message) => (
 export const addMilestoneToFirebase = (groupId, title, due, closeModal) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -318,7 +317,7 @@ export const editMilestoneOnFirebase = (
   milestoneId,
   title,
   due,
-  closeModal
+  closeModal,
 ) => (dispatch, getState, { getFirestore }) => {
   const firestore = getFirestore();
 
@@ -346,7 +345,7 @@ export const editMilestoneOnFirebase = (
 export const deleteMilestoneOnFirebase = (milestoneId) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -370,7 +369,7 @@ export const deleteMilestoneOnFirebase = (milestoneId) => (
 export const setMilestoneStateOnFirebase = (milestoneId, state) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -396,7 +395,7 @@ export const setMilestoneStateOnFirebase = (milestoneId, state) => (
 export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -425,7 +424,7 @@ export const updateTasksMilestoneOnFirebase = (milestoneId, tasks) => (
 export const addMeetingToFirebase = (groupId, data, closeModal) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
 
@@ -454,7 +453,7 @@ export const addMeetingToFirebase = (groupId, data, closeModal) => (
 export const updateProjectDetails = (projectId, project, cb) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
   dispatch({ type: actions.UPDATE_PROJECT_DETAILS_START });
@@ -469,7 +468,7 @@ export const updateProjectDetails = (projectId, project, cb) => (
         createdAt: firestore.FieldValue.serverTimestamp(),
         createdBy: getState().auth.currentUser,
       },
-      { merge: true }
+      { merge: true },
     )
     .then(() => {
       dispatch({ type: actions.UPDATE_PROJECT_DETAILS_SUCCESS });
@@ -486,7 +485,7 @@ export const updateProjectDetails = (projectId, project, cb) => (
 export const updateProjectGithubLinks = (projectId, link, cb) => (
   dispatch,
   getState,
-  { getFirestore }
+  { getFirestore },
 ) => {
   const firestore = getFirestore();
   dispatch({ type: actions.UPDATE_PROJECT_GITHUB_LINKS_START });
@@ -513,4 +512,21 @@ export const updateProjectGithubLinks = (projectId, link, cb) => (
         payload: error,
       });
     });
+};
+
+export const updateMeetingLink = (id, type, cb) => (dispatch, getState, { getFirestore }) => {
+  const firestore = getFirestore();
+
+  const meetingId = type === 'meet' ? 'fake_meet_id' : 'fake_zoom_id';
+
+  setTimeout(() => {
+    firestore
+      .collection('meetings')
+      .doc(id)
+      .update({ meetingId })
+      .then(() => {
+        cb();
+      })
+      .catch((err) => console.log(err));
+  }, 2000);
 };
