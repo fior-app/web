@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./landing_screen.module.css";
-import { Button } from "semantic-ui-react";
+import React from 'react';
+import { Button } from 'semantic-ui-react';
+import styles from './landing_screen.module.css';
 
 const LandingScreen = () => (
   <>
@@ -11,7 +11,7 @@ const LandingScreen = () => (
           <div className={styles.landing_content}>
             {/* Bg Doodle */}
             <img
-              src="../../assets/img/landing_vector.svg"
+              src="../../assets/img/landing_vector.png"
               alt="Mentoring Platform For Computer Science Students"
               className={styles.landing_content_left}
             />
@@ -29,7 +29,7 @@ const LandingScreen = () => (
               {/* Become a member */}
               {/* </button> */}
               {/* TODO */}
-              <button class="ui teal button">Become a member</button>
+              <button className="ui teal button">Become a member</button>
             </div>
             {/* End of Col Right */}
           </div>
@@ -281,7 +281,7 @@ const LandingScreen = () => (
                   {/* <button type="button" className="secondary_btn">
                     Choose Plan
                   </button> */}
-                  <button class="ui teal button">Choose Plan</button>
+                  <button className="ui teal button">Choose Plan</button>
                 </div>
                 {/* End of Standard Package */}
 
@@ -326,7 +326,7 @@ const LandingScreen = () => (
                   >
                     Choose Plan
                   </button> */}
-                  <button class="ui white button">Choose Plan</button>
+                  <button className="ui white button">Choose Plan</button>
                 </div>
               </div>
               {/* End of Pricing Plan Packages */}
@@ -340,7 +340,7 @@ const LandingScreen = () => (
                   {/* <button type="button" className="secondary_btn"> */}
                   {/* Start a plan */}
                   {/* </button> */}
-                  <button class="ui teal button">Start a plan</button>
+                  <button className="ui teal button">Start a plan</button>
                 </div>
               </div>
             </div>
