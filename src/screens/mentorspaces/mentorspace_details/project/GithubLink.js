@@ -119,6 +119,28 @@ export class GithubLink extends Component {
                   })}
               />
             )}
+            {issues &&
+              issues.filter((issue) => issue.pull_request !== undefined)
+                .length !== 0 && (
+                <>
+                  <Header as="h3">Pull requests</Header>
+                  <Divider />
+                </>
+              )}
+            {issues && (
+              <Card.Group
+                items={issues
+                  .filter((issue) => issue.pull_request !== undefined)
+                  .map((issue) => {
+                    return {
+                      header: issue.title,
+                      description: issue.body,
+                      meta: `${issue.user.login} wants to merge`,
+                      href: issue.pull_request.html_url,
+                    };
+                  })}
+              />
+            )}
           </div>
         ) : null}
         <Header as="h3">Contributors</Header>
