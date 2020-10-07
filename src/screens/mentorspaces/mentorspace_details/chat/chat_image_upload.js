@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import Dropzone from 'react-dropzone'
-import { Button, Form, Header, Icon, Image, Modal, Segment } from "semantic-ui-react";
+import { Button, Header, Icon, Image, Modal, Segment } from "semantic-ui-react";
 import { sendGroupImageMessageToFirebase } from "../../../../store/actions/mentorspaceActions";
 import { connect } from "react-redux";
 import styles from '../../../../styles/chat.module.css';
@@ -82,7 +82,7 @@ const ChatImageUploader = ({
             </Dropzone>
           )}
         </Modal.Content>
-        <Modal.Actions>
+        <Modal.Content>
           <Button
             loading={loading}
             disabled={imageFile === null}
@@ -91,13 +91,13 @@ const ChatImageUploader = ({
           >
             Send
           </Button>
-        </Modal.Actions>
+        </Modal.Content>
       </Modal>
     </div>
   )
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchGroupImageMessageToFirebase: (roomId, files, closeModel, stopLoading) => {

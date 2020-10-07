@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useParams, Route, Redirect, NavLink } from 'react-router-dom';
+import { useParams, Route, NavLink } from 'react-router-dom';
 import {
   Container,
   Grid,
   Menu,
   Header,
-  Label,
   Button,
   Icon,
 } from 'semantic-ui-react';
@@ -54,7 +53,6 @@ const MentorspaceScreen = ({ loading, member, error, dispatchGetGroup }) => {
                   to={`/mentorspaces/${mentorspaceId}/room/${member.group.chatroom.id}`}
                   name="thread"
                 >
-                  <Label color="teal">1</Label>
                   Thread
                 </Menu.Item>
 

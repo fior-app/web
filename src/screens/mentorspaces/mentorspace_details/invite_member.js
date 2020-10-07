@@ -25,11 +25,11 @@ class InviteMember extends Component {
   };
 
   showModal = () => {
-    this.setState((state) => ({...state, isOpen: true}))
+    this.setState((state) => ({ ...state, isOpen: true }))
   }
 
   closeModal = () => {
-    this.setState((state) => ({...state, isOpen: false}))
+    this.setState((state) => ({ ...state, isOpen: false }))
   }
 
   render() {
@@ -74,19 +74,18 @@ class InviteMember extends Component {
                   </div>
                 ) : null}
               </Form.Field>
-
-              <div className="row end">
-                <button
-                  type="button"
-                  className="btn-alternate"
-                  disabled={loading}
-                  onClick={this.handleInviteMember}
-                >
-                  Invite
-                </button>
-              </div>
             </Form>
           </Modal.Description>
+        </Modal.Content>
+        <Modal.Content>
+          <Button
+            loading={loading}
+            disabled={loading}
+            primary
+            onClick={this.handleInviteMember}
+          >
+            Invite
+          </Button>
         </Modal.Content>
       </Modal>
     );
