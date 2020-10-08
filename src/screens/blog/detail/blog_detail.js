@@ -41,14 +41,10 @@ const BlogDetail = (
             <Grid.Column>
               <Header as="h2">{post.title}</Header>
               <Image src="../../assets/vectors/blogviewicon.svg" alt=""/>
-              <p>{post.text}</p>
-              <div className="comments_section">
-                <Header as="h4">Comments</Header>
-                <button type="button">Add Comment</button>
-              </div>
+              <pre>{post.text}</pre>
             </Grid.Column>
             <Grid.Column width={4}>
-              {post.createdBy.id === user.id && (
+              {user && post.createdBy.id === user.id && (
                 <>
                   <Button as={NavLink} to={`/blog/edit/${post.id}`} primary>Edit Post</Button>
                   <Button onClick={handleDelete} negative>Delete Post</Button>

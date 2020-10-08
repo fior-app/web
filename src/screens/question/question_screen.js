@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Container, Grid, Button, Pagination, Card, Feed, Header,
+  Container, Grid, Button, Label, Card, Feed, Header,
 } from 'semantic-ui-react';
 import { getQuestions } from '../../store/actions/questionActions';
 import styles from '../../styles/question.module.css';
@@ -14,16 +14,11 @@ class QuestionScreen extends Component {
   }
 
   render() {
-    const { questions } = this.props;
+    const { questions, user, skills } = this.props;
     console.log(questions);
 
     return (
       <Container>
-        <div className={styles.ques_screen_header}>
-          <Header as="h2">
-            Question Forum
-          </Header>
-        </div>
         <Grid>
           <Grid.Column width={10}>
             {questions && questions.map((question) => (
@@ -40,49 +35,28 @@ class QuestionScreen extends Component {
               </div>
             ))}
           </Grid.Column>
-          <Grid.Column width={1} />
+          <Grid.Column width={1}/>
           <div className={styles.ques_category}>
             <Grid.Column width={5}>
-              <Grid.Row top="2">
-                <Button onClick={this.handleQuestionCreate} color="teal">
-                  Add Question
-                </Button>
-              </Grid.Row>
-              <div className={styles.spacer_min} />
+              {user && (
+                <Grid.Row top="2">
+                  <Button onClick={this.handleQuestionCreate} color="teal">
+                    Add Question
+                  </Button>
+                </Grid.Row>
+              )}
+              <div className={styles.spacer_min}/>
               <Grid.Row>
                 <Card>
                   <Card.Content>
                     <Card.Header>Categories</Card.Header>
                   </Card.Content>
                   <Card.Content>
-                    {/* {categories.map((category) => (
-              <Label key={category.id}>
-                {category.name}
-              </Label>
-            ))} */}
-                  </Card.Content>
-                </Card>
-                <div className={styles.spacer_min} />
-                <Card>
-                  <Card.Content>
-                    <Card.Header>Recent Posts</Card.Header>
-                  </Card.Content>
-                  <Card.Content>
-                    {/* <Feed>
-              {posts.map((post) => (
-                <Feed.Event key={post.id}>
-                  <Feed.Content>
-                    <Feed.Date content={post.date} />
-                    <Feed.Summary>
-                      {post.title}
-                    </Feed.Summary>
-                    <Feed.Extra text>
-                       Ours is a life of constant reruns.
-                    </Feed.Extra>
-                  </Feed.Content>
-                </Feed.Event>
-              ))}
-              </Feed> */}
+                    {skills.map((category) => (
+                      <Label key={category.id}>
+                        {category.name}
+                      </Label>
+                    ))}
                   </Card.Content>
                 </Card>
               </Grid.Row>
@@ -108,6 +82,8 @@ class QuestionScreen extends Component {
 
 const mapStateToProps = (state) => ({
   questions: state.question.questions,
+  user: state.auth.currentUser,
+  skills: state.skills.skills.items,
 });
 
 const mapDispatchToProps = (dispatch) => ({
