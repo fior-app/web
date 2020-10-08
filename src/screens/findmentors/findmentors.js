@@ -61,7 +61,7 @@ const FindMentorsScreen = ({
             ))}
           </Card.Group>
         </Grid.Column>
-        <Grid.Column width={4}>
+        <Grid.Column width={5}>
           <Categories categories={skills} />
         </Grid.Column>
       </Grid>

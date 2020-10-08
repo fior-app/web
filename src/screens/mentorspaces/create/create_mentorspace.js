@@ -52,15 +52,6 @@ class CreateMentorspace extends Component {
               onChange={this.handleOnChangeInput}
             />
           </Form.Field>
-          <Form.Field>
-            <input
-              type="text"
-              id="icon"
-              placeholder="Icon"
-              value={icon}
-              onChange={this.handleOnChangeInput}
-            />
-          </Form.Field>
 
           {error && JSON.stringify(error)}
           {loading ? (
