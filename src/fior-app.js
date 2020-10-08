@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { REACT_APP_ADMIN_URL } from './config/config';
 
 import { connect } from 'react-redux';
 import { Image } from 'semantic-ui-react';
+import { REACT_APP_ADMIN_URL } from './config/config';
 import LandingScreen from './screens/landing/landing_screen';
 import Navbar from './components/navbar/navbar_cmp';
 import AuthScreen from './screens/auth/auth_screen';
@@ -32,6 +32,8 @@ import FindMentorsScreen from './screens/findmentors/findmentors';
 import MentorProfile from './screens/findmentors/mentor_profile';
 import NotificationsScreen from './screens/notifications/notifications_screen';
 import AboutUs from './screens/about/about_us';
+import PaymentRedirect from './screens/pricing/redirect';
+import BaseLoading from './components/loading/loading';
 
 class FiorApp extends Component {
   componentDidMount() {
@@ -40,11 +42,7 @@ class FiorApp extends Component {
   }
 
   renderFullLoading = () => (
-    <div className="row center">
-      <div className="full-loading">
-        <Image src="assets/svg/loading-full.svg" size="small"/>
-      </div>
-    </div>
+    <BaseLoading />
   );
 
   render() {
@@ -64,7 +62,7 @@ class FiorApp extends Component {
           <div style={{ height: '4rem' }} />
           <div className="row">
             <Switch>
-              <Route exact path="/" component={LandingScreen}/>
+              <Route exact path="/" component={LandingScreen} />
               <Route
                 exact
                 path="/auth/linkedin/callback"
@@ -84,8 +82,8 @@ class FiorApp extends Component {
                 path="/mentorspaces/:mentorspaceId"
                 component={AuthRequire(MentorspaceScreen)}
               />
-              <Route exact path="/orgs" component={LandingScreen}/>
-              <Route exact path="/forum" component={QuestionScreen}/>
+              <Route exact path="/orgs" component={LandingScreen} />
+              <Route exact path="/forum" component={QuestionScreen} />
               <Route
                 exact
                 path="/question-forum/create"
@@ -96,14 +94,14 @@ class FiorApp extends Component {
                 path="/question-forum/:questionId"
                 component={ViewQuestion}
               />
-              <Route exact path="/blog" component={BlogScreen}/>
-              <Route exact path="/blog/edit" component={EditBlogPost}/>
-              <Route exact path="/blog/edit/:postId" component={EditBlogPost}/>
-              <Route exact path="/blog/:postId" component={BlogDetail}/>
-              <Route exact path="/myposts" component={MyPostsScreen}/>
-              <Route exact path="/mentors" component={FindMentorsScreen}/>
-              <Route exact path="/mentors/:userId" component={MentorProfile}/>
-              <Route exact path="/users" component={LandingScreen}/>
+              <Route exact path="/blog" component={BlogScreen} />
+              <Route exact path="/blog/edit" component={EditBlogPost} />
+              <Route exact path="/blog/edit/:postId" component={EditBlogPost} />
+              <Route exact path="/blog/:postId" component={BlogDetail} />
+              <Route exact path="/myposts" component={MyPostsScreen} />
+              <Route exact path="/mentors" component={FindMentorsScreen} />
+              <Route exact path="/mentors/:userId" component={MentorProfile} />
+              <Route exact path="/users" component={LandingScreen} />
               <Route
                 exact
                 path="/notifications"
@@ -113,11 +111,12 @@ class FiorApp extends Component {
               <Route exact path="/pricing" component={PricingScreen} />
               <Route exact path="/about-us" component={AboutUs} />
               <Route path="/profile" component={ProfileScreen} />
+              <Route path="/payment-redirect/:response" component={PaymentRedirect} />
+              <Route exact path="/dashboard" render={() => (window.location = REACT_APP_ADMIN_URL)} />
               <Route exact path="*" component={NotFound} />
-              <Route exact path="/dashboard" render={() => (window.location = REACT_APP_ADMIN_URL)}/>
             </Switch>
           </div>
-          <Footer/>
+          <Footer />
         </div>
       </BrowserRouter>
     );
