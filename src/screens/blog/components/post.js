@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Header, Image } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 const Post = ({ post }) => (
   <div style={{ marginBottom: '2rem' }}>

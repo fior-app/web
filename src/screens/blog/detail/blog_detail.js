@@ -37,28 +37,36 @@ const BlogDetail = (
         </Grid.Row>
 
         {!loading && post
-          ? (<>
-            <Grid.Column>
-              <Header as="h2">{post.title}</Header>
-              <Image src="../../assets/vectors/blogviewicon.svg" alt=""/>
-              <pre>{post.text}</pre>
-            </Grid.Column>
-            <Grid.Column width={4}>
-              {user && post.createdBy.id === user.id && (
+          ? (
+            <>
+              <Grid.Column>
+                <Header as="h2">{post.title}</Header>
+                <div style={{
+                  color: '#3b5266',
+                  textAlign: 'justify',
+                  textJustify: 'inter-word',
+                }}
+                >
+                  {post.text}
+                </div>
+              </Grid.Column>
+              <Grid.Column width={4}>
+                {user && post.createdBy.id === user.id && (
                 <>
                   <Button as={NavLink} to={`/blog/edit/${post.id}`} primary>Edit Post</Button>
                   <Button onClick={handleDelete} negative>Delete Post</Button>
                 </>
-              )}
-              <Header as="h4">Categories</Header>
+                )}
+                <Header as="h4">Categories</Header>
 
-              {post.skills.map((skill) => (
-                <Label key={skill.id}>
-                  {skill.name}
-                </Label>
-              ))}
-            </Grid.Column>
-          </>)
+                {post.skills.map((skill) => (
+                  <Label key={skill.id}>
+                    {skill.name}
+                  </Label>
+                ))}
+              </Grid.Column>
+            </>
+          )
           : <div>Loading</div>}
       </Grid>
     </Container>
