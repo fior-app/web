@@ -72,7 +72,7 @@ const MentorProfile = ({
                       ? mentor.skills.map((userSkill) => (
                         <Label key={userSkill.id} image>
                           {userSkill.skill.name}
-                          {userSkill.isVerified && <LabelDetail>Verified</LabelDetail>}
+                          {userSkill.isVerified && <LabelDetail className={profileStyles.verified}>Verified</LabelDetail>}
                         </Label>
                       )) : <div>Mentor dont have any skills yet</div>
                     }
