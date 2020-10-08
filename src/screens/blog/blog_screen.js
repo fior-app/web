@@ -10,6 +10,7 @@ import Post from './components/post';
 import { getPosts } from '../../store/actions/blogActions';
 
 const BlogScreen = ({
+  user,
   posts,
   skills,
   dispatchGetPosts,
@@ -47,7 +48,7 @@ const BlogScreen = ({
             {posts.slice(getPageStart(), getPageEnd())
               .map((post) => (
                 <Link to={`/blog/${post.id}`} key={post.id}>
-                  <Post post={post} />
+                  <Post post={post}/>
                 </Link>
               ))}
           </Grid.Row>
@@ -61,10 +62,12 @@ const BlogScreen = ({
             />
           </Grid.Row>
         </Grid.Column>
-        <Grid.Column width={4}>
-          <Button as={NavLink} to="/blog/edit" color="teal">Create Post</Button>
-          <Categories categories={skills} />
-          <RecentPosts posts={recentPosts} />
+        <Grid.Column width={5}>
+          {user && (
+            <Button as={NavLink} to="/blog/edit" color="teal">Create Post</Button>
+          )}
+          <Categories categories={skills}/>
+          {/*<RecentPosts posts={recentPosts}/>*/}
         </Grid.Column>
       </Grid>
     </Container>
@@ -76,6 +79,7 @@ const mapStateToProps = (state) => ({
   error: state.blog.posts.error,
   posts: state.blog.posts.posts,
   skills: state.skills.skills.items,
+  user: state.auth.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
