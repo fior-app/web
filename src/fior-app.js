@@ -33,6 +33,7 @@ import MentorProfile from './screens/findmentors/mentor_profile';
 import NotificationsScreen from './screens/notifications/notifications_screen';
 import AboutUs from './screens/about/about_us';
 import PaymentRedirect from './screens/pricing/redirect';
+import BaseLoading from './components/loading/loading';
 
 class FiorApp extends Component {
   componentDidMount() {
@@ -41,11 +42,7 @@ class FiorApp extends Component {
   }
 
   renderFullLoading = () => (
-    <div className="row center">
-      <div className="full-loading">
-        <Image src="assets/svg/loading-full.svg" size="small" />
-      </div>
-    </div>
+    <BaseLoading />
   );
 
   render() {
