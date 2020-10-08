@@ -134,7 +134,7 @@ class ProfileMentor extends Component {
                           }}
                         />
                         {userSkill.isVerified
-                          ? <LabelDetail>Verified</LabelDetail>
+                          ? <LabelDetail className={styles.verified}>Verified</LabelDetail>
                           : <VerifySkill userskillId={userSkill.id} skill={userSkill.skill}/>}
                       </Label>
                     )) : <div>You dont have added any skills yet</div>

@@ -34,6 +34,7 @@ const VerifySkill = ({
 
   const closeModal = () => {
     setModelOpen(false);
+    setVerifySkillState(initState);
   };
 
   const steps = questions.map((question, index) => ({
@@ -80,6 +81,7 @@ const VerifySkill = ({
     }
 
     dispatchVerifyUserSkill(userskillId, { answers: data });
+    closeModal();
   };
 
   return (
@@ -133,7 +135,7 @@ const VerifySkill = ({
         {verifySkillState.activeStep === 0 && (
           <Modal.Description>
             <Header>Start</Header>
-            <p>Start description</p>
+            <p>Successfully answer all the questions to gain the verified status.</p>
             <Button onClick={handleOnStart} primary>Start</Button>
           </Modal.Description>
         )}
@@ -180,7 +182,7 @@ const VerifySkill = ({
         {verifySkillState.activeStep === steps.length + 1 && !verifySkillState.isQuestionsDone && (
           <Modal.Description>
             <Header>Finish</Header>
-            <p>Finish description</p>
+            <p>You can now finish the quiz. Or go back and review your answers.</p>
             <Button onClick={handleOnEnd} primary>End</Button>
           </Modal.Description>
         )}

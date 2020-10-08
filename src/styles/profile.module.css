@@ -79,3 +79,7 @@
 .avatar_upload_icon:hover {
   color: #02c39a;
 }
+
+.verified {
+  background-color: #02c39a !important;
+}

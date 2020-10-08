@@ -106,6 +106,7 @@ export const verifyUserSkill = (userskillId, data) => (dispatch) => {
         type: actions.VERIFY_USER_SKILL_SUCCESS,
         payload: res.data,
       });
+      fetchUserSkills(dispatch);
     })
     .catch((error) => {
       console.log(error);
