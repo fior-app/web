@@ -46,7 +46,7 @@ const Milestones = ({
         <AddEditMilestone
           mentorspaceId={mentorspaceId}
           trigger={(open) => (
-            <Button onClick={open}>
+            <Button color="teal" onClick={open}>
               <Icon name="plus" />
               Milestone
             </Button>

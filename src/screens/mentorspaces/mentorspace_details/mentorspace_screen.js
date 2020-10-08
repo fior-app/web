@@ -23,7 +23,9 @@ import Calendar from './calendar/calendar';
 import Project from './project/Project';
 import ProjectWidget from './project/ProjectWidget';
 
-const MentorspaceScreen = ({ loading, member, error, dispatchGetGroup }) => {
+const MentorspaceScreen = ({
+  loading, member, error, dispatchGetGroup,
+}) => {
   const { mentorspaceId } = useParams();
 
   useEffect(() => {
@@ -132,7 +134,7 @@ const MentorspaceScreen = ({ loading, member, error, dispatchGetGroup }) => {
               {member.permissions.includes('SEND_MEMBER_REQUESTS') ? (
                 <>
                   <InviteMember groupId={mentorspaceId} />
-                  <Button as={NavLink} to="/mentors" primary>
+                  <Button as={NavLink} to="/mentors" color="teal">
                     <Icon name="add" />
                     &nbsp; Mentor
                   </Button>

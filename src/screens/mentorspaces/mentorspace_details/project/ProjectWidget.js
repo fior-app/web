@@ -3,7 +3,9 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
-import { Card, Divider, Button, Header } from 'semantic-ui-react';
+import {
+  Card, Divider, Button, Header,
+} from 'semantic-ui-react';
 
 import * as styles from '../../../../styles/mentorspace-project.module.css';
 
@@ -31,7 +33,9 @@ export class ProjectWidget extends Component {
   }
 
   render() {
-    const { title, description, githubLinks, projectId } = this.state;
+    const {
+      title, description, githubLinks, projectId,
+    } = this.state;
     return (
       <Card>
         <Card.Content>
@@ -43,26 +47,24 @@ export class ProjectWidget extends Component {
                 <Header as="h3">{title}</Header>
               </Card.Description>
               <Card.Meta>{description}</Card.Meta>
-              {githubLinks &&
-                githubLinks.map((link, index) => {
-                  return (
-                    <Card
-                      as={Link}
-                      to={`/mentorspaces/${projectId}/project`}
-                      key={index}
-                    >
-                      <Card.Content>
-                        {`${link.owner}/${link.repository}`}
-                      </Card.Content>
-                    </Card>
-                  );
-                })}
+              {githubLinks
+                && githubLinks.map((link, index) => (
+                  <Card
+                    as={Link}
+                    to={`/mentorspaces/${projectId}/project`}
+                    key={index}
+                  >
+                    <Card.Content>
+                      {`${link.owner}/${link.repository}`}
+                    </Card.Content>
+                  </Card>
+                ))}
             </>
           ) : (
             <NavLink
-              to={'/mentorspaces/' + this.props.mentorspaceId + '/project'}
+              to={`/mentorspaces/${this.props.mentorspaceId}/project`}
             >
-              <Button>Configure Project</Button>
+              <Button basic>Configure Project</Button>
             </NavLink>
           )}
         </Card.Content>
@@ -84,5 +86,5 @@ export default compose(
       where: ['projectId', '==', props.mentorspaceId],
     },
   ]),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(ProjectWidget);

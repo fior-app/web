@@ -1,13 +1,15 @@
-import React, { useState, useCallback } from 'react'
-import Dropzone from 'react-dropzone'
-import { Button, Header, Icon, Image, Modal, Segment } from "semantic-ui-react";
-import { sendGroupImageMessageToFirebase } from "../../../../store/actions/mentorspaceActions";
-import { connect } from "react-redux";
+import React, { useState, useCallback } from 'react';
+import Dropzone from 'react-dropzone';
+import {
+  Button, Header, Icon, Image, Modal, Segment,
+} from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { sendGroupImageMessageToFirebase } from '../../../../store/actions/mentorspaceActions';
 import styles from '../../../../styles/chat.module.css';
 
 const ChatImageUploader = ({
   roomId,
-  dispatchGroupImageMessageToFirebase
+  dispatchGroupImageMessageToFirebase,
 }) => {
   const [imageFile, setFile] = useState(null);
 
@@ -23,37 +25,37 @@ const ChatImageUploader = ({
   const onFilesDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length > 0) {
       const file = acceptedFiles[0];
-      const reader = new FileReader()
+      const reader = new FileReader();
 
-      reader.onabort = () => console.log('file reading was aborted')
-      reader.onerror = () => console.log('file reading has failed')
+      reader.onabort = () => console.log('file reading was aborted');
+      reader.onerror = () => console.log('file reading has failed');
       reader.onload = () => {
         // Do whatever you want with the file contents
-        const binaryStr = reader.result
+        const binaryStr = reader.result;
 
-        setFile({ file, image: binaryStr })
-      }
-      reader.readAsDataURL(file)
+        setFile({ file, image: binaryStr });
+      };
+      reader.readAsDataURL(file);
     }
-  }, [])
+  }, []);
 
   const onFileUpload = () => {
     setLoading(true);
     dispatchGroupImageMessageToFirebase(roomId, [imageFile.file], onCloseModal, () => {
-      setLoading(false)
+      setLoading(false);
     });
-  }
+  };
 
-  console.log(imageFile)
+  console.log(imageFile);
 
   return (
     <div>
       <Modal
-        trigger={
+        trigger={(
           <Button icon onClick={() => setModalOpen(true)}>
-            <Icon name="image outline"/>
+            <Icon name="image outline" />
           </Button>
-        }
+        )}
         size="small"
         onClose={onCloseModal}
         open={modalOpen}
@@ -64,7 +66,7 @@ const ChatImageUploader = ({
         </Modal.Header>
         <Modal.Content>
           {imageFile ? (
-            <Image className={styles.image_upload_container} src={imageFile.image} size='medium' bordered rounded/>
+            <Image className={styles.image_upload_container} src={imageFile.image} size="medium" bordered rounded />
           ) : (
             <Dropzone onDrop={onFilesDrop}>
               {({ getRootProps, getInputProps }) => (
@@ -72,10 +74,10 @@ const ChatImageUploader = ({
                   <input {...getInputProps()} />
                   <Segment placeholder>
                     <Header icon>
-                      <Icon name='image outline'/>
+                      <Icon name="image outline" />
                       Drop image to add to chat
                     </Header>
-                    <Button primary>Add Image</Button>
+                    <Button color="teal">Add Image</Button>
                   </Segment>
                 </div>
               )}
@@ -86,7 +88,7 @@ const ChatImageUploader = ({
           <Button
             loading={loading}
             disabled={imageFile === null}
-            primary
+            color="teal"
             onClick={onFileUpload}
           >
             Send
@@ -94,14 +96,14 @@ const ChatImageUploader = ({
         </Modal.Content>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchGroupImageMessageToFirebase: (roomId, files, closeModel, stopLoading) => {
-    dispatch(sendGroupImageMessageToFirebase(roomId, files, closeModel, stopLoading))
+    dispatch(sendGroupImageMessageToFirebase(roomId, files, closeModel, stopLoading));
   },
 });
 

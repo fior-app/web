@@ -40,26 +40,26 @@ class Navbar extends Component {
           <Menu.Menu position="right">
             {user ? (
               <>
-                <Menu.Item as={NavLink} name="Blog" to="/blog">
+                <Menu.Item as={NavLink} name="Blog" to="/blog" color="teal">
                   Blog
                 </Menu.Item>
-                <Menu.Item as={NavLink} name="Forum" to="/forum">
+                <Menu.Item as={NavLink} name="Forum" to="/forum" color="teal">
                   Forum
                 </Menu.Item>
-                <Menu.Item as={NavLink} name="Organizations" to="/organizations">
-                  Organizations
-                </Menu.Item>
-                <Menu.Item as={NavLink} name="Pricing Plan" to="/pricing">
+                {/* <Menu.Item as={NavLink} name="Organizations" to="/organizations" color="teal"> */}
+                {/*  Organizations */}
+                {/* </Menu.Item> */}
+                <Menu.Item as={NavLink} name="Pricing Plan" to="/pricing" color="teal">
                   Pricing Plan
                 </Menu.Item>
-                <Menu.Item as={NavLink} name="About Us" to="/about-us">
+                <Menu.Item as={NavLink} name="About Us" to="/about-us" color="teal">
                   About Us
                 </Menu.Item>
-                <Menu.Item>Find Mentees</Menu.Item>
-                <Menu.Item as={NavLink} to="/mentors">
+                {/* <Menu.Item>Find Mentees</Menu.Item> */}
+                <Menu.Item as={NavLink} to="/mentors" color="teal">
                   Find Mentors
                 </Menu.Item>
-                <Menu.Item name="notifiations" as={NavLink} to="/notifications">
+                <Menu.Item name="notifiations" as={NavLink} to="/notifications" color="teal">
                   <Icon name="bell" />
                 </Menu.Item>
                 <div className={styles.avatar}>
@@ -90,19 +90,19 @@ class Navbar extends Component {
               </>
             ) : (
               <>
-                <Menu.Item as={NavLink} name="Blog" to="/blog">
+                <Menu.Item as={NavLink} name="Blog" to="/blog" color="teal">
                   Blog
                 </Menu.Item>
-                <Menu.Item as={NavLink} name="Forum" to="/forum">
+                <Menu.Item as={NavLink} name="Forum" to="/forum" color="teal">
                   Forum
                 </Menu.Item>
-                <Menu.Item as={NavLink} name="Organizations" to="/organizations">
-                  Organizations
-                </Menu.Item>
-                <Menu.Item as={NavLink} name="Pricing Plan" to="/pricing">
+                {/* <Menu.Item as={NavLink} name="Organizations" to="/organizations" color="teal"> */}
+                {/*  Organizations */}
+                {/* </Menu.Item> */}
+                <Menu.Item as={NavLink} name="Pricing Plan" to="/pricing" color="teal">
                   Pricing Plan
                 </Menu.Item>
-                <Menu.Item as={NavLink} name="About Us" to="/about-us">
+                <Menu.Item as={NavLink} name="About Us" to="/about-us" color="teal">
                   About Us
                 </Menu.Item>
                 <Menu.Item>

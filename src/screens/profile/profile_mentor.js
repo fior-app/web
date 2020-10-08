@@ -48,11 +48,13 @@ class ProfileMentor extends Component {
   };
 
   render() {
-    const { user, groups, userSkills, setMentorState } = this.props;
+    const {
+      user, groups, userSkills, setMentorState,
+    } = this.props;
 
-    console.log(groups)
+    console.log(groups);
 
-    if (!user) return <Redirect to="/"/>;
+    if (!user) return <Redirect to="/" />;
 
     return (
       <div>
@@ -61,17 +63,17 @@ class ProfileMentor extends Component {
             <Grid.Column width={8}>
               <Grid.Row className={styles.section_wrapper}>
                 <h3>Status</h3>
-                {!user.isMentor ?
-                  (
+                {!user.isMentor
+                  ? (
                     <>
                       <div>You are not a mentor yet</div>
                       <Button
-                        primary
                         onClick={() => {
-                          this.props.dispatchSetMentor(true)
+                          this.props.dispatchSetMentor(true);
                         }}
                         disabled={setMentorState.isLoading}
                         loading={setMentorState.isLoading}
+                        color="teal"
                       >
                         Become a mentor
                       </Button>
@@ -82,7 +84,7 @@ class ProfileMentor extends Component {
                       <Button
                         negative
                         onClick={() => {
-                          this.props.dispatchSetMentor(false)
+                          this.props.dispatchSetMentor(false);
                         }}
                         disabled={setMentorState.isLoading}
                         loading={setMentorState.isLoading}
@@ -90,8 +92,7 @@ class ProfileMentor extends Component {
                         Stop mentoring
                       </Button>
                     </>
-                  )
-                }
+                  )}
               </Grid.Row>
               <Grid.Row className={styles.section_wrapper}>
                 <div className={styles.section_title}>
@@ -129,13 +130,13 @@ class ProfileMentor extends Component {
                           open={this.state.showSkillDeleteOf === userSkill.id}
                           onCancel={() => this.closeSkillDeleteModal()}
                           onConfirm={() => {
-                            this.props.deleteUserSkill(userSkill.id)
-                            this.closeSkillDeleteModal()
+                            this.props.deleteUserSkill(userSkill.id);
+                            this.closeSkillDeleteModal();
                           }}
                         />
                         {userSkill.isVerified
                           ? <LabelDetail className={styles.verified}>Verified</LabelDetail>
-                          : <VerifySkill userskillId={userSkill.id} skill={userSkill.skill}/>}
+                          : <VerifySkill userskillId={userSkill.id} skill={userSkill.skill} />}
                       </Label>
                     )) : <div>You dont have added any skills yet</div>
                 }
@@ -162,7 +163,7 @@ class ProfileMentor extends Component {
                     open={this.state.showMentorspacesModal}
                     closeIcon
                   >
-                    <CreateMentorspace closeModal={this.closeMentorspacesModal}/>
+                    <CreateMentorspace closeModal={this.closeMentorspacesModal} />
                   </Modal>
                 </div>
                 <Card.Group>
@@ -170,7 +171,8 @@ class ProfileMentor extends Component {
                     <Card
                       as={Link}
                       to={`/mentorspaces/${mentorspaceItem.group.id}`}
-                      key={mentorspaceItem.id}>
+                      key={mentorspaceItem.id}
+                    >
                       <Card.Content>
                         <Card.Header>{mentorspaceItem.group.name}</Card.Header>
                         {mentorspaceItem.group.description && (
@@ -207,7 +209,7 @@ const mapDispatchToProps = (dispatch) => ({
   getGroupsMe: () => dispatch(getGroupsMe()),
   addUserSkills: (skillIds) => dispatch(addUserSkills(skillIds)),
   deleteUserSkill: (userSkillId) => dispatch(deleteUserSkill(userSkillId)),
-  dispatchSetMentor: (isMentor) => dispatch(setMentor(isMentor))
+  dispatchSetMentor: (isMentor) => dispatch(setMentor(isMentor)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileMentor);

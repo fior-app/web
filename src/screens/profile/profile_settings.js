@@ -84,6 +84,7 @@ class ProfileSettings extends Component {
                 </Form.Field>
                 <Form.Field>
                   <Button
+                    color="teal"
                     type="submit"
                     disabled={updateState.isLoading}
                     loading={updateState.isLoading}

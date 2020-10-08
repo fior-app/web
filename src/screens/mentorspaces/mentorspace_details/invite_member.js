@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Form, Icon, Modal } from 'semantic-ui-react';
+import {
+  Button, Form, Icon, Modal,
+} from 'semantic-ui-react';
 
 import { inviteMember } from '../../../store/actions/mentorspaceActions';
 
@@ -25,11 +27,11 @@ class InviteMember extends Component {
   };
 
   showModal = () => {
-    this.setState((state) => ({ ...state, isOpen: true }))
+    this.setState((state) => ({ ...state, isOpen: true }));
   }
 
   closeModal = () => {
-    this.setState((state) => ({ ...state, isOpen: false }))
+    this.setState((state) => ({ ...state, isOpen: false }));
   }
 
   render() {
@@ -40,10 +42,11 @@ class InviteMember extends Component {
         trigger={(
           <Button
             icon
+            basic
             className="btn-primary"
             onClick={this.showModal}
           >
-            <Icon name="add"/>
+            <Icon name="add" />
             &nbsp; Member
           </Button>
         )}
@@ -81,7 +84,7 @@ class InviteMember extends Component {
           <Button
             loading={loading}
             disabled={loading}
-            primary
+            color="teal"
             onClick={this.handleInviteMember}
           >
             Invite

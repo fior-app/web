@@ -37,7 +37,7 @@ const FindMentorsScreen = ({
                   setQuery(value);
                 }}
               />
-              <Form.Button content="Search" />
+              <Form.Button content="Search" color="teal" />
             </Form.Group>
           </Form>
           {mentorSearch.isLoading && (<Loader active inline="centered" />)}

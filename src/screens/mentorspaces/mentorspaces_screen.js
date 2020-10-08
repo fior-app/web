@@ -50,6 +50,7 @@ class MentorspacesScreen extends Component {
           <Modal
             trigger={(
               <Button
+                color="teal"
                 icon
                 className="btn-primary"
                 onClick={this.handleOnOpenClick}

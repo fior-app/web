@@ -25,7 +25,7 @@ const Meetings = ({ meetings }) => {
         <AddEditMeetings
           mentorspaceId={mentorspaceId}
           trigger={(open) => (
-            <Button onClick={open}>
+            <Button color="teal" onClick={open}>
               <Icon name="plus" />
               Meeting
             </Button>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Icon, Modal, Form } from 'semantic-ui-react';
+import {
+  Button, Icon, Modal, Form,
+} from 'semantic-ui-react';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -42,7 +44,7 @@ export class CreateUpdateProject extends Component {
     this.props.updateProjectDetails(
       this.props.mentorspaceId,
       this.state,
-      this.closeModal
+      this.closeModal,
     );
   };
 
@@ -51,12 +53,12 @@ export class CreateUpdateProject extends Component {
 
     return (
       <Modal
-        trigger={
-          <Button onClick={this.openModal}>
+        trigger={(
+          <Button onClick={this.openModal} color="teal">
             <Icon name="edit" />
             Update Project details
           </Button>
-        }
+        )}
         size="small"
         onClose={this.closeModal}
         open={isModelOpen}
@@ -101,8 +103,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateProjectDetails: (projectId, project, cb) =>
-    dispatch(updateProjectDetails(projectId, project, cb)),
+  updateProjectDetails: (projectId, project, cb) => dispatch(updateProjectDetails(projectId, project, cb)),
 });
 
 export default compose(
@@ -112,5 +113,5 @@ export default compose(
       where: ['projectId', '==', props.mentorspaceId],
     },
   ]),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(CreateUpdateProject);

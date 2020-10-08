@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { useFirebase } from 'react-redux-firebase'
-import Dropzone from 'react-dropzone'
-import { Button, Form, Header, Icon, Modal, Segment } from "semantic-ui-react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useState } from 'react';
+import { useFirebase } from 'react-redux-firebase';
+import Dropzone from 'react-dropzone';
+import {
+  Button, Form, Header, Icon, Modal, Segment,
+} from 'semantic-ui-react';
+import { v4 as uuidv4 } from 'uuid';
 
-const filesPath = 'uploadedFiles'
-const dbPath = 'files'
+const filesPath = 'uploadedFiles';
+const dbPath = 'files';
 
 const Uploader = ({ mentorspaceId }) => {
   const initialFormState = {
@@ -13,7 +15,7 @@ const Uploader = ({ mentorspaceId }) => {
     description: '',
   };
 
-  const firebase = useFirebase()
+  const firebase = useFirebase();
 
   const [files, setFiles] = useState(null);
 
@@ -30,7 +32,7 @@ const Uploader = ({ mentorspaceId }) => {
   const onFilesDrop = (files) => {
     setModalOpen(true);
     setFiles(files);
-  }
+  };
 
   const handleOnChangeInput = (e, { name, value }) => {
     // eslint-disable-next-line no-shadow
@@ -47,10 +49,12 @@ const Uploader = ({ mentorspaceId }) => {
       name: uuidv4(),
       metadataFactory: (uploadRes, firebase, metadata, downloadURL) => {
         const {
-          metadata: { fullPath }
+          metadata: { fullPath },
         } = uploadRes;
 
-        return { ...formState, fullPath, fileUrl: downloadURL, groupId: mentorspaceId }
+        return {
+          ...formState, fullPath, fileUrl: downloadURL, groupId: mentorspaceId,
+        };
       },
     }).then(() => {
       setFiles(null);
@@ -60,7 +64,7 @@ const Uploader = ({ mentorspaceId }) => {
     }).catch(() => {
       setLoading(false);
     });
-  }
+  };
 
   return (
     <div>
@@ -70,10 +74,10 @@ const Uploader = ({ mentorspaceId }) => {
             <input {...getInputProps()} />
             <Segment placeholder>
               <Header icon>
-                <Icon name='pdf file outline'/>
+                <Icon name="pdf file outline" />
                 Drop files to share with the mentorspace
               </Header>
-              <Button primary>Add File</Button>
+              <Button color="teal">Add File</Button>
             </Segment>
           </div>
         )}
@@ -107,7 +111,7 @@ const Uploader = ({ mentorspaceId }) => {
                 onChange={handleOnChangeInput}
               />
             </Form.Field>
-            {/*{error && (<div>{JSON.stringify(error)}</div>)}*/}
+            {/* {error && (<div>{JSON.stringify(error)}</div>)} */}
             <Button
               loading={loading}
               disabled={formState.title === ''}
@@ -120,7 +124,7 @@ const Uploader = ({ mentorspaceId }) => {
         </Modal.Content>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
 export default Uploader;
