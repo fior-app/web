@@ -114,7 +114,7 @@ class FiorApp extends Component {
               <Route exact path="/pricing" component={PricingScreen} />
               <Route exact path="/about-us" component={AboutUs} />
               <Route path="/profile" component={ProfileScreen} />
-              <Route path="/payment-redirect" component={PaymentRedirect} />
+              <Route path="/payment-redirect/:response" component={PaymentRedirect} />
               <Route exact path="/dashboard" render={() => (window.location = REACT_APP_ADMIN_URL)} />
               <Route exact path="*" component={NotFound} />
             </Switch>
