@@ -1,15 +1,15 @@
-import React from "react";
-import { Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import styles from "./pricing.module.css";
+import React from 'react';
+import { Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import styles from './pricing.module.css';
 
 const PricingScreen = () => {
   const handlePayment = (type) => {
     const win = window.open(
-      type === "normal"
-        ? "https://sandbox.payhere.lk/pay/oe9d9f422"
-        : "https://sandbox.payhere.lk/pay/o891e7dc7",
-      "_blank"
+      type === 'normal'
+        ? 'https://sandbox.payhere.lk/pay/oe9d9f422'
+        : 'https://sandbox.payhere.lk/pay/o891e7dc7',
+      '_blank'
     );
     win.focus();
   };
@@ -30,7 +30,7 @@ const PricingScreen = () => {
 
             <div className={styles.pricing_content1}>
               <div className={styles.pricing_description1}>
-                <img src="../../img/check.svg" alt="Check Mark" />
+                <img src="../../assets/img/check.svg" alt="Check Mark" />
                 <p className={styles.pricing_point}>Create 2 groups</p>
               </div>
               <div className={styles.pricing_description}>
@@ -67,7 +67,7 @@ const PricingScreen = () => {
             <Button
               type="button"
               color="teal"
-              onClick={() => handlePayment("normal")}
+              onClick={() => handlePayment('normal')}
             >
               Choose Plan
             </Button>
@@ -109,7 +109,7 @@ const PricingScreen = () => {
             <Button
               type="button"
               color="white"
-              onClick={() => handlePayment("enterprise")}
+              onClick={() => handlePayment('enterprise')}
             >
               Choose Plan
             </Button>
