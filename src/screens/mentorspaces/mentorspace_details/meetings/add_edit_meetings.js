@@ -82,7 +82,7 @@ const AddEditMeetings = ({
 
   const handleAddMeeting = () => {
     if (state.title && state.title !== '' && state.on && state.on !== '' && state.from && state.from !== '' && state.to && state.to !== '') {
-      dispatchAddGroupMeeting(mentorspaceId, state);
+      dispatchAddGroupMeeting(mentorspaceId, state, closeModal);
     }
   };
 
