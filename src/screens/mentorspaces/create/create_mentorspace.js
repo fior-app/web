@@ -31,23 +31,25 @@ class CreateMentorspace extends Component {
 
     return (
       <div className={styles.modal_container}>
-        <h3>Create your awesome mentorspace</h3>
+        <h3>Create your mentorspace</h3>
 
         <Form>
           <Form.Field>
-            <input
+            <Form.Input
               type="text"
               id="name"
               placeholder="Name"
+              label="Name"
               value={name}
               onChange={this.handleOnChangeInput}
             />
           </Form.Field>
           <Form.Field>
-            <input
+            <Form.Input
               type="text"
               id="description"
               placeholder="Description"
+              label="Description"
               value={description}
               onChange={this.handleOnChangeInput}
             />
