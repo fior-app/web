@@ -95,12 +95,12 @@ class Login extends Component {
               cookiePolicy="single_host_origin"
               render={(renderProps) => (
                 <Button
-                  color="google plus"
+                  basic
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
                   fluid
                 >
-                  <Icon name="google" />
+                  <Icon name="google" color="red" />
                   Sign in with Google
                 </Button>
               )}
@@ -111,8 +111,8 @@ class Login extends Component {
               className="linkedin_signin_btn linkedin_signin"
               href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78imnw0jx3qczv&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fauth%2Flinkedin%2Fcallback&state=fooobar&scope=r_liteprofile%20r_emailaddress"
             >
-              <Button color="linkedin" fluid>
-                <Icon name="linkedin" />
+              <Button basic fluid>
+                <Icon name="linkedin" color="blue" />
                 Sign in with Linkedin
               </Button>
             </a>
