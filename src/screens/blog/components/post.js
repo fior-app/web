@@ -15,7 +15,7 @@ const Post = ({ post }) => (
             textJustify: 'inter-word',
           }}
           >
-            {post.text}
+            {post.text.length < 100 ? post.text : `${post.text.substr(0, 100)}...`}
           </div>
         </Card.Description>
       </Card.Content>

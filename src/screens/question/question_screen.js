@@ -27,7 +27,7 @@ class QuestionScreen extends Component {
                   <Card.Content>
                     <Card.Header>{question.title}</Card.Header>
                     <Card.Description>
-                      {question.description.length < 100 ? question.description : `${question.description.substr(1, 100)}...`}
+                      {question.description.length < 100 ? question.description : `${question.description.substr(0, 100)}...`}
                     </Card.Description>
                     <Card.Meta textAlign="right">3rd Oct 2020</Card.Meta>
                   </Card.Content>
