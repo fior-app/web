@@ -32,7 +32,8 @@ const AuthScreen = ({ currentUser }) => {
     <Container>
       <Grid>
         <Grid.Column width={10}>
-          <Image src="https://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg" />
+          {/* <Image src="https://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg" /> */}
+          <img src="../../assets/img/authImage.jpg" width="600px" />
         </Grid.Column>
         <Grid.Column width={6}>
           <Tab panes={panes} />
